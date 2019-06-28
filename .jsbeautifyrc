@@ -1,0 +1,13 @@
+{
+  "end_with_newline": true,
+  "indent_size": 2,
+  "html": {
+	"extra_liners": "",
+	"indent_head_inner_html": true,
+    "indent_inner_html": true,
+    "wrap_line_length": 80
+  },
+  "css": {
+    "space_around_combinator": true
+  }
+}
