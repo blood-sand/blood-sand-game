@@ -1,7 +1,6 @@
 // Module Start
 // JS imports
 import Phaser from 'phaser';
-import logoImg from './assets/logo.png';
 
 // Scene configuration
 const config = {
@@ -12,9 +11,12 @@ const config = {
   height: window.innerHeight,
   scene: {
     preload: preload,
-    create: create
+    create: create,
+    update: update
   }
 };
+// Game State
+const gameState = {};
 // Scene initialization
 const game = new Phaser.Game(config);
 
@@ -23,24 +25,18 @@ const game = new Phaser.Game(config);
  * @author Luca Cattide
  * @date 2019-06-28
  */
-function preload() {
-  this.load.image('logo', logoImg);
-}
+function preload() {}
 
 /**
  * @description Assets creation
  * @author Luca Cattide
  * @date 2019-06-28
  */
-function create() {
-  const logo = this.add.image(400, 150, 'logo');
+function create() {}
 
-  this.tweens.add({
-    targets: logo,
-    y: 450,
-    duration: 2000,
-    ease: 'Power2',
-    yoyo: true,
-    loop: -1
-  });
-}
+/**
+ * @description Scene updating
+ * @author Luca Cattide
+ * @date 2019-07-02
+ */
+function update() {}

@@ -6,6 +6,8 @@ Thumbs.db
 *.suo
 *.sublime-project
 *.sublime-workspace
+.editorconfig
+.vscode
 # Vendors
 node_modules/
 # Build
