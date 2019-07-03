@@ -10,6 +10,8 @@ Thumbs.db
 .vscode
 # Vendors
 node_modules/
+# Cache
+.sass-cache
 # Build
 dist/
 /npm-debug.log

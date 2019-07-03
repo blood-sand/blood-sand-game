@@ -1,42 +1,44 @@
 // Module Start
+// Main
+// SASS Imports
+import './sass/index.scss';
 // JS imports
-import Phaser from 'phaser';
-
-// Scene configuration
-const config = {
-  type: Phaser.AUTO,
-  parent: 'blood-sand',
-  // Responsive
-  width: window.innerWidth,
-  height: window.innerHeight,
-  scene: {
-    preload: preload,
-    create: create,
-    update: update
-  }
-};
-// Game State
-const gameState = {};
-// Scene initialization
-const game = new Phaser.Game(config);
+import 'phaser';
+import config from './config/config';
+import GameScene from './scenes/GameScene';
+import BootScene from './scenes/BootScene';
+import PreloaderScene from './scenes/PreloaderScene';
+import TitleScene from './scenes/TitleScene';
+import OptionsScene from './scenes/OptionsScene';
+import CreditsScene from './scenes/CreditsScene';
 
 /**
- * @description Assets preloading
- * @author Luca Cattide
- * @date 2019-06-28
- */
-function preload() {}
-
-/**
- * @description Assets creation
- * @author Luca Cattide
- * @date 2019-06-28
- */
-function create() {}
-
-/**
- * @description Scene updating
+ * @description Main Game
  * @author Luca Cattide
  * @date 2019-07-02
+ * @class Game
+ * @extends {Phaser.Game}
  */
-function update() {}
+class Game extends Phaser.Game {
+  /**
+   * Creates an instance of Game.
+   * @author Luca Cattide
+   * @date 2019-07-02
+   * @memberof Game
+   */
+  constructor() {
+    super(config);
+
+    // Scenes initialization
+    this.scene.add('Boot', BootScene);
+    this.scene.add('Preloader', PreloaderScene);
+    this.scene.add('Title', TitleScene);
+    this.scene.add('Options', OptionsScene);
+    this.scene.add('Credits', CreditsScene);
+    this.scene.add('Game', GameScene);
+    // Game initialization
+    this.scene.start('Game');
+  }
+}
+
+window.game = new Game();

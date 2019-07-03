@@ -9,7 +9,15 @@
 
 ## Team
 
-### Design / Writing / Project Management
+### Project Management
+
+[Aphelion](@Aphelion1984)
+
+[Emet](@lucacattide)
+
+<info@lucacattide.it> (https://lucacattide.it)
+
+### Design / Writing
 
 [Aphelion](@Aphelion1984)
 
@@ -27,9 +35,33 @@ Kory
 
 Em3rgency
 
+### Development
+
+[Spn](@s-p-n)
+
+## Usage
+
+### Development
+
+On terminal - inside the project folder -  run:
+```
+  npm install
+  npm run start
+```
+After dependencies installation, a NodeJS server will be initialized, listening at http://localhost:8080 and launched on your browser. It is configured in ```watch``` mode, with ```Hot Reloading``` enabled.
+
+### Production
+
+On terminal - inside the project folder - run:
+```
+  npm run build
+```
+A ```/build``` directory will be generated, containing all the production files required for deployment.
+
 ## 1) FAQ
 
-Blood & Sand Game.
+**_Blood and Sand_** is a Roman Gladiator game made for PC. Turn-based, text-based and with highly tactical combat mechanics and skill progression, the game aims for realism without sacrificing gameplay. This detailed Game Design Document acts as a roadmap for the coding of the first phase. The initial goal is to achieve a test build and proof of concept prototype for balancing mechanics. After, scope can expand to adding gladiator school management elements and the RPG elements of living in this age as a lanista (manager) of a ludus (gladiator school.) Game style and scope differentiate it from other gladiator titles on the market.
+
 
 ## 2) Disclaimer
 
@@ -49,15 +81,15 @@ Blood & Sand Game.
 
 - Blood & Sand cannot guarantee to the User secure revenues deriving from the exploitation of the services;
 
+
 ## 3) Privacy Policy
 
-Blood & Sand, pursuant to Art. 13 of the Italian Legislative Decree N. 196/2003 - Privacy Code, in its capacity as data controller, informs you that the data concerning you will be used for execution of the contractual relationship that binds you, as well as for the provision of services directly instrumental to this relationship. The data will be processed by electronic and paper means, according to strictly instrumental methods to the pursuit of the indicated purpose, as well as indicated in the Italian Legislative Decree N. 679/16 - GDPR. The conferment of yours, is necessary for the execution of the contractual relationship with you in place. The information concerning you may be used by employees and consultants of Blood & Sand designated in charge of processing or by third parties who hold the qualification of external managers for completion of the operations connected to the aforementioned purpose. Except as indicated above, and for what follows in the paragraph 4), the communication of your data to third parties may only be carried out for the fulfillment of legal obligations or for accounting purposes, as well as to implement the existing contractual relationship. Except for the indications contained in the aforementioned paragraph, your data will not be disclosed or transferred abroad. The data controller is Blood & Sand, with headquarters in ADDRESS. The list updated by the managers and the employees is available at Blood & Sand and is available for consultation to be made by E-Mail at the address fields.of.elysium@gmail.com or through any channel indicated in the paragraph 4). To have full clarity about the operations we referred to you and to exercise the rights of access, rectification, opposition to the treatment and the other rights referred to in Art. 7 of the Italian Legislative Decree. 196/2003 (Consolidated Law - Privacy Code) we can contact the manager for the management of the requests of the interested parties by letter sent by e-mail to the address fields.of.elysium@gmail.com or as indicated in the paragraph 4).
+Blood & Sand, in its capacity as data controller, informs you that the data concerning you will be used for execution of the contractual relationship that binds you, as well as for the provision of services directly instrumental to this relationship. The data will be processed by electronic and paper means, according to strictly instrumental methods to the pursuit of the indicated purpose, as well as indicated in the GDPR policy. The conferment of yours, is necessary for the execution of the contractual relationship with you in place. The information concerning you may be used by employees and consultants of Blood & Sand designated in charge of processing or by third parties who hold the qualification of external managers for completion of the operations connected to the aforementioned purpose. Except as indicated above, and for what follows in the paragraph 4), the communication of your data to third parties may only be carried out for the fulfillment of legal obligations or for accounting purposes, as well as to implement the existing contractual relationship. Except for the indications contained in the aforementioned paragraph, your data will not be disclosed or transferred abroad. The data controller is Blood & Sand, with headquarters in ADDRESS. The list updated by the managers and the employees is available at Blood & Sand and is available for consultation to be made by E-Mail at the address fields.of.elysium@gmail.com or through any channel indicated in the paragraph 4). To have full clarity about the operations we referred to you and to exercise the rights of access, rectification, opposition to the treatment and the other rights referred to the law, we can contact the manager for the management of the requests of the interested parties by letter sent by e-mail to the address fields.of.elysium@gmail.com or as indicated in the paragraph 4).
 
-Blood & Sand, using the cookies technology for technical and informational purposes, presents the list of third-party advertising features involved in paragraph 5). The data - of a sensitive nature - that authorize the users identification, based on the use of the services on the https://tinyurl.com/y4f47grg site - which could be collected subject to explicit consent, together with the data - of a non-sensitive nature - that follow only the interaction and the user experience in relation to the website in question - as indicated - are subject to processing according to the current rules and provisions dictated by the aforementioned disclosure. This is to allow the services involved to function properly. In addition to determining the volume and quality of traffic generated by the activity of displaying and consulting the website contents, in accordance with what is described by the Google guidelines (http://tinyurl.com/lal99wg). The information acquired will be stored for a period of time strictly dependent on the parameters and settings dictated and envisaged by these technologies. The latter, consistent with the local, international and third party legal guidelines involved. Blood & Sand also declares to not acquire, without explicit consent, personal information in order to integrate them with impersonal data collected through a third-party product or advertising function. The use of Blood & Sand implicitly intends to accept the conditions set by the European legislation on cookies and therefore considers the consent of the user approved. It's possible to deactivate these data collection technologies through the settings on Google ads - in addition to the indications in the relevant section - or any other available means, in line with the deactivation feature for consumers provided for by the NAI regulations. If the described features are subject to deactivation - all or part of it, some of the services provided by Blood & Sand may be unusable.
 
 ## 4) GDPR
 
-Blood & Sand, pursuant to Italian Legislative Decree 679/2016 - European regulation on personal data protection, in its capacity as processing owner, informs you that the data concerning you will be held by the data controller - Blood & Sand - at Blood & Sand, with headquarters in ADDRESS. The data will be archived in paper and electronic format, for the entire relationship duration and/or unless otherwise indicated by the provisions of existing contractual documentation - including the use of website services. In their digital version, their protection will be guaranteed by procedures of cryptography and anonymisation of the identified subjects. As well as systems suitable for preventive protection against IT attacks of different nature - such as hacking, cracking, viruses, malwares, various and possibly. In case of data breach, official notification will be presented to the competent authorities on the subject, and you will be notified by and no later than 72 hours after verification by the data controller. Your data will be indirectly transmitted to third-party subjects who own the tools and technologies available on https://tinyurl.com/y4f47grg. These guarantee the correct platform operations, as well as its usability by the users. The list of subjects involved, as well as how to send them the data, are indicated in the paragraph 5). Blood & Sand, in compliance with the aforementioned regulation and to the Italian Legislative Decree 196/03 - Privacy Code, guarantees your right of access, rectification, and opposition to the data processing, after ownership verification by the applicant through request addressed to the manager of treatment. This request must be supported by a valid identity document, to be presented in autonomy through the special services provided by the platform - if allowed - or according to the methods expressed in the paragraph 3). In case of data communication by subjects less than years 16, Blood & Sand it will oppose the processing and / or archiving of these - in any form - excluding the person responsible for the processing and any related physical and legal person, from any obligation and responsibility in the against the subjects involved, if the transmission of the aforementioned does not take place in the presence of certified consent by part of legal tutor. For any other matter on the subject, as well as the points concerning the legislation, we refer you to the full text consultation (https://tinyurl.com/y9z38rnb).
+Blood & Sand, n its capacity as processing owner, informs you that the data concerning you will be held by the data controller - Blood & Sand - at Blood & Sand, with headquarters in ADDRESS. The data will be archived in paper and electronic format, for the entire relationship duration and/or unless otherwise indicated by the provisions of existing contractual documentation - including the use of website services. In their digital version, their protection will be guaranteed by procedures of cryptography and anonymisation of the identified subjects. As well as systems suitable for preventive protection against IT attacks of different nature - such as hacking, cracking, viruses, malwares, various and possibly. In case of data breach, official notification will be presented to the competent authorities on the subject, and you will be notified by and no later than 72 hours after verification by the data controller. Your data will be indirectly transmitted to third-party subjects who own the tools and technologies available on https://tinyurl.com/y4f47grg. These guarantee the correct platform operations, as well as its usability by the users. The list of subjects involved, as well as how to send them the data, are indicated in the paragraph 5). Blood & Sand, in compliance with the aforementioned regulation and to the law, guarantees your right of access, rectification, and opposition to the data processing, after ownership verification by the applicant through request addressed to the manager of treatment. This request must be supported by a valid identity document, to be presented in autonomy through the special services provided by the platform - if allowed - or according to the methods expressed in the paragraph 3). In case of data communication by subjects less than years 16, Blood & Sand it will oppose the processing and / or archiving of these - in any form - excluding the person responsible for the processing and any related physical and legal person, from any obligation and responsibility in the against the subjects involved, if the transmission of the aforementioned does not take place in the presence of certified consent by part of legal tutor. For any other matter on the subject, as well as the points concerning the legislation, we refer you to the full text consultation (https://tinyurl.com/y9z38rnb).
 
 
 ## 5) Legal

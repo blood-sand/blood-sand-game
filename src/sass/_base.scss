@@ -1,0 +1,61 @@
+// Imports Start
+@import 'compass/css3';
+// Imports End
+// Fonts
+// Fonts - Dimensions
+$font-size-desktop: 14px;
+$font-size-label: 1.6rem;
+$font-size-mobile: 12px;
+$font-size-rem: 62.5%;
+// Resolutions
+$desktop: 992px;
+$desktop-hd: 1200px;
+$tablet: 768px;
+$smartphone: 576px;
+// Media Queries
+// Variables Start
+$media-desktop: 'min-width: #{$desktop}';
+$media-desktop-hd: 'min-width: #{$desktop-hd}';
+$media-tablet: 'min-width: #{$tablet}';
+$media-smartphone: 'min-width: #{$smartphone}';
+$media-local: 'display-mode: standalone';
+
+// General
+// Outline
+input:focus,
+.btn:focus {
+  outline: none !important;
+}
+
+// Buttons
+input[type='submit'] {
+  appearance: none !important;
+  border-radius: 0 !important;
+}
+
+// Layout
+.blocked {
+  overflow: hidden !important;
+}
+
+.clear {
+  clear: both;
+}
+
+// Interaction
+.disable {
+  user-select: none;
+}
+
+.deactivate {
+  pointer-events: none;
+}
+
+// Visibility
+.hidden {
+  display: none !important;
+}
+
+.occult {
+  opacity: 0 !important;
+}

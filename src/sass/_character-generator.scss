@@ -1,0 +1,59 @@
+// SASS Start
+// Character generator form
+.character-generator-form {
+
+  &,
+  &#{__fields},
+  .fields__label {
+
+    @include display-flex;
+  }
+
+  &,
+  .fields__label {
+
+    @include display-flex;
+    @include flex-direction(column);
+  }
+
+  width: 800px;
+
+  &#{__fields} {
+
+    @include flex-direction(row);
+    @include justify-content(space-between);
+
+    .fields__label {
+      margin: 1em 0;
+
+      &,
+      .label__field {
+        font-size: $font-size-label;
+      }
+
+      .label__field {
+        margin: .5em 0 0;
+        padding: .2em 16px;
+      }
+
+      .label__field:focus ~ .label__tip {
+        display: block !important;
+      }
+
+      .label__tip {
+        display: none;
+
+        ul li {
+          list-style-type: disc;
+          padding: .5em 0;
+
+          strong {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}
+
+// SASS End

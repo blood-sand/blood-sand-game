@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "blood-sand",
-  "version": "1.0.0",
+  "version": "0.2.0",
   "description": "© Blood & Sand 2019. All Rights reserved.",
   "homepage": "https://www.develteam.com/Game/Blood-and-Sand",
   "bugs": {
@@ -15,23 +15,41 @@
   "devDependencies": {
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
+    "autoprefixer": "^9.6.0",
     "babel-loader": "^8.0.6",
     "clean-webpack-plugin": "^3.0.0",
+    "compass-mixins": "^0.12.10",
+    "css-loader": "^3.0.0",
+    "cssnano": "^4.1.10",
+    "extract-text-webpack-plugin": "next",
     "file-loader": "^4.0.0",
     "html-webpack-plugin": "^3.2.0",
+    "imagemin-webpack-plugin": "^2.4.2",
+    "midas": "^2.0.3",
+    "node-sass": "^4.12.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "postcss-import": "^12.0.1",
+    "postcss-load-config": "^2.1.0",
+    "postcss-loader": "^3.0.0",
+    "postcss-scss": "^2.0.0",
     "raw-loader": "^3.0.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "sugarss": "^2.0.0",
     "terser-webpack-plugin": "^1.3.0",
     "webpack": "^4.35.2",
+    "webpack-bundle-size-analyzer": "^3.0.0",
     "webpack-cli": "^3.3.5",
     "webpack-dev-server": "^3.7.2",
+    "webpack-manifest-plugin": "^2.0.4",
     "webpack-merge": "^4.2.1"
   },
   "dependencies": {
     "phaser": "^3.18.1"
   },
   "scripts": {
-    "start": "webpack-dev-server --config webpack/base.js --open",
-    "build": "webpack --config webpack/prod.js "
+    "start": "webpack-dev-server --watch --colors --progress --config webpack.base.js --open",
+    "build": "webpack --config webpack.prod.js"
   },
   "window": {
     "width": 800,
@@ -46,5 +64,5 @@
     "blood",
     "sand"
   ],
-  "author": "Luca Cattide - Senior Frontend Developer <info@lucacattide.it> | LC (https://lucacattide.it)"
+  "author": "Blood & Sand team (https://github.com/blood-sand)"
 }
