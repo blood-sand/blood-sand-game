@@ -30,10 +30,10 @@ export default class GameScene extends Phaser.Scene {
    */
   preload() {
     // Images
-    this.load.image('avatar', 'src/assets/img/gladiator.png');
+    this.load.image('avatar', __dirname + 'src/assets/img/gladiator.png');
     // Forms
     this.load
-      .html('characterGenerator', 'src/assets/html/character-generator.html');
+      .html('characterGenerator', __dirname + 'src/assets/html/character-generator.html');
   }
 
   /**

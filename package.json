@@ -54,7 +54,9 @@
   "window": {
     "width": 800,
     "height": 600,
-    "title": "Blood & Sand"
+    "title": "Blood & Sand",
+    "resizable": true,
+    "maximizable": true
   },
   "repository": {
     "type": "git",
