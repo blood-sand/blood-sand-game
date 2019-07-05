@@ -3,7 +3,7 @@
 
 const webpack = require('webpack');
 const merge = require('webpack-merge');
-const base = require('./base');
+const base = require('./webpack.base');
 const TerserPlugin = require('terser-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
