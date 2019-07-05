@@ -1,12 +1,21 @@
 // Imports Start
 @import 'compass/css3';
 // Imports End
+
+// Colors
+$white: #fff;
 // Fonts
+$main: 'weiss_initialenregular',
+sans-serif;
+$alternate: 'weiss_initialenalternates',
+sans-serif;
 // Fonts - Dimensions
 $font-size-desktop: 14px;
 $font-size-label: 1.6rem;
 $font-size-mobile: 12px;
 $font-size-rem: 62.5%;
+$font-size-tip: 1.2rem;
+$line-height-tip: 1.8rem;
 // Resolutions
 $desktop: 992px;
 $desktop-hd: 1200px;
@@ -20,10 +29,47 @@ $media-tablet: 'min-width: #{$tablet}';
 $media-smartphone: 'min-width: #{$smartphone}';
 $media-local: 'display-mode: standalone';
 
+// Classes
+%cover,
+%background,
+%sprites {
+
+  @extend %background-base;
+}
+
+%background {
+  background-position: 0 0;
+  background-size: 100%;
+}
+
+%background-base {
+  background-attachment: scroll;
+  background-repeat: no-repeat;
+}
+
+%center {
+  text-align: center;
+}
+
+%cover {
+  background-position: center;
+  background-size: cover;
+}
+
+%image {
+  height: auto;
+  width: 100%;
+}
+
+%uppercase {
+  text-transform: uppercase;
+}
+
 // General
 // Outline
 input:focus,
-.btn:focus {
+.btn:focus,
+select:focus {
   outline: none !important;
 }
 

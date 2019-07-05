@@ -41,6 +41,8 @@ Kory
 
 Em3rgency
 
+<tadas.juscius@gmail.com>
+
 ### Development
 
 [Spn](@s-p-n)

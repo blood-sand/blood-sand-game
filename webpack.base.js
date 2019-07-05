@@ -59,6 +59,19 @@ module.exports = {
         }),
       },
       {
+        // Fonts
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        include: path.resolve(__dirname, './src/assets/fonts'),
+        use: [{
+          loader: 'file-loader',
+          options: {
+            publicPath: '/src/assets/fonts/',
+            outputPath: '/src/assets/fonts/',
+            useRelativePath: true,
+          },
+        }],
+      },
+      {
         test: [/\.vert$/, /\.frag$/],
         use: 'raw-loader'
       }, {

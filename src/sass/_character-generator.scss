@@ -4,53 +4,115 @@
 
   &,
   &#{__fields},
-  .fields__label {
-
-    @include display-flex;
-  }
-
-  &,
-  .fields__label {
+  &#{__fields} .fields__label,
+  &#{__tips} {
 
     @include display-flex;
     @include flex-direction(column);
   }
 
-  width: 800px;
+  width: 400px;
+
+  &#{__fields} .fields__label,
+  &#{__fields} .fields__label .label__field,
+  &#{__tips} .tips__list {
+    font-family: $main;
+  }
+
+  &#{__fields} .fields__label .label__field,
+  &#{__fields} .fields__label .label__name,
+  &#{__tips} .tips__list .list__element {
+    color: $white;
+  }
+
+  &#{__fields} .fields__label .label__field,
+  &#{__tips} .tips__list .list__element {
+    font-size: $font-size-tip;
+  }
 
   &#{__fields} {
+
+    &,
+    .fields__label {
+      position: relative;
+    }
+
+    .fields__label {
+      font-size: $font-size-label;
+      margin: 1em 0;
+
+      .label__field {
+        background-color: transparent;
+        border-bottom: 2px solid darkgoldenrod;
+        border-left: 0;
+        border-right: 0;
+        border-top: 0;
+        margin: 1em 0 0;
+        padding: .2em 16px;
+
+        &[disabled] {
+          opacity: .7;
+        }
+      }
+
+      .label__field--culture {
+
+        /* IE Hack */
+        &::-ms-expand {
+          display: none;
+        }
+      }
+    }
+  }
+
+  &#{__fields--inline} {
 
     @include flex-direction(row);
     @include justify-content(space-between);
 
     .fields__label {
-      margin: 1em 0;
+      flex: 0 0 50%;
 
-      &,
-      .label__field {
-        font-size: $font-size-label;
+      .label__field,
+      .label__radio,
+      .label__radio::after {
+        position: absolute;
       }
 
       .label__field {
-        margin: .5em 0 0;
-        padding: .2em 16px;
+        opacity: 0;
       }
 
-      .label__field:focus ~ .label__tip {
-        display: block !important;
+      .label__field:checked + .label__radio {
+        background-color: darkgoldenrod;
       }
 
-      .label__tip {
-        display: none;
+      .label__name {
+        text-indent: 48px;
+      }
 
-        ul li {
-          list-style-type: disc;
-          padding: .5em 0;
+      .label__radio {
+        border: 2px solid darkgoldenrod;
+        height: 16px;
+        left: 0;
+        top: 0;
+        width: 16px;
+      }
+    }
+  }
 
-          strong {
-            font-weight: bold;
-          }
-        }
+  &#{__tips} .tips__list {
+    margin: .5em 0 0;
+    padding: 0 0 0 24px;
+
+    .list__element {
+      line-height: $line-height-tip;
+      list-style-type: circle;
+      padding: .2em 0;
+
+      strong {
+        color: darkgoldenrod;
+        font-weight: bold;
       }
     }
   }

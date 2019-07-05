@@ -6,64 +6,75 @@
     module
   </legend>
   <div class="character-generator-form__fields">
+    <label class="fields__label" for="name">
+      <span class="label__name">Name</span>
+      <input class="label__field label__field--name" type="text" name="name"
+        pattern="[a-zA-Z+ ]" tabindex="0" disabled />
+    </label>
     <label class="fields__label" for="culture">
       <span class="label__name">Culture</span>
-      <select id="culture" class="label__field" name="culture" tabindex="1">
+      <select id="culture" class="label__field label__field--culture"
+        name="culture" tabindex="1">
         <option class="field__option" selected disabled>Choose a culture
         </option>
         <option class="field__option" disabled>Roman</option>
-        <option class="field__option" value="roman_volounteer">- Volounteer
+        <option class="field__option" value="roman_volounteer">Volounteer
         </option>
-        <option class="field__option" value="roman_contracted">- Contracted
+        <option class="field__option" value="roman_contracted">Contracted
         </option>
-        <option class="field__option" value="roman_debt_slave">- Debt Slave
+        <option class="field__option" value="roman_debt_slave">Debt Slave
         </option>
         <option class="field__option" disabled>Slaves</option>
-        <option class="field__option" value="gallic">- Gallic</option>
-        <option class="field__option" value="germanic">- Germanic</option>
-        <option class="field__option" value="iberian">- Iberian</option>
-        <option class="field__option" value="syrian">- Syrian</option>
-        <option class="field__option" value="numidian">- Numidian</option>
-        <option class="field__option" value="thracian">- Thracian</option>
-        <option class="field__option" value="greek">- Greek</option>
-        <option class="field__option" value="judean">- Judean</option>
-        <option class="field__option" value="schythian">- Schythian</option>
+        <option class="field__option" value="gallic">Gallic</option>
+        <option class="field__option" value="germanic">Germanic</option>
+        <option class="field__option" value="iberian">Iberian</option>
+        <option class="field__option" value="syrian">Syrian</option>
+        <option class="field__option" value="numidian">Numidian</option>
+        <option class="field__option" value="thracian">Thracian</option>
+        <option class="field__option" value="greek">Greek</option>
+        <option class="field__option" value="judean">Judean</option>
+        <option class="field__option" value="schythian">Schythian</option>
       </select>
     </label>
-    <label class="fields__label" for="male">
-      <input id="male" class="label__field" type="radio" name="sex" value="male"
-        tabindex="2" />
-      <span class="label__name">Male</span>
-    </label>
-    <label class="fields__label" for="female">
-      <input id="female" class="label__field" type="radio" name="sex"
-        value="female" tabindex="3" />
-      <!--TODO: Show the tip dynamically-->
-      <span class="label__name">Female</span>
-      <span class="label__tip">
-        <ul>
-          <li>+2 <strong>Perception</strong></li>
-          <li>+1 <strong>Willpower</strong></li>
-          <li>-2 <strong>Strenght</strong></li>
-          <li>-10 cm to <strong>Height</strong></li>
-          <li>Slightly lower arm reach based on
-            <strong>Height</strong></li>
-        </ul>
-      </span>
-    </label>
+    <div
+      class="character-generator-form__fields character-generator-form__fields--inline">
+      <label class="fields__label" for="male">
+        <input id="male" class="label__field" type="radio" name="sex"
+          value="male" tabindex="2" />
+        <span class="label__radio"></span>
+        <span class="label__name">Male</span>
+      </label>
+      <label class="fields__label fields__label--female" for="female">
+        <input id="female" class="label__field" type="radio" name="sex"
+          value="female" tabindex="3" />
+        <span class="label__radio"></span>
+        <span class="label__name">Female</span>
+      </label>
+    </div>
+    <div class="character-generator-form__tips hidden">
+      <ul class="tips__list">
+        <li class="list__element">+2 <strong>Perception</strong></li>
+        <li class="list__element">+1 <strong>Willpower</strong></li>
+        <li class="list__element">-2 <strong>Strenght</strong></li>
+        <li class="list__element">-10 cm to <strong>Height</strong></li>
+        <li class="list__element">Slightly lower arm reach based on
+          <strong>Height</strong></li>
+      </ul>
+    </div>
   </div>
-  <div class="character-generator-form__fields">
+  <div class="character-generator-form__fields hidden">
     <label class="fields__label" for="strenght">
       <span class="label__name">Strenght</span>
       <input id="strenght" class="label__field" type="number" name="strenght"
         step="1" min="1" max="20" tabindex="4" />
       <span class="label__tip">
-        <ul>
-          <li><strong>Strength</strong> affects how much encumbrance from
+        <ul class="tip__list">
+          <li class="list__element"><strong>Strength</strong> affects how much
+            encumbrance from
             carried equipment will
             penalise the gladiator’s stamina or stamina recovery.</li>
-          <li>It may modify weapon damage</li>
-          <li> It affects Critical chance.</li>
+          <li class="list__element">It may modify weapon damage</li>
+          <li class="list__element"> It affects Critical chance.</li>
         </ul>
       </span>
     </label>
@@ -72,13 +83,15 @@
       <input id="dexterity" class="label__field" type="number" name="dexterity"
         step="1" min="1" max="20" tabindex="5" />
       <span class="label__tip">
-        <ul>
-          <li><strong>Dexterity</strong> affects Dodge chance in combat both
+        <ul class="tip__list">
+          <li class="list__element"><strong>Dexterity</strong> affects Dodge
+            chance in combat both
             directly and through
             its
             impact on the trained Dodge Skill</li>
-          <li>It affects the gladiator’s Initiative value</li>
-          <li>It affects Critical chance</li>
+          <li class="list__element">It affects the gladiator’s Initiative value
+          </li>
+          <li class="list__element">It affects Critical chance</li>
         </ul>
       </span>
     </label>
@@ -87,10 +100,12 @@
       <input id="endurance" class="label__field" type="number" name="endurance"
         step="1" min="1" max="20" tabindex="6" />
       <span class="label__tip">
-        <ul>
-          <li><strong>Endurance</strong> affects the gladiator’s Stamina pool
+        <ul class="tip__list">
+          <li class="list__element"><strong>Endurance</strong> affects the
+            gladiator’s Stamina pool
             and regeneration speed</li>
-          <li>It affects gladiator <strong>Health</strong> pool</li>
+          <li class="list__element">It affects gladiator <strong>Health</strong>
+            pool</li>
         </ul>
       </span>
     </label>
@@ -99,16 +114,20 @@
       <input id="vitality" class="label__field" type="number" name="vitality"
         step="1" min="1" max="20" tabindex="7" />
       <span class="label__tip">
-        <ul>
-          <li><strong>Vitality</strong> affects the gladiator’s
+        <ul class="tip__list">
+          <li class="list__element"><strong>Vitality</strong> affects the
+            gladiator’s
             <strong>Health</strong> pool</li>
-          <li>It affects the gladiator’s <strong>Stamina</strong> pool</li>
-          <li>It affects the gladiator’s <strong>Immunity</strong> and thereby
+          <li class="list__element">It affects the gladiator’s
+            <strong>Stamina</strong> pool</li>
+          <li class="list__element">It affects the gladiator’s
+            <strong>Immunity</strong> and thereby
             the chance to fall
             sick
             and duration of sickness. Also the chance of developing an infection
             from injury</li>
-          <li>It plays the primary role in any and all matters of gladiator
+          <li class="list__element">It plays the primary role in any and all
+            matters of gladiator
             <strong>Health</strong>,
             including resistance to poor lifestyle conditions like accommodation
             and
@@ -116,18 +135,19 @@
         </ul>
       </span>
     </label>
-  </div>
-  <div class="character-generator-form__fields">
     <label class="fields__label" for="perception">
       <span class="label__name">Perception</span>
       <input id="perception" class="label__field" type="number"
         name="perception" step="1" min="1" max="20" tabindex="8" />
       <span class="label__tip">
-        <ul>
-          <li><strong>Perception</strong> affects the gladiator’s
+        <ul class="tip__list">
+          <li class="list__element"><strong>Perception</strong> affects the
+            gladiator’s
             <strong>Initiative</strong> value</li>
-          <li>It affects <strong>Critical</strong> chance</li>
-          <li>Influence chance of noticing details or dangers</li>
+          <li class="list__element">It affects <strong>Critical</strong> chance
+          </li>
+          <li class="list__element">Influence chance of noticing details or
+            dangers</li>
         </ul>
       </span>
     </label>
@@ -136,11 +156,13 @@
       <input id="intelligence" class="label__field" type="number"
         name="intelligence" step="1" min="1" max="20" tabindex="9" />
       <span class="label__tip">
-        <ul>
-          <li><strong>Intelligence</strong> affects the gladiator’s total
+        <ul class="tip__list">
+          <li class="list__element"><strong>Intelligence</strong> affects the
+            gladiator’s total
             assignable skill
             points</li>
-          <li>It will have an effect on a gladiator’s training speed</li>
+          <li class="list__element">It will have an effect on a gladiator’s
+            training speed</li>
         </ul>
       </span>
     </label>
@@ -149,10 +171,12 @@
       <input id="v" class="label__field" type="number" name="willpower" step="1"
         min="1" max="20" tabindex="10" />
       <span class="label__tip">
-        <ul>
-          <li>It affects a gladiator’s <strong>Nerve</strong></li>
-          <li>It affects <strong>Stamina</strong> pool and regeneration</li>
-          <li>It affects <strong>Health</strong> pool</li>
+        <ul class="tip__list">
+          <li class="list__element">It affects a gladiator’s
+            <strong>Nerve</strong></li>
+          <li class="list__element">It affects <strong>Stamina</strong> pool and
+            regeneration</li>
+          <li class="list__element">It affects <strong>Health</strong> pool</li>
         </ul>
       </span>
     </label>

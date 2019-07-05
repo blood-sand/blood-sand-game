@@ -2,6 +2,7 @@
 // Scene Configuration
 // JS imports
 import Phaser from 'phaser';
+import WebFontLoaderPlugin from '../assets/js/lib/rexwebfontloaderplugin.min';
 
 // Module Export
 export default {
@@ -19,12 +20,18 @@ export default {
     height: '100%'
   },
   title: 'Blood & Sand',
-  backgroundColor: '#ccc',
-  transparent: false,
+  transparent: true,
   url: 'https://www.develteam.com/Game/Blood-and-Sand',
-  version: '0.1.0',
+  version: '0.3.0',
   fps: 60,
   dom: {
     createContainer: true
+  },
+  plugins: {
+    global: [{
+      key: 'WebFontLoader',
+      plugin: WebFontLoaderPlugin,
+      start: true
+    }]
   }
 };
