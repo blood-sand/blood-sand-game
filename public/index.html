@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<!--HTML Start-->
+<html>
+  <!--Head Start-->
+  <head>
+    <meta charset="utf-8">
+    <title>Blood & Sand</title>
+    <link rel="icon dns-prefetch" type="image/png" href="favicon.png" />
+    <style>
+      @font-face {
+        font-family: 'weiss_initialenregular';
+        src: url('/src/assets/fonts/weissinitialen-webfont.woff2') format('woff2'),
+          url('/src/assets/fonts/weissinitialen-webfont.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+
+      }
+
+      @font-face {
+        font-family: 'weiss_initialenalternates';
+        src: url('/src/assets/fonts/weissinitialen-alternates-webfont.woff2') format('woff2'),
+          url('/src/assets/fonts/weissinitialen-alternates-webfont.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+      }
+
+      * {
+        font-family: "weiss_initialenregular", sans-serif;
+      }
+
+      html {
+        background-color: rgb(0, 0, 0);
+        color: rgb(255, 255, 255);
+      }
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+
+      #background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        background-image: url(/src/assets/img/character-generator-background.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      #container {
+        display: flex
+      }
+
+      #game {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100vw;
+        height: 40vh;
+        justify-content: center;
+      }
+
+      .info, .action {
+        flex-shrink: 1;
+        background: rgba(0, 0, 0, 0.72);
+        color: rgb(255, 255, 255);
+        margin: 2.5vh 0;
+        padding: 5vh;
+      }
+      .info {
+        border-right: 1px solid rgb(170, 130, 25);
+      }
+      input,select,textarea {
+        background: rgba(0, 0, 0, 0.72);
+        color: rgb(170, 130, 25);
+        padding: 5px;
+      }
+
+      form>label {
+        flex:1;
+        flex-shrink: 1;
+      }
+
+    </style>
+</head>
+  <!--Head End-->
+  <!--Body Start-->
+  <body>
+    <div id="background"></div>
+    <div id="container">
+      <div id="game">
+        <div class="info">
+          <span>Create your First Gladiator</span>
+        </div>
+        <form class="action" action="new-gladiator" method="socket">
+          <label for="culture">
+            <span>Culture: </span>
+            <select id="culture" name="culture">
+              <option>Roman</option>
+              <option>Other</option>
+            </select>
+          </label>
+
+        </form>
+
+
+      </div>
+    </div>
+  </body>
+</html>

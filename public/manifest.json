@@ -1,0 +1,5 @@
+{
+  "main.js": "bundle.min.js",
+  "main.css": "src/css/index.css",
+  "index.html": "index.html"
+}

@@ -1,0 +1,17 @@
+# Repository - Configuration
+# System and IDE files
+Thumbs.db
+.DS_Store
+.idea
+*.suo
+*.sublime-project
+*.sublime-workspace
+.editorconfig
+.vscode
+# Vendors
+node_modules/
+# Cache
+.sass-cache
+# Build
+dist/
+/npm-debug.log
