@@ -1,6 +1,6 @@
 var main = {
 	express : require('express'),
-	port: 8000, 
+	port: 8080, 
 	fs: require('fs'), 
 	config: require('./private/config.json')
 };
