@@ -6,7 +6,7 @@ Thumbs.db
 *.suo
 *.sublime-project
 *.sublime-workspace
-.package-lock.json
+package-lock.json
 .editorconfig
 .vscode
 # Vendors
