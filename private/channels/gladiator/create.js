@@ -1,7 +1,7 @@
 const jsonSL = require('json-sl');
 const MAX_ABILITY_SUM = 91;
 const MAX_STAT_SIZE = 25;
-
+console.log("hi!");
 const attributeGenerator = {
     "strength": "rand(1,6)+rand(1,6)+rand(1,6)",
     "dexterity": "rand(1,6)+rand(1,6)+rand(1,6)",

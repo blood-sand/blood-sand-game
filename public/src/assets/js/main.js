@@ -1,5 +1,18 @@
 var socket = io();
-(function () {
+(function hotReload() {
+    let reloadOnConnect = false;
+    socket.on("disconnect", function () {
+        reloadOnConnect = true;
+    });
+
+    socket.on("connect", function () {
+        if (reloadOnConnect) {
+            window.location.reload();
+        }
+    });
+}());
+
+(function createGladiator () {
     const MAX_ABILITY_SUM = 91;
     const MAX_STAT_SIZE = 25;
     let stats = {
