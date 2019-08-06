@@ -14,7 +14,8 @@ var socket = io();
 
 (function createGladiator () {
     const MAX_ABILITY_SUM = 91;
-    const MAX_STAT_SIZE = 25;
+    const MAX_STAT_SIZE = 18;
+    const MIN_STAT_SIZE = 3
     let stats = {
         strength: 0,
         dexterity: 0,
@@ -78,12 +79,33 @@ var socket = io();
             while (difference !== 0) {
                 let randProp;
                 if (difference > 0) {
-                    randProp = randomProperty(stats, i => i !== "abilitySum" && stats[i] < MAX_STAT_SIZE);
+                    randProp = randomProperty(stats, i => {
+                        if (i === "abilitySum") {
+                            return false;
+                        }
+                        if (stats[i] >= MAX_STAT_SIZE) {
+                            console.log("bad stat:", stats[i]);
+                            return false;
+                        }
+                        console.log("good stat:", stats[i], MAX_STAT_SIZE);
+                        return true;
+                    });
                     console.log("rand prop:", randProp);
+
                     stats[randProp] += 1;
                     difference -= 1;
                 } else {
-                    randProp = randomProperty(stats, i => i !== "abilitySum" && stats[i] > 0);
+                    randProp = randomProperty(stats, i => {
+                        if (i === "abilitySum") {
+                            return false;
+                        }
+                        if (stats[i] <= MIN_STAT_SIZE) {
+                            console.log("bad stat:", stats[i]);
+                            return false;
+                        }
+                        console.log("good stat:", stats[i], MAX_STAT_SIZE);
+                        return true;
+                    });
                     console.log("rand prop:", randProp);
                     stats[randProp] -= 1;
                     difference += 1;
@@ -94,8 +116,12 @@ var socket = io();
             
             return;
         }
-        if (value < 0) {
-            value = 0;
+        if (value < MIN_STAT_SIZE) {
+            value = MIN_STAT_SIZE;
+        } 
+
+        if (value > MAX_STAT_SIZE) {
+            value = MAX_STAT_SIZE;
         }
         
         let difference = value - stats[name];
