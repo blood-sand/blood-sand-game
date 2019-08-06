@@ -5,7 +5,7 @@ const MAX_STAT_SIZE = 25;
 console.log("hi!");
 const attributeGenerator = require('../../jsonSL/attributes.json');
 const cultureBiometrics = require('../../jsonSL/culture_biometrics.json');
-
+const combatStats = require('../../jsonSL/combat_stats.json');
 const sexes = {
     male: 0,
     female: 1
@@ -58,6 +58,10 @@ function createGlatiator (m, session) {
         cultureBiometrics.culture = culture;
         biometrics = jsonSL(cultureBiometrics);
         socket.emit("gladiator-biometrics", biometrics)
+    }
+
+    function generateCombatStats () {
+        // TODO FINIsH THIS
     }
 
     socket.emit("gladiator-names", names);

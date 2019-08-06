@@ -77,7 +77,7 @@ ul.gladiatorData>li {
 ul.gladiatorData>li>span {
     flex:2;
 }
-#game>.info, #game>.action, #game>.biometrics {
+#game>.info, #game>.action, #game>.biometricStats, #game>.combatStats {
     width: 40vw;
     background: rgba(0, 0, 0, 0.72);
     color: rgb(255, 255, 255);
@@ -117,7 +117,7 @@ html,select,input,textarea {
         width: 5vh;
     }
 
-    #game>.info, #game>.action, #game>.biometrics {
+    #game>.info, #game>.action, #game>.biometricStats, #game>.combatStats {
         width: 100%;
         margin: 0;
         border: 0;
