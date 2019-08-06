@@ -11,6 +11,7 @@ function createGlatiator (m, session) {
     let gladiator;
     let culture = "";
     let biometrics = null;
+    let sex = 0;
     if (!session.gladiator) {
         gladiator = session.gladiator = {};
         gladiator.stats = {
@@ -44,16 +45,27 @@ function createGlatiator (m, session) {
         gladiator = session.gladiator;
         console.log("found gladiator in cache.");
     }
+
+    function generateBiometrics () {
+        cultureBiometrics.sex = sex;
+        cultureBiometrics.culture = culture;
+        biometrics = jsonSL(cultureBiometrics);
+        socket.emit("gladiator-biometrics", biometrics)
+    }
+
     socket.emit("gladiator-names", names);
     socket.emit("gladiator-culture-info", gladiator.cultureInfo);
     socket.emit("gladiator-stats", gladiator.stats);
 
     socket.on("gladiator-culture", newCulture => {
         culture = newCulture;
-        cultureBiometrics.sex = 0;
-        cultureBiometrics.culture = culture;
-        biometrics = jsonSL(cultureBiometrics);
-        socket.emit("gladiator-biometrics", biometrics)
+        generateBiometrics();
+    });
+
+    socket.on("gladiator-sex", newSex => {
+        sex = newSex;
+        console.log(newSex);
+        generateBiometrics();
     });
 }
 

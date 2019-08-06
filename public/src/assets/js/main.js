@@ -34,8 +34,14 @@ var socket = io();
         bmi: 0,
         reach: 0
     };
-    let cultureInfo = {}
-    let gladiatorNames = {}
+    let cultureInfo = {};
+    let gladiatorNames = {};
+    let sexes = {
+        male: 0,
+        female: 1
+    };
+    let sex = $('#sex').val();
+
     socket.emit("gladiator-create-ready");
     socket.on("gladiator-names", d => {
         console.log(d);
@@ -83,6 +89,10 @@ var socket = io();
 
         //console.log(culture);
     });
+    $('#sex').on('change', e => {
+        sex = $(e.target).val().toLowerCase();
+        socket.emit("gladiator-sex", sexes[sex]);
+    })
     $('.gladiatorData input').on('change', e => {
         let value = +e.target.value;
         let name = e.target.name;
