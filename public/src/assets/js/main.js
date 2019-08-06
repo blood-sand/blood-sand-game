@@ -26,6 +26,14 @@ var socket = io();
         vitality: 0,
         abilitySum: 0
     };
+    let biometrics = {
+        rank: 1,
+        age: 0,
+        weight: 0,
+        height: 0,
+        bmi: 0,
+        reach: 0
+    };
     let cultureInfo = {}
     let gladiatorNames = {}
     socket.emit("gladiator-create-ready");
@@ -41,6 +49,13 @@ var socket = io();
         stats = d;
         for (let field in stats) {
             $(`input[name="${field}"]`).val(stats[field]);
+        }
+    });
+
+    socket.on("gladiator-biometrics", d => {
+        biometrics = d;
+        for (let field in biometrics) {
+            $(`input[name="${field}"]`).val(biometrics[field]);
         }
     });
 
@@ -64,9 +79,9 @@ var socket = io();
         $('p.cultureInfo').text(cultureInfo[$(e.target).val()]);
         $('input[name="name"]').val(randName)
         culture = pick;
+        socket.emit("gladiator-culture", culture);
 
-
-        console.log(culture);
+        //console.log(culture);
     });
     $('.gladiatorData input').on('change', e => {
         let value = +e.target.value;

@@ -3,20 +3,14 @@ const names = require('./names.json');
 const MAX_ABILITY_SUM = 91;
 const MAX_STAT_SIZE = 25;
 console.log("hi!");
-const attributeGenerator = {
-    "strength": "rand(1,6)+rand(1,6)+rand(1,6)",
-    "dexterity": "rand(1,6)+rand(1,6)+rand(1,6)",
-    "perception": "rand(1,6)+rand(1,6)+rand(1,6)",
-    "endurance": "rand(1,6)+rand(1,6)+rand(1,6)",
-    "intelligence": "rand(1,6)+rand(1,6)+rand(1,6)",
-    "willpower": "rand(1,6)+rand(1,6)+rand(1,6)",
-    "vitality": "rand(1,6)+rand(1,6)+rand(1,6)",
-    "abilitySum": "strength+dexterity+perception+endurance+intelligence+willpower+vitality"
-};
+const attributeGenerator = require('../../jsonSL/attributes.json');
+const cultureBiometrics = require('../../jsonSL/culture_biometrics.json');
 
 function createGlatiator (m, session) {
     const socket = session.socket;
     let gladiator;
+    let culture = "";
+    let biometrics = null;
     if (!session.gladiator) {
         gladiator = session.gladiator = {};
         gladiator.stats = {
@@ -53,6 +47,14 @@ function createGlatiator (m, session) {
     socket.emit("gladiator-names", names);
     socket.emit("gladiator-culture-info", gladiator.cultureInfo);
     socket.emit("gladiator-stats", gladiator.stats);
+
+    socket.on("gladiator-culture", newCulture => {
+        culture = newCulture;
+        cultureBiometrics.sex = 0;
+        cultureBiometrics.culture = culture;
+        biometrics = jsonSL(cultureBiometrics);
+        socket.emit("gladiator-biometrics", biometrics)
+    });
 }
 
 module.exports = createGlatiator;

@@ -1,0 +1,134 @@
+{
+  "culture": 1,
+  "sex": 1,
+  "rank": 1,
+  "height if culture is 0": {
+    "roll": "rand(1,100)",
+    "value if roll in range(1,10)": "rand(150, 154)",
+    "value if roll in range(11,30)": "rand(155, 164)",
+    "value if roll in range(31,70)": "rand(165, 175)",
+    "value if roll in range(71,90)": "rand(176, 185)",
+    "value if roll in range(91,100)": {
+      "value": "rand(186, 190)",
+      "value if rand(1,100) is 100": "rand(191, 200)"
+    }
+  },
+  "height if culture is 1": {
+    "roll": "rand(1,100)",
+    "value if roll in range(1,10)": "rand(159, 164)",
+    "value if roll in range(11,30)": "rand(165, 175)",
+    "value if roll in range(31,70)": "rand(176, 186)",
+    "value if roll in range(71,90)": "rand(187, 197)",
+    "value if roll in range(91,100)": {
+      "value": "rand(198, 203)",
+      "value if rand(1,100) in range(99,100)": "rand(204, 214)"
+    }
+  },
+  "height if culture is 2": {
+    "roll": "rand(1,100)",
+    "value if roll in range(1,10)": "rand(159, 165)",
+    "value if roll in range(11,30)": "rand(166, 178)",
+    "value if roll in range(31,70)": "rand(179, 191)",
+    "value if roll in range(71,90)": "rand(192, 204)",
+    "value if roll in range(91,100)": {
+      "value": "rand(205, 210)",
+      "value if rand(1,100) in range(98,100)": "rand(211, 222)"
+    }
+  },
+  "height if culture is 3": {
+    "roll": "rand(1,100)",
+    "value if roll in range(1,10)": "rand(151, 154)",
+    "value if roll in range(11,30)": "rand(155, 163)",
+    "value if roll in range(31,70)": "rand(164, 173)",
+    "value if roll in range(71,90)": "rand(174, 182)",
+    "value if roll in range(91,100)": {
+      "value": "rand(183, 187)",
+      "value if rand(1,100) is 100": "rand(188, 196)"
+    }
+  },
+  "height if culture is 4": {
+    "roll": "rand(1,100)",
+    "value if roll in range(1,10)": "rand(151, 154)",
+    "value if roll in range(11,30)": "rand(155, 163)",
+    "value if roll in range(31,70)": "rand(164, 173)",
+    "value if roll in range(71,90)": "rand(174, 182)",
+    "value if roll in range(91,100)": {
+      "value": "rand(183, 187)",
+      "value if rand(1,100) is 100": "rand(188, 196)"
+    }
+  },
+  "height if culture is 5": {
+    "roll": "rand(1,100)",
+    "value if roll in range(1,10)": "rand(160, 164)",
+    "value if roll in range(11,30)": "rand(165, 174)",
+    "value if roll in range(31,70)": "rand(175, 184)",
+    "value if roll in range(71,90)": "rand(185, 194)",
+    "value if roll in range(91,100)": {
+      "value": "rand(195, 200)",
+      "value if rand(1,100) in range(99,100)": "rand(201, 210)"
+    }
+  },
+  "height if culture is 6": {
+    "roll": "rand(1,100)",
+    "value if roll in range(1,10)": "rand(159, 163)",
+    "value if roll in range(11,30)": "rand(164, 172)",
+    "value if roll in range(31,70)": "rand(173, 181)",
+    "value if roll in range(71,90)": "rand(182, 190)",
+    "value if roll in range(91,100)": {
+      "value": "rand(191, 195)",
+      "value if rand(1,100) in range(99,100)": "rand(196, 204)"
+    }
+  },
+  "height if culture is 7": {
+    "roll": "rand(1,100)",
+    "value if roll in range(1,10)": "rand(155, 159)",
+    "value if roll in range(11,30)": "rand(160, 168)",
+    "value if roll in range(31,70)": "rand(169, 177)",
+    "value if roll in range(71,90)": "rand(178, 186)",
+    "value if roll in range(91,100)": {
+      "value": "rand(187, 191)",
+      "value if rand(1,100) in range(99,100)": "rand(192, 200)"
+    }
+  },
+  "height if culture is 8": {
+    "roll": "rand(1,100)",
+    "value if roll in range(1,10)": "rand(159, 163)",
+    "value if roll in range(11,30)": "rand(164, 172)",
+    "value if roll in range(31,70)": "rand(173, 181)",
+    "value if roll in range(71,90)": "rand(182, 190)",
+    "value if roll in range(91,100)": {
+      "value": "rand(191, 195)",
+      "value if rand(1,100) in range(99,100)": "rand(196, 204)"
+    }
+  },
+    "height if culture is 9": {
+    "roll": "rand(1,100)",
+    "value if roll in range(1,10)": "rand(158, 162)",
+    "value if roll in range(11,30)": "rand(163, 173)",
+    "value if roll in range(31,70)": "rand(174, 183)",
+    "value if roll in range(71,90)": "rand(184, 193)",
+    "value if roll in range(91,100)": {
+      "value": "rand(194, 198)",
+      "value if rand(1,100) in range(99,100)": "rand(199, 208)"
+    }
+  },
+  "height if sex is 1": "height - 10",
+  "bmi": {
+    "roll": "rand(1,100)",
+    "value if roll in range(1,35)": "rand(14,19)",
+    "value if roll in range(36,85)": "rand(20,24)",
+    "value if roll in range(86,96)": "rand(25,29)",
+    "value if roll in range(97,99)": "rand(30,34)",
+    "value if roll is 100": "rand(35,39)"
+  },
+  "weight": "bmi*((height/100)^2)",
+  "reach if sex is 0": "height * 0.345",
+  "reach if sex is 1": "height * 0.326",
+  "age": {
+    "roll": "rand(1,100)",
+    "value if roll in range(1,30)": "rand(16,20)",
+    "value if roll in range(31,80)": "rand(21,34)",
+    "value if roll in range(81,100)": "rand(35,45)"
+    
+  }
+}
