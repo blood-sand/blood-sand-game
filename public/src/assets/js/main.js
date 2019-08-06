@@ -70,6 +70,16 @@ var socket = io();
         return  keys[keys.length * Math.random() << 0];
     };
 
+    function generateName () {
+        let cultureLabel = $('#culture').val().toLowerCase();
+        let sex = $('#sex').val().toLowerCase();
+        if (cultureLabel === "culture") {
+            return;
+        }
+        let ref = gladiatorNames[cultureLabel][sex]
+        let randName = ref[Math.floor(Math.random()*ref.length)];
+        $('input[name="name"]').val(randName);
+    }
 
     let culture = -1;
     $('#culture').on('change', e => {
@@ -77,20 +87,14 @@ var socket = io();
         if (pick < 0) {
             e.target.selectedIndex = culture + 1;
             return;
-        }
-        let cultureLabel = $(e.target).val().toLowerCase();
-        let sex = 'male';
-        let ref = gladiatorNames[cultureLabel][sex]
-        let randName = ref[Math.floor(Math.random()*ref.length)];
-        $('p.cultureInfo').text(cultureInfo[$(e.target).val()]);
-        $('input[name="name"]').val(randName)
+        }        $('p.cultureInfo').text(cultureInfo[$(e.target).val()]);
+        generateName();
         culture = pick;
         socket.emit("gladiator-culture", culture);
-
-        //console.log(culture);
     });
     $('#sex').on('change', e => {
         sex = $(e.target).val().toLowerCase();
+        generateName();
         socket.emit("gladiator-sex", sexes[sex]);
     })
     $('.gladiatorData input').on('change', e => {

@@ -6,10 +6,14 @@ console.log("hi!");
 const attributeGenerator = require('../../jsonSL/attributes.json');
 const cultureBiometrics = require('../../jsonSL/culture_biometrics.json');
 
+const sexes = {
+    male: 0,
+    female: 1
+};
 function createGlatiator (m, session) {
     const socket = session.socket;
     let gladiator;
-    let culture = "";
+    let culture = -1;
     let biometrics = null;
     let sex = 0;
     if (!session.gladiator) {
@@ -47,6 +51,9 @@ function createGlatiator (m, session) {
     }
 
     function generateBiometrics () {
+        if (culture === -1) {
+            return;
+        }
         cultureBiometrics.sex = sex;
         cultureBiometrics.culture = culture;
         biometrics = jsonSL(cultureBiometrics);
@@ -64,7 +71,7 @@ function createGlatiator (m, session) {
 
     socket.on("gladiator-sex", newSex => {
         sex = newSex;
-        console.log(newSex);
+        console.log("new sex:", newSex);
         generateBiometrics();
     });
 }
