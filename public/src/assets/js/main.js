@@ -27,9 +27,12 @@ var socket = io();
         abilitySum: 0
     };
     let cultureInfo = {}
-
+    let gladiatorNames = {}
     socket.emit("gladiator-create-ready");
-
+    socket.on("gladiator-names", d => {
+        console.log(d);
+        gladiatorNames = d;
+    });
     socket.on("gladiator-culture-info", d => {
         cultureInfo = d;
         $('select[name="culture"]').trigger('change');
@@ -54,8 +57,15 @@ var socket = io();
             e.target.selectedIndex = culture + 1;
             return;
         }
+        let cultureLabel = $(e.target).val().toLowerCase();
+        let sex = 'male';
+        let ref = gladiatorNames[cultureLabel][sex]
+        let randName = ref[Math.floor(Math.random()*ref.length)];
         $('p.cultureInfo').text(cultureInfo[$(e.target).val()]);
+        $('input[name="name"]').val(randName)
         culture = pick;
+
+
         console.log(culture);
     });
     $('.gladiatorData input').on('change', e => {

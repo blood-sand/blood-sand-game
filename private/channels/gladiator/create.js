@@ -1,4 +1,5 @@
 const jsonSL = require('json-sl');
+const names = require('./names.json');
 const MAX_ABILITY_SUM = 91;
 const MAX_STAT_SIZE = 25;
 console.log("hi!");
@@ -49,7 +50,7 @@ function createGlatiator (m, session) {
         gladiator = session.gladiator;
         console.log("found gladiator in cache.");
     }
-
+    socket.emit("gladiator-names", names);
     socket.emit("gladiator-culture-info", gladiator.cultureInfo);
     socket.emit("gladiator-stats", gladiator.stats);
 }
