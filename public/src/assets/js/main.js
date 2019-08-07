@@ -36,12 +36,31 @@ var socket = io();
     };
     let cultureInfo = {};
     let combatStats = {};
+    let bmiMods = {};
     let gladiatorNames = {};
     let sexes = {
         male: 0,
         female: 1
     };
     let sex = $('#sex').val();
+
+    function displayStats () {
+        $('.bmiMod').remove();
+        for (let field in stats) {
+            let stat = stats[field];
+            let e = $(`input[name="${field}"]`);
+            /*
+            if (field in bmiMods) {
+                let mod = "" + bmiMods[field];
+                if (mod[0] !== '-') {
+                    mod = '+' + mod;
+                }
+                $(`<span class="bmiMod">${mod}</span>`).insertBefore(e)
+                //stat += bmiMods[field];
+            }*/
+            e.val(stat);
+        }
+    }
 
     socket.emit("gladiator-create-ready");
     socket.on("gladiator-names", d => {
@@ -54,9 +73,7 @@ var socket = io();
     });
     socket.on("gladiator-stats", d => {
         stats = d;
-        for (let field in stats) {
-            $(`input[name="${field}"]`).val(stats[field]);
-        }
+        displayStats();
     });
 
     socket.on("gladiator-biometrics", d => {
@@ -66,11 +83,25 @@ var socket = io();
         }
     });
 
-    socket.on("gladiator-combatStats", d => {
+    socket.on("gladiator-combat-stats", d => {
         combatStats = d;
         for (let field in combatStats) {
             $(`input[name="${field}"]`).val(combatStats[field]);
         }
+    });
+
+    socket.on("gladiator-bmi-mod", d => {
+        bmiMods = d;
+        console.log("bmiMods:", bmiMods);
+        for (let field in bmiMods) {
+            let mod = "" + bmiMods[field];
+            if (mod[0] !== '-') {
+                mod = '+' + mod;
+            }
+            console.log(field, mod);
+            $(`<span class="bmiMod">${mod}</span>`).insertBefore(`input[name="${field}"]`)
+        }
+        //displayStats();
     });
 
     function randomProperty (obj, f = () => {}) {
@@ -109,6 +140,9 @@ var socket = io();
         let value = +e.target.value;
         let name = e.target.name;
         let abilitySum = stats.abilitySum;
+        if (name in bmiMods) {
+            value -= bmiMods[name];
+        }
         if (name === "abilitySum") {
             console.log("abilitySum", value)
             if (value > MAX_ABILITY_SUM) {

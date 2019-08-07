@@ -77,6 +77,13 @@ ul.gladiatorData>li {
 ul.gladiatorData>li>span {
     flex:2;
 }
+ul.gladiatorData>li>.bmiMod {
+    text-align:right;
+    font-style: italic;
+    padding: 5px;
+    color: rgb(170, 130, 25);
+
+}
 #game>.info, #game>.action, #game>.biometricStats, #game>.combatStats {
     width: 40vw;
     background: rgba(0, 0, 0, 0.72);
@@ -95,6 +102,7 @@ input,select,textarea {
 input.stat {
     width: 5vw;
 }
+
 input.biometrics {
     width: 10vw;
 }

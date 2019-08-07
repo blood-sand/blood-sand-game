@@ -6,6 +6,8 @@ console.log("hi!");
 const attributeGenerator = require('../../jsonSL/attributes.json');
 const cultureBiometrics = require('../../jsonSL/culture_biometrics.json');
 const combatStats = require('../../jsonSL/combat_stats.json');
+const bmiModifiers = require('../../jsonSL/bmi_modifiers.json')
+
 const sexes = {
     male: 0,
     female: 1
@@ -42,6 +44,7 @@ function createGlatiator (m, session) {
         };
         gladiator.biometrics = null;
         gladiator.stats = jsonSL(attributeGenerator);
+        gladiator.bmiMod = null;
         console.log("Generated Stats.")
         console.log(gladiator.stats);
     } else {
@@ -57,9 +60,19 @@ function createGlatiator (m, session) {
         cultureBiometrics.culture = culture;
         gladiator.biometrics = jsonSL(cultureBiometrics);
         socket.emit("gladiator-biometrics", gladiator.biometrics)
+        generateBmiMod();
         generateCombatStats();
     }
-
+    function generateBmiMod() {
+        console.log("glad stats:", gladiator.stats);
+        Object.assign(bmiModifiers.input, gladiator.stats, gladiator.biometrics);
+        bmiModifiers.input.bmi = gladiator.biometrics.bmi;
+        gladiator.bmiMod = jsonSL(bmiModifiers);
+        delete gladiator.bmiMod.input;
+        delete gladiator.bmiMod.bmi;
+        console.log("glad bmi mod:", gladiator.bmiMod);
+        socket.emit("gladiator-bmi-mod", gladiator.bmiMod)
+    }
     function generateCombatStats () {
         // not yet implemented things:
         let input = {
@@ -75,16 +88,11 @@ function createGlatiator (m, session) {
             "fatigueModifier": 1,
             "bmiModifier": 0
         };
-        for (let field in gladiator.biometrics) {
-            input[field] = gladiator.biometrics[field];
-        }
-        for (let field in gladiator.stats) {
-            input[field] = gladiator.stats[field];
-        }
+        Object.assign(input, gladiator.biometrics, gladiator.stats);
         combatStats.input = input;
         gladiator.combatStats = jsonSL(combatStats);
-        console.log(gladiator.combatStats);
-        socket.emit("gladiator-combatStats", gladiator.combatStats);
+        //console.log(gladiator.combatStats);
+        socket.emit("gladiator-combat-stats", gladiator.combatStats);
     }
 
     socket.emit("gladiator-names", names);
