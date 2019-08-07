@@ -4,7 +4,7 @@
         "strength": 10,
         "intelligence": 10,
         "vitality": 10,
-        "willPower": 10,
+        "willpower": 10,
         "endurance": 10,
         "dexterity": 10,
         "perception": 10,
@@ -21,12 +21,13 @@
         "fatigueModifier": 1,
         "bmiModifier": 0
     },
-    "health": "(2*(input.rank)+5*(0.5*input.vitality+0.2*input.willPower+0.3*input.endurance))+(input.weight-64)+input.lifestyleModifier",
-    "stamina": "10+2*(input.rank)+5*((0.3*input.willPower)+(0.3*input.vitality)+(0.4*input.endurance))+input.lifestyleModifier",
-    "staminaRegen": "1+(stamina*0.04)+(stamina * 0.35)*(input.encumbranceModifier)+(input.lifestyleModifier / 10)+4*(input.fatigueModifier)",
+    "health": "(2*(input.rank)+5*(0.5*input.vitality+0.2*input.willpower+0.3*input.endurance))+(input.weight-64)+input.lifestyleModifier",
+    "stamina": "10+2*(input.rank)+5*((0.3*input.willpower)+(0.3*input.vitality)+(0.4*input.endurance))+input.lifestyleModifier",
+    "staminaRecovery": "1+(stamina*0.04)+(stamina * 0.35)*(input.encumbranceModifier)+(input.lifestyleModifier / 10)+4*(input.fatigueModifier)",
     "initiative": "input.encumbranceModifier*(input.rank + (2*(0.3*input.dexterity+0.3*input.perception)+0.4*input.tactics))",
-    "nerve": "(0.5*5*input.willPower)+(input.rank/15*50)",
-    "Offense": "25+(input.weaponSkill/2)+2*(input.rank)+input.weaponOffense",
-    "Dodge": "((input.dexterity*input.encumbranceModifier+input.perception)/2 + (input.dodgeSkill*input.encumbranceModifier/3)+ input.rank + input.bmiModifier)",
-    "Parry": "(input.strength+input.dexterity+input.perception+input.intelligence)/4 + (input.parrySkill/3) + input.rank + input.weaponParry + input.shieldParry"
+    "nerve": "(0.5*5*input.willpower)+(input.rank/15*50)",
+    "offense": "25+(input.weaponSkill/2)+2*(input.rank)+input.weaponOffense",
+    "dodge": "((input.dexterity*input.encumbranceModifier+input.perception)/2 + (input.dodgeSkill*input.encumbranceModifier/3)+ input.rank + input.bmiModifier)",
+    "parry": "(input.strength+input.dexterity+input.perception+input.intelligence)/4 + (input.parrySkill/3) + input.rank + input.weaponParry + input.shieldParry",
+    "defense": "dodge+parry"
 }

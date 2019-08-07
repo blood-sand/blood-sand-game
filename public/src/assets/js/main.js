@@ -35,6 +35,7 @@ var socket = io();
         reach: 0
     };
     let cultureInfo = {};
+    let combatStats = {};
     let gladiatorNames = {};
     let sexes = {
         male: 0,
@@ -62,6 +63,13 @@ var socket = io();
         biometrics = d;
         for (let field in biometrics) {
             $(`input[name="${field}"]`).val(biometrics[field]);
+        }
+    });
+
+    socket.on("gladiator-combatStats", d => {
+        combatStats = d;
+        for (let field in combatStats) {
+            $(`input[name="${field}"]`).val(combatStats[field]);
         }
     });
 

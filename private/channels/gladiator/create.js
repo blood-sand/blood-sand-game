@@ -14,7 +14,6 @@ function createGlatiator (m, session) {
     const socket = session.socket;
     let gladiator;
     let culture = -1;
-    let biometrics = null;
     let sex = 0;
     if (!session.gladiator) {
         gladiator = session.gladiator = {};
@@ -41,7 +40,7 @@ function createGlatiator (m, session) {
             Judean: "info about Judeans...",
             Scythian: "info about Scythians...",
         };
-
+        gladiator.biometrics = null;
         gladiator.stats = jsonSL(attributeGenerator);
         console.log("Generated Stats.")
         console.log(gladiator.stats);
@@ -56,12 +55,36 @@ function createGlatiator (m, session) {
         }
         cultureBiometrics.sex = sex;
         cultureBiometrics.culture = culture;
-        biometrics = jsonSL(cultureBiometrics);
-        socket.emit("gladiator-biometrics", biometrics)
+        gladiator.biometrics = jsonSL(cultureBiometrics);
+        socket.emit("gladiator-biometrics", gladiator.biometrics)
+        generateCombatStats();
     }
 
     function generateCombatStats () {
-        // TODO FINIsH THIS
+        // not yet implemented things:
+        let input = {
+            "tactics": 0,
+            "weaponSkill": 0,
+            "weaponOffense": 15,
+            "dodgeSkill": 0,
+            "parrySkill": 0,
+            "weaponParry": 15,
+            "shieldParry": 0,
+            "lifestyleModifier": 0,
+            "encumbranceModifier": 1,
+            "fatigueModifier": 1,
+            "bmiModifier": 0
+        };
+        for (let field in gladiator.biometrics) {
+            input[field] = gladiator.biometrics[field];
+        }
+        for (let field in gladiator.stats) {
+            input[field] = gladiator.stats[field];
+        }
+        combatStats.input = input;
+        gladiator.combatStats = jsonSL(combatStats);
+        console.log(gladiator.combatStats);
+        socket.emit("gladiator-combatStats", gladiator.combatStats);
     }
 
     socket.emit("gladiator-names", names);
@@ -75,7 +98,6 @@ function createGlatiator (m, session) {
 
     socket.on("gladiator-sex", newSex => {
         sex = newSex;
-        console.log("new sex:", newSex);
         generateBiometrics();
     });
 }
