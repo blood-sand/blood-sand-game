@@ -66,12 +66,12 @@ function createGlatiator (m, session) {
             "tactics": 0,
             "weaponSkill": 0,
             "weaponOffense": 15,
+            "weaponWeight": 0,
             "dodgeSkill": 0,
             "parrySkill": 0,
             "weaponParry": 15,
             "shieldParry": 0,
             "lifestyleModifier": 0,
-            "encumbranceModifier": 1,
             "fatigueModifier": 1,
             "bmiModifier": 0
         };
