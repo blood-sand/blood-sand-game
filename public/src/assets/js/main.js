@@ -45,19 +45,10 @@ var socket = io();
     let sex = $('#sex').val();
 
     function displayStats () {
-        $('.bmiMod').remove();
+        
         for (let field in stats) {
             let stat = stats[field];
             let e = $(`input[name="${field}"]`);
-            /*
-            if (field in bmiMods) {
-                let mod = "" + bmiMods[field];
-                if (mod[0] !== '-') {
-                    mod = '+' + mod;
-                }
-                $(`<span class="bmiMod">${mod}</span>`).insertBefore(e)
-                //stat += bmiMods[field];
-            }*/
             e.val(stat);
         }
     }
@@ -92,6 +83,7 @@ var socket = io();
 
     socket.on("gladiator-bmi-mod", d => {
         bmiMods = d;
+        $('.bmiMod').remove();
         console.log("bmiMods:", bmiMods);
         for (let field in bmiMods) {
             let mod = "" + bmiMods[field];
@@ -101,7 +93,6 @@ var socket = io();
             console.log(field, mod);
             $(`<span class="bmiMod">${mod}</span>`).insertBefore(`input[name="${field}"]`)
         }
-        //displayStats();
     });
 
     function randomProperty (obj, f = () => {}) {
