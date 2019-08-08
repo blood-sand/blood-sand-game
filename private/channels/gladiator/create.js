@@ -1,8 +1,8 @@
 const jsonSL = require('json-sl');
 const names = require('./names.json');
 const MAX_ABILITY_SUM = 91;
-const MAX_STAT_SIZE = 25;
-console.log("hi!");
+const MAX_STAT_SIZE = 18;
+const MIN_STAT_SIZE = 3;
 const attributeGenerator = require('../../jsonSL/attributes.json');
 const cultureBiometrics = require('../../jsonSL/culture_biometrics.json');
 const combatStats = require('../../jsonSL/combat_stats.json');
@@ -44,6 +44,7 @@ function createGlatiator (m, session) {
         };
         gladiator.biometrics = null;
         gladiator.stats = jsonSL(attributeGenerator);
+        gladiator.combatStats = null;
         gladiator.bmiMod = null;
         console.log("Generated Stats.")
         console.log(gladiator.stats);
@@ -89,7 +90,9 @@ function createGlatiator (m, session) {
             "bmiModifier": 0
         };
         Object.assign(input, gladiator.biometrics, gladiator.stats);
+        
         combatStats.input = input;
+        //console.log(combatStats);
         gladiator.combatStats = jsonSL(combatStats);
         //console.log(gladiator.combatStats);
         socket.emit("gladiator-combat-stats", gladiator.combatStats);
@@ -106,6 +109,25 @@ function createGlatiator (m, session) {
 
     socket.on("gladiator-sex", newSex => {
         sex = newSex;
+        generateBiometrics();
+    });
+
+    socket.on("gladiator-stats-change", stats => {
+        let sum = 0;
+        for (let field in gladiator.stats) {
+            if (field === "abilitySum") {
+                continue;
+            }
+            if ((field in stats) && 
+                !isNaN(+stats[field]) &&
+                stats[field] >= MIN_STAT_SIZE && 
+                stats[field] <= MAX_STAT_SIZE) {
+                gladiator.stats[field] = stats[field];
+            }
+            sum += gladiator.stats[field];
+        }
+        gladiator.stats.abilitySum = sum;
+        socket.emit("gladiator-stats", gladiator.stats)
         generateBiometrics();
     });
 }

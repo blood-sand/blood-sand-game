@@ -45,12 +45,19 @@ var socket = io();
     let sex = $('#sex').val();
 
     function displayStats () {
-        
         for (let field in stats) {
             let stat = stats[field];
-            let e = $(`input[name="${field}"]`);
-            e.val(stat);
+            $(`input[name="${field}"]`).val(stat);
         }
+        for (let field in combatStats) {
+            let stat = combatStats[field];
+            $(`input[name="${field}"]`).val(stat);
+        }
+        for (let field in biometrics) {
+            let stat = biometrics[field];
+            $(`input[name="${field}"]`).val(stat);
+        }
+
     }
 
     socket.emit("gladiator-create-ready");
@@ -131,11 +138,8 @@ var socket = io();
         let value = +e.target.value;
         let name = e.target.name;
         let abilitySum = stats.abilitySum;
-        if (name in bmiMods) {
-            value -= bmiMods[name];
-        }
+        
         if (name === "abilitySum") {
-            console.log("abilitySum", value)
             if (value > MAX_ABILITY_SUM) {
                 value = MAX_ABILITY_SUM;
             }
@@ -143,7 +147,6 @@ var socket = io();
                 value = 0;
             }
             let difference = value - stats.abilitySum;
-            console.log(difference);
             stats.abilitySum = value;
             if (isNaN(difference)) {
                 return false;
@@ -182,11 +185,12 @@ var socket = io();
                     stats[randProp] -= 1;
                     difference += 1;
                 }
-                $(`input[name="${randProp}"]`).val(stats[randProp]);
+                //$(`input[name="${randProp}"]`).val(stats[randProp]);
             }
-            $('input[name="abilitySum"]').val(stats.abilitySum);
+            //$('input[name="abilitySum"]').val(stats.abilitySum);
             
-            return;
+            socket.emit("gladiator-stats-change", stats);
+            return displayStats();
         }
         if (value < MIN_STAT_SIZE) {
             value = MIN_STAT_SIZE;
@@ -209,7 +213,8 @@ var socket = io();
             stats[name] += difference;
         }
         stats.abilitySum = abilitySum;
-        $(`input[name="${name}"]`).val(stats[name]);
-        $('input[name="abilitySum"]').val(abilitySum);
+        console.log(stats);
+        socket.emit("gladiator-stats-change", stats);
+        return displayStats();
     });
 }());
