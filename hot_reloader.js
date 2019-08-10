@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const open = require('open');
 const kill = require('tree-kill');
-const URL = "http://localhost:8080";
+const URL = "http://localhost:8081";
 const NAME = "Server Auto-Reloading Environment for Blood & Sand";
 
 let server = cp.fork('server.js');
@@ -45,4 +45,4 @@ process.on('SIGINT', function () {
     process.exit();
 });
 waiting = false;
-setTimeout(() => open("http://localhost:8080"), 1000);
+setTimeout(() => open(URL), 1000);

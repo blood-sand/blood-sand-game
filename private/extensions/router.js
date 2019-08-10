@@ -9,7 +9,7 @@ module.exports = function (m) {
 	});
 	
 	app.get(/(.*)/, function (req, res) {
-		var filename = 'public';
+		var filename = 'src';
 		var url_parts = req.params[0].split('/').splice(1);
 		var i;
 		console.log(url_parts);
@@ -34,8 +34,19 @@ module.exports = function (m) {
 		const filepath = path.join(root, filename);
 		//console.log(filepath)
 		if (m.fs.existsSync(filepath)) {
-			res.sendFile(filepath);
-			console.log("sent file:", filepath);
+			if (m.fs.lstatSync(filepath).isDirectory()) {
+				m.fs.readdir(filepath, function (err, dir) {
+					if (err) {
+						return res.send(err);
+					}
+					res.send(dir);
+					console.log("sent dir", dir);
+				});
+			} else {
+				res.sendFile(filepath);
+				console.log("sent file:", filepath);
+			}
+			
 		} else {
 			res.status(404).send('Cannot find it.');
 			console.log("sent 404 for:", filepath)
