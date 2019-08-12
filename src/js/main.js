@@ -13,5 +13,7 @@ var socket = io();
 }());
 
 $.getScript('/js/ModuleFactory.js', function () {
-	console.log("got the factory");
+	let m = new ModuleFactory();
+	m.fetch('culture');
+	//console.log("culture module:", culture)
 });

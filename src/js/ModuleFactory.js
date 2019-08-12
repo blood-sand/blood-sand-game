@@ -15,11 +15,10 @@
 if (window) {
 	window.ModuleFactory = (function () {
 		const priv = new WeakMap();
-		let ready = false;
-		let modules = [];
 		const dirExp = /\/([a-z]+)$/;
 		const htmExp = /\/([a-z]+\.htm)$/;
 		const jsExp = /\/([a-z]+\.js)$/;
+
 		async function load (path) {
 			let contents;
 			if (dirExp.test(path)) {
@@ -36,15 +35,23 @@ if (window) {
 				}));
 			}
 			if (contents instanceof Array) {
-				let result = {};
+				let pending = [];
+				let labels = [];
+				let resolved, result;
 				for (let i = 0; i < contents.length; i += 1) {
-					let entry = contents[i];
-					result[entry] = await load(`${path}/${entry}`);
+					labels.push(contents[i]);
+					pending.push(load(`${path}/${contents[i]}`));
 				}
-				return result;
+				resolved = await Promise.all(pending);
+				results = {};
+				resolved.forEach((c, i) => {
+					results[labels[i]] = c;
+				});
+				return results;
 			}
 			return contents;
 		}
+		/*
 		load('/module').then(r => {
 			$('#game').append(r.culture.display['main.htm']);
 			for (let filename in r.culture.control) {
@@ -52,53 +59,58 @@ if (window) {
 				func();
 			}
 		});
-		/*
-		$.get('/module', function (moduleDirs) {
-			if (!(moduleDirs instanceof Array)) {
-				return;
-			}
-			moduleDirs.forEach(moduleName => {
-
-				modules[moduleName] = {};
-				let dirname = `/module/${moduleName}`;
-				$.get(dirname, md => {
-					console.log(md);
-					md.forEach(entry => {
-						if (entry === "main.js") {
-							$.ajax({
-								url: `${dirname}/main.js`, 
-								dataType: "text",
-								success: main => {
-									modules[moduleName].init = new Function(main);
-								}
-							});
-						} else {
-							modules[moduleName][entry] = {};
-							$.get(`${dirname}/${entry}`, d => {
-								d.forEach(f => {
-									$.get(`${dirname}/${entry}/${f}`, contents => {
-										modules[moduleName][entry][f] = contents;
-										console.log(modules);
-									})
-								});
-
-							});
-						}
-					});
-				});
-			});
-
-		});
 		*/
 
 		class ModuleFactory {
-			constructor() {
-				priv.set(this, {
-					// private properties
+			constructor(moduleDirectory = '/module') {
+				const self = this;
+				let modules = load(moduleDirectory);
+
+				priv.set(self, {
+					modules: modules,
+					modulesSync: {},
+					prepareModule: function (module) {
+						let main = module['main.js'];
+						if (!main) {
+							main = function () {};
+						}
+						main.prototype = module;
+						return new main;
+					}
+				});
+
+				modules.then(r => {
+					priv.get(self).modulesSync = r;
 				});
 			}
 
+			/* 
+				fetch (String moduleName):
+					input : (string) the name of a module.
+					return: a promise that resolves to a module's
+							directory, fully loaded and ready.
+							If a module doesn't exist, returns
+							undefined.
+				
+			*/
+			async fetch (moduleName) {
+				const self = this;
+				const p = priv.get(self);
+				return p.prepareModule((await p.modules)[moduleName]);
+			}
 
+			/*
+				fetchSync (String moduleName):
+					input : (string) the name of a module.
+					return: a fully loaded module, if possible.
+							if the module isn't ready, or doesn't
+							exist, returns undefined.
+			*/
+			fetchSync (moduleName) {
+				const self = this;
+				const p = priv.get(self);
+				return p.prepareModule(priv.get(self).modulesSync[moduleName]);
+			}
 
 		}
 

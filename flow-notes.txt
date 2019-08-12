@@ -1,0 +1,22 @@
+gladiator skills - 10 points initially
+gladiator sheet - list multiple gladiators
+
+
+"New Game" Flow:
+- Choose culture / sex / name / region
+- Generate Biometrics and traits / redistribute ability points
+- Training screen (ability / skills / biometric / combat)
+- - assign ability points (if any)
+- - adjust traits (with perk points)
+- - lifestyle (later)
+- Battle
+- - if win:
+- - - +fame (less chance of execution) from crowd favor and audience size
+- - - +gold
+- - if loss:
+- - - ~25% chance of dying (based on crowd favor)
+- - - extra ability points (based on progress) for next gladiator if you die
+- Next day
+- - gain experience from training
+- - gain experience from battle (if any)
+- - - if you lose (but don't die), you gain a bit more xp
