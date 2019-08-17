@@ -11,9 +11,9 @@ var socket = io();
         }
     });
 }());
-
+var modules = {};
+window.state = {};
 $.getScript('/js/ModuleFactory.js', function () {
-	let m = new ModuleFactory();
-	m.fetch('culture');
-	//console.log("culture module:", culture)
+	modules = new ModuleFactory();
+	modules.fetch('culture');
 });

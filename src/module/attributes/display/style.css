@@ -1,0 +1,15 @@
+div < button[name="attributesNext"] {
+	display: block;
+}
+
+button[name="attributesPrevious"] {
+	display: block;
+	float: left;
+}
+
+button[name="attributesNext"] {
+	display: block;
+	float: right;
+	color: rgba(255, 255, 255, 0.3);
+	cursor: default;
+}

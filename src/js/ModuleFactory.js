@@ -7,8 +7,8 @@
 	
 
 
-	let culture = ModuleFactory.fetch('culture');
-
+	let culture = (ModuleFactory instance).fetch('culture');
+	
 
 
 */
@@ -18,6 +18,7 @@ if (window) {
 		const dirExp = /\/([a-z]+)$/;
 		const htmExp = /\/([a-z]+\.htm)$/;
 		const jsExp = /\/([a-z]+\.js)$/;
+		const cssExp = /\/([a-z]+\.css)$/;
 
 		async function load (path) {
 			let contents;
@@ -33,13 +34,18 @@ if (window) {
 					url: path,
 					dataType: "text"
 				}));
+			} else if (cssExp.test(path)) {
+				contents = (await $.ajax({
+					url: path,
+					dataType: "text"
+				}));
 			}
 			if (contents instanceof Array) {
 				let pending = [];
 				let labels = [];
 				let resolved, result;
 				for (let i = 0; i < contents.length; i += 1) {
-					labels.push(contents[i]);
+					labels.push(contents[i].split('.')[0]);
 					pending.push(load(`${path}/${contents[i]}`));
 				}
 				resolved = await Promise.all(pending);
@@ -51,31 +57,48 @@ if (window) {
 			}
 			return contents;
 		}
-		/*
-		load('/module').then(r => {
-			$('#game').append(r.culture.display['main.htm']);
-			for (let filename in r.culture.control) {
-				let func = r.culture.control[filename];
-				func();
-			}
-		});
-		*/
 
 		class ModuleFactory {
 			constructor(moduleDirectory = '/module') {
 				const self = this;
 				let modules = load(moduleDirectory);
-
+				let loaded = [];
 				priv.set(self, {
 					modules: modules,
 					modulesSync: {},
-					prepareModule: function (module) {
-						let main = module['main.js'];
+					prepareModule: function (module, name) {
+						let main = module.main;
 						if (!main) {
 							main = function () {};
 						}
 						main.prototype = module;
-						return new main;
+						if (loaded.indexOf(name) === -1) {
+							main.prototype.loaded = false;
+							main.prototype.state = waject();
+							loaded.push(name);
+							for (let field in module) {
+								let val = module[field];
+								if (field === "main") {
+									continue;
+								}
+								if (typeof val === "object") {
+									for (let f2 in val) {
+										let v2 = val[f2];
+										if (typeof v2 === "function") {
+											//console.log(f2);
+											//console.log(v2.bind(module));
+											module[field][f2] = v2.bind(main.prototype);
+										}
+									}
+								}
+							}
+						} else {
+							main.prototype.loaded = true;
+						}
+						let instance = new main();
+							
+						
+						return instance;
 					}
 				});
 
@@ -96,7 +119,7 @@ if (window) {
 			async fetch (moduleName) {
 				const self = this;
 				const p = priv.get(self);
-				return p.prepareModule((await p.modules)[moduleName]);
+				return p.prepareModule((await p.modules)[moduleName], moduleName);
 			}
 
 			/*
