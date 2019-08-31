@@ -12,14 +12,14 @@ const sexes = {
     male: 0,
     female: 1
 };
-function createGlatiator (m, session) {
-    const socket = session.socket;
-    let gladiator;
-    let culture = -1;
-    let sex = 0;
+function createGlatiator (m, local) {
+    console.log("creating gladiator")
+    const socket = local.socket;
+    const session = local.session;
+    //let gladiator;
     if (!session.gladiator) {
-        gladiator = session.gladiator = {};
-        gladiator.stats = {
+        session.gladiator = {};
+        session.gladiator.stats = {
             strength: 0,
             dexterity: 0,
             perception: 0,
@@ -30,7 +30,7 @@ function createGlatiator (m, session) {
             abilitySum: 0
         };
 
-        gladiator.cultureInfo = {
+        session.gladiator.cultureInfo = {
             Roman: "The culture of ancient Rome existed throughout the almost 1200-year history of the civilization of Ancient Rome. The term refers to the culture of the Roman Republic, later the Roman Empire, which at its peak covered an area from Lowland Scotland and Morocco to the Euphrates.",
             Gallic: "Gaul was divided by Roman administration into three provinces, which were sub-divided in the later third century reorganization under Diocletian, and divided between two dioceses, Galliae and Viennensis, under the Praetorian prefecture of Galliae. On the local level, it was composed of civitates which preserved, broadly speaking, the boundaries of the formerly independent Gaulish tribes, which had been organised in large part on village structures that retained some features in the Roman civic formulas that overlaid them.\n\nOver the course of the Roman period, an ever-increasing proportion of Gauls gained Roman citizenship. In 212 the Constitutio Antoniniana extended citizenship to all free-born men in the Roman Empire.",
             Germanic: "info about Germanics...",
@@ -42,14 +42,16 @@ function createGlatiator (m, session) {
             Judean: "info about Judeans...",
             Scythian: "info about Scythians...",
         };
-        gladiator.biometrics = null;
-        gladiator.stats = jsonSL(attributeGenerator);
-        gladiator.combatStats = null;
-        gladiator.bmiMod = null;
+        session.gladiator.biometrics = null;
+        session.gladiator.stats = jsonSL(attributeGenerator);
+        session.gladiator.combatStats = null;
+        session.gladiator.bmiMod = null;
         console.log("Generated Stats.")
-        console.log(gladiator.stats);
+        console.log(session.gladiator.stats);
     } else {
-        gladiator = session.gladiator;
+        session.culture = -1;
+        session.sex = 0;
+        //gladiator = session.gladiator;
         console.log("found gladiator in cache.");
     }
 
@@ -57,22 +59,22 @@ function createGlatiator (m, session) {
         if (culture === -1) {
             return;
         }
-        cultureBiometrics.sex = sex;
-        cultureBiometrics.culture = culture;
-        gladiator.biometrics = jsonSL(cultureBiometrics);
-        socket.emit("gladiator-biometrics", gladiator.biometrics)
+        cultureBiometrics.sex = session.sex;
+        cultureBiometrics.culture = session.culture;
+        session.gladiator.biometrics = jsonSL(cultureBiometrics);
+        socket.emit("gladiator-biometrics", session.gladiator.biometrics)
         generateBmiMod();
         generateCombatStats();
     }
     function generateBmiMod() {
-        console.log("glad stats:", gladiator.stats);
-        Object.assign(bmiModifiers.input, gladiator.stats, gladiator.biometrics);
-        bmiModifiers.input.bmi = gladiator.biometrics.bmi;
-        gladiator.bmiMod = jsonSL(bmiModifiers);
-        delete gladiator.bmiMod.input;
-        delete gladiator.bmiMod.bmi;
-        console.log("glad bmi mod:", gladiator.bmiMod);
-        socket.emit("gladiator-bmi-mod", gladiator.bmiMod)
+        console.log("glad stats:", session.gladiator.stats);
+        Object.assign(bmiModifiers.input, session.gladiator.stats, session.gladiator.biometrics);
+        bmiModifiers.input.bmi = session.gladiator.biometrics.bmi;
+        session.gladiator.bmiMod = jsonSL(bmiModifiers);
+        delete session.gladiator.bmiMod.input;
+        delete session.gladiator.bmiMod.bmi;
+        console.log("glad bmi mod:", session.gladiator.bmiMod);
+        socket.emit("gladiator-bmi-mod", session.gladiator.bmiMod)
     }
     function generateCombatStats () {
         // not yet implemented things:
@@ -89,32 +91,32 @@ function createGlatiator (m, session) {
             "fatigueModifier": 1,
             "bmiModifier": 0
         };
-        Object.assign(input, gladiator.biometrics, gladiator.stats);
+        Object.assign(input, session.gladiator.biometrics, session.gladiator.stats);
         
         combatStats.input = input;
         //console.log(combatStats);
-        gladiator.combatStats = jsonSL(combatStats);
+        session.gladiator.combatStats = jsonSL(combatStats);
         //console.log(gladiator.combatStats);
-        socket.emit("gladiator-combat-stats", gladiator.combatStats);
+        socket.emit("gladiator-combat-stats", session.gladiator.combatStats);
     }
 
     socket.emit("gladiator-names", names);
-    socket.emit("gladiator-culture-info", gladiator.cultureInfo);
-    socket.emit("gladiator-stats", gladiator.stats);
+    socket.emit("gladiator-culture-info", session.gladiator.cultureInfo);
+    socket.emit("gladiator-stats", session.gladiator.stats);
 
     socket.on("gladiator-culture", newCulture => {
-        culture = newCulture;
+        session.culture = newCulture;
         generateBiometrics();
     });
 
     socket.on("gladiator-sex", newSex => {
-        sex = newSex;
+        session.sex = newSex;
         generateBiometrics();
     });
 
     socket.on("gladiator-stats-change", stats => {
         let sum = 0;
-        for (let field in gladiator.stats) {
+        for (let field in session.gladiator.stats) {
             if (field === "abilitySum") {
                 continue;
             }
@@ -122,12 +124,12 @@ function createGlatiator (m, session) {
                 !isNaN(+stats[field]) &&
                 stats[field] >= MIN_STAT_SIZE && 
                 stats[field] <= MAX_STAT_SIZE) {
-                gladiator.stats[field] = stats[field];
+                session.gladiator.stats[field] = stats[field];
             }
-            sum += gladiator.stats[field];
+            sum += session.gladiator.stats[field];
         }
-        gladiator.stats.abilitySum = sum;
-        socket.emit("gladiator-stats", gladiator.stats)
+        session.gladiator.stats.abilitySum = sum;
+        socket.emit("gladiator-stats", session.gladiator.stats)
         generateBiometrics();
     });
 }

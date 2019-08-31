@@ -6,7 +6,7 @@ const catcher = function (o, prop, val) {
 	if (val !== o[prop]) {
 		o[prop] = val;
 		socket.emit(`gladiator-${prop}`, val);
-		if (prop !== "name") {
+		if (prop !== "name" && !self.state.name) {
 			generateName();
 		}
 	}
@@ -63,12 +63,21 @@ function generateName () {
     //$('[name="name"]').val(randName);
 }
 
-
+console.log("culture ready sent");
+console.log(socket)
 socket.emit("gladiator-culture-ready");
 socket.on("gladiator-names", d => {
     self.state.names = d;
 });
-
+socket.on("gladiator-name", d => {
+	self.state.name = d;
+});
+socket.on("gladiator-sex", d => {
+	self.state.sex = d;
+});
+socket.on("gladiator-culture", d => {
+	self.state.culture = d;
+});
 socket.on("gladiator-culture-info", d => {
     self.state.cultureInfo = d;
 });

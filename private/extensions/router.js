@@ -2,8 +2,16 @@ module.exports = function (m) {
 	const express = m.express;
 	const app = m.app;
 	const path = require('path');
+	const session = require('express-session')({
+		secret: 'blood-sand',
+		resave: true,
+		saveUninitialized: true
+	});
 	const root = path.dirname(process.mainModule.filename);
 	//console.log(path, root);
+
+	app.use(session);
+	m.expressSession = session;
 	app.get('/', function (req, res) {
 		res.redirect('/' + m.config.defaults.index);
 	});
@@ -12,7 +20,8 @@ module.exports = function (m) {
 		var filename = 'src';
 		var url_parts = req.params[0].split('/').splice(1);
 		var i;
-		console.log(url_parts);
+		//console.log("my sess:", session)
+		//console.log(url_parts);
 		//res.send(url_parts);
 		
 		for (i in url_parts) {
@@ -30,7 +39,7 @@ module.exports = function (m) {
 		}
 		
 		//var alternative = filename.substr(7) + '/' + m.config.defaults.index;
-		console.log(root, filename);
+		//console.log(root, filename);
 		const filepath = path.join(root, filename);
 		//console.log(filepath)
 		if (m.fs.existsSync(filepath)) {
@@ -40,16 +49,16 @@ module.exports = function (m) {
 						return res.send(err);
 					}
 					res.send(dir);
-					console.log("sent dir", dir);
+					//console.log("sent dir", dir);
 				});
 			} else {
 				res.sendFile(filepath);
-				console.log("sent file:", filepath);
+				//console.log("sent file:", filepath);
 			}
 			
 		} else {
 			res.status(404).send('Cannot find it.');
-			console.log("sent 404 for:", filepath)
+			//console.log("sent 404 for:", filepath)
 		}
 	});
 }

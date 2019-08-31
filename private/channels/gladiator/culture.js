@@ -11,11 +11,24 @@ const cultureInfo = {
     Judean: "info about Judeans...",
     Scythian: "info about Scythians...",
 };
-module.exports = function (m, session) {
-	const socket = session.socket;
+module.exports = function (m, local) {
+	const socket = local.socket;
+    const session = local.session;
 	socket.emit("gladiator-names", names);
     socket.emit("gladiator-culture-info", cultureInfo);
+    if (session.name) {
+        socket.emit("gladiator-name", session.name);
+    }
+    if (session.sex) {
+        socket.emit("gladiator-sex", session.sex);
+    }
+    if (session.culture) {
+        socket.emit("gladiator-culture", session.culture);
+    }
 	socket.on("gladiator-next", data => {
+        session.name = data.name;
+        session.sex = data.sex;
+        session.culture = data.culture;
 		console.log("gladiator-next:", data);
 	});
 
