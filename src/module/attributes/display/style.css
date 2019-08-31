@@ -10,6 +10,4 @@ button[name="attributesPrevious"] {
 button[name="attributesNext"] {
 	display: block;
 	float: right;
-	color: rgba(255, 255, 255, 0.3);
-	cursor: default;
 }

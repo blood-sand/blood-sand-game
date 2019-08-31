@@ -17,7 +17,7 @@ self.state.mk({
 			
 		});
 		$('#attributes').hide(0);
-		modules.fetch('attributes');
+		modules.fetch('biometrics');
 	}
 });
 

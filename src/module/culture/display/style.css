@@ -2,6 +2,22 @@ div < button[name="cultureNext"] {
 	display: block;
 }
 
+.dice {
+	width: 2vw;
+    height: 2vw;
+    border-radius: 5px;
+    border: 1px outset #3c3c3c;
+    cursor: pointer;
+}
+
+.dice:hover {
+	border-color: #7c7c7c;
+}
+
+.dice:active {
+	border-style: inset;
+}
+
 button[name="cultureNext"] {
 	display: block;
 	float:right;

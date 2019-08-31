@@ -11,25 +11,64 @@ const cultureInfo = {
     Judean: "info about Judeans...",
     Scythian: "info about Scythians...",
 };
+const sexes = {
+    male: 0,
+    female: 1
+};
+const cultures = {
+    roman: 0,
+    gallic: 1,
+    germanic: 2,
+    syrian: 3,
+    numidian: 4,
+    thracian: 5,
+    greek: 6,
+    iberian: 7,
+    judean: 8,
+    scythian: 9
+};
 module.exports = function (m, local) {
 	const socket = local.socket;
     const session = local.session;
+
 	socket.emit("gladiator-names", names);
     socket.emit("gladiator-culture-info", cultureInfo);
     if (session.name) {
         socket.emit("gladiator-name", session.name);
+    } else {
+        session.name = "";
     }
-    if (session.sex) {
-        socket.emit("gladiator-sex", session.sex);
+    if (session.sex && session.sex !== -1) {
+        socket.emit("gladiator-sex", Object.keys(sexes)[session.sex]);
+    } else {
+        session.sex = 0;
     }
-    if (session.culture) {
-        socket.emit("gladiator-culture", session.culture);
+    if (session.culture && session.culture !== -1) {
+        socket.emit("gladiator-culture", Object.keys(cultures)[session.culture]);
+    } else {
+        session.culture = -1;
     }
+
+    socket.on('gladiator-culture', culture => {
+        session.culture = (culture in cultures ? cultures[culture] : -1);
+        console.log("new culture:", session.culture);
+    });
+
+    socket.on('gladiator-sex', sex => {
+        session.sex = (sex in sexes ? sexes[sex] : -1);
+        console.log("new sex:", session.sex);
+    });
+
+    socket.on('gladiator-name', name => {
+        if (typeof name === "string" && name.length < 16) {
+            session.name = name;
+            console.log("new name:", session.name);
+        }
+    });
+
 	socket.on("gladiator-next", data => {
-        session.name = data.name;
-        session.sex = data.sex;
-        session.culture = data.culture;
-		console.log("gladiator-next:", data);
+		console.log("gladiator-next (from culture)");
+        console.log("current state:", session);
 	});
 
 }

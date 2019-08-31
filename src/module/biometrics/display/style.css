@@ -1,0 +1,14 @@
+div < button[name="biometricsNext"] {
+	display: block;
+}
+
+button[name="biometricsPrevious"] {
+	display: block;
+	float: left;
+}
+
+button[name="biometricsNext"] {
+	display: block;
+	float: right;
+	color: rgba(255,255,255,0.4);
+}
