@@ -1,9 +1,9 @@
 const self = this;
 
-let name = window.state.culture.name;
-
-$('[name="name"]').val(name);
-
+if (self.share.name) {
+	let name = self.share.name;
+	$('[name="name"]').val(name);
+}
 $('[name="attributesPrevious').on('click', e => {
     self.state.previous = true;
 });

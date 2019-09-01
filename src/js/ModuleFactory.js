@@ -30,10 +30,13 @@ if (window) {
 					dataType: "text"
 				}));
 			} else if(jsExp.test(path)) {
-				contents = new Function(await $.ajax({
-					url: path,
-					dataType: "text"
-				}));
+				let fName = path.replace(/\/[^\/]*\//, "").replace(/\//g, "_").replace(/\.js$/, "");
+				contents = new Function(`return function ${fName} () {\n\t` +
+					(await $.ajax({
+						url: path,
+						dataType: "text"
+					})).replace(/\n/g, '\n\t') +
+					"\n};")();
 			} else if (cssExp.test(path)) {
 				contents = (await $.ajax({
 					url: path,
@@ -61,6 +64,7 @@ if (window) {
 		class ModuleFactory {
 			constructor(moduleDirectory = '/module') {
 				const self = this;
+				let share = {};
 				let modules = load(moduleDirectory);
 				let loaded = [];
 				priv.set(self, {
@@ -75,6 +79,8 @@ if (window) {
 						if (loaded.indexOf(name) === -1) {
 							main.prototype.loaded = false;
 							main.prototype.state = waject();
+							main.prototype.share = share;
+							
 							loaded.push(name);
 							for (let field in module) {
 								let val = module[field];

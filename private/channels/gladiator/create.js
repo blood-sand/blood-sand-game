@@ -94,9 +94,7 @@ function createGlatiator (m, local) {
         Object.assign(input, session.gladiator.biometrics, session.gladiator.stats);
         
         combatStats.input = input;
-        //console.log(combatStats);
         session.gladiator.combatStats = jsonSL(combatStats);
-        //console.log(gladiator.combatStats);
         socket.emit("gladiator-combat-stats", session.gladiator.combatStats);
     }
 

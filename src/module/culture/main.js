@@ -14,8 +14,7 @@ if (!self.loaded) {
 	    }
 	    let randName = ref[Math.floor(Math.random()*ref.length)];
 	    self.state.name = randName;
-	    //$('[name="name"]').val(randName);
-	}
+	};
 	$('#game').append(self.display.box);
 	$('head').append("<style>" + self.display.style + "</style>");
 
@@ -24,4 +23,4 @@ if (!self.loaded) {
 } else {
 	$('#culture').show(50);
 }
-console.log(self);
+console.log(self.share);

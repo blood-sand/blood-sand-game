@@ -13,9 +13,7 @@ self.state.mk({
 	property: 'next',
 	value: false,
 	preset: () => {
-		socket.emit('gladiator-next', {
-			
-		});
+		//socket.emit('gladiator-next');
 		$('#attributes').hide(0);
 		modules.fetch('biometrics');
 	}
@@ -25,9 +23,7 @@ self.state.mk({
 	property: 'previous',
 	value: false,
 	preset: () => {
-		socket.emit('gladiator-previous', {
-			
-		});
+		//socket.emit('gladiator-previous');
 		$('#attributes').hide(0)
 		modules.fetch('culture');
 	}

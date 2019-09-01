@@ -14,7 +14,7 @@ var socket = io();
 console.log("my session:", document.cookie);
 socket.emit("session-id", document.cookie.session)
 var modules = {};
-window.state = {};
+//window.state = {};
 $.getScript('/js/ModuleFactory.js', function () {
 	modules = new ModuleFactory();
 	modules.fetch('culture');
