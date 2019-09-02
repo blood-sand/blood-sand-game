@@ -1,24 +1,40 @@
 <div id="culture" class="item">
-  <select name="culture">
-    <option>culture</option>
-    <option>roman</option>
-    <option>gallic</option>
-    <option>germanic</option>
-    <option>syrian</option>
-    <option>numidian</option>
-    <option>thracian</option>
-    <option>greek</option>
-    <option>iberian</option>
-    <option>judean</option>
-    <option>scythian</option>
-  </select>
-  <br>
-  <select name="sex">
-    <option>male</option>
-    <option>female</option>
-  </select>
-  <br>
-  Name <img src="/img/dice.png" class="randomizeName dice"> <input name="name">
+  <span>
+    <img src="/img/dice.png" class="randomizeCulture dice">
+    Create Gladiator
+    <input name="name" value="Name Your Gladiator">
+  </span>
+  <ul class="gladiatorData">
+    <li>
+      <span>Culture</span>
+      <select class="stat" name="culture">
+        <option>roman</option>
+        <option>gallic</option>
+        <option>germanic</option>
+        <option>syrian</option>
+        <option>numidian</option>
+        <option>thracian</option>
+        <option>greek</option>
+        <option>iberian</option>
+        <option>judean</option>
+        <option>scythian</option>
+      </select>
+    </li>
+    <li>
+      <span>Sex</span>
+      <select class="stat" name="sex">
+        <option>male</option>
+        <option>female</option>
+      </select>
+    </li>
+    <li>
+      <span>
+        Name
+        <img src="/img/dice.png" class="randomizeName dice">
+      </span>
+      <input class="stat" name="name">
+    </li>
+  </ul>
   <div>
     <button name="cultureNext">Next</button>
   </div>

@@ -1,29 +1,56 @@
 <div id="biometrics" class="item">
-  <span>Biometrics</span>
+  <span>
+    <img src="/img/dice.png" class="randomizeBiometrics dice">
+    Biometrics For 
+    <input name="name" value="Name Your Gladiator">
+  </span>
   <ul class="gladiatorData">
     <li>
+      <span>Culture</span>
+      <select class="stat" name="culture">
+        <option disabled>culture</option>
+        <option>roman</option>
+        <option>gallic</option>
+        <option>germanic</option>
+        <option>syrian</option>
+        <option>numidian</option>
+        <option>thracian</option>
+        <option>greek</option>
+        <option>iberian</option>
+        <option>judean</option>
+        <option>scythian</option>
+      </select>
+    </li>
+    <li>
+      <span>Sex</span>
+      <select class="stat" name="sex">
+        <option>male</option>
+        <option>female</option>
+      </select>
+    </li>
+    <li>
       <span>Rank</span>
-      <input type="number" class="biometrics" name="rank" readonly>
+      <input class="stat" name="rank" readonly>
     </li>
     <li>
       <span>Age</span>
-      <input type="number" class="biometrics" name="age" readonly>
+      <input class="stat" name="age" readonly>
     </li>
     <li>
       <span>Weight</span>
-      <input type="number" class="biometrics" name="weight" readonly>
+      <input class="stat" name="weight" readonly>
     </li>
     <li>
       <span>Height</span>
-      <input type="number" class="biometrics" name="height" readonly>
+      <input class="stat" name="height" readonly>
     </li>
     <li>
       <span>BMI</span>
-      <input type="number" class="biometrics" name="bmi" readonly>
+      <input class="stat" name="bmi" readonly>
     </li>
     <li>
       <span>Reach</span>
-      <input type="number" class="biometrics" name="reach" readonly>
+      <input class="stat" name="reach" readonly>
     </li>
   </ul>
   <div>

@@ -1,5 +1,6 @@
 module.exports = function (m) {
 	const express = m.express;
+	const sass = require('node-sass');
 	const app = m.app;
 	const path = require('path');
 	const expressSession = require('express-session');
@@ -47,6 +48,24 @@ module.exports = function (m) {
 			} else {
 				res.sendFile(filepath);
 			}
+		} else if(path.extname(filepath) === ".css") {
+			let sassPath = filepath.replace('.css', '.scss');
+			sass.render({
+				file: sassPath, 
+				sourceMap: true,
+				sourceMapEmbed: true,
+				outputStyle: "compressed",
+				outFile: filepath
+			}, (err, result) => {
+				if (err) {
+					res.status(404).send('Cannot find it.');
+					return;
+				}
+				res.setHeader('content-type', "text/css");
+				//console.log(result.css);
+				res.send(result.css);
+			});
+			return;
 		} else {
 			res.status(404).send('Cannot find it.');
 		}

@@ -47,7 +47,7 @@ html, body {
 #game {
     display: flex;
     flex-wrap: wrap;
-    width: 100vw;
+    width: 100%;
     justify-content: center;
 }
 
@@ -72,6 +72,7 @@ ul.gladiatorData>li {
     background: rgba(0, 0, 0, 0.32);
 }
 ul.gladiatorData>li>span {
+    padding-top:6px;
     flex:2;
 }
 ul.gladiatorData>li>.bmiMod {
@@ -82,27 +83,50 @@ ul.gladiatorData>li>.bmiMod {
 
 }
 #game>.item {
-    width: 40vw;
+    width: 720px;
     background: rgba(0, 0, 0, 0.72);
     color: rgb(255, 255, 255);
-    margin: 2.5vh 0;
-    padding: 5vh;
+    margin: 15px 0;
+    padding: 25px;
 }
 
 input,select,textarea,button {
     background: rgba(0, 0, 0, 0.32);
     color: rgb(170, 130, 25);
     padding: 5px;
-    border: 0.1px inset rgb(0, 0, 0, 0.32);
+    border: 0.1px solid rgb(0, 0, 0, 0.32);
 }
 
-input.stat {
-    width: 5vw;
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
-input.biometrics {
-    width: 10vw;
+.stat {
+    box-sizing: border-box;
+    width: 90px;
+    height: 40px;
+    padding: 5px;
 }
+
+.dice {
+    width: 28px;
+    height: 28px;
+    border-radius: 5px;
+    border: 1px outset #3c3c3c;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.dice:hover {
+    border-color: #7c7c7c;
+}
+
+.dice:active {
+    border-style: inset;
+}
+
 form>label {
     flex:1;
     flex-shrink: 1;
@@ -111,19 +135,9 @@ button {
     cursor: pointer;
 }
 html,select,input,textarea,button {
-    font-size: 3vw;
+    font-size: 18px;
 }
-
-@media (min-width: 768px){
-    html,select,input,textarea {
-        font-size: 2vw;
-    }
-}
-@media (orientation: portrait){
-    input.stat {
-        width: 5vh;
-    }
-
+@media (max-width: 768px){
     #game>.item {
         width: 100%;
         margin: 0;
@@ -131,14 +145,13 @@ html,select,input,textarea,button {
         margin-bottom: 3px;
         border-radius: 0;
     }
-
-    html,select,input,textarea {
-        font-size: 2vh;
-    }
-
-    @media (max-width: 768px){
-        html,select,input,textarea {
-            font-size: 3vh;
-        }
+}
+@media (orientation: portrait){
+    #game>.item {
+        width: 100%;
+        margin: 0;
+        border: 0;
+        margin-bottom: 3px;
+        border-radius: 0;
     }
 }

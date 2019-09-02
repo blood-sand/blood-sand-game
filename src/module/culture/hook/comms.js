@@ -8,6 +8,9 @@ const catcher = function (o, prop, val) {
 	}
 	self.share[prop] = o[prop];
 	$(`[name="${prop}"]`).val(o[prop]);
+	if ($(`[name="${prop}"]`).is('select')) {
+		$(`[name="${prop}"]`).selectric();
+	}
 	return false;
 }
 
@@ -37,6 +40,10 @@ self.state.mk({
 	value: $('[name="name"]').val().toLowerCase(),
 	preset: catcher
 });
+
+self.share.culture = self.state.culture;
+self.share.sex = self.state.sex;
+self.share.name = self.state.name;
 
 socket.emit("gladiator-culture-ready");
 socket.on("gladiator-names", d => {

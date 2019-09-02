@@ -1,0 +1,16 @@
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
+    border: 1px solid rgba(255,255,255,0.32);
+    background: rgba(0,0,0,0.72);
+    font-weight: normal;
+    color: rgb(170, 130, 25);
+}
+
+.ui-widget.ui-widget-content {
+    border: 1px solid rgba(255,255,255,0.32);
+}
+
+.ui-widget-content {
+    border: 1px solid rgba(0,0,0,0.72);
+    background: rgba(0,0,0,0.32);
+    color: rgb(170, 130, 25);
+}

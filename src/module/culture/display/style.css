@@ -2,20 +2,17 @@ div < button[name="cultureNext"] {
 	display: block;
 }
 
-.dice {
-	width: 2vw;
-    height: 2vw;
-    border-radius: 5px;
-    border: 1px outset #3c3c3c;
-    cursor: pointer;
+#custom-handle {
+	width: 3em;
+	height: 1.6em;
+	top: 50%;
+	margin-top: -.8em;
+	text-align: center;
+	line-height: 1.6em;
 }
 
-.dice:hover {
-	border-color: #7c7c7c;
-}
-
-.dice:active {
-	border-style: inset;
+#culture input[name="name"] {
+	width: 450px;
 }
 
 button[name="cultureNext"] {

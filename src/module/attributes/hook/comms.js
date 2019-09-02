@@ -31,7 +31,11 @@ self.state.mk({
 
 socket.on("gladiator-attributes", data => {
 	for (let name in data) {
+        let slider = $(`[name=${name}`).siblings('.slider');
+        slider.slider('value', data[name]);
+        slider.children('.custom-handle').text(data[name]);
 		$(`[name="${name}"]`).val(data[name]);
+
 	}
 	self.state.attributes = waject(data, (stats, name, value) => {
 		let abilitySum = stats.abilitySum;

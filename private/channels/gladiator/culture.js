@@ -1,5 +1,6 @@
 const NAME_MAX_LENGTH = 32;
-
+const NUM_SEXES = 2;
+const NUM_CULTURES = 10;
 const names = require('./names.json');
 const cultureInfo = {
     Roman: "The culture of ancient Rome existed throughout the almost 1200-year history of the civilization of Ancient Rome. The term refers to the culture of the Roman Republic, later the Roman Empire, which at its peak covered an area from Lowland Scotland and Morocco to the Euphrates.",
@@ -40,24 +41,23 @@ module.exports = function (m, local) {
     } else {
         session.name = "";
     }
-    if (session.sex && session.sex !== -1) {
+    if (session.sex > -1 && session.sex < NUM_SEXES) {
         socket.emit("gladiator-sex", Object.keys(sexes)[session.sex]);
     } else {
         session.sex = 0;
     }
-    if (session.culture && session.culture !== -1) {
+    if (session.culture > -1 && session.culture < NUM_CULTURES) {
         socket.emit("gladiator-culture", Object.keys(cultures)[session.culture]);
     } else {
-        session.culture = -1;
+        session.culture = 0;
     }
-
     socket.on('gladiator-culture', culture => {
-        session.culture = (culture in cultures ? cultures[culture] : -1);
+        session.culture = (culture in cultures ? cultures[culture] : 0);
         console.log("new culture:", session.culture);
     });
 
     socket.on('gladiator-sex', sex => {
-        session.sex = (sex in sexes ? sexes[sex] : -1);
+        session.sex = (sex in sexes ? sexes[sex] : 0);
         console.log("new sex:", session.sex);
     });
 

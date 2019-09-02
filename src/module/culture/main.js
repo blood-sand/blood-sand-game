@@ -17,10 +17,20 @@ if (!self.loaded) {
 	};
 	$('#game').append(self.display.box);
 	$('head').append("<style>" + self.display.style + "</style>");
-
+	$('select').selectric();
 	self.hook.comms();
 	self.control.events();
+	var handle = $( "#custom-handle" );
+	$( "#slider" ).slider({
+		create: function() {
+			handle.text( $( this ).slider( "value" ) );
+		},
+		slide: function( event, ui ) {
+			handle.text( ui.value );
+		},
+		min: 3,
+		max: 18
+	});
 } else {
-	$('#culture').show(50);
+	$('#culture').show();
 }
-console.log(self.share);

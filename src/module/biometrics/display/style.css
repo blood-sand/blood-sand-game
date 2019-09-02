@@ -7,6 +7,14 @@ button[name="biometricsPrevious"] {
 	float: left;
 }
 
+#biometrics input[name="name"] {
+	width: 50%;
+}
+
+#biometrics select {
+	width: 150px;
+}
+
 button[name="biometricsNext"] {
 	display: block;
 	float: right;
