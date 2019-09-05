@@ -11,20 +11,27 @@ if (!self.loaded) {
 	$( ".slider" ).slider({
 		create: function() {
 			$(this).children('.custom-handle').text( $(this).slider("value"));
-			let input = $(this).siblings('input');
+			/*let input = $(this).siblings('input');
 			input.on('change', e => {
 				$(this).slider("value", e.target.value);
 				$(this).children('.custom-handle').text(e.target.value);
 			});
+			*/
 		},
 		slide: function( event, ui ) {
 			$(this).children('.custom-handle').text(ui.value);
-			$(this).siblings('input').val(ui.value).trigger('change');
+			let name = $(this).attr('name');
+			console.log(name, ui.value);
+			if (self.state.attributes && name in self.state.attributes) {
+				self.state.attributes[name] = ui.value;
+			}
+			//$(this).siblings('input').val(ui.value).trigger('change');
 		},
 		min: 3,
-		max: 18
+		max: 18,
+		animate: 'slow'
 	});
-	$('[name=abilitySum]').siblings('.slider').slider('option', 'max', 91).slider('option', 'min', 21);
+	$('[name=abilitySum]').slider('option', 'max', 91).slider('option', 'min', 21);
 } else {
 	$('#attributes').show();
 }

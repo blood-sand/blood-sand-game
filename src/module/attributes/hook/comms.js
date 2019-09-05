@@ -31,10 +31,11 @@ self.state.mk({
 
 socket.on("gladiator-attributes", data => {
 	for (let name in data) {
-        let slider = $(`[name=${name}`).siblings('.slider');
+        let slider = $(`[name=${name}`);
+        console.log(slider);
         slider.slider('value', data[name]);
         slider.children('.custom-handle').text(data[name]);
-		$(`[name="${name}"]`).val(data[name]);
+		//$(`[name="${name}"]`).val(data[name]);
 
 	}
 	self.state.attributes = waject(data, (stats, name, value) => {
@@ -87,8 +88,11 @@ socket.on("gladiator-attributes", data => {
                     difference += 1;
                 }
             }
-            
-            socket.emit("gladiator-attributes-change", stats);
+            if (!self.state.ignoreChange) {
+                socket.emit("gladiator-attributes-change", stats);
+            } else {
+                console.log("ignoring change")
+            }
             return false;
         }
         if (value < MIN_STAT_SIZE) {
@@ -111,7 +115,11 @@ socket.on("gladiator-attributes", data => {
             stats[name] += difference;
         }
         stats.abilitySum = abilitySum;
-        socket.emit("gladiator-attributes-change", stats);
+        if (!self.state.ignoreChange) {
+            socket.emit("gladiator-attributes-change", stats);
+        } else {
+            console.log("ignoring change")
+        }
         return false;
 	});
 });

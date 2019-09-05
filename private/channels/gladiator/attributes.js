@@ -14,11 +14,15 @@ module.exports = function (m, local) {
     if (!session.attributes) {
         session.attributes = jsonSL(attributeGenerator);
     }
+    if (session.attributes.abilitySum > 91) {
+        session.attributes.abilitySum = 91;
+    }
 	console.log(session.attributes);
 	socket.emit("gladiator-attributes", session.attributes);
 	socket.on("gladiator-attributes-change", stats => {
         let sum = 0;
-        console.log("new stats:", stats);
+        let tempStats = Object.assign(session.attributes);
+        //console.log("new stats:", stats);
         for (let field in session.attributes) {
             if (field === "abilitySum") {
                 continue;
@@ -27,12 +31,18 @@ module.exports = function (m, local) {
                 !isNaN(+stats[field]) &&
                 stats[field] >= MIN_STAT_SIZE && 
                 stats[field] <= MAX_STAT_SIZE) {
-                session.attributes[field] = stats[field];
+                tempStats[field] = stats[field];
+                sum += tempStats[field];
+                console.log(field, tempStats[field])
             }
-            sum += session.attributes[field];
         }
-        session.attributes.abilitySum = sum;
-        socket.emit("gladiator-attributes", session.attributes)
-        //TODO: generateBiometrics();
+        console.log(sum);
+        if (sum <= MAX_ABILITY_SUM) {
+            tempStats.abilitySum = sum;
+            session.attributes = tempStats;
+            
+        }
+        console.log("new stats:", session.attributes);
+        socket.emit("gladiator-attributes", session.attributes);
     });
 }
