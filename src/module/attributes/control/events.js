@@ -11,12 +11,12 @@ $('[name="attributesNext').on('click', e => {
 });
 $('#attributes input').on('change', e => {
 	if (self.state.attributes && e.target.name in self.state.attributes) {
-		self.state.attributes[e.target.name] = e.target.value;
+		//self.state.attributes[e.target.name] = e.target.value;
 	}
 });
 $('#attributes .randomizeAttributes').on('click', e => {
 	let abilitySum = $('#attributes [name=abilitySum]');
-	let slider = abilitySum.siblings('div.slider');
+	//let slider = abilitySum.siblings('div.slider');
 	/*
 	$('.slider').each(function () {
 		if ($(this).siblings('[name=abilitySum]').length === 0) {
@@ -28,13 +28,13 @@ $('#attributes .randomizeAttributes').on('click', e => {
 	*/
 	//self.state.ignoreChange = true;
 	//slider.slider('option', 'slide').call(slider, null, {value: 91});
-	slider.slider('option', 'slide').call(slider, null, {value: 21});
+	abilitySum.slider('option', 'slide').call(abilitySum, null, {value: 21});
 	
 	setTimeout(() => {
 		//$('.slider').siblings('input').val(3).change();
 		//slider.siblings('input').val(21).change();
 		//slider.slider('option', 'slide').call(slider, null, {value: 21})
 		//self.state.ignoreChange = false;
-		slider.slider('option', 'slide').call(slider, null, {value: 91});
+		abilitySum.slider('option', 'slide').call(abilitySum, null, {value: 91});
 	}, 700);
 });
