@@ -58,7 +58,7 @@ On terminal - inside the project folder -  run:
   npm install
   npm run start
 ```
-After dependencies installation, a NodeJS server will be initialized, listening at http://localhost:8080 and launched on your browser. It is configured in ```watch``` mode, with ```Hot Reloading``` enabled.
+After dependencies installation, a NodeJS server will be initialized, listening at http://localhost:8081 and launched on your browser. It is configured in ```watch``` mode, with ```Hot Reloading``` enabled.
 
 
 ## FAQ
