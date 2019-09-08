@@ -15,15 +15,17 @@ module.exports = function (m, local) {
 				break;
 			}
 		}
-		for (let label in settingValues) {
-			if (!(label in session.user)) {
-				console.log("bad sess(2)!");
-				session.user = undefined;
-				break;
-			}
-			if (!settingValues[label].test(session.user[label])) {
-				console.log("bad sess format!");
-				session.user = undefined;
+		if (session.user !== undefined) {
+			for (let label in settingValues) {
+				if (!(label in session.user)) {
+					console.log("bad sess(2)!");
+					session.user = undefined;
+					break;
+				}
+				if (!settingValues[label].test(session.user[label])) {
+					console.log("bad sess format!");
+					session.user = undefined;
+				}
 			}
 		}
 	}
