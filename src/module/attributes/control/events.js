@@ -4,9 +4,13 @@ if (self.share.name) {
 	$('[name="name"]').val(self.share.name);
 }
 $('[name="attributesPrevious').on('click', e => {
+	self.share.sounds.back.currentTime = 0;
+    self.share.sounds.back.play();
     self.state.previous = true;
 });
 $('[name="attributesNext').on('click', e => {
+	self.share.sounds.forward.currentTime = 0;
+    self.share.sounds.forward.play();
     self.state.next = true;
 });
 $('#attributes input').on('change', e => {

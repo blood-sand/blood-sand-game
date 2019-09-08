@@ -50,5 +50,7 @@ $('[name="cultureNext').on('click', e => {
     if (self.state.culture === "culture") {
         return;
     }
+	self.share.sounds.forward.currentTime = 0;
+    self.share.sounds.forward.play();
     self.state.next = true;
 });

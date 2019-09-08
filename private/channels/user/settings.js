@@ -1,16 +1,39 @@
-let settingLabels = [
-	'sound'
-];
-
 let settingValues = {
-	sound: /0|1/
-}
+	masterSound: /0|1/,
+	masterVolume: /[0-9][0-9]?0?/,
+	musicVolume: /[0-9][0-9]?0?/,
+	fxVolume: /[0-9][0-9]?0?/
+};
 module.exports = function (m, local) {
 	let session = local.session;
 	let socket = local.socket;
+	if (typeof session.user === "object") {
+		for (let label in session.user) {
+			if (!(label in settingValues)) {
+				console.log("bad sess!")
+				session.user = undefined;
+				break;
+			}
+		}
+		for (let label in settingValues) {
+			if (!(label in session.user)) {
+				console.log("bad sess(2)!");
+				session.user = undefined;
+				break;
+			}
+			if (!settingValues[label].test(session.user[label])) {
+				console.log("bad sess format!");
+				session.user = undefined;
+			}
+		}
+	}
+		
 	if (session.user === undefined) {
 		session.user = {
-			sound: null
+			masterSound: null,
+			masterVolume: 75,
+			musicVolume: 75,
+			fxVolume: 75,
 		}
 	}
 	console.log("user settings:", session.user);
