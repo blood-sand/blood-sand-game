@@ -8,7 +8,7 @@ if (!self.loaded) {
 	self.hook.comms();
 
 	self.control.events();
-	$( ".slider" ).slider({
+	$( "#attributes .slider" ).slider({
 		create: function() {
 			$(this).children('.custom-handle').text( $(this).slider("value"));
 			/*let input = $(this).siblings('input');
@@ -31,7 +31,7 @@ if (!self.loaded) {
 		max: 18,
 		animate: 'slow'
 	});
-	$('[name=abilitySum]').slider('option', 'max', 91).slider('option', 'min', 21);
+	$('#attributes [name=abilitySum]').slider('option', 'max', 91).slider('option', 'min', 21);
 } else {
 	$('#attributes').show();
 }

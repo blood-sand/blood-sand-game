@@ -18,4 +18,5 @@ var modules = {};
 $.getScript('/js/ModuleFactory.js', function () {
 	modules = new ModuleFactory();
 	modules.fetch('culture');
+    modules.fetch('settings');
 });

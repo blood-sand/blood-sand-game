@@ -1,16 +1,16 @@
-div < button[name="attributesNext"] {
+#attributes div < button[name="attributesNext"] {
 	display: block;
 }
 
-button[name="attributesPrevious"] {
+#attributes button[name="attributesPrevious"] {
 	display: block;
 	float: left;
 }
-.slider {
+#attributes .slider {
 	width: 480px;
 	margin: 11.75px 40px;
 }
-.slider .custom-handle {
+#attributes .slider .custom-handle {
 	width: 3em;
 	height: 1.6em;
 	top: 50%;
@@ -24,7 +24,7 @@ button[name="attributesPrevious"] {
 	width: 57%;
 }
 
-button[name="attributesNext"] {
+#attributes button[name="attributesNext"] {
 	display: block;
 	float: right;
 }
