@@ -31,6 +31,8 @@ Kory
 
 <catalistkory@gmail.com>
 
+Jarrod Arroyo (GojiraGuy)
+
 ### Development / Consulting
 
 [Emet](@lucacattide)
