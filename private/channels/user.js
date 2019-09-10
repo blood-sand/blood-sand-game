@@ -1,7 +1,7 @@
 const path = require('path');
 
-const userSettings = require(path.join(__dirname, 'user/settings.js'));
+const soundSettings = require(path.join(__dirname, 'user/sound.js'));
 module.exports = function (m, local) {
     const socket = local.socket;
-    socket.on("user-settings-ready", () => userSettings(m, local));
+    socket.on("sound-settings-ready", () => soundSettings(m, local));
 }

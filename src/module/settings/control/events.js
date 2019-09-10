@@ -5,15 +5,15 @@ dialog.dialog({
 	modal: true,
 	width: 720,
 	show: {
-		effect: 'slide',
-		duration: 'fast'
+		effect: 'explode',
+		duration: 250
 	}, 
 	hide: {
-		effect: 'slide',
-		duration: 'fast'
+		effect: 'explode',
+		duration: 250
 	},
 	close: function() {
-		self.share.sounds.down.play();
+		self.share.sounds.bow.play();
 		self.state.masterSound = $(this).find('[name=master-sound]').slider('value');
 		self.state.masterVolume = $(this).find('[name=master-volume]').slider('value');
 		self.state.musicVolume = $(this).find('[name=music-volume]').slider('value');
@@ -21,9 +21,11 @@ dialog.dialog({
 		//self.state.sound = sound;
 	},
 	open: function () {
-		self.share.sounds.up.play();
+		self.share.sounds.switch.play();
+		$('.ui-widget-overlay').one('click', () => $(this).dialog('close'));
 	}
 });
+
 
 let masterSoundOn = $('#user-settings-dialog .slider[name=master-sound]').slider({
 	value: 0,
@@ -94,6 +96,29 @@ $('body').on('click', '.user-settings-btn', function (e) {
 	//self.share.sounds.stone.play();
 	dialog.dialog('open');
 });
+
+$('body').on('click', '.next,.previous', () => {
+	self.share.sounds.switch.play();
+});
+
+$('body').on('selectric-before-open', 'select', () => {
+	self.share.sounds.up.play();
+});
+
+$('body').on('selectric-before-close', 'select', () => {
+	self.share.sounds.down.play();
+});
+
+$('body').on('slide', '.slider', function (e, ui) {
+	let before = $(this).slider('value');
+	let after = ui.value;
+	if (before < after && !self.share.sounds.up.playing()) {
+		self.share.sounds.up.play();
+	} else if (before > after && !self.share.sounds.down.playing()) {
+		self.share.sounds.down.play();
+	}
+	console.log('slide..',$(this).slider('value'), ui.value);
+})
 
 $('body').on('click', '.dice', () => {
 	function randomDie () {

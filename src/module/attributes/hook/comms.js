@@ -14,7 +14,10 @@ self.state.mk({
 	value: false,
 	preset: () => {
 		//socket.emit('gladiator-next');
-		$('#attributes').hide(0);
+		$('#attributes').hide('slide', {
+            direction: 'left'
+        }, 250);
+        self.share.slideDirection = 'right';
 		modules.fetch('biometrics');
 	}
 });
@@ -24,7 +27,10 @@ self.state.mk({
 	value: false,
 	preset: () => {
 		//socket.emit('gladiator-previous');
-		$('#attributes').hide(0)
+		$('#attributes').hide('slide', {
+            direction: 'right'
+        }, 250);
+        self.share.slideDirection = 'left';
 		modules.fetch('culture');
 	}
 });
@@ -32,7 +38,7 @@ self.state.mk({
 socket.on("gladiator-attributes", data => {
 	for (let name in data) {
         let slider = $(`[name=${name}`);
-        console.log(slider);
+        //console.log(slider);
         slider.slider('value', data[name]);
         slider.children('.custom-handle').text(data[name]);
 		//$(`[name="${name}"]`).val(data[name]);

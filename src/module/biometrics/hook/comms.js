@@ -24,7 +24,10 @@ self.state.mk({
 	property: 'previous',
 	value: false,
 	preset: () => {
-		$('#biometrics').hide(0);
+		$('#biometrics').hide('slide', {
+            direction: 'right'
+        }, 250);
+        self.share.slideDirection = 'left';
 		modules.fetch('attributes');
 	}
 });

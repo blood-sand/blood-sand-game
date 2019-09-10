@@ -1,4 +1,5 @@
 const self = this;
+let slideDirection = self.share.slideDirection ? self.share.slideDirection : 'left';
 if (!self.loaded) {
 	console.log("first load");
 	self.__proto__.generateName = function generateName () {
@@ -20,17 +21,9 @@ if (!self.loaded) {
 	$('select').selectric();
 	self.hook.comms();
 	self.control.events();
-	var handle = $( "#custom-handle" );
-	$( "#slider" ).slider({
-		create: function() {
-			handle.text( $( this ).slider( "value" ) );
-		},
-		slide: function( event, ui ) {
-			handle.text( ui.value );
-		},
-		min: 3,
-		max: 18
-	});
+	
 } else {
-	$('#culture').show();
+	$('#culture').show('slide', {
+		direction: slideDirection
+	}, 250);
 }

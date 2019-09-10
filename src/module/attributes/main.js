@@ -1,8 +1,12 @@
 const self = this;
+let slideDirection = self.share.slideDirection ? self.share.slideDirection : 'left';
 if (!self.loaded) {
 	console.log("first load of attributes");
 	$('#game').append(self.display.box);
 	$('head').append("<style>" + self.display.style + "</style>");
+	$('#attributes').hide(0).toggle('slide', {
+		direction: slideDirection
+	}, 250);
 	
 	
 	self.hook.comms();
@@ -33,5 +37,7 @@ if (!self.loaded) {
 	});
 	$('#attributes [name=abilitySum]').slider('option', 'max', 91).slider('option', 'min', 21);
 } else {
-	$('#attributes').show();
+	$('#attributes').toggle('slide', {
+		direction: slideDirection
+	}, 250);
 }

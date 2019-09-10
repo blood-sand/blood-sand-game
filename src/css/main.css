@@ -26,6 +26,7 @@ html {
 html, body {
     margin: 0;
     padding: 0;
+    overflow-x: hidden;
 }
 
 #background {
@@ -83,6 +84,7 @@ ul.gladiatorData>li>.bmiMod {
 
 }
 #game>.item {
+    position: absolute;
     width: 720px;
     background: rgba(0, 0, 0, 0.72);
     color: rgb(255, 255, 255);

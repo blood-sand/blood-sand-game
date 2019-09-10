@@ -17,13 +17,9 @@ $('.randomizeBiometrics').on('click', e => {
 });
 
 $('[name="biometricsPrevious').on('click', e => {
-	self.share.sounds.back.currentTime = 0;
-    self.share.sounds.back.play();
     self.state.previous = true;
 });
 
 $('[name="biometricsNext').on('click', e => {
-	self.share.sounds.forward.currentTime = 0;
-    self.share.sounds.forward.play();
     self.state.next = true;
 });

@@ -23,7 +23,7 @@ let sounds = self.share.sounds = {
 	down: new Howl({
 		src: ['/sound/stone_scraping_2.mp3']
 	}),
-	stone: new Howl({
+	switch: new Howl({
 		src: ['/sound/stone_6.mp3']
 	}),
 	dice1: new Howl({
@@ -34,6 +34,9 @@ let sounds = self.share.sounds = {
 	}),
 	dice3: new Howl({
 		src: ['/sound/stone_4.mp3']
+	}),
+	bow: new Howl({
+		src: ['/sound/fire_bow_sound-mike-koenig.mp3']
 	})
 };
 
@@ -58,7 +61,7 @@ self.state.mk({
 				element.slider('value', settings.masterSound);
 				element.find('.custom-handle').text(settings.masterSound ? 'On' : 'Off');
 			}
-			socket.emit('user-settings', settings);
+			socket.emit('sound-settings', settings);
 			
 			return true;
 		}
@@ -74,13 +77,13 @@ self.state.mk({
 		if (val !== o[name] && val >= 0 && val <= 100) {
 			settings.masterVolume = val;
 			Howler.volume(val / 100);
-			if (val > o[name]) {
+			/*if (val > o[name]) {
 				sounds.up.play();
 			} else {
 				sounds.down.play();
-			}
+			}*/
 			//console.log('volume:', val/100)
-			socket.emit('user-settings', settings);
+			socket.emit('sound-settings', settings);
 			return true;
 		}
 		
@@ -94,12 +97,12 @@ self.state.mk({
 		if (val !== o[name] && val >= 0 && val <= 100) {
 			settings.musicVolume = val;
 			sounds.music.volume(val / 100);
-			if (val > o[name]) {
+			/*if (val > o[name]) {
 				sounds.up.play();
 			} else {
 				sounds.down.play();
-			}
-			socket.emit('user-settings', settings);
+			}*/
+			socket.emit('sound-settings', settings);
 			return true;
 		}
 		
@@ -118,19 +121,19 @@ self.state.mk({
 				}
 				sounds[sound].volume(val / 100);
 			}
-			if (val > o[name]) {
+			/*if (val > o[name]) {
 				sounds.up.play();
 			} else {
 				sounds.down.play();
-			}
-			socket.emit('user-settings', settings);
+			}*/
+			socket.emit('sound-settings', settings);
 			return true;
 		}
 		
 		return false;
 	}
 });
-socket.on('user-settings', serverSettings => {
+socket.on('sound-settings', serverSettings => {
 	settings = serverSettings;
 	for (let label in settings) {
 		if (settings[label] === null) {
@@ -148,4 +151,4 @@ socket.on('user-settings', serverSettings => {
 	
 });
 
-socket.emit("user-settings-ready")
+socket.emit("sound-settings-ready")

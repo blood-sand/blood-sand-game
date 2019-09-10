@@ -18,7 +18,8 @@ self.state.mk({
 	property: 'next',
 	value: false,
 	preset: () => {
-		$('#culture').hide(0);
+		$('#culture').toggle('slide', 250);
+		self.share.slideDirection = 'right';
 		modules.fetch('attributes');
 	}
 });

@@ -25,6 +25,7 @@ module.exports = function (m, local) {
 				if (!settingValues[label].test(session.user[label])) {
 					console.log("bad sess format!");
 					session.user = undefined;
+					break;
 				}
 			}
 		}
@@ -38,14 +39,14 @@ module.exports = function (m, local) {
 			fxVolume: 75,
 		}
 	}
-	console.log("user settings:", session.user);
-	socket.emit("user-settings", session.user)
-	socket.on("user-settings", settings => {
+	console.log("sound settings:", session.user);
+	socket.emit("sound-settings", session.user)
+	socket.on("sound-settings", settings => {
 		for (let label in settings) {
 			if (label in settingValues && settingValues[label].test(settings[label])) {
 				session.user[label] = settings[label];
 			}
 		}
-		console.log("new settings:", session.user);
+		console.log("new sound settings:", session.user);
 	});
 }
