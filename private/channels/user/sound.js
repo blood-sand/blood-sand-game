@@ -30,7 +30,7 @@ module.exports = function (m, local) {
 			}
 		}
 	}
-		
+	
 	if (session.user === undefined) {
 		session.user = {
 			masterSound: null,

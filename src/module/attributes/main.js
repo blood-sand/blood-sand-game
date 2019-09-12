@@ -1,17 +1,16 @@
 const self = this;
 let slideDirection = self.share.slideDirection ? self.share.slideDirection : 'left';
 if (!self.loaded) {
-	console.log("first load of attributes");
 	$('#game').append(self.display.box);
 	$('head').append("<style>" + self.display.style + "</style>");
-	$('#attributes').hide(0).toggle('slide', {
+	$('#attributes').hide(0).show('slide', {
 		direction: slideDirection
 	}, 250);
 	
 	
-	self.hook.comms();
+	new self.hook.comms();
 
-	self.control.events();
+	new self.control.events();
 	$( "#attributes .slider" ).slider({
 		create: function() {
 			$(this).children('.custom-handle').text( $(this).slider("value"));
@@ -25,7 +24,6 @@ if (!self.loaded) {
 		slide: function( event, ui ) {
 			$(this).children('.custom-handle').text(ui.value);
 			let name = $(this).attr('name');
-			console.log(name, ui.value);
 			if (self.state.attributes && name in self.state.attributes) {
 				self.state.attributes[name] = ui.value;
 			}
@@ -37,7 +35,7 @@ if (!self.loaded) {
 	});
 	$('#attributes [name=abilitySum]').slider('option', 'max', 91).slider('option', 'min', 21);
 } else {
-	$('#attributes').toggle('slide', {
+	$('#attributes').show('slide', {
 		direction: slideDirection
 	}, 250);
 }

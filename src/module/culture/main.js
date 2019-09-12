@@ -19,8 +19,8 @@ if (!self.loaded) {
 	$('#game').append(self.display.box);
 	$('head').append("<style>" + self.display.style + "</style>");
 	$('select').selectric();
-	self.hook.comms();
-	self.control.events();
+	new self.hook.comms();
+	new self.control.events();
 	
 } else {
 	$('#culture').show('slide', {

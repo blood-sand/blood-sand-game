@@ -7,8 +7,8 @@ if (!self.loaded) {
 	$('#biometrics').hide(0).show('slide', {
 		direction: slideDirection
 	}, 250);
-	self.hook.comms();
-	self.control.events();
+	new self.hook.comms();
+	new self.control.events();
 	$('select').selectric();
 	//console.log(self);
 } else {
