@@ -13,4 +13,5 @@ if (!self.loaded) {
 	$('#combatStats').show('slide', {
 		direction: slideDirection
 	}, 250);
+	socket.emit("gladiator-combatStats-generate");
 }
