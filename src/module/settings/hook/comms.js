@@ -6,7 +6,7 @@ let settings = {
 Howler.mute(true);
 let sounds = self.share.sounds = {
 	music: new Howl({
-		src: ['/sound/Era_of_Terror_Main_Theme_2.mp3'],
+		src: ['/sound/Paint_the_Arena_with_Red.mp3'],
 		loop: true,
 		autoplay: true,
 		volume: 0.5

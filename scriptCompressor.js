@@ -23,7 +23,7 @@ scripts.forEach(filename => {
 
 let result = UglifyJS.minify(code, {
 	compress: {
-		drop_console: true
+		//drop_console: true
 	},
 	/*
 	sourceMap: {

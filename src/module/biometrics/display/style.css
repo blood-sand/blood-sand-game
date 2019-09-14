@@ -18,5 +18,4 @@ button[name="biometricsPrevious"] {
 button[name="biometricsNext"] {
 	display: block;
 	float: right;
-	color: rgba(255,255,255,0.4);
 }

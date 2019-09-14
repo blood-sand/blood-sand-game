@@ -15,8 +15,11 @@ self.state.mk({
 	property: 'next',
 	value: false,
 	preset: () => {
-		//$('#biometrics').hide(0);
-		//modules.fetch('bmi');
+		$('#biometrics').hide('slide', {
+            direction: 'left'
+        }, 250);
+        self.share.slideDirection = 'right';
+		modules.fetch('combatStats');
 	}
 });
 

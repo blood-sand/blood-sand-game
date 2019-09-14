@@ -1,0 +1,22 @@
+div < button[name="combatStatsNext"] {
+	display: block;
+}
+
+button[name="combatStatsPrevious"] {
+	display: block;
+	float: left;
+}
+
+#combatStats input[name="name"] {
+	width: 50%;
+}
+
+#combatStats select {
+	width: 150px;
+}
+
+button[name="combatStatsNext"] {
+	display: block;
+	float: right;
+	color: rgba(255,255,255,0.72);
+}

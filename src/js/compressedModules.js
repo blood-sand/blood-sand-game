@@ -290,8 +290,8 @@ modules.biometrics.prototype.control.events=function() {
 };
 modules.biometrics.prototype.control.events.prototype = modules.biometrics.prototype;
 modules.biometrics.prototype.display={};
-modules.biometrics.prototype.display.box=$("<div id=\"biometrics\" class=\"item\"> <span> <img src=\"/img/dice.png\" class=\"randomizeBiometrics dice\"> Biometrics For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <ul class=\"gladiatorData\"> <li> <span>Culture</span> <select class=\"stat\" name=\"culture\"> <option disabled>culture</option> <option>roman</option> <option>gallic</option> <option>germanic</option> <option>syrian</option> <option>numidian</option> <option>thracian</option> <option>greek</option> <option>iberian</option> <option>judean</option> <option>scythian</option> </select> </li> <li> <span>Sex</span> <select class=\"stat\" name=\"sex\"> <option>male</option> <option>female</option> </select> </li> <li> <span>Rank</span> <input class=\"stat\" name=\"rank\" readonly> </li> <li> <span>Age</span> <input class=\"stat\" name=\"age\" readonly> </li> <li> <span>Weight</span> <input class=\"stat\" name=\"weight\" readonly> </li> <li> <span>Height</span> <input class=\"stat\" name=\"height\" readonly> </li> <li> <span>BMI</span> <input class=\"stat\" name=\"bmi\" readonly> </li> <li> <span>Reach</span> <input class=\"stat\" name=\"reach\" readonly> </li> </ul> <div> <button name=\"biometricsPrevious\" class=\"previous\">Previous</button> <button name=\"biometricsNext\" class=\"next\" disabled>Next</button> </div> </div>");
-modules.biometrics.prototype.display.style="div < button[name=\"biometricsNext\"] { display: block; } button[name=\"biometricsPrevious\"] { display: block; float: left; } #biometrics input[name=\"name\"] { width: 50%; } #biometrics select { width: 150px; } button[name=\"biometricsNext\"] { display: block; float: right; color: rgba(255,255,255,0.4); }";
+modules.biometrics.prototype.display.box=$("<div id=\"biometrics\" class=\"item\"> <span> <img src=\"/img/dice.png\" class=\"randomizeBiometrics dice\"> Biometrics For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <ul class=\"gladiatorData\"> <li> <span>Culture</span> <select class=\"stat\" name=\"culture\"> <option disabled>culture</option> <option>roman</option> <option>gallic</option> <option>germanic</option> <option>syrian</option> <option>numidian</option> <option>thracian</option> <option>greek</option> <option>iberian</option> <option>judean</option> <option>scythian</option> </select> </li> <li> <span>Sex</span> <select class=\"stat\" name=\"sex\"> <option>male</option> <option>female</option> </select> </li> <li> <span>Rank</span> <input class=\"stat\" name=\"rank\" readonly> </li> <li> <span>Age</span> <input class=\"stat\" name=\"age\" readonly> </li> <li> <span>Weight</span> <input class=\"stat\" name=\"weight\" readonly> </li> <li> <span>Height</span> <input class=\"stat\" name=\"height\" readonly> </li> <li> <span>BMI</span> <input class=\"stat\" name=\"bmi\" readonly> </li> <li> <span>Reach</span> <input class=\"stat\" name=\"reach\" readonly> </li> </ul> <div> <button name=\"biometricsPrevious\" class=\"previous\">Previous</button> <button name=\"biometricsNext\" class=\"next\">Next</button> </div> </div>");
+modules.biometrics.prototype.display.style="div < button[name=\"biometricsNext\"] { display: block; } button[name=\"biometricsPrevious\"] { display: block; float: left; } #biometrics input[name=\"name\"] { width: 50%; } #biometrics select { width: 150px; } button[name=\"biometricsNext\"] { display: block; float: right; }";
 modules.biometrics.prototype.hook={};
 modules.biometrics.prototype.hook.comms=function() {
 	const self = this;
@@ -311,8 +311,11 @@ modules.biometrics.prototype.hook.comms=function() {
 		property: 'next',
 		value: false,
 		preset: () => {
-			//$('#biometrics').hide(0);
-			//modules.fetch('bmi');
+			$('#biometrics').hide('slide', {
+	            direction: 'left'
+	        }, 250);
+	        self.share.slideDirection = 'right';
+			modules.fetch('combatStats');
 		}
 	});
 	
@@ -379,6 +382,102 @@ modules.biometrics.prototype.hook.comms=function() {
 	socket.emit("gladiator-biometrics-ready");
 };
 modules.biometrics.prototype.hook.comms.prototype = modules.biometrics.prototype;
+modules.combatStats = function () {
+	const self = this;
+	let slideDirection = self.share.slideDirection ? self.share.slideDirection : 'left';
+	
+	if (!self.loaded) {
+		$('#game').append(self.display.box);
+		$('head').append("<style>" + self.display.style + "</style>");
+		$('#combatStats').hide(0).show('slide', {
+			direction: slideDirection
+		}, 250);
+		new self.hook.comms();
+		new self.control.events();
+	} else {
+		$('#combatStats').show('slide', {
+			direction: slideDirection
+		}, 250);
+	}
+};
+modules.combatStats.prototype.state = waject();
+modules.combatStats.prototype.share = modules.share;
+modules.combatStats.prototype.loaded = false;
+modules.combatStats.prototype.control={};
+modules.combatStats.prototype.control.events=function() {
+	const self = this;
+	
+	
+	$('[name="combatStatsPrevious').on('click', e => {
+	    self.state.previous = true;
+	});
+	
+	$('[name="combatStatsNext').on('click', e => {
+	    self.state.next = true;
+	});
+};
+modules.combatStats.prototype.control.events.prototype = modules.combatStats.prototype;
+modules.combatStats.prototype.display={};
+modules.combatStats.prototype.display.box=$("<div id=\"combatStats\" class=\"item\"> <span>Combat Statistics</span> <ul class=\"gladiatorData\"> <li> <span>Health</span> <input type=\"number\" class=\"stat\" name=\"health\" readonly> </li> <li> <span>Stamina</span> <input type=\"number\" class=\"stat\" name=\"stamina\" readonly> </li> <li> <span>Stamina Recovery</span> <input type=\"number\" class=\"stat\" name=\"staminaRecovery\" readonly> </li> <li> <span>Initiative</span> <input type=\"number\" class=\"stat\" name=\"initiative\" readonly> </li> <li> <span>Nerve</span> <input type=\"number\" class=\"stat\" name=\"nerve\" readonly> </li> <li> <span>Offense</span> <input type=\"number\" class=\"stat\" name=\"offense\" readonly> </li> <li> <span>Defense</span> <input type=\"number\" class=\"stat\" name=\"defense\" readonly> </li> <li> <span>Dodge</span> <input type=\"number\" class=\"stat\" name=\"dodge\" readonly> </li> <li> <span>Parry</span> <input type=\"number\" class=\"stat\" name=\"parry\" readonly> </li> </ul> <div> <button name=\"combatStatsPrevious\" class=\"previous\">Previous</button> <button name=\"combatStatsNext\" class=\"next\" disabled>Next</button> </div> </div>");
+modules.combatStats.prototype.display.style="div < button[name=\"combatStatsNext\"] { display: block; } button[name=\"combatStatsPrevious\"] { display: block; float: left; } #combatStats input[name=\"name\"] { width: 50%; } #combatStats select { width: 150px; } button[name=\"combatStatsNext\"] { display: block; float: right; color: rgba(255,255,255,0.72); }";
+modules.combatStats.prototype.hook={};
+modules.combatStats.prototype.hook.comms=function() {
+	const self = this;
+	
+	self.state.mk({
+		property: 'next',
+		value: false,
+		preset: () => {
+			/*$('#skills').hide('slide', {
+	            direction: 'left'
+	        }, 250);
+	        self.share.slideDirection = 'right';
+			modules.fetch('hmm');
+			*/
+		}
+	});
+	
+	self.state.mk({
+		property: 'previous',
+		value: false,
+		preset: () => {
+			$('#combatStats').hide('slide', {
+	            direction: 'right'
+	        }, 250);
+	        self.share.slideDirection = 'left';
+			modules.fetch('biometrics');
+		}
+	});
+	
+	let combatStatsLabels = [
+		"health",
+		"stamina",
+		"staminaRecovery",
+		"initiative",
+		"nerve",
+		"offense",
+		"defense",
+		"dodge",
+		"parry"
+	];
+	
+	socket.on("gladiator-combatStats", data => {
+		console.log("stats:", data);
+		combatStatsLabels.forEach(name => {
+			if (name in data) {
+				let val = data[name];
+				console.log(name, val)
+				if (/\./.test("" + val)) {
+					val = val.toFixed(2);
+				}
+				$(`[name="${name}"]`).val(val);
+			}
+		});
+	});
+	
+	socket.emit("gladiator-combatStats-ready");
+};
+modules.combatStats.prototype.hook.comms.prototype = modules.combatStats.prototype;
 modules.culture = function () {
 	const self = this;
 	let slideDirection = self.share.slideDirection ? self.share.slideDirection : 'left';
@@ -710,7 +809,7 @@ modules.settings.prototype.hook.comms=function() {
 	Howler.mute(true);
 	let sounds = self.share.sounds = {
 		music: new Howl({
-			src: ['/sound/Era_of_Terror_Main_Theme_2.mp3'],
+			src: ['/sound/Paint_the_Arena_with_Red.mp3'],
 			loop: true,
 			autoplay: true,
 			volume: 0.5
