@@ -1001,7 +1001,7 @@ modules.skills.prototype.control.events=function() {
 };
 modules.skills.prototype.control.events.prototype = modules.skills.prototype;
 modules.skills.prototype.display={};
-modules.skills.prototype.display.box=$("<div id=\"skills\" class=\"item\"> <span> <!-- <img src=\"/img/dice.png\" class=\"randomizeSkills dice\"> --> Skills For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <div> <span>Skill Points:</span> <span name=\"skillPoints\">10</span> </div> <ul class=\"gladiatorData\"> <li> <span>dodge</span> <div class=\"slider\" name=\"dodge\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\">n</span> <span class=\"description\">Abyssmal</span> </li> <li> <span>parry</span> <div class=\"slider\" name=\"parry\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>shield</span> <div class=\"slider\" name=\"shield\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>bash</span> <div class=\"slider\" name=\"bash\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>charge</span> <div class=\"slider\" name=\"charge\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>spear</span> <div class=\"slider\" name=\"spear\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>lightBlade</span> <div class=\"slider\" name=\"lightBlade\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>heavyBlade</span> <div class=\"slider\" name=\"heavyBlade\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>bludgeoning</span> <div class=\"slider\" name=\"bludgeoning\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>axe</span> <div class=\"slider\" name=\"axe\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>riposte</span> <div class=\"slider\" name=\"riposte\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>closeCombat</span> <div class=\"slider\" name=\"closeCombat\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>feint</span> <div class=\"slider\" name=\"feint\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>dirtyTrick</span> <div class=\"slider\" name=\"dirtyTrick\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>appraise</span> <div class=\"slider\" name=\"appraise\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> </ul> <div> <button name=\"skillsPrevious\" class=\"previous\">Previous</button> <button name=\"skillsNext\" class=\"next\" disabled>Next</button> </div> </div>");
+modules.skills.prototype.display.box=$("<div id=\"skills\" class=\"item\"> <span> <!-- <img src=\"/img/dice.png\" class=\"randomizeSkills dice\"> --> Skills For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <div> <span>Skill Points:</span> <span name=\"skillPoints\">10</span> </div> <ul class=\"gladiatorData\"> <li> <span>tactics</span> <div class=\"slider\" name=\"tactics\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\">n</span> <span class=\"description\">Abyssmal</span> </li> <li> <span>dodge</span> <div class=\"slider\" name=\"dodge\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>parry</span> <div class=\"slider\" name=\"parry\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>shield</span> <div class=\"slider\" name=\"shield\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>bash</span> <div class=\"slider\" name=\"bash\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>charge</span> <div class=\"slider\" name=\"charge\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>spear</span> <div class=\"slider\" name=\"spear\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>light Blade</span> <div class=\"slider\" name=\"lightBlade\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>heavy Blade</span> <div class=\"slider\" name=\"heavyBlade\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>bludgeoning</span> <div class=\"slider\" name=\"bludgeoning\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>axe</span> <div class=\"slider\" name=\"axe\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>riposte</span> <div class=\"slider\" name=\"riposte\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>close Combat</span> <div class=\"slider\" name=\"closeCombat\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>feint</span> <div class=\"slider\" name=\"feint\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>dirty Trick</span> <div class=\"slider\" name=\"dirtyTrick\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>appraise</span> <div class=\"slider\" name=\"appraise\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> </ul> <div> <button name=\"skillsPrevious\" class=\"previous\">Previous</button> <button name=\"skillsNext\" class=\"next\" disabled>Next</button> </div> </div>");
 modules.skills.prototype.display.style="#skills div < button[name=\"skillsNext\"] { display: block; } #skills button[name=\"skillsPrevious\"] { display: block; float: left; } #skills .slider { width: 200px; margin: 11.75px 40px; } #skills .slider .custom-handle { width: 3em; height: 1.6em; top: 50%; margin-top: -.8em; margin-left: -23px; text-align: center; line-height: 1.6em; } #skills input[name=\"name\"] { width: 57%; } #skills button[name=\"skillsNext\"] { display: block; float: right; color: rgba(255,255,255,0.72); } #skills .proficiency { text-align: center; }";
 modules.skills.prototype.hook={};
 modules.skills.prototype.hook.comms=function() {
@@ -1054,13 +1054,18 @@ modules.skills.prototype.hook.comms=function() {
 		if (val > 20) {
 			desc = "Okay";
 		}
+		if (skill === "tactics") {
+			if (val > 1) {
+				desc = "Bad";
+			}
+		}
 		$(`#skills [name=${skill}]`).siblings('.description').text(desc);
 	}
 	
 	function generateSkills (skill, val) {
 		let attr = modules.attributes.prototype.state.attributes;
 		let biometrics = modules.biometrics.prototype.state.biometrics;
-		console.log(skill, val, attr, biometrics);
+		console.log("generateSkills:", skill, val);
 		let generator = {
 			"input": {
 				"skill": skill,
@@ -1074,7 +1079,7 @@ modules.skills.prototype.hook.comms=function() {
 				"willpower": attr.willpower,
 				"intelligence": attr.intelligence,
 				"rank": biometrics.rank,
-				"tacticspoints": 0
+				"tacticspoints": self.state.skills.tactics
 			},
 	
 			"skill": "input.skill",
@@ -1185,6 +1190,7 @@ modules.skills.prototype.hook.comms=function() {
 	
 	self.state.skillPoints = 10;
 	let skills = {
+		"tactics": 0,
 		"dodge": 0,
 		"parry": 0,
 		"shield": 0,
@@ -1246,11 +1252,27 @@ modules.skills.prototype.hook.comms=function() {
 				if (skillPoints < 0) {
 					return false;
 				}
+	
 				self.state.skillPoints = skillPoints;
-				let result = generateSkills(skillLabels.indexOf(name), val);
-				console.log(result);
-				$(`#skills [name=${name}]`).siblings('.proficiency').text(result.toFixed(2));
-				setDescription(name, result);
+				
+				if (name === "tactics") {
+					o[name] = val;
+					for (let skill in o) {
+						if (skill === "tactics" || skill === "toString") {
+							continue;
+						}
+						let r = generateSkills(skillLabels.indexOf(skill), o[skill]);
+						console.log("tactics forced change:", skill, o[skill], r);
+						$(`#skills [name=${skill}]`).siblings('.proficiency').text(r.toFixed(2));
+						setDescription(name, r);
+					}
+					$(`#skills [name=${name}]`).siblings('.proficiency').text(val.toFixed(2));
+					setDescription(name, val);
+				} else {
+					let result = generateSkills(skillLabels.indexOf(name), val);
+					$(`#skills [name=${name}]`).siblings('.proficiency').text(result.toFixed(2));
+					setDescription(name, result);
+				}
 			}
 		});
 	}

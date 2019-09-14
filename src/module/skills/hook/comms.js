@@ -47,13 +47,18 @@ function setDescription (skill, val) {
 	if (val > 20) {
 		desc = "Okay";
 	}
+	if (skill === "tactics") {
+		if (val > 1) {
+			desc = "Bad";
+		}
+	}
 	$(`#skills [name=${skill}]`).siblings('.description').text(desc);
 }
 
 function generateSkills (skill, val) {
 	let attr = modules.attributes.prototype.state.attributes;
 	let biometrics = modules.biometrics.prototype.state.biometrics;
-	console.log(skill, val, attr, biometrics);
+	console.log("generateSkills:", skill, val);
 	let generator = {
 		"input": {
 			"skill": skill,
@@ -67,7 +72,7 @@ function generateSkills (skill, val) {
 			"willpower": attr.willpower,
 			"intelligence": attr.intelligence,
 			"rank": biometrics.rank,
-			"tacticspoints": 0
+			"tacticspoints": self.state.skills.tactics
 		},
 
 		"skill": "input.skill",
@@ -178,6 +183,7 @@ function generateSkills (skill, val) {
 
 self.state.skillPoints = 10;
 let skills = {
+	"tactics": 0,
 	"dodge": 0,
 	"parry": 0,
 	"shield": 0,
@@ -239,11 +245,27 @@ for (let label in skills) {
 			if (skillPoints < 0) {
 				return false;
 			}
+
 			self.state.skillPoints = skillPoints;
-			let result = generateSkills(skillLabels.indexOf(name), val);
-			console.log(result);
-			$(`#skills [name=${name}]`).siblings('.proficiency').text(result.toFixed(2));
-			setDescription(name, result);
+			
+			if (name === "tactics") {
+				o[name] = val;
+				for (let skill in o) {
+					if (skill === "tactics" || skill === "toString") {
+						continue;
+					}
+					let r = generateSkills(skillLabels.indexOf(skill), o[skill]);
+					console.log("tactics forced change:", skill, o[skill], r);
+					$(`#skills [name=${skill}]`).siblings('.proficiency').text(r.toFixed(2));
+					setDescription(name, r);
+				}
+				$(`#skills [name=${name}]`).siblings('.proficiency').text(val.toFixed(2));
+				setDescription(name, val);
+			} else {
+				let result = generateSkills(skillLabels.indexOf(name), val);
+				$(`#skills [name=${name}]`).siblings('.proficiency').text(result.toFixed(2));
+				setDescription(name, result);
+			}
 		}
 	});
 }
