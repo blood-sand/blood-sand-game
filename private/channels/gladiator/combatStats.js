@@ -19,7 +19,7 @@ module.exports = function (m, local) {
             "bmiModifier": 0
         };
         Object.assign(input, session.biometrics, session.attributes);
-        
+        combatStatsGenerator.input = input;
         let result = jsonSL(combatStatsGenerator);
         delete result.input;
         session.combatStats = result;

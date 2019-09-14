@@ -398,6 +398,7 @@ modules.combatStats = function () {
 		$('#combatStats').show('slide', {
 			direction: slideDirection
 		}, 250);
+		socket.emit("gladiator-combatStats-generate");
 	}
 };
 modules.combatStats.prototype.state = waject();
