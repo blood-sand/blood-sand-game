@@ -68,6 +68,15 @@ let biometricLabels = [
 	"reach"
 ];
 
+self.state.biometrics = {
+	rank: 0,
+	age: 0,
+	weight: 0,
+	height: 0,
+	bmi: 0,
+	reach: 0
+};
+
 socket.on("gladiator-biometrics", data => {
 	biometricLabels.forEach(name => {
 		if (name in data) {
@@ -76,6 +85,7 @@ socket.on("gladiator-biometrics", data => {
 			if (/\./.test("" + val)) {
 				val = val.toFixed(2);
 			}
+			self.state.biometrics[name] = val;
 			$(`[name="${name}"]`).val(val);
 		}
 	});

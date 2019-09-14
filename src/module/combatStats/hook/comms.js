@@ -4,12 +4,12 @@ self.state.mk({
 	property: 'next',
 	value: false,
 	preset: () => {
-		/*$('#skills').hide('slide', {
+		$('#combatStats').hide('slide', {
             direction: 'left'
         }, 250);
         self.share.slideDirection = 'right';
-		modules.fetch('hmm');
-		*/
+		modules.fetch('skills');
+		
 	}
 });
 

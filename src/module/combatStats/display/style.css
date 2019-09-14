@@ -18,5 +18,4 @@ button[name="combatStatsPrevious"] {
 button[name="combatStatsNext"] {
 	display: block;
 	float: right;
-	color: rgba(255,255,255,0.72);
 }

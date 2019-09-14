@@ -1,0 +1,35 @@
+#skills div < button[name="skillsNext"] {
+	display: block;
+}
+
+#skills button[name="skillsPrevious"] {
+	display: block;
+	float: left;
+}
+#skills .slider {
+	width: 200px;
+	margin: 11.75px 40px;
+}
+#skills .slider .custom-handle {
+	width: 3em;
+	height: 1.6em;
+	top: 50%;
+	margin-top: -.8em;
+	margin-left: -23px;
+	text-align: center;
+	line-height: 1.6em;
+}
+
+#skills input[name="name"] {
+	width: 57%;
+}
+
+#skills button[name="skillsNext"] {
+	display: block;
+	float: right;
+	color: rgba(255,255,255,0.72);
+}
+
+#skills .proficiency {
+	text-align: center;
+}

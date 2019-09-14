@@ -31,7 +31,15 @@ window.waject = function(o, Preset, Got) {
             configurable: true,
             enumerable: true
         });
-        o[prop] = (props.value || val || null);
+        if (props.value === undefined) {
+            if (val !== undefined) {
+                o[prop] = val;
+            } else {
+                o[prop] = undefined;
+            }
+        } else {
+            o[prop] = props.value;
+        }
     });
     $('toString', function () {
         return JSON.stringify(o, null, '\t');

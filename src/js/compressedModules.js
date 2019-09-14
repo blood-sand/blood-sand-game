@@ -16,33 +16,8 @@ modules.attributes = function () {
 			direction: slideDirection
 		}, 250);
 		
-		
 		new self.hook.comms();
-	
 		new self.control.events();
-		$( "#attributes .slider" ).slider({
-			create: function() {
-				$(this).children('.custom-handle').text( $(this).slider("value"));
-				/*let input = $(this).siblings('input');
-				input.on('change', e => {
-					$(this).slider("value", e.target.value);
-					$(this).children('.custom-handle').text(e.target.value);
-				});
-				*/
-			},
-			slide: function( event, ui ) {
-				$(this).children('.custom-handle').text(ui.value);
-				let name = $(this).attr('name');
-				if (self.state.attributes && name in self.state.attributes) {
-					self.state.attributes[name] = ui.value;
-				}
-				//$(this).siblings('input').val(ui.value).trigger('change');
-			},
-			min: 3,
-			max: 18,
-			animate: 'slow'
-		});
-		$('#attributes [name=abilitySum]').slider('option', 'max', 91).slider('option', 'min', 21);
 	} else {
 		$('#attributes').show('slide', {
 			direction: slideDirection
@@ -65,32 +40,29 @@ modules.attributes.prototype.control.events=function() {
 	$('[name="attributesNext').on('click', e => {
 	    self.state.next = true;
 	});
-	$('#attributes input').on('change', e => {
-		if (self.state.attributes && e.target.name in self.state.attributes) {
-			//self.state.attributes[e.target.name] = e.target.value;
-		}
+	
+	$( "#attributes .slider" ).slider({
+		create: function() {
+			$(this).children('.custom-handle').text( $(this).slider("value"));
+		},
+		slide: function( event, ui ) {
+			$(this).children('.custom-handle').text(ui.value);
+			let name = $(this).attr('name');
+			if (self.state.attributes && name in self.state.attributes) {
+				self.state.attributes[name] = ui.value;
+			}
+		},
+		min: 3,
+		max: 18,
+		animate: 'slow'
 	});
+	$('#attributes [name=abilitySum]').slider('option', 'max', 91).slider('option', 'min', 21);
+	
 	$('#attributes .randomizeAttributes').on('click', e => {
 		let abilitySum = $('#attributes [name=abilitySum]');
-		//let slider = abilitySum.siblings('div.slider');
-		/*
-		$('.slider').each(function () {
-			if ($(this).siblings('[name=abilitySum]').length === 0) {
-				$(this).slider('value', 3).children().text(3);
-			} else {
-				$(this).slider('value', 21).children().text(21);
-			}
-		});
-		*/
-		//self.state.ignoreChange = true;
-		//slider.slider('option', 'slide').call(slider, null, {value: 91});
+	
 		abilitySum.slider('option', 'slide').call(abilitySum, null, {value: 21});
-		
 		setTimeout(() => {
-			//$('.slider').siblings('input').val(3).change();
-			//slider.siblings('input').val(21).change();
-			//slider.slider('option', 'slide').call(slider, null, {value: 21})
-			//self.state.ignoreChange = false;
 			abilitySum.slider('option', 'slide').call(abilitySum, null, {value: 91});
 		}, 700);
 	});
@@ -364,6 +336,15 @@ modules.biometrics.prototype.hook.comms=function() {
 		"reach"
 	];
 	
+	self.state.biometrics = {
+		rank: 0,
+		age: 0,
+		weight: 0,
+		height: 0,
+		bmi: 0,
+		reach: 0
+	};
+	
 	socket.on("gladiator-biometrics", data => {
 		biometricLabels.forEach(name => {
 			if (name in data) {
@@ -372,6 +353,7 @@ modules.biometrics.prototype.hook.comms=function() {
 				if (/\./.test("" + val)) {
 					val = val.toFixed(2);
 				}
+				self.state.biometrics[name] = val;
 				$(`[name="${name}"]`).val(val);
 			}
 		});
@@ -408,7 +390,7 @@ modules.combatStats.prototype.control={};
 modules.combatStats.prototype.control.events=function() {
 	const self = this;
 	
-	
+	$('#combatStats [name=name]').val(self.share.name);
 	$('[name="combatStatsPrevious').on('click', e => {
 	    self.state.previous = true;
 	});
@@ -419,8 +401,8 @@ modules.combatStats.prototype.control.events=function() {
 };
 modules.combatStats.prototype.control.events.prototype = modules.combatStats.prototype;
 modules.combatStats.prototype.display={};
-modules.combatStats.prototype.display.box=$("<div id=\"combatStats\" class=\"item\"> <span>Combat Statistics</span> <ul class=\"gladiatorData\"> <li> <span>Health</span> <input type=\"number\" class=\"stat\" name=\"health\" readonly> </li> <li> <span>Stamina</span> <input type=\"number\" class=\"stat\" name=\"stamina\" readonly> </li> <li> <span>Stamina Recovery</span> <input type=\"number\" class=\"stat\" name=\"staminaRecovery\" readonly> </li> <li> <span>Initiative</span> <input type=\"number\" class=\"stat\" name=\"initiative\" readonly> </li> <li> <span>Nerve</span> <input type=\"number\" class=\"stat\" name=\"nerve\" readonly> </li> <li> <span>Offense</span> <input type=\"number\" class=\"stat\" name=\"offense\" readonly> </li> <li> <span>Defense</span> <input type=\"number\" class=\"stat\" name=\"defense\" readonly> </li> <li> <span>Dodge</span> <input type=\"number\" class=\"stat\" name=\"dodge\" readonly> </li> <li> <span>Parry</span> <input type=\"number\" class=\"stat\" name=\"parry\" readonly> </li> </ul> <div> <button name=\"combatStatsPrevious\" class=\"previous\">Previous</button> <button name=\"combatStatsNext\" class=\"next\" disabled>Next</button> </div> </div>");
-modules.combatStats.prototype.display.style="div < button[name=\"combatStatsNext\"] { display: block; } button[name=\"combatStatsPrevious\"] { display: block; float: left; } #combatStats input[name=\"name\"] { width: 50%; } #combatStats select { width: 150px; } button[name=\"combatStatsNext\"] { display: block; float: right; color: rgba(255,255,255,0.72); }";
+modules.combatStats.prototype.display.box=$("<div id=\"combatStats\" class=\"item\"> <span> Combat Statistics For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <ul class=\"gladiatorData\"> <li> <span>Health</span> <input type=\"number\" class=\"stat\" name=\"health\" readonly> </li> <li> <span>Stamina</span> <input type=\"number\" class=\"stat\" name=\"stamina\" readonly> </li> <li> <span>Stamina Recovery</span> <input type=\"number\" class=\"stat\" name=\"staminaRecovery\" readonly> </li> <li> <span>Initiative</span> <input type=\"number\" class=\"stat\" name=\"initiative\" readonly> </li> <li> <span>Nerve</span> <input type=\"number\" class=\"stat\" name=\"nerve\" readonly> </li> <li> <span>Offense</span> <input type=\"number\" class=\"stat\" name=\"offense\" readonly> </li> <li> <span>Defense</span> <input type=\"number\" class=\"stat\" name=\"defense\" readonly> </li> <li> <span>Dodge</span> <input type=\"number\" class=\"stat\" name=\"dodge\" readonly> </li> <li> <span>Parry</span> <input type=\"number\" class=\"stat\" name=\"parry\" readonly> </li> </ul> <div> <button name=\"combatStatsPrevious\" class=\"previous\">Previous</button> <button name=\"combatStatsNext\" class=\"next\">Next</button> </div> </div>");
+modules.combatStats.prototype.display.style="div < button[name=\"combatStatsNext\"] { display: block; } button[name=\"combatStatsPrevious\"] { display: block; float: left; } #combatStats input[name=\"name\"] { width: 50%; } #combatStats select { width: 150px; } button[name=\"combatStatsNext\"] { display: block; float: right; }";
 modules.combatStats.prototype.hook={};
 modules.combatStats.prototype.hook.comms=function() {
 	const self = this;
@@ -429,12 +411,12 @@ modules.combatStats.prototype.hook.comms=function() {
 		property: 'next',
 		value: false,
 		preset: () => {
-			/*$('#skills').hide('slide', {
+			$('#combatStats').hide('slide', {
 	            direction: 'left'
 	        }, 250);
 	        self.share.slideDirection = 'right';
-			modules.fetch('hmm');
-			*/
+			modules.fetch('skills');
+			
 		}
 	});
 	
@@ -958,3 +940,319 @@ modules.settings.prototype.hook.comms=function() {
 	socket.emit("sound-settings-ready")
 };
 modules.settings.prototype.hook.comms.prototype = modules.settings.prototype;
+modules.skills = function () {
+	const self = this;
+	let slideDirection = self.share.slideDirection ? self.share.slideDirection : 'left';
+	
+	if (!self.loaded) {
+		$('#game').append(self.display.box);
+		$('head').append("<style>" + self.display.style + "</style>");
+		$('#skills').hide(0).show('slide', {
+			direction: slideDirection
+		}, 250);
+		new self.hook.comms();
+		new self.control.events();
+	} else {
+		$('#skills').show('slide', {
+			direction: slideDirection
+		}, 250);
+	}
+};
+modules.skills.prototype.state = waject();
+modules.skills.prototype.share = modules.share;
+modules.skills.prototype.loaded = false;
+modules.skills.prototype.control={};
+modules.skills.prototype.control.events=function() {
+	const self = this;
+	
+	$('#skills [name=name]').val(self.share.name);
+	
+	$( "#skills .slider" ).slider({
+		create: function() {
+			$(this).children('.custom-handle').text( $(this).slider("value"));
+		},
+		slide: function( event, ui ) {
+			$(this).children('.custom-handle').text(ui.value);
+			let name = $(this).attr('name');
+			let skillPoints = 10;
+			console.log("skills:", self.state.skills)
+			if (self.state.skills && name in self.state.skills) {
+				self.state.skills[name] = ui.value;
+			}
+			if (ui.value !== self.state.skills[name]) {
+				ui.value = self.state.skills[name];
+				$(this).children('.custom-handle').text(ui.value);
+				return false;
+			}
+		},
+		min: 0,
+		max: 2,
+		animate: 'slow'
+	});
+	
+	
+	$('[name="skillsPrevious').on('click', e => {
+	    self.state.previous = true;
+	});
+	
+	$('[name="skillsNext').on('click', e => {
+	    self.state.next = true;
+	});
+};
+modules.skills.prototype.control.events.prototype = modules.skills.prototype;
+modules.skills.prototype.display={};
+modules.skills.prototype.display.box=$("<div id=\"skills\" class=\"item\"> <span> <!-- <img src=\"/img/dice.png\" class=\"randomizeSkills dice\"> --> Skills For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <div> <span>Skill Points:</span> <span name=\"skillPoints\">10</span> </div> <ul class=\"gladiatorData\"> <li> <span>dodge</span> <div class=\"slider\" name=\"dodge\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\">n</span> <span class=\"description\">Abyssmal</span> </li> <li> <span>parry</span> <div class=\"slider\" name=\"parry\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>shield</span> <div class=\"slider\" name=\"shield\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>bash</span> <div class=\"slider\" name=\"bash\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>charge</span> <div class=\"slider\" name=\"charge\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>spear</span> <div class=\"slider\" name=\"spear\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>lightBlade</span> <div class=\"slider\" name=\"lightBlade\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>heavyBlade</span> <div class=\"slider\" name=\"heavyBlade\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>bludgeoning</span> <div class=\"slider\" name=\"bludgeoning\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>axe</span> <div class=\"slider\" name=\"axe\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>riposte</span> <div class=\"slider\" name=\"riposte\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>closeCombat</span> <div class=\"slider\" name=\"closeCombat\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>feint</span> <div class=\"slider\" name=\"feint\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>dirtyTrick</span> <div class=\"slider\" name=\"dirtyTrick\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>appraise</span> <div class=\"slider\" name=\"appraise\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> </ul> <div> <button name=\"skillsPrevious\" class=\"previous\">Previous</button> <button name=\"skillsNext\" class=\"next\" disabled>Next</button> </div> </div>");
+modules.skills.prototype.display.style="#skills div < button[name=\"skillsNext\"] { display: block; } #skills button[name=\"skillsPrevious\"] { display: block; float: left; } #skills .slider { width: 200px; margin: 11.75px 40px; } #skills .slider .custom-handle { width: 3em; height: 1.6em; top: 50%; margin-top: -.8em; margin-left: -23px; text-align: center; line-height: 1.6em; } #skills input[name=\"name\"] { width: 57%; } #skills button[name=\"skillsNext\"] { display: block; float: right; color: rgba(255,255,255,0.72); } #skills .proficiency { text-align: center; }";
+modules.skills.prototype.hook={};
+modules.skills.prototype.hook.comms=function() {
+	const self = this;
+	
+	let totalSkillPoints = 10;
+	
+	self.state.mk({
+		property: 'next',
+		value: false,
+		preset: () => {
+			$('#skills').hide('slide', {
+	            direction: 'left'
+	        }, 250);
+	        self.share.slideDirection = 'right';
+			modules.fetch('combatStats');
+		}
+	});
+	
+	self.state.mk({
+		property: 'previous',
+		value: false,
+		preset: () => {
+			$('#skills').hide('slide', {
+	            direction: 'right'
+	        }, 250);
+	        self.share.slideDirection = 'left';
+			modules.fetch('combatStats');
+		}
+	});
+	
+	self.state.mk({
+		property: "skillPoints",
+		value: totalSkillPoints,
+		preset: (o, name, val) => {
+			if (val > -1) {
+				console.log("skill points:", val);
+				$('#skills [name=skillPoints]').text(val);
+				return true;
+			}
+			return false;
+		}
+	});
+	
+	function setDescription (skill, val) {
+		let desc = "Terrible";
+		if (val > 10) {
+			desc = "Bad";
+		}
+		if (val > 20) {
+			desc = "Okay";
+		}
+		$(`#skills [name=${skill}]`).siblings('.description').text(desc);
+	}
+	
+	function generateSkills (skill, val) {
+		let attr = modules.attributes.prototype.state.attributes;
+		let biometrics = modules.biometrics.prototype.state.biometrics;
+		console.log(skill, val, attr, biometrics);
+		let generator = {
+			"input": {
+				"skill": skill,
+				"skillpointsspent": val,
+				"skillvalue": 0,
+				"dexterity": attr.dexterity,
+				"endurance": attr.endurance,
+				"perception": attr.perception,
+				"strength": attr.strength,
+				"vitality": attr.vitality,
+				"willpower": attr.willpower,
+				"intelligence": attr.intelligence,
+				"rank": biometrics.rank,
+				"tacticspoints": 0
+			},
+	
+			"skill": "input.skill",
+			"skillpointsspent": "input.skillpointsspent",
+			"skillvalue": "input.skillvalue",
+			"tactics": "0.1*(input.intelligence+input.rank/10*20)/2*input.tacticspoints",
+	
+			"dodgemod": "0.1+(0.9*(input.dexterity+input.perception)/30)+0.15*tactics/15",
+			"parrymod": "0.1+(0.9*(input.strength+input.dexterity+input.perception+input.intelligence)/60)+0.15*tactics/15",
+			"shieldmod": "0.1+(0.9*(input.strength+input.endurance)/30)+0.15*tactics/15",
+			"bashmod": "0.1+(0.9*(input.strength+input.dexterity)/30)+0.15*tactics/15",
+			"chargemod": "0.1+(0.9*(input.strength+input.dexterity)/30)+0.15*tactics/15",
+			"spearsmod": "0.05+(0.95*(input.strength+input.dexterity+input.perception)/45)+0.2*tactics/15",
+			"lightbladesmod": "0.05+(0.85*(input.dexterity+input.perception)/30)+0.3*tactics/15",
+			"heavybladesmod": "(0.85*(input.strength+input.endurance)/30)+0.4*tactics/15",
+			"bludgeoningmod": "0.2+(1*(input.strength+input.endurance+input.willpower)/45)",
+			"axesmod": "0.05+(0.95*(input.strength+input.endurance+input.perception)/45)+0.2*tactics/15",
+			"ripostemod": "0.1+(0.8*(input.dexterity+input.perception+input.intelligence)/45)+0.3*tactics/15",
+			"closecombatmod": "0.2+(0.85*(input.strength+input.dexterity+input.perception+input.endurance)/60)+0.15*tactics/15",
+			"feintmod": "0.2+(0.65*(input.dexterity+input.intelligence)/30)+0.35*tactics/15",
+			"dirtytricksmod": "0.2+1*(input.dexterity+input.perception+2*input.intelligence)/60",
+			"appraisemod": "0.2+0.7*(input.perception+input.intelligence)/30+0.3*tactics/15",
+	
+			"skilltype if skill is 0": "0",
+			"skilltype if skill is 1": "0",
+			"skilltype if skill is 2": "1",
+			"skilltype if skill is 3": "2",
+			"skilltype if skill is 4": "2",
+			"skilltype if skill is 5": "1",
+			"skilltype if skill is 6": "1",
+			"skilltype if skill is 7": "0",
+			"skilltype if skill is 8": "0",
+			"skilltype if skill is 9": "0",
+			"skilltype if skill is 10": "1",
+			"skilltype if skill is 11": "0",
+			"skilltype if skill is 12": "2",
+			"skilltype if skill is 13": "1",
+			"skilltype if skill is 14": "1",
+	
+			"skillmax if skilltype is 0": "16",
+			"skillmax if skilltype is 1": "12",
+			"skillmax if skilltype is 2": "8",
+	
+			"skillvalue if skilltype is 0": {
+				"value if parent.skillpointsspent is 0": 0 ,
+				"value if parent.skillpointsspent is 1": 9 ,
+				"value if parent.skillpointsspent is 2": 17.5 ,
+				"value if parent.skillpointsspent is 3": 25.5 ,
+				"value if parent.skillpointsspent is 4": 33 ,
+				"value if parent.skillpointsspent is 5": 40 ,
+				"value if parent.skillpointsspent is 6": 46.5 ,
+				"value if parent.skillpointsspent is 7": 52.5 ,
+				"value if parent.skillpointsspent is 8": 58 ,
+				"value if parent.skillpointsspent is 9": 63 ,
+				"value if parent.skillpointsspent is 10": 67.5 ,
+				"value if parent.skillpointsspent is 11": 71.5 ,
+				"value if parent.skillpointsspent is 12": 75 ,
+				"value if parent.skillpointsspent is 13": 78 ,
+				"value if parent.skillpointsspent is 14": 80.5 ,
+				"value if parent.skillpointsspent is 15": 82.5 ,
+				"value if parent.skillpointsspent is 16": 84 
+			},
+			"skillvalue if skilltype is 1": {
+				"value if parent.skillpointsspent is 0": 0 ,
+				"value if parent.skillpointsspent is 1": 12.01 ,
+				"value if parent.skillpointsspent is 2": 23.11 ,
+				"value if parent.skillpointsspent is 3": 33.3 ,
+				"value if parent.skillpointsspent is 4": 42.58 ,
+				"value if parent.skillpointsspent is 5": 50.95 ,
+				"value if parent.skillpointsspent is 6": 58.41 ,
+				"value if parent.skillpointsspent is 7": 64.96 ,
+				"value if parent.skillpointsspent is 8": 70.6 ,
+				"value if parent.skillpointsspent is 9": 75.33 ,
+				"value if parent.skillpointsspent is 10": 79.15 ,
+				"value if parent.skillpointsspent is 11": 82.06 ,
+				"value if parent.skillpointsspent is 12": 84.06 
+			},
+			"skillvalue if skilltype is 2": {
+				"value if parent.skillpointsspent is 0": 0 ,
+				"value if parent.skillpointsspent is 1": 18.05 ,
+				"value if parent.skillpointsspent is 2": 33.95 ,
+				"value if parent.skillpointsspent is 3": 47.7 ,
+				"value if parent.skillpointsspent is 4": 59.3 ,
+				"value if parent.skillpointsspent is 5": 68.75 ,
+				"value if parent.skillpointsspent is 6": 76.05 ,
+				"value if parent.skillpointsspent is 7": 81.2 ,
+				"value if parent.skillpointsspent is 8": 84.2 
+			},
+			"skillfinal if skill is 0": "dodgemod*skillvalue",
+			"skillfinal if skill is 1": "parrymod*skillvalue",
+			"skillfinal if skill is 2": "shieldmod*skillvalue",
+			"skillfinal if skill is 3": "bashmod*skillvalue",
+			"skillfinal if skill is 4": "chargemod*skillvalue",
+			"skillfinal if skill is 5": "spearsmod*skillvalue",
+			"skillfinal if skill is 6": "lightbladesmod*skillvalue",
+			"skillfinal if skill is 7": "heavybladesmod*skillvalue",
+			"skillfinal if skill is 8": "bludgeoningmod*skillvalue",
+			"skillfinal if skill is 9": "axesmod*skillvalue",
+			"skillfinal if skill is 10": "ripostemod*skillvalue",
+			"skillfinal if skill is 11": "closecombatmod*skillvalue",
+			"skillfinal if skill is 12": "feintmod*skillvalue",
+			"skillfinal if skill is 13": "dirtytricksmod*skillvalue",
+			"skillfinal if skill is 14": "appraisemod*skillvalue"
+		};
+	
+		return jsonSL(generator).skillfinal;
+	}
+	
+	self.state.skillPoints = 10;
+	let skills = {
+		"dodge": 0,
+		"parry": 0,
+		"shield": 0,
+		"bash": 0,
+		"charge": 0,
+		"spear": 0,
+		"lightBlade": 0,
+		"heavyBlade": 0,
+		"bludgeoning": 0,
+		"axe": 0,
+		"riposte": 0,
+		"closeCombat": 0,
+		"feint": 0,
+		"dirtyTrick": 0,
+		"appraise": 0
+	};
+	
+	let skillLabels = [
+		"dodge",
+		"parry",
+		"shield",
+		"bash",
+		"charge",
+		"spear",
+		"lightBlade",
+		"heavyBlade",
+		"bludgeoning",
+		"axe",
+		"riposte",
+		"closeCombat",
+		"feint",
+		"dirtyTrick",
+		"appraise"
+	];
+	
+	self.state.skills = waject();
+	for (let label in skills) {
+		$(`#skills [name=${label}]`).siblings('.proficiency').text("0.00");
+		setDescription(label, 0);
+		self.state.skills.mk({
+			property: label,
+			value: 0,
+			preset: (o, name, val) => {
+				console.log("skill set:", name, val);
+				let skillPoints = totalSkillPoints;
+				for (let skill in o) {
+					if (!(skill in skills) || skill === "toString") {
+						continue;
+					}
+					if (skill === name) {
+						console.log("-",skill,val)
+						skillPoints -= val;
+					} else {
+						console.log("-",skill,o[skill])
+						skillPoints -= o[skill];
+					}
+				}
+				console.log("new skill points:", skillPoints);
+				if (skillPoints < 0) {
+					return false;
+				}
+				self.state.skillPoints = skillPoints;
+				let result = generateSkills(skillLabels.indexOf(name), val);
+				console.log(result);
+				$(`#skills [name=${name}]`).siblings('.proficiency').text(result.toFixed(2));
+				setDescription(name, result);
+			}
+		});
+	}
+};
+modules.skills.prototype.hook.comms.prototype = modules.skills.prototype;

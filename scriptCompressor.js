@@ -11,6 +11,7 @@ let scripts = [
 	'jquery.selectric.js',
 	'jquery-ui-touch-punch.min.js',
 	'waject.js',
+	'json-sl.js',
 	'compressedModules.js',
 	'main.js'
 ];
