@@ -28,7 +28,7 @@
     "staminaRecovery": "1+(stamina*0.04)+(stamina * 0.05)*(encumbranceModifier)+(input.lifestyleModifier/10)+4*(input.fatigueModifier)",
     "initiative": "encumbranceModifier*(input.rank + (2*(0.3*input.dexterity+0.3*input.perception)+0.4*input.tactics))",
     "nerve": "(0.5*5*input.willpower)+(input.rank/15*50)",
-    "offense": "25+(input.weaponSkill/2)+2*(input.rank)+input.weaponOffense",
+    "offense": "20+((((0.75*input.strength)+(1.25*input.perception)+(input.intelligence)+(input.dexterity))-40)/2)+(input.weaponSkill/2)+2*(input.rank)+input.weaponOffense",
     "dodge": "((input.dexterity*encumbranceModifier+input.perception)/2 + (input.dodgeSkill*encumbranceModifier/3)+ input.rank + input.bmiModifier) + (10-(input.height-150)/5)",
     "parry": "(input.strength+input.dexterity+input.perception+input.intelligence)/4 + (input.parrySkill/3) + input.rank + input.weaponParry + input.shieldParry",
     "defense": "dodge+parry"
