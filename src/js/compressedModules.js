@@ -1026,11 +1026,14 @@ modules.skills.prototype.control.events=function() {
 	const self = this;
 	
 	$('#skills [name=name]').val(self.share.name);
-	
 	$( "#skills .slider" ).slider({
 		create: function() {
 			let name = $(this).attr('name');
 			let max = self.share.skillMaxes[name];
+			console.log('slider max:', max);
+			let rank = modules.biometrics.prototype.state.biometrics.rank || 1;
+			let rankMax = rank * 2;
+			$('#skills .slider-container').attr('title', `Maximum of ${rankMax} for rank ${rank}`);
 			$(this).slider('option', 'max', max);
 			$(this).children('.custom-handle').text( $(this).slider("value"));
 		},
@@ -1178,16 +1181,26 @@ modules.skills.prototype.hook.comms=function() {
 	}
 	
 	function generateSkills (skill, val) {
+		let input;
 		let attr = modules.attributes.prototype.state.attributes;
 		let biometrics = modules.biometrics.prototype.state.biometrics;
 		if (!attr || !biometrics) {
-			return {
-				skillfinal: 0,
-				skillmax: 16
+			input = {
+				"skill": skill,
+				"skillpointsspent": val,
+				"skillvalue": 0,
+				"dexterity": 10,
+				"endurance": 10,
+				"perception": 10,
+				"strength": 10,
+				"vitality": 10,
+				"willpower": 10,
+				"intelligence": 10,
+				"rank": 1,
+				"tacticspoints": 0
 			};
-		}
-		let generator = {
-			"input": {
+		} else {
+			input = {
 				"skill": skill,
 				"skillpointsspent": val,
 				"skillvalue": 0,
@@ -1200,7 +1213,10 @@ modules.skills.prototype.hook.comms=function() {
 				"intelligence": attr.intelligence,
 				"rank": biometrics.rank,
 				"tacticspoints": self.state.skills.tactics
-			},
+			};
+		}
+		let generator = {
+			"input": input,
 	
 			"skill": "input.skill",
 			"skillpointsspent": "input.skillpointsspent",
@@ -1380,11 +1396,12 @@ modules.skills.prototype.hook.comms=function() {
 		if (skillMaxes[label] === undefined) {
 			skillMaxes[label] = 16;
 		}
+		console.log("skillmax:", label, skillMaxes[label], result.skillmax);
 		$(`#skills .slider[name=${label}]`).
 			children('.custom-handle').text(skills[label]);
 	
 		$(`#skills .slider-container:has([name=${label}])>.max`).
-			text(self.state.skillCeiling + "/" + skillMaxes[label]);
+			text(skillMaxes[label]);
 	
 		self.state.skills.mk({
 			property: label,

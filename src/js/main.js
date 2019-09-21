@@ -11,7 +11,7 @@ var socket = io();
         }
     });
 }());
-
+$(document).tooltip();
 socket.emit("session-id", document.cookie.session)
 
 modules.fetch('gladiator');

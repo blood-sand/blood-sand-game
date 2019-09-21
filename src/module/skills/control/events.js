@@ -1,11 +1,14 @@
 const self = this;
 
 $('#skills [name=name]').val(self.share.name);
-
 $( "#skills .slider" ).slider({
 	create: function() {
 		let name = $(this).attr('name');
 		let max = self.share.skillMaxes[name];
+		console.log('slider max:', max);
+		let rank = modules.biometrics.prototype.state.biometrics.rank || 1;
+		let rankMax = rank * 2;
+		$('#skills .slider-container').attr('title', `Maximum of ${rankMax} for rank ${rank}`);
 		$(this).slider('option', 'max', max);
 		$(this).children('.custom-handle').text( $(this).slider("value"));
 	},

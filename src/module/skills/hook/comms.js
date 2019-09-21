@@ -82,16 +82,26 @@ function setDescription (skill, val) {
 }
 
 function generateSkills (skill, val) {
+	let input;
 	let attr = modules.attributes.prototype.state.attributes;
 	let biometrics = modules.biometrics.prototype.state.biometrics;
 	if (!attr || !biometrics) {
-		return {
-			skillfinal: 0,
-			skillmax: 16
+		input = {
+			"skill": skill,
+			"skillpointsspent": val,
+			"skillvalue": 0,
+			"dexterity": 10,
+			"endurance": 10,
+			"perception": 10,
+			"strength": 10,
+			"vitality": 10,
+			"willpower": 10,
+			"intelligence": 10,
+			"rank": 1,
+			"tacticspoints": 0
 		};
-	}
-	let generator = {
-		"input": {
+	} else {
+		input = {
 			"skill": skill,
 			"skillpointsspent": val,
 			"skillvalue": 0,
@@ -104,7 +114,10 @@ function generateSkills (skill, val) {
 			"intelligence": attr.intelligence,
 			"rank": biometrics.rank,
 			"tacticspoints": self.state.skills.tactics
-		},
+		};
+	}
+	let generator = {
+		"input": input,
 
 		"skill": "input.skill",
 		"skillpointsspent": "input.skillpointsspent",
@@ -284,11 +297,12 @@ for (let label in skills) {
 	if (skillMaxes[label] === undefined) {
 		skillMaxes[label] = 16;
 	}
+	console.log("skillmax:", label, skillMaxes[label], result.skillmax);
 	$(`#skills .slider[name=${label}]`).
 		children('.custom-handle').text(skills[label]);
 
 	$(`#skills .slider-container:has([name=${label}])>.max`).
-		text(self.state.skillCeiling + "/" + skillMaxes[label]);
+		text(skillMaxes[label]);
 
 	self.state.skills.mk({
 		property: label,
