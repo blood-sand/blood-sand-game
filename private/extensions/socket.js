@@ -21,7 +21,7 @@ module.exports = function (m) {
     m.sockets = io.sockets;
     m.sockets.on('connection', function (socket) {
         //console.log("cookies:", socket.request.cookies);
-        console.log(socket.handshake.session);
+        //console.log(socket.handshake.session);
         let session = socket.handshake.session;
         let local = {
             socket,
@@ -29,7 +29,6 @@ module.exports = function (m) {
             event: new m.eventEmitter()
         };
         socket.on('disconnect', function () {
-            
             console.log("Session disconnected:");
         });
         

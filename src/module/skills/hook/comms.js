@@ -1,6 +1,6 @@
 const self = this;
-
-let totalSkillPoints = 10;
+let skillCeiling = 16;
+let totalSkillPoints = 0;
 
 self.state.mk({
 	property: 'next',
@@ -31,13 +31,33 @@ self.state.mk({
 	value: totalSkillPoints,
 	preset: (o, name, val) => {
 		if (val > -1) {
-			console.log("skill points:", val);
 			$('#skills [name=skillPoints]').text(val);
 			return true;
 		}
 		return false;
 	}
 });
+
+self.state.mk({
+	property: "skillCeiling",
+	value: modules.biometrics.prototype.state.biometrics.rank * 2,
+});
+
+self.state.regenerateSkills = function () {
+	for (let label in skills) {
+		let val = self.state.skills[label];
+		if (label === "tactics") { 
+			$(`#skills .slider-container:has([name=${label}])`).
+				siblings('.proficiency').text(val.toFixed(2));
+				setDescription(label, val);
+			continue;
+		}
+		let result = generateSkills(skillLabels.indexOf(label), val);
+		$(`#skills .slider-container:has([name=${label}])`).
+			siblings('.proficiency').text(result.skillfinal.toFixed(2));
+		setDescription(label, result.skillfinal);
+	}
+}
 
 function setDescription (skill, val) {
 	let desc = "Terrible";
@@ -47,18 +67,24 @@ function setDescription (skill, val) {
 	if (val > 20) {
 		desc = "Okay";
 	}
+	if (val > 30) {
+		desc = "decent";
+	}
+	if (val > 40) {
+		desc = "good";
+	}
 	if (skill === "tactics") {
 		if (val > 1) {
 			desc = "Bad";
 		}
 	}
-	$(`#skills [name=${skill}]`).siblings('.description').text(desc);
+	$(`#skills .slider-container:has([name=${skill}])`).siblings('.description').text(desc);
 }
 
 function generateSkills (skill, val) {
 	let attr = modules.attributes.prototype.state.attributes;
 	let biometrics = modules.biometrics.prototype.state.biometrics;
-	console.log("generateSkills:", skill, val);
+	//console.log("generateSkills:", skill, val);
 	let generator = {
 		"input": {
 			"skill": skill,
@@ -177,8 +203,12 @@ function generateSkills (skill, val) {
 		"skillfinal if skill is 13": "dirtytricksmod*skillvalue",
 		"skillfinal if skill is 14": "appraisemod*skillvalue"
 	};
-
-	return jsonSL(generator).skillfinal;
+	let result = jsonSL(generator);
+	//console.log(result);
+	return {
+		skillfinal: result.skillfinal, 
+		skillmax: result.skillmax
+	};
 }
 
 self.state.skillPoints = 10;
@@ -201,6 +231,25 @@ let skills = {
 	"appraise": 0
 };
 
+let skillMaxes = {
+	"tactics": 16,
+	"dodge": 16,
+	"parry": 16,
+	"shield": 16,
+	"bash": 16,
+	"charge": 16,
+	"spear": 16,
+	"lightBlade": 16,
+	"heavyBlade": 16,
+	"bludgeoning": 16,
+	"axe": 16,
+	"riposte": 16,
+	"closeCombat": 16,
+	"feint": 16,
+	"dirtyTrick": 16,
+	"appraise": 16
+};
+self.share.skillMaxes = skillMaxes;
 let skillLabels = [
 	"dodge",
 	"parry",
@@ -221,27 +270,42 @@ let skillLabels = [
 
 self.state.skills = waject();
 for (let label in skills) {
-	$(`#skills [name=${label}]`).siblings('.proficiency').text("0.00");
+	$(`#skills .slider-container:has([name=${label}])`).
+		siblings('.proficiency').text("0.00");
 	setDescription(label, 0);
+	
+	let result = generateSkills(skillLabels.indexOf(label), skills[label]);
+	skillMaxes[label] = result.skillmax;
+	if (skillMaxes[label] === undefined) {
+		skillMaxes[label] = 16;
+	}
+	$(`#skills .slider[name=${label}]`).
+		children('.custom-handle').text(skills[label]);
+
+	$(`#skills .slider-container:has([name=${label}])>.max`).
+		text(self.state.skillCeiling + "/" + skillMaxes[label]);
+
 	self.state.skills.mk({
 		property: label,
 		value: 0,
 		preset: (o, name, val) => {
-			console.log("skill set:", name, val);
+			
+			if (o[name] === val) {
+				return;
+			}
+			console.log('skill change:', name, val);
+
 			let skillPoints = totalSkillPoints;
 			for (let skill in o) {
 				if (!(skill in skills) || skill === "toString") {
 					continue;
 				}
 				if (skill === name) {
-					console.log("-",skill,val)
 					skillPoints -= val;
 				} else {
-					console.log("-",skill,o[skill])
 					skillPoints -= o[skill];
 				}
 			}
-			console.log("new skill points:", skillPoints);
 			if (skillPoints < 0) {
 				return false;
 			}
@@ -255,17 +319,43 @@ for (let label in skills) {
 						continue;
 					}
 					let r = generateSkills(skillLabels.indexOf(skill), o[skill]);
-					console.log("tactics forced change:", skill, o[skill], r);
-					$(`#skills [name=${skill}]`).siblings('.proficiency').text(r.toFixed(2));
-					setDescription(name, r);
+					$(`#skills .slider-container:has([name=${skill}])`).
+						siblings('.proficiency').text(r.skillfinal.toFixed(2));
+					setDescription(skill, r.skillfinal);
 				}
-				$(`#skills [name=${name}]`).siblings('.proficiency').text(val.toFixed(2));
+				$(`#skills .slider-container:has([name=${name}])`).
+					siblings('.proficiency').text(val.toFixed(2));
 				setDescription(name, val);
 			} else {
 				let result = generateSkills(skillLabels.indexOf(name), val);
-				$(`#skills [name=${name}]`).siblings('.proficiency').text(result.toFixed(2));
-				setDescription(name, result);
+				$(`#skills .slider-container:has([name=${name}])`).
+					siblings('.proficiency').text(result.skillfinal.toFixed(2));
+				setDescription(name, result.skillfinal);
 			}
+			let skillChange = {};
+			skillChange[name] = val;
+			$(`#skills .slider[name=${name}`).slider('value', val).
+				children('.custom-handle').text(val);
+			socket.emit("gladiator-skill-change", skillChange);
 		}
 	});
 }
+
+socket.on("gladiator-skills", data => {
+	console.log("skills:",data);
+	totalSkillPoints = data.skillPoints;
+	self.state.skillPoints = data.skillPoints;
+	let t = 200;
+	for (let label in skills) {
+		if (label in data && skills[label] !== data[label]) {
+			totalSkillPoints += data[label];
+			setTimeout(() => {
+				self.state.skills[label] = data[label];
+			}, t);
+		}
+		t += 75;
+	}
+
+});
+
+socket.emit("gladiator-skills-ready");

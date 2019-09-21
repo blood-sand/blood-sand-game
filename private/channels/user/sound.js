@@ -39,7 +39,7 @@ module.exports = function (m, local) {
 			fxVolume: 75,
 		}
 	}
-	console.log("sound settings:", session.user);
+	//console.log("sound settings:", session.user);
 	socket.emit("sound-settings", session.user)
 	socket.on("sound-settings", settings => {
 		for (let label in settings) {
@@ -47,6 +47,6 @@ module.exports = function (m, local) {
 				session.user[label] = settings[label];
 			}
 		}
-		console.log("new sound settings:", session.user);
+		//console.log("new sound settings:", session.user);
 	});
 }

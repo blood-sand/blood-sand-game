@@ -33,3 +33,30 @@
 #skills .proficiency {
 	text-align: center;
 }
+
+#skills .slider-container {
+	color: rgba(170, 130, 25, 0.5);
+	background: rgba(0, 0, 0, 0.32);
+	border: 1px inset rgba(0,0,0,0.72);
+	padding-left: 5px;
+	padding-right: 5px;
+	display: flex;
+	flex-direction: row;
+	width: 350px;
+}
+#skills .min {
+	text-align: right;
+}
+
+#skills .max {
+	text-align: left;
+}
+
+#skills .max, #skills .min {
+	flex-grow: 0;
+	padding-top: 8px;
+}
+
+#skills ul.gladiatorData>li>span:nth-child(1) {
+	flex-grow: 3;
+}

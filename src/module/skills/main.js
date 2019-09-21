@@ -13,4 +13,5 @@ if (!self.loaded) {
 	$('#skills').show('slide', {
 		direction: slideDirection
 	}, 250);
+	self.state.regenerateSkills();
 }

@@ -11,6 +11,7 @@ var socket = io();
         }
     });
 }());
+
 socket.emit("session-id", document.cookie.session)
 
 modules.fetch('culture');
