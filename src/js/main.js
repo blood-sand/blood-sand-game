@@ -14,5 +14,5 @@ var socket = io();
 
 socket.emit("session-id", document.cookie.session)
 
-modules.fetch('culture');
+modules.fetch('gladiator');
 modules.fetch('settings');

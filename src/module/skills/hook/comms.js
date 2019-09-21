@@ -84,7 +84,12 @@ function setDescription (skill, val) {
 function generateSkills (skill, val) {
 	let attr = modules.attributes.prototype.state.attributes;
 	let biometrics = modules.biometrics.prototype.state.biometrics;
-	//console.log("generateSkills:", skill, val);
+	if (!attr || !biometrics) {
+		return {
+			skillfinal: 0,
+			skillmax: 16
+		};
+	}
 	let generator = {
 		"input": {
 			"skill": skill,

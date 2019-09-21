@@ -16,8 +16,8 @@ if (!self.loaded) {
 	    let randName = ref[Math.floor(Math.random()*ref.length)];
 	    self.state.name = randName;
 	};
-	$('#game').append(self.display.box);
-	$('head').append("<style>" + self.display.style + "</style>");
+	//$('#gladiator').append(self.display.box);
+	//$('head').append("<style>" + self.display.style + "</style>");
 	$('select').selectric();
 	new self.hook.comms();
 	new self.control.events();

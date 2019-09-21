@@ -10,18 +10,22 @@ modules.attributes = function () {
 	const self = this;
 	let slideDirection = self.share.slideDirection ? self.share.slideDirection : 'left';
 	if (!self.loaded) {
-		$('#game').append(self.display.box);
+		/*
+		$('#gladiator').append(self.display.box);
 		$('head').append("<style>" + self.display.style + "</style>");
+		
 		$('#attributes').hide(0).show('slide', {
 			direction: slideDirection
 		}, 250);
-		
+		*/
 		new self.hook.comms();
 		new self.control.events();
 	} else {
+		/*
 		$('#attributes').show('slide', {
 			direction: slideDirection
 		}, 250);
+		*/
 	}
 };
 modules.attributes.prototype.state = waject();
@@ -212,20 +216,21 @@ modules.biometrics = function () {
 	const self = this;
 	let slideDirection = self.share.slideDirection ? self.share.slideDirection : 'left';
 	if (!self.loaded) {
-		console.log("first load of biometrics");
-		$('#game').append(self.display.box);
+		/*
+		$('#gladiator').append(self.display.box);
 		$('head').append("<style>" + self.display.style + "</style>");
 		$('#biometrics').hide(0).show('slide', {
 			direction: slideDirection
 		}, 250);
+		*/
 		new self.hook.comms();
 		new self.control.events();
 		$('select').selectric();
 		//console.log(self);
 	} else {
-		$('#biometrics').show('slide', {
+		/*$('#biometrics').show('slide', {
 			direction: slideDirection
-		}, 250);
+		}, 250);*/
 	}
 	
 };
@@ -369,17 +374,19 @@ modules.combatStats = function () {
 	let slideDirection = self.share.slideDirection ? self.share.slideDirection : 'left';
 	
 	if (!self.loaded) {
-		$('#game').append(self.display.box);
+		/*
+		$('#gladiator').append(self.display.box);
 		$('head').append("<style>" + self.display.style + "</style>");
 		$('#combatStats').hide(0).show('slide', {
 			direction: slideDirection
 		}, 250);
+		*/
 		new self.hook.comms();
 		new self.control.events();
 	} else {
-		$('#combatStats').show('slide', {
+		/*$('#combatStats').show('slide', {
 			direction: slideDirection
-		}, 250);
+		}, 250);*/
 		socket.emit("gladiator-combatStats-generate");
 	}
 };
@@ -480,8 +487,8 @@ modules.culture = function () {
 		    let randName = ref[Math.floor(Math.random()*ref.length)];
 		    self.state.name = randName;
 		};
-		$('#game').append(self.display.box);
-		$('head').append("<style>" + self.display.style + "</style>");
+		//$('#gladiator').append(self.display.box);
+		//$('head').append("<style>" + self.display.style + "</style>");
 		$('select').selectric();
 		new self.hook.comms();
 		new self.control.events();
@@ -629,6 +636,53 @@ modules.culture.prototype.hook.comms=function() {
 	
 };
 modules.culture.prototype.hook.comms.prototype = modules.culture.prototype;
+modules.gladiator = function () {
+	const self = this;
+	
+	if (!self.loaded) {
+		console.log("tabs r here!!");
+	
+		$('head').append("<style>" + self.display.style + "</style>");
+		$('#game').append(self.display.view);
+		new self.control.events();
+	}
+};
+modules.gladiator.prototype.state = waject();
+modules.gladiator.prototype.share = modules.share;
+modules.gladiator.prototype.loaded = false;
+modules.gladiator.prototype.control={};
+modules.gladiator.prototype.control.events=function() {
+	
+	$('#gladiator ul>li').each(function () {
+		let id = $(this).children('a').attr('href').replace('#', '');
+		$('head').append('<style>' + modules[id].prototype.display.style + '</style>');
+		$('#gladiator').append(modules[id].prototype.display.box);
+		modules.fetch(id);
+		console.log(modules[id].prototype)
+	});
+	let baseHeight = $('#gladiator ul').height();
+	console.log(baseHeight)
+	modules.fetch('culture');
+	$('#gladiator').css({
+		'height': $('#culture').outerHeight(),
+		'width': $('#culture').outerWidth()
+	});
+	$('#gladiator').tabs({
+		activate (event, ui) {
+			//console.log(ui);
+			let id = ui.newPanel.attr('id').replace('#', '');
+			modules.fetch(id);
+			$('#gladiator').css({
+				'height': ui.newPanel.outerHeight(),
+				'width': ui.newPanel.outerWidth()
+			});
+		}
+	});
+};
+modules.gladiator.prototype.control.events.prototype = modules.gladiator.prototype;
+modules.gladiator.prototype.display={};
+modules.gladiator.prototype.display.style="#gladiator { overflow: hidden; }";
+modules.gladiator.prototype.display.view=$("<div id=\"gladiator\"> <ul> <li><a href=\"#culture\">Culture</a></li> <li><a href=\"#attributes\">Attributes</a></li> <li><a href=\"#biometrics\">Biometrics</a></li> <li><a href=\"#combatStats\">Combat Stats</a></li> <li><a href=\"#skills\">Skills</a></li> </ul> </div>");
 modules.settings = function () {
 	const self = this;
 	
@@ -945,17 +999,21 @@ modules.skills = function () {
 	let slideDirection = self.share.slideDirection ? self.share.slideDirection : 'left';
 	
 	if (!self.loaded) {
-		$('#game').append(self.display.box);
+		/*
+		$('#gladiator').append(self.display.box);
 		$('head').append("<style>" + self.display.style + "</style>");
 		$('#skills').hide(0).show('slide', {
 			direction: slideDirection
 		}, 250);
+		*/
 		new self.hook.comms();
 		new self.control.events();
 	} else {
+		/*
 		$('#skills').show('slide', {
 			direction: slideDirection
 		}, 250);
+		*/
 		self.state.regenerateSkills();
 	}
 	
@@ -981,13 +1039,14 @@ modules.skills.prototype.control.events=function() {
 			let name = $(this).attr('name');
 			let max = $(this).slider('option', 'max');
 			let highestPoint = self.state.skillPoints + $(this).slider('value');
+			let skillCeiling = (modules.biometrics.prototype.state.biometrics.rank || 0) * 2
 			console.log("current value:", $(this).slider('value'));
 			console.log("new value", ui.value);
 			console.log("max", max);
 			console.log('available points:', self.state.skillPoints);
-			console.log('skill ceiling', self.state.skillCeiling);
-			if (self.state.skillCeiling < highestPoint) {
-				highestPoint = self.state.skillCeiling;
+			console.log('skill ceiling', skillCeiling);
+			if (skillCeiling < highestPoint) {
+				highestPoint = skillCeiling;
 			}
 			if (max < highestPoint) {
 				highestPoint = max;
@@ -1121,7 +1180,12 @@ modules.skills.prototype.hook.comms=function() {
 	function generateSkills (skill, val) {
 		let attr = modules.attributes.prototype.state.attributes;
 		let biometrics = modules.biometrics.prototype.state.biometrics;
-		//console.log("generateSkills:", skill, val);
+		if (!attr || !biometrics) {
+			return {
+				skillfinal: 0,
+				skillmax: 16
+			};
+		}
 		let generator = {
 			"input": {
 				"skill": skill,

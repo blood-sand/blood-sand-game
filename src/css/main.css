@@ -22,6 +22,10 @@
 html {
     background-color: rgb(0, 0, 0);
     color: rgb(255, 255, 255);
+    overflow-y:inherit;
+}
+body {
+    overflow-y: hidden;
 }
 html, body {
     margin: 0;
@@ -83,7 +87,7 @@ ul.gladiatorData>li>.bmiMod {
     color: rgb(170, 130, 25);
 
 }
-#game>.item {
+#game .item {
     position: absolute;
     width: 720px;
     background: rgba(0, 0, 0, 0.72);
@@ -140,7 +144,7 @@ html,select,input,textarea,button {
     font-size: 18px;
 }
 @media (max-width: 768px){
-    #game>.item {
+    #game .item {
         width: 100%;
         margin: 0;
         border: 0;
@@ -149,7 +153,7 @@ html,select,input,textarea,button {
     }
 }
 @media (orientation: portrait){
-    #game>.item {
+    #game .item {
         width: 100%;
         margin: 0;
         border: 0;

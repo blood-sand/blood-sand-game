@@ -14,13 +14,14 @@ $( "#skills .slider" ).slider({
 		let name = $(this).attr('name');
 		let max = $(this).slider('option', 'max');
 		let highestPoint = self.state.skillPoints + $(this).slider('value');
+		let skillCeiling = (modules.biometrics.prototype.state.biometrics.rank || 0) * 2
 		console.log("current value:", $(this).slider('value'));
 		console.log("new value", ui.value);
 		console.log("max", max);
 		console.log('available points:', self.state.skillPoints);
-		console.log('skill ceiling', self.state.skillCeiling);
-		if (self.state.skillCeiling < highestPoint) {
-			highestPoint = self.state.skillCeiling;
+		console.log('skill ceiling', skillCeiling);
+		if (skillCeiling < highestPoint) {
+			highestPoint = skillCeiling;
 		}
 		if (max < highestPoint) {
 			highestPoint = max;
