@@ -41,7 +41,8 @@ module.exports = function (m, local) {
 		};
 		skillsGenerator.input = input;
 		let result = jsonSL(skillsGenerator);
-		console.log(result.skillfinal);
+        session.skills.final[skill] = result.skillfinal;
+		//console.log(result.skillfinal);
     }
 
     if (session.skills === undefined) {
@@ -53,6 +54,12 @@ module.exports = function (m, local) {
     	skillMappings.forEach(label => {
     		session.skills[label] = 0
     	});
+    }
+    if (session.skills.final === undefined) {
+        session.skills.final = {};
+        skillMappings.forEach(label => {
+            session.skills.final[label] = 0
+        });
     }
 
     socket.on("gladiator-skill-change", data => {
@@ -76,8 +83,16 @@ module.exports = function (m, local) {
     			invalid = true;
     		}
     		if (!invalid) {
-    			console.log('skills updated', session.skills)
-    			session.skills[skill] = val;
+                session.skills[skill] = val;
+                if (skill === "tactics") {
+                    session.skills.final.tactics = val;
+                    skillMappings.forEach(label => {
+                        generate(label, session.skills[label]);
+                    });
+                } else {
+                    generate(skill, val);
+                }
+    			console.log('skills updated', session.skills);
     		} else {
     			console.log("invalid", skill, val, session.skills.skillPoints);
     		}
@@ -85,6 +100,5 @@ module.exports = function (m, local) {
     });
 
     socket.emit("gladiator-skills", session.skills);
-    console.log("sess:", session);
 
 }

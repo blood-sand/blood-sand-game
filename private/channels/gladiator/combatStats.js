@@ -2,6 +2,7 @@ const jsonSL = require('json-sl');
 
 module.exports = function (m, local) {
     const combatStatsGenerator = require('../../jsonSL/combat_stats.json');
+
 	const socket = local.socket;
     const session = local.session;
     function generateCombatStats () {
@@ -19,10 +20,9 @@ module.exports = function (m, local) {
             "bmiModifier": 0
         };
         if (session.skills) {
-            console.log("skills are real");
-            input.tactics = session.skills.tactics;
-            input.dodgeSkill = session.skills.dodge;
-            input.parrySkill = session.skills.parry;
+            input.tactics = session.skills.final.tactics;
+            input.dodgeSkill = session.skills.final.dodge;
+            input.parrySkill = session.skills.final.parry;
         }
         Object.assign(input, session.biometrics, session.attributes);
         console.log(input);
