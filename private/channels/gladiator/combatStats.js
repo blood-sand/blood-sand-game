@@ -54,7 +54,7 @@ module.exports = function (m, local) {
             "fatigueModifier": 1,
             "bmiModifier": 0
         };
-        if (session.skills && session.skills.final) {
+        if (session.skills) {
             input.tactics = session.skills.tactics;
             input.dodgeSkill = generateSkill('dodge', session.skills.dodge);
             input.parrySkill = generateSkill('parry', session.skills.parry);
