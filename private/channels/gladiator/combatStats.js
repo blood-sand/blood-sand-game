@@ -18,7 +18,14 @@ module.exports = function (m, local) {
             "fatigueModifier": 1,
             "bmiModifier": 0
         };
+        if (session.skills) {
+            console.log("skills are real");
+            input.tactics = session.skills.tactics;
+            input.dodgeSkill = session.skills.dodge;
+            input.parrySkill = session.skills.parry;
+        }
         Object.assign(input, session.biometrics, session.attributes);
+        console.log(input);
         combatStatsGenerator.input = input;
         let result = jsonSL(combatStatsGenerator);
         delete result.input;

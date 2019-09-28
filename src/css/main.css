@@ -22,14 +22,12 @@
 html {
     background-color: rgb(0, 0, 0);
     color: rgb(255, 255, 255);
-    overflow-y:inherit;
 }
-body {
-    overflow-y: hidden;
-}
+
 html, body {
     margin: 0;
     padding: 0;
+    height: 100%;
     overflow-x: hidden;
 }
 
@@ -63,7 +61,7 @@ ul.gladiatorData {
     background-position: center;
     list-style: none;
     background-color:rgba(164, 148, 105, 0.36);
-    margin: 50px 0;
+    margin: 10px 0 0 0;
     padding: 10px;
     border: 0.5px outset rgba(170, 130, 25, 0.32);
     border-radius: 3px;
@@ -88,11 +86,11 @@ ul.gladiatorData>li>.bmiMod {
 
 }
 #game .item {
-    position: absolute;
+    position: relative;
     width: 720px;
     background: rgba(0, 0, 0, 0.72);
     color: rgb(255, 255, 255);
-    margin: 15px 0;
+    margin: 0;
     padding: 25px;
 }
 
@@ -101,6 +99,11 @@ input,select,textarea,button {
     color: rgb(170, 130, 25);
     padding: 5px;
     border: 0.1px solid rgb(0, 0, 0, 0.32);
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+    -webkit-appearance: textfield;
 }
 
 select {
@@ -143,6 +146,8 @@ button {
 html,select,input,textarea,button {
     font-size: 18px;
 }
+
+/*
 @media (max-width: 768px){
     #game .item {
         width: 100%;
@@ -161,3 +166,4 @@ html,select,input,textarea,button {
         border-radius: 0;
     }
 }
+*/

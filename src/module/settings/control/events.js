@@ -97,7 +97,7 @@ $('body').on('click', '.user-settings-btn', function (e) {
 	dialog.dialog('open');
 });
 
-$('body').on('click', '.next,.previous', () => {
+$('body').on('click', '.next,.previous,.ui-tab a', () => {
 	self.share.sounds.switch.play();
 });
 

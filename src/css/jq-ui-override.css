@@ -1,4 +1,10 @@
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active {
+.ui-state-default, 
+.ui-widget-content 
+.ui-state-default, 
+.ui-widget-header .ui-state-default, 
+.ui-button, 
+html .ui-button.ui-state-disabled:hover, 
+html .ui-button.ui-state-disabled:active {
     border: 1px solid rgba(255,255,255,0.32);
     background: rgba(0,0,0,0.72);
     font-weight: normal;
@@ -21,7 +27,49 @@
 	color: rgba(255,255,255,0.72);
 }
 
-.ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button {
+.ui-widget input, 
+.ui-widget select, 
+.ui-widget textarea, 
+.ui-widget button {
     font-family: "weiss_initialenregular", sans-serif;
     font-size: 18px;
+}
+
+.ui-state-hover a,
+.ui-state-hover a:hover,
+.ui-state-hover a:link,
+.ui-state-hover a:visited,
+.ui-state-focus a,
+.ui-state-focus a:hover,
+.ui-state-focus a:link,
+.ui-state-focus a:visited,
+a.ui-button:hover,
+a.ui-button:focus {
+    color: rgb(170, 130, 25);
+    text-decoration: none;
+    outline: none;
+}
+
+.ui-state-default a, 
+.ui-state-default a:link, 
+.ui-state-default a:visited, 
+a.ui-button, 
+a:link.ui-button, 
+a:visited.ui-button, 
+.ui-button {
+    color: rgba(255, 255, 255, 0.72);
+    text-decoration: none;
+}
+
+.ui-state-active a, 
+.ui-state-active a:link, 
+.ui-state-active a:visited {
+    color: rgb(170, 130, 25);
+    text-decoration: none;
+}
+
+.ui-tabs .ui-tabs-nav {
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    background: transparent;
 }
