@@ -1,45 +1,35 @@
 const self = this;
 
 const catcher = function (o, prop, val) {
-	console.log(prop, "changed from", o[prop], "to", val);
-	if (val !== o[prop]) {
-		o[prop] = val;
-		socket.emit(`gladiator-${prop}`, val);
-	}
-	self.share[prop] = o[prop];
-	$(`[name="${prop}"]`).val(o[prop]);
-	if ($(`[name="${prop}"]`).is('select')) {
-		$(`[name="${prop}"]`).selectric();
-	}
-	return false;
+    console.log(prop, "changed from", o[prop], "to", val);
+    if (val !== o[prop]) {
+        o[prop] = val;
+        socket.emit(`gladiator-${prop}`, val);
+    }
+    self.share[prop] = o[prop];
+    $(`[name="${prop}"]`).val(o[prop]);
+    if ($(`[name="${prop}"]`).is('select')) {
+        $(`[name="${prop}"]`).selectric();
+    }
+    return false;
 }
 
 self.state.mk({
-	property: 'next',
-	value: false,
-	preset: () => {
-		$('#culture').toggle('slide', 250);
-		self.share.slideDirection = 'right';
-		modules.fetch('attributes');
-	}
+    property: 'culture', 
+    value: $('[name="culture"]').val().toLowerCase(),
+    preset: catcher
 });
 
 self.state.mk({
-	property: 'culture', 
-	value: $('[name="culture"]').val().toLowerCase(),
-	preset: catcher
+    property: 'sex', 
+    value: $('[name="sex"]').val().toLowerCase(),
+    preset: catcher
 });
 
 self.state.mk({
-	property: 'sex', 
-	value: $('[name="sex"]').val().toLowerCase(),
-	preset: catcher
-});
-
-self.state.mk({
-	property: 'name', 
-	value: $('[name="name"]').val().toLowerCase(),
-	preset: catcher
+    property: 'name', 
+    value: $('[name="name"]').val().toLowerCase(),
+    preset: catcher
 });
 
 self.share.culture = self.state.culture;
@@ -51,16 +41,16 @@ socket.on("gladiator-names", d => {
     self.state.names = d;
 });
 socket.on("gladiator-name", d => {
-	console.log("name:", d)
-	self.state.name = d;
+    console.log("name:", d)
+    self.state.name = d;
 });
 socket.on("gladiator-sex", d => {
-	console.log("sex:", d)
-	self.state.sex = d;
+    console.log("sex:", d)
+    self.state.sex = d;
 });
 socket.on("gladiator-culture", d => {
-	console.log("culture:", d)
-	self.state.culture = d;
+    console.log("culture:", d)
+    self.state.culture = d;
 });
 socket.on("gladiator-culture-info", d => {
     self.state.cultureInfo = d;

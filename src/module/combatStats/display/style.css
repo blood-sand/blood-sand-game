@@ -1,21 +1,21 @@
 div < button[name="combatStatsNext"] {
-	display: block;
+    display: block;
 }
 
 button[name="combatStatsPrevious"] {
-	display: block;
-	float: left;
+    display: block;
+    float: left;
 }
 
 #combatStats input[name="name"] {
-	width: 50%;
+    width: 50%;
 }
 
 #combatStats select {
-	width: 150px;
+    width: 150px;
 }
 
 button[name="combatStatsNext"] {
-	display: block;
-	float: right;
+    display: block;
+    float: right;
 }

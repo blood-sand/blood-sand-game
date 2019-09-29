@@ -1,62 +1,62 @@
 #skills div < button[name="skillsNext"] {
-	display: block;
+    display: block;
 }
 
 #skills button[name="skillsPrevious"] {
-	display: block;
-	float: left;
+    display: block;
+    float: left;
 }
 #skills .slider {
-	width: 200px;
-	margin: 11.75px 40px;
+    width: 200px;
+    margin: 11.75px 40px;
 }
 #skills .slider .custom-handle {
-	width: 3em;
-	height: 1.6em;
-	top: 50%;
-	margin-top: -.8em;
-	margin-left: -23px;
-	text-align: center;
-	line-height: 1.6em;
+    width: 3em;
+    height: 1.6em;
+    top: 50%;
+    margin-top: -.8em;
+    margin-left: -23px;
+    text-align: center;
+    line-height: 1.6em;
 }
 
 #skills input[name="name"] {
-	width: 57%;
+    width: 57%;
 }
 
 #skills button[name="skillsNext"] {
-	display: block;
-	float: right;
-	color: rgba(255,255,255,0.72);
+    display: block;
+    float: right;
+    color: rgba(255,255,255,0.72);
 }
 
 #skills .proficiency {
-	text-align: center;
+    text-align: center;
 }
 
 #skills .slider-container {
-	color: rgba(170, 130, 25, 0.5);
-	background: rgba(0, 0, 0, 0.32);
-	border: 1px solid rgba(0,0,0,0.72);
-	padding-left: 5px;
-	padding-right: 5px;
-	display: flex;
-	flex-direction: row;
-	width: 350px;
+    color: rgba(170, 130, 25, 0.5);
+    background: rgba(0, 0, 0, 0.32);
+    border: 1px solid rgba(0,0,0,0.72);
+    padding-left: 5px;
+    padding-right: 5px;
+    display: flex;
+    flex-direction: row;
+    width: 350px;
 }
 #skills .min {
-	text-align: right;
+    text-align: right;
 }
 
 #skills .max {
-	text-align: left;
+    text-align: left;
 }
 
 #skills .max, #skills .min {
-	flex-grow: 0;
-	padding-top: 8px;
+    flex-grow: 0;
+    padding-top: 8px;
 }
 
 #skills ul.gladiatorData>li>span:nth-child(1) {
-	flex-grow: 3;
+    flex-grow: 3;
 }

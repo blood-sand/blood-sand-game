@@ -1,12 +1,12 @@
 div < button[name="cultureNext"] {
-	display: block;
+    display: block;
 }
 
 #culture input[name="name"] {
-	width: 450px;
+    width: 450px;
 }
 
 button[name="cultureNext"] {
-	display: block;
-	float:right;
+    display: block;
+    float:right;
 }

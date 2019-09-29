@@ -19,11 +19,12 @@ const cultures = {
 
 module.exports = function (m, local) {
     const biometricsGenerator = require('../../jsonSL/culture_biometrics.json');
-	const socket = local.socket;
+    const socket = local.socket;
     const session = local.session;
     function generateBiometrics () {
         biometricsGenerator.sex = session.sex;
         biometricsGenerator.culture = session.culture;
+        biometricsGenerator.rank = 5;
         session.biometrics = jsonSL(biometricsGenerator);
         
         console.log(session.biometrics);
@@ -38,5 +39,4 @@ module.exports = function (m, local) {
     socket.on('gladiator-biometrics-generate', generateBiometrics);
     socket.on('gladiator-culture', generateBiometrics);
     socket.on('gladiator-sex', generateBiometrics);
-	
 }

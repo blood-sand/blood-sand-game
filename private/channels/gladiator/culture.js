@@ -31,10 +31,10 @@ const cultures = {
     scythian: 9
 };
 module.exports = function (m, local) {
-	const socket = local.socket;
+    const socket = local.socket;
     const session = local.session;
 
-	socket.emit("gladiator-names", names);
+    socket.emit("gladiator-names", names);
     socket.emit("gladiator-culture-info", cultureInfo);
     if (session.name) {
         socket.emit("gladiator-name", session.name);
@@ -71,9 +71,9 @@ module.exports = function (m, local) {
         }
     });
 
-	socket.on("gladiator-next", data => {
-		console.log("gladiator-next (from culture)");
+    socket.on("gladiator-next", data => {
+        console.log("gladiator-next (from culture)");
         console.log("current state:", session);
-	});
+    });
 
 }

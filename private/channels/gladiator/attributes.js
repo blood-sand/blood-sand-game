@@ -9,7 +9,7 @@ const MIN_STAT_SIZE = 3
 
 module.exports = function (m, local) {
 
-	const socket = local.socket;
+    const socket = local.socket;
     const session = local.session;
     if (!session.attributes) {
         session.attributes = jsonSL(attributeGenerator);
@@ -17,9 +17,9 @@ module.exports = function (m, local) {
     if (session.attributes.abilitySum > 91) {
         session.attributes.abilitySum = 91;
     }
-	console.log(session.attributes);
-	socket.emit("gladiator-attributes", session.attributes);
-	socket.on("gladiator-attributes-change", stats => {
+    console.log(session.attributes);
+    socket.emit("gladiator-attributes", session.attributes);
+    socket.on("gladiator-attributes-change", stats => {
         let sum = 0;
         let tempStats = Object.assign(session.attributes);
         //console.log("new stats:", stats);

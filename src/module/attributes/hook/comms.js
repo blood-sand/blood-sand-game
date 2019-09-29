@@ -9,43 +9,15 @@ function randomProperty (obj, f = () => {}) {
     return  keys[keys.length * Math.random() << 0];
 };
 
-self.state.mk({
-	property: 'next',
-	value: false,
-	preset: () => {
-		//socket.emit('gladiator-next');
-		$('#attributes').hide('slide', {
-            direction: 'left'
-        }, 250);
-        self.share.slideDirection = 'right';
-		modules.fetch('biometrics');
-	}
-});
-
-self.state.mk({
-	property: 'previous',
-	value: false,
-	preset: () => {
-		//socket.emit('gladiator-previous');
-		$('#attributes').hide('slide', {
-            direction: 'right'
-        }, 250);
-        self.share.slideDirection = 'left';
-		modules.fetch('culture');
-	}
-});
-
 socket.on("gladiator-attributes", data => {
-	for (let name in data) {
+    for (let name in data) {
         let slider = $(`[name=${name}`);
-        //console.log(slider);
         slider.slider('value', data[name]);
         slider.children('.custom-handle').text(data[name]);
-		//$(`[name="${name}"]`).val(data[name]);
 
-	}
-	self.state.attributes = waject(data, (stats, name, value) => {
-		let abilitySum = stats.abilitySum;
+    }
+    self.state.attributes = waject(data, (stats, name, value) => {
+        let abilitySum = stats.abilitySum;
         
         if (name === "abilitySum") {
             if (value > MAX_ABILITY_SUM) {
@@ -67,7 +39,7 @@ socket.on("gladiator-attributes", data => {
                             return false;
                         }
                         if (i === "toString") {
-                        	return false;
+                            return false;
                         }
                         if (stats[i] >= MAX_STAT_SIZE) {
                             return false;
@@ -83,7 +55,7 @@ socket.on("gladiator-attributes", data => {
                             return false;
                         }
                         if (i === "toString") {
-                        	return false;
+                            return false;
                         }
                         if (stats[i] <= MIN_STAT_SIZE) {
                             return false;
@@ -127,7 +99,7 @@ socket.on("gladiator-attributes", data => {
             console.log("ignoring change")
         }
         return false;
-	});
+    });
 });
 
 socket.emit("gladiator-attributes-ready");

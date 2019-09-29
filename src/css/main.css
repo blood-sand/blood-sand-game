@@ -146,24 +146,3 @@ button {
 html,select,input,textarea,button {
     font-size: 18px;
 }
-
-/*
-@media (max-width: 768px){
-    #game .item {
-        width: 100%;
-        margin: 0;
-        border: 0;
-        margin-bottom: 3px;
-        border-radius: 0;
-    }
-}
-@media (orientation: portrait){
-    #game .item {
-        width: 100%;
-        margin: 0;
-        border: 0;
-        margin-bottom: 3px;
-        border-radius: 0;
-    }
-}
-*/

@@ -1,21 +1,21 @@
 div < button[name="biometricsNext"] {
-	display: block;
+    display: block;
 }
 
 button[name="biometricsPrevious"] {
-	display: block;
-	float: left;
+    display: block;
+    float: left;
 }
 
 #biometrics input[name="name"] {
-	width: 50%;
+    width: 50%;
 }
 
 #biometrics select {
-	width: 150px;
+    width: 150px;
 }
 
 button[name="biometricsNext"] {
-	display: block;
-	float: right;
+    display: block;
+    float: right;
 }

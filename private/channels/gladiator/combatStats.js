@@ -20,7 +20,7 @@ const skillMappings = [
 module.exports = function (m, local) {
     const combatStatsGenerator = require('../../jsonSL/combat_stats.json');
     const skillsGenerator = require('../../jsonSL/skills.json');
-	const socket = local.socket;
+    const socket = local.socket;
     const session = local.session;
     function generateSkill (skill, value) {
         let input = {
@@ -71,5 +71,4 @@ module.exports = function (m, local) {
     generateCombatStats();
     
     socket.on('gladiator-combatStats-generate', generateCombatStats);
-	
 }

@@ -35,16 +35,14 @@ $('body').on('change', '[name="name"]', e => {
     self.state.name = e.target.value;
 });
 $('body').on('click', '.randomizeName', e => {
-	self.generateName();
+    self.generateName();
 });
 $('body').on('click', '.randomizeCulture', e => {
-	let randCulture = getRandomInt(0, 9);
-	let randSex = getRandomInt(0, 1);
-	console.log(randCulture, cultures[randCulture]);
-	console.log(randSex, sexes[randSex]);
-	self.state.culture = cultures[randCulture];
-	self.state.sex = sexes[randSex];
-	self.generateName();
+    let randCulture = getRandomInt(0, 9);
+    let randSex = getRandomInt(0, 1);
+    self.state.culture = cultures[randCulture];
+    self.state.sex = sexes[randSex];
+    self.generateName();
 });
 $('[name="cultureNext').on('click', e => {
     if (self.state.culture === "culture") {

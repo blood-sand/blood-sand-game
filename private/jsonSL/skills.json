@@ -10,8 +10,8 @@
     "vitality": 10,
     "willpower": 10,
     "intelligence": 10,
-	  "rank": 1,
-	  "tacticspoints": 0
+      "rank": 1,
+      "tacticspoints": 0
   },
 
   "skill": "input.skill",
