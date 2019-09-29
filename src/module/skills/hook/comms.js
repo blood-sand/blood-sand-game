@@ -2,6 +2,20 @@ const self = this;
 let skillCeiling = 16;
 let totalSkillPoints = 0;
 
+function calcTactics (val) {
+    let input = {
+        intelligence: modules.attributes.prototype.state.attributes.intelligence,
+        rank: modules.biometrics.prototype.state.biometrics.rank,
+        tacticspoints: val
+    };
+    let generator = {
+        input: input,
+        value: "0.1*(input.intelligence+input.rank/10*20)/2*input.tacticspoints"
+    };
+
+    return jsonSL(generator)
+}
+
 self.state.mk({
     property: "skillPoints",
     value: totalSkillPoints,
@@ -22,9 +36,9 @@ self.state.mk({
 self.state.regenerateSkills = function () {
     for (let label in skills) {
         let val = self.state.skills[label];
-        if (label === "tactics") { 
+        if (label === "tactics") {
             $(`#skills .slider-container:has([name=${label}])`).
-                siblings('.proficiency').text(val.toFixed(2));
+                siblings('.proficiency').text(calcTactics(val).toFixed(2));
                 setDescription(label, val);
             continue;
         }
@@ -321,8 +335,10 @@ for (let label in skills) {
                         siblings('.proficiency').text(r.skillfinal.toFixed(2));
                     setDescription(skill, r.skillfinal);
                 }
+                let tacticsVal = calcTactics(val);
+                console.log('tac val:', tacticsVal);
                 $(`#skills .slider-container:has([name=${name}])`).
-                    siblings('.proficiency').text(val.toFixed(2));
+                    siblings('.proficiency').text(tacticsVal.toFixed(2));
                 setDescription(name, val);
             } else {
                 let result = generateSkills(skillLabels.indexOf(name), val);
