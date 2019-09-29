@@ -42,7 +42,6 @@ module.exports = function (m, local) {
     }
     function generateCombatStats () {
         let input = {
-            "tactics": 0,
             "weaponSkill": 0,
             "weaponOffense": 15,
             "weaponWeight": 0,
@@ -55,11 +54,12 @@ module.exports = function (m, local) {
             "bmiModifier": 0
         };
         if (session.skills) {
-            input.tactics = session.skills.tactics;
+            input.tacticspoints = session.skills.tactics;
             input.dodgeSkill = generateSkill('dodge', session.skills.dodge);
             input.parrySkill = generateSkill('parry', session.skills.parry);
         }
         Object.assign(input, session.biometrics, session.attributes);
+        input.tactics = skillsGenerator.tactics.replace(/input\./g, '');
         console.log(input);
         combatStatsGenerator.input = input;
         let result = jsonSL(combatStatsGenerator);
