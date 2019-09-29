@@ -303,10 +303,10 @@ for (let label in skills) {
         preset: (o, name, val) => {
             
             if (o[name] === val) {
+                console.log("ignoring update:", name, o[name], val);
                 return;
             }
-            console.log('skill change:', name, val);
-
+            console.log('skill change:', name, o[name], val);
             let skillPoints = totalSkillPoints;
             for (let skill in o) {
                 if (!(skill in skills) || skill === "toString") {
@@ -318,7 +318,8 @@ for (let label in skills) {
                     skillPoints -= o[skill];
                 }
             }
-            if (skillPoints < 0) {
+            console.log('skill points:', skillPoints);
+            if (skillPoints < 0 && val > o[name]) {
                 return false;
             }
 
@@ -359,9 +360,9 @@ socket.on("gladiator-skills", data => {
     console.log("skills:",data);
     totalSkillPoints = data.skillPoints;
     self.state.skillPoints = data.skillPoints;
-    let t = 200;
+    let t = 120;
     for (let label in skills) {
-        if (label in data && skills[label] !== data[label]) {
+        if (label in data) {
             totalSkillPoints += data[label];
             setTimeout(() => {
                 self.state.skills[label] = data[label];

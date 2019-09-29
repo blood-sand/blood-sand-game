@@ -187,6 +187,12 @@ modules.biometrics.prototype.control.events=function() {
 	$('#biometrics select[name=sex]').val(self.share.sex);
 	$('[name="name"]').val(self.share.name);
 	
+	$('#biometrics input[name=rank]').on('change', e => {
+	    self.state.biometrics.rank = $(e.target).val();
+	    console.log('rank', self.state.biometrics.rank);
+	    socket.emit('gladiator-biometrics-rank', self.state.biometrics.rank);
+	});
+	
 	$('body').on('change', '[name="culture"]', e => {
 	    self.state.culture = $(e.target).val();
 	});
@@ -202,7 +208,7 @@ modules.biometrics.prototype.control.events=function() {
 };
 modules.biometrics.prototype.control.events.prototype = modules.biometrics.prototype;
 modules.biometrics.prototype.display={};
-modules.biometrics.prototype.display.box=$("<div id=\"biometrics\" class=\"item\"> <span> <img src=\"/img/dice.png\" class=\"randomizeBiometrics dice\"> Biometrics For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <ul class=\"gladiatorData\"> <li> <span>Culture</span> <select class=\"stat\" name=\"culture\"> <option disabled>culture</option> <option>roman</option> <option>gallic</option> <option>germanic</option> <option>syrian</option> <option>numidian</option> <option>thracian</option> <option>greek</option> <option>iberian</option> <option>judean</option> <option>scythian</option> </select> </li> <li> <span>Sex</span> <select class=\"stat\" name=\"sex\"> <option>male</option> <option>female</option> </select> </li> <li> <span>Rank</span> <input type=\"number\" class=\"stat\" name=\"rank\" readonly> </li> <li> <span>Age</span> <input type=\"number\" class=\"stat\" name=\"age\" readonly> </li> <li> <span>Weight</span> <input type=\"number\" class=\"stat\" name=\"weight\" readonly> </li> <li> <span>Height</span> <input type=\"number\" class=\"stat\" name=\"height\" readonly> </li> <li> <span>BMI</span> <input type=\"number\" class=\"stat\" name=\"bmi\" readonly> </li> <li> <span>Reach</span> <input type=\"number\" class=\"stat\" name=\"reach\" readonly> </li> </ul> </div>");
+modules.biometrics.prototype.display.box=$("<div id=\"biometrics\" class=\"item\"> <span> <img src=\"/img/dice.png\" class=\"randomizeBiometrics dice\"> Biometrics For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <ul class=\"gladiatorData\"> <li> <span>Culture</span> <select class=\"stat\" name=\"culture\"> <option disabled>culture</option> <option>roman</option> <option>gallic</option> <option>germanic</option> <option>syrian</option> <option>numidian</option> <option>thracian</option> <option>greek</option> <option>iberian</option> <option>judean</option> <option>scythian</option> </select> </li> <li> <span>Sex</span> <select class=\"stat\" name=\"sex\"> <option>male</option> <option>female</option> </select> </li> <li> <span>Rank</span> <input type=\"number\" class=\"stat\" name=\"rank\" min=1 max=15> </li> <li> <span>Age</span> <input type=\"number\" class=\"stat\" name=\"age\" readonly> </li> <li> <span>Weight</span> <input type=\"number\" class=\"stat\" name=\"weight\" readonly> </li> <li> <span>Height</span> <input type=\"number\" class=\"stat\" name=\"height\" readonly> </li> <li> <span>BMI</span> <input type=\"number\" class=\"stat\" name=\"bmi\" readonly> </li> <li> <span>Reach</span> <input type=\"number\" class=\"stat\" name=\"reach\" readonly> </li> </ul> </div>");
 modules.biometrics.prototype.display.style="div < button[name=\"biometricsNext\"] { display: block; } button[name=\"biometricsPrevious\"] { display: block; float: left; } #biometrics input[name=\"name\"] { width: 50%; } #biometrics select { width: 150px; } button[name=\"biometricsNext\"] { display: block; float: right; }";
 modules.biometrics.prototype.hook={};
 modules.biometrics.prototype.hook.comms=function() {
@@ -1237,10 +1243,10 @@ modules.skills.prototype.hook.comms=function() {
 	        preset: (o, name, val) => {
 	            
 	            if (o[name] === val) {
+	                console.log("ignoring update:", name, o[name], val);
 	                return;
 	            }
-	            console.log('skill change:', name, val);
-	
+	            console.log('skill change:', name, o[name], val);
 	            let skillPoints = totalSkillPoints;
 	            for (let skill in o) {
 	                if (!(skill in skills) || skill === "toString") {
@@ -1252,7 +1258,8 @@ modules.skills.prototype.hook.comms=function() {
 	                    skillPoints -= o[skill];
 	                }
 	            }
-	            if (skillPoints < 0) {
+	            console.log('skill points:', skillPoints);
+	            if (skillPoints < 0 && val > o[name]) {
 	                return false;
 	            }
 	
@@ -1293,9 +1300,9 @@ modules.skills.prototype.hook.comms=function() {
 	    console.log("skills:",data);
 	    totalSkillPoints = data.skillPoints;
 	    self.state.skillPoints = data.skillPoints;
-	    let t = 200;
+	    let t = 120;
 	    for (let label in skills) {
-	        if (label in data && skills[label] !== data[label]) {
+	        if (label in data) {
 	            totalSkillPoints += data[label];
 	            setTimeout(() => {
 	                self.state.skills[label] = data[label];
