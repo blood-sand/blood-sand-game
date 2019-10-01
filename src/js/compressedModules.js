@@ -56,7 +56,7 @@ modules.attributes.prototype.control.events=function() {
 modules.attributes.prototype.control.events.prototype = modules.attributes.prototype;
 modules.attributes.prototype.display={};
 modules.attributes.prototype.display.box=$("<div id=\"attributes\" class=\"item\"> <span> <img src=\"/img/dice.png\" class=\"randomizeAttributes dice\"> Attributes For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <ul class=\"gladiatorData\"> <li> <span>strength</span> <div class=\"slider\" name=\"strength\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> <li> <span>dexterity</span> <div class=\"slider\" name=\"dexterity\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> <li> <span>perception</span> <div class=\"slider\" name=\"perception\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> <li> <span>endurance</span> <div class=\"slider\" name=\"endurance\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> <li> <span>intelligence</span> <div class=\"slider\" name=\"intelligence\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> <li> <span>willpower</span> <div class=\"slider\" name=\"willpower\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> <li> <span>vitality</span> <div class=\"slider\" name=\"vitality\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> <li> <span>ability sum</span> <div class=\"slider\" name=\"abilitySum\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> </ul> <!-- <div> <button name=\"attributesPrevious\" class=\"previous\">Previous</button> <button name=\"attributesNext\" class=\"next\">Next</button> </div> --> </div>");
-modules.attributes.prototype.display.style="#attributes div < button[name=\"attributesNext\"] { display: block; } #attributes button[name=\"attributesPrevious\"] { display: block; float: left; } #attributes .slider { width: 480px; margin: 11.75px 40px; } #attributes .slider .custom-handle { width: 3em; height: 1.6em; top: 50%; margin-top: -.8em; margin-left: -23px; text-align: center; line-height: 1.6em; } #attributes input[name=\"name\"] { width: 57%; } #attributes button[name=\"attributesNext\"] { display: block; float: right; }";
+modules.attributes.prototype.display.style="#attributes div < button[name=\"attributesNext\"] { display: block; } #attributes button[name=\"attributesPrevious\"] { display: block; float: left; } #attributes .slider { width: 480px; margin: 11.75px 40px; } #attributes input[name=\"name\"] { width: 57%; } #attributes button[name=\"attributesNext\"] { display: block; float: right; }";
 modules.attributes.prototype.hook={};
 modules.attributes.prototype.hook.comms=function() {
     const self = this;
@@ -529,20 +529,76 @@ modules.gladiator.prototype.share = modules.share;
 modules.gladiator.prototype.loaded = false;
 modules.gladiator.prototype.control={};
 modules.gladiator.prototype.control.events=function() {
-    $('#gladiator ul>li').each(function () {
+    let activeTab = 0;
+	const baseTitle = "Blood & Sand";
+	const baseContent = document.getElementsByTagName('html')[0].outerHTML;
+	let stateLoad = false;
+	
+	function setWindowTitle (url) {
+	    url = url.replace('/', '');
+	    let parts = url.split('-');
+	    let title = baseTitle + " |";
+	    parts.forEach((part, i) => {
+	        let newPart = "";
+	        for (let i = 0; i < part.length; i += 1) {
+	            if (i === 0) {
+	                newPart = " " + part[i].toUpperCase();
+	            } else if (part[i] === part[i].toUpperCase()) {
+	                newPart += " " + part[i];
+	            } else {
+	                newPart += part[i]
+	            }
+	        }
+	        title += newPart;
+	    });
+	    document.title = title;
+	}
+	
+	$('#gladiator ul>li').each(function (i) {
 	    let id = $(this).children('a').attr('href').replace('#', '');
 	    $('head').append('<style>' + modules[id].prototype.display.style + '</style>');
 	    $('#gladiator').append(modules[id].prototype.display.box);
 	    modules.fetch(id);
+	    if (window.location.pathname === ('/gladiator-' + id)) {
+	        setWindowTitle('gladiator-' + id);
+	        activeTab = i;
+	    }
 	});
+	
+	if (activeTab === 0) {
+	    setWindowTitle('gladiator-culture');
+	    window.history.replaceState({
+	        id: '#culture'
+	    }, baseTitle + " | gladiator culture", "gladiator-culture");
+	}
 	modules.fetch('culture');
 	
 	$('#gladiator').tabs({
+	    active: activeTab,
+	    beforeActivate (event, ui) {
+	        let newUrl = ui.newTab.children('a').attr('href').replace("#", "gladiator-");
+	        let content = baseContent;
+	        setWindowTitle(newUrl);
+	        if (!stateLoad) {
+	            window.history.pushState({
+	                id: ui.newTab.children('a').attr('href')
+	            }, "", newUrl);
+	        }
+	    },
 	    activate (event, ui) {
+	        stateLoad = false;
 	        let id = ui.newPanel.attr('id').replace('#', '');
 	        modules.fetch(id);
 	    }
 	});
+	
+	window.onpopstate = function (e) {
+	    if (e.state && e.state.id) {
+	        stateLoad = true;
+	        $('#gladiator').tabs()
+	        $(`a[href="${e.state.id}"]`).trigger('click');
+	    }
+	};
 	
 };
 modules.gladiator.prototype.control.events.prototype = modules.gladiator.prototype;
@@ -935,7 +991,7 @@ modules.skills.prototype.control.events=function() {
 modules.skills.prototype.control.events.prototype = modules.skills.prototype;
 modules.skills.prototype.display={};
 modules.skills.prototype.display.box=$("<div id=\"skills\" class=\"item\"> <span> Skills For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <div> <span>Skill Points:</span> <span name=\"skillPoints\">10</span> </div> <ul class=\"gladiatorData\"> <li> <span>tactics</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"tactics\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\">n</span> <span class=\"description\">Abyssmal</span> </li> <li> <span>dodge</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"dodge\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>parry</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"parry\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>shield</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"shield\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>bash</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"bash\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>charge</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"charge\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>spear</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"spear\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>light Blade</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"lightBlade\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>heavy Blade</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"heavyBlade\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>bludgeoning</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"bludgeoning\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>axe</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"axe\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>riposte</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"riposte\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>close Combat</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"closeCombat\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>feint</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"feint\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>dirty Trick</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"dirtyTrick\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>appraise</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"appraise\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> </ul> </div>");
-modules.skills.prototype.display.style="#skills div < button[name=\"skillsNext\"] { display: block; } #skills button[name=\"skillsPrevious\"] { display: block; float: left; } #skills .slider { width: 200px; margin: 11.75px 40px; } #skills .slider .custom-handle { width: 3em; height: 1.6em; top: 50%; margin-top: -.8em; margin-left: -23px; text-align: center; line-height: 1.6em; } #skills input[name=\"name\"] { width: 57%; } #skills button[name=\"skillsNext\"] { display: block; float: right; color: rgba(255,255,255,0.72); } #skills .proficiency { text-align: center; } #skills .slider-container { color: rgba(170, 130, 25, 0.5); background: rgba(0, 0, 0, 0.32); border: 1px solid rgba(0,0,0,0.72); padding-left: 5px; padding-right: 5px; display: flex; flex-direction: row; width: 350px; } #skills .min { text-align: right; } #skills .max { text-align: left; } #skills .max, #skills .min { flex-grow: 0; padding-top: 8px; } #skills ul.gladiatorData>li>span:nth-child(1) { flex-grow: 3; }";
+modules.skills.prototype.display.style="#skills div < button[name=\"skillsNext\"] { display: block; } #skills button[name=\"skillsPrevious\"] { display: block; float: left; } #skills .slider { width: 200px; margin: 11.75px 40px; } #skills input[name=\"name\"] { width: 57%; } #skills button[name=\"skillsNext\"] { display: block; float: right; color: rgba(255,255,255,0.72); } #skills .proficiency { text-align: center; } #skills .slider-container { color: rgba(170, 130, 25, 0.5); background: rgba(0, 0, 0, 0.32); border: 1px solid rgba(0,0,0,0.72); padding-left: 5px; padding-right: 5px; display: flex; flex-direction: row; width: 350px; } #skills .min { text-align: right; } #skills .max { text-align: left; } #skills .max, #skills .min { flex-grow: 0; padding-top: 8px; } #skills ul.gladiatorData>li>span:nth-child(1) { flex-grow: 3; }";
 modules.skills.prototype.hook={};
 modules.skills.prototype.hook.comms=function() {
     const self = this;

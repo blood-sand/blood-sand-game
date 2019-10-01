@@ -10,15 +10,6 @@
     width: 200px;
     margin: 11.75px 40px;
 }
-#skills .slider .custom-handle {
-    width: 3em;
-    height: 1.6em;
-    top: 50%;
-    margin-top: -.8em;
-    margin-left: -23px;
-    text-align: center;
-    line-height: 1.6em;
-}
 
 #skills input[name="name"] {
     width: 57%;

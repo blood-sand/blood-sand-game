@@ -136,6 +136,26 @@ select {
     border-style: inset;
 }
 
+.slider .custom-handle:active {
+    cursor: grabbing;
+}
+
+.slider .custom-handle {
+    cursor: grab;
+    outline: none;
+    border: 0px solid black;
+    width: 1.6em;
+    height: 1.6em;
+    top: 50%;
+    margin-top: -.8em;
+    margin-left: -23px;
+    text-align: center;
+    line-height: 1.6em;
+    border-radius: 1.6em;
+    box-shadow: -4px 5px 5px 0px rgba(0,0,0,0.75);
+    background: radial-gradient(ellipse at center, rgb(90, 77, 42) 36%, rgba(0, 0, 0, 0.72) 100%);
+}
+
 form>label {
     flex:1;
     flex-shrink: 1;

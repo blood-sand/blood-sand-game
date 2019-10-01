@@ -21,6 +21,11 @@ module.exports = function (m) {
         res.redirect('/' + m.config.defaults.index);
     });
     
+    app.get(/gladiator\-(.*)/, function (req, res) {
+        
+        res.sendFile(path.join(root, 'src', 'index.html'));
+    });
+
     app.get(/(.*)/, function (req, res) {
         var filename = 'src';
         var url_parts = req.params[0].split('/').splice(1);
