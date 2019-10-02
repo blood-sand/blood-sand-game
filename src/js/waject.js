@@ -41,6 +41,9 @@ window.waject = function(o, Preset, Got) {
             o[prop] = props.value;
         }
     });
+    $('rm', function (prop) {
+        return (delete Main[prop]);
+    });
     $('toString', function () {
         return JSON.stringify(o, null, '\t');
     });

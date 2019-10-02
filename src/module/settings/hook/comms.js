@@ -3,6 +3,7 @@ let settings = {
     masterSound: null,
     masterVolume: 100
 };
+self.share.soundSettings = settings;
 Howler.mute(true);
 let sounds = self.share.sounds = {
     music: new Howl({
@@ -47,6 +48,7 @@ self.state.mk({
     preset: (o, name, val) => {
         if (val !== o[name] && val === 0 || val === 1) {
             settings.masterSound = val;
+            self.share.eventLoop.emit('master-sound', val);
             if (val) {
                 Howler.mute(false);
             }
@@ -134,13 +136,13 @@ self.state.mk({
     }
 });
 socket.on('sound-settings', serverSettings => {
-    settings = serverSettings;
-    for (let label in settings) {
+    self.share.soundSettings = settings = serverSettings;
+    /*for (let label in settings) {
         if (settings[label] === null) {
             $('#user-settings-dialog').dialog('open');
             return;
         }
-    }
+    }*/
     self.state.masterSound = settings.masterSound;
     self.state.masterVolume = settings.masterVolume;
     self.state.musicVolume = settings.musicVolume;

@@ -55,7 +55,7 @@ modules.attributes.prototype.control.events=function() {
 };
 modules.attributes.prototype.control.events.prototype = modules.attributes.prototype;
 modules.attributes.prototype.display={};
-modules.attributes.prototype.display.box=$("<div id=\"attributes\" class=\"item\"> <span> <img src=\"/img/dice.png\" class=\"randomizeAttributes dice\"> Attributes For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <ul class=\"gladiatorData\"> <li> <span>strength</span> <div class=\"slider\" name=\"strength\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> <li> <span>dexterity</span> <div class=\"slider\" name=\"dexterity\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> <li> <span>perception</span> <div class=\"slider\" name=\"perception\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> <li> <span>endurance</span> <div class=\"slider\" name=\"endurance\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> <li> <span>intelligence</span> <div class=\"slider\" name=\"intelligence\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> <li> <span>willpower</span> <div class=\"slider\" name=\"willpower\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> <li> <span>vitality</span> <div class=\"slider\" name=\"vitality\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> <li> <span>ability sum</span> <div class=\"slider\" name=\"abilitySum\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> </ul> <!-- <div> <button name=\"attributesPrevious\" class=\"previous\">Previous</button> <button name=\"attributesNext\" class=\"next\">Next</button> </div> --> </div>");
+modules.attributes.prototype.display.box=$("<div id=\"attributes\" class=\"item\"> <span> <img title=\"Don't have time for this? Generate random Attributes.\" src=\"/img/dice.png\" class=\"randomizeAttributes dice\"> Attributes For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <ul class=\"gladiatorData\"> <li> <span>strength</span> <div class=\"slider\" name=\"strength\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> <li> <span>dexterity</span> <div class=\"slider\" name=\"dexterity\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> <li> <span>perception</span> <div class=\"slider\" name=\"perception\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> <li> <span>endurance</span> <div class=\"slider\" name=\"endurance\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> <li> <span>intelligence</span> <div class=\"slider\" name=\"intelligence\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> <li> <span>willpower</span> <div class=\"slider\" name=\"willpower\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> <li> <span>vitality</span> <div class=\"slider\" name=\"vitality\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> <li> <span>ability sum</span> <div class=\"slider\" name=\"abilitySum\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> </ul> <!-- <div> <button name=\"attributesPrevious\" class=\"previous\">Previous</button> <button name=\"attributesNext\" class=\"next\">Next</button> </div> --> </div>");
 modules.attributes.prototype.display.style="#attributes div < button[name=\"attributesNext\"] { display: block; } #attributes button[name=\"attributesPrevious\"] { display: block; float: left; } #attributes .slider { width: 480px; margin: 11.75px 40px; } #attributes input[name=\"name\"] { width: 57%; } #attributes button[name=\"attributesNext\"] { display: block; float: right; }";
 modules.attributes.prototype.hook={};
 modules.attributes.prototype.hook.comms=function() {
@@ -208,7 +208,7 @@ modules.biometrics.prototype.control.events=function() {
 };
 modules.biometrics.prototype.control.events.prototype = modules.biometrics.prototype;
 modules.biometrics.prototype.display={};
-modules.biometrics.prototype.display.box=$("<div id=\"biometrics\" class=\"item\"> <span> <img src=\"/img/dice.png\" class=\"randomizeBiometrics dice\"> Biometrics For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <ul class=\"gladiatorData\"> <li> <span>Culture</span> <select class=\"stat\" name=\"culture\"> <option disabled>culture</option> <option>roman</option> <option>gallic</option> <option>germanic</option> <option>syrian</option> <option>numidian</option> <option>thracian</option> <option>greek</option> <option>iberian</option> <option>judean</option> <option>scythian</option> </select> </li> <li> <span>Sex</span> <select class=\"stat\" name=\"sex\"> <option>male</option> <option>female</option> </select> </li> <li> <span>Rank</span> <input type=\"number\" class=\"stat\" name=\"rank\" min=1 max=15> </li> <li> <span>Age</span> <input type=\"number\" class=\"stat\" name=\"age\" readonly> </li> <li> <span>Weight</span> <input type=\"number\" class=\"stat\" name=\"weight\" readonly> </li> <li> <span>Height</span> <input type=\"number\" class=\"stat\" name=\"height\" readonly> </li> <li> <span>BMI</span> <input type=\"number\" class=\"stat\" name=\"bmi\" readonly> </li> <li> <span>Reach</span> <input type=\"number\" class=\"stat\" name=\"reach\" readonly> </li> </ul> </div>");
+modules.biometrics.prototype.display.box=$("<div id=\"biometrics\" class=\"item\"> <span> <img title=\"Don't Like These? Generate new Biometrics. This will not overwrite culture, sex, rank or name.\" src=\"/img/dice.png\" class=\"randomizeBiometrics dice\"> Biometrics For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <ul class=\"gladiatorData\"> <li> <span>Culture</span> <select class=\"stat\" name=\"culture\"> <option disabled>culture</option> <option>roman</option> <option>gallic</option> <option>germanic</option> <option>syrian</option> <option>numidian</option> <option>thracian</option> <option>greek</option> <option>iberian</option> <option>judean</option> <option>scythian</option> </select> </li> <li> <span>Sex</span> <select class=\"stat\" name=\"sex\"> <option>male</option> <option>female</option> </select> </li> <li> <span>Rank</span> <input type=\"number\" class=\"stat\" name=\"rank\" min=1 max=15> </li> <li> <span>Age</span> <input type=\"number\" class=\"stat\" name=\"age\" readonly> </li> <li> <span>Weight</span> <input type=\"number\" class=\"stat\" name=\"weight\" readonly> </li> <li> <span>Height</span> <input type=\"number\" class=\"stat\" name=\"height\" readonly> </li> <li> <span>BMI</span> <input type=\"number\" class=\"stat\" name=\"bmi\" readonly> </li> <li> <span>Reach</span> <input type=\"number\" class=\"stat\" name=\"reach\" readonly> </li> </ul> </div>");
 modules.biometrics.prototype.display.style="div < button[name=\"biometricsNext\"] { display: block; } button[name=\"biometricsPrevious\"] { display: block; float: left; } #biometrics input[name=\"name\"] { width: 50%; } #biometrics select { width: 150px; } button[name=\"biometricsNext\"] { display: block; float: right; }";
 modules.biometrics.prototype.hook={};
 modules.biometrics.prototype.hook.comms=function() {
@@ -450,7 +450,7 @@ modules.culture.prototype.control.events=function() {
 };
 modules.culture.prototype.control.events.prototype = modules.culture.prototype;
 modules.culture.prototype.display={};
-modules.culture.prototype.display.box=$("<div id=\"culture\" class=\"item\"> <span> <img src=\"/img/dice.png\" class=\"randomizeCulture dice\"> Create Gladiator <input name=\"name\" value=\"Name Your Gladiator\"> </span> <ul class=\"gladiatorData\"> <li> <span>Culture</span> <select class=\"stat\" name=\"culture\"> <option>roman</option> <option>gallic</option> <option>germanic</option> <option>syrian</option> <option>numidian</option> <option>thracian</option> <option>greek</option> <option>iberian</option> <option>judean</option> <option>scythian</option> </select> </li> <li> <span>Sex</span> <select class=\"stat\" name=\"sex\"> <option>male</option> <option>female</option> </select> </li> <li> <span> Name <img src=\"/img/dice.png\" class=\"randomizeName dice\"> </span> <input class=\"stat\" name=\"name\"> </li> </ul> </div>");
+modules.culture.prototype.display.box=$("<div id=\"culture\" class=\"item\"> <span> <img title=\"Randomly Generate Culture, Sex and Name.\" src=\"/img/dice.png\" class=\"randomizeCulture dice\"> Create Gladiator <input name=\"name\" value=\"Name This Fighter\"> </span> <ul class=\"gladiatorData\"> <li> <span>Culture</span> <select class=\"stat\" name=\"culture\"> <option>roman</option> <option>gallic</option> <option>germanic</option> <option>syrian</option> <option>numidian</option> <option>thracian</option> <option>greek</option> <option>iberian</option> <option>judean</option> <option>scythian</option> </select> </li> <li> <span>Sex</span> <select class=\"stat\" name=\"sex\"> <option>male</option> <option>female</option> </select> </li> <li> <span> Name <img title=\"Randomly Generate a name based on The Fighter's Culture and Sex.\" src=\"/img/dice.png\" class=\"randomizeName dice\"> </span> <input class=\"stat\" name=\"name\"> </li> </ul> </div>");
 modules.culture.prototype.display.style="div < button[name=\"cultureNext\"] { display: block; } #culture input[name=\"name\"] { width: 450px; } button[name=\"cultureNext\"] { display: block; float:right; } ";
 modules.culture.prototype.hook={};
 modules.culture.prototype.hook.comms=function() {
@@ -515,6 +515,62 @@ modules.culture.prototype.hook.comms=function() {
 	
 };
 modules.culture.prototype.hook.comms.prototype = modules.culture.prototype;
+modules.eventLoop = function () {
+    const self = this;
+	
+	if (!self.loaded) {
+	    new self.control.events();
+	}
+};
+modules.eventLoop.prototype.state = waject();
+modules.eventLoop.prototype.share = modules.share;
+modules.eventLoop.prototype.loaded = false;
+modules.eventLoop.prototype.control={};
+modules.eventLoop.prototype.control.events=function() {
+    const self = this;
+	
+	self.share.eventLoop = new (function eventLoop() {
+	    let lastUpdate = Date.now();
+	    const interval = 250;
+	
+	    const events = {};
+	    const checkers = [];
+	
+	    this.on = function on(title, handle) {
+	        if (events[title] === undefined) {
+	            events[title] = [handle];
+	        } else {
+	            events[title].push(handle);
+	        }
+	    };
+	
+	    this.emit = function emit(title, data) {
+	        console.log("eventLoop.emit:", title, data, events);
+	        if (events[title] === undefined) {
+	            return;
+	        }
+	        events[title].forEach(handle => handle(data));
+	    };
+	
+	    this.when = function (checker, handler) {
+	        checkers.push(() => {
+	            if (checker()) {
+	                handler();
+	            }
+	        });
+	    };
+	    function tick () {
+	        let now = Date.now();
+	        if ((lastUpdate + interval) < now) {
+	            lastUpdate = now;
+	            checkers.forEach(fn => fn());
+	        }
+	        return window.requestAnimationFrame(tick);
+	    }
+	    window.requestAnimationFrame(tick);
+	});
+};
+modules.eventLoop.prototype.control.events.prototype = modules.eventLoop.prototype;
 modules.gladiator = function () {
     const self = this;
 	
@@ -529,7 +585,9 @@ modules.gladiator.prototype.share = modules.share;
 modules.gladiator.prototype.loaded = false;
 modules.gladiator.prototype.control={};
 modules.gladiator.prototype.control.events=function() {
-    let activeTab = 0;
+    const self = this;
+	
+	let activeTab = 0;
 	const baseTitle = "Blood & Sand";
 	const baseContent = document.getElementsByTagName('html')[0].outerHTML;
 	let stateLoad = false;
@@ -554,8 +612,11 @@ modules.gladiator.prototype.control.events=function() {
 	    document.title = title;
 	}
 	
-	$('#gladiator ul>li').each(function (i) {
+	$('#gladiator ul>li:has(a[href])').each(function (i) {
 	    let id = $(this).children('a').attr('href').replace('#', '');
+	    if (!(id in modules)) {
+	        return;
+	    }
 	    $('head').append('<style>' + modules[id].prototype.display.style + '</style>');
 	    $('#gladiator').append(modules[id].prototype.display.box);
 	    modules.fetch(id);
@@ -569,7 +630,7 @@ modules.gladiator.prototype.control.events=function() {
 	    setWindowTitle('gladiator-culture');
 	    window.history.replaceState({
 	        id: '#culture'
-	    }, baseTitle + " | gladiator culture", "gladiator-culture");
+	    }, baseTitle + " | gladiator culture", "gladiator-culture" + location.search + location.hash);
 	}
 	modules.fetch('culture');
 	
@@ -582,13 +643,15 @@ modules.gladiator.prototype.control.events=function() {
 	        if (!stateLoad) {
 	            window.history.pushState({
 	                id: ui.newTab.children('a').attr('href')
-	            }, "", newUrl);
+	            }, "", newUrl + location.search + location.hash);
 	        }
 	    },
 	    activate (event, ui) {
 	        stateLoad = false;
 	        let id = ui.newPanel.attr('id').replace('#', '');
-	        modules.fetch(id);
+	        if (id in modules) {
+	            modules.fetch(id);
+	        }
 	    }
 	});
 	
@@ -600,11 +663,205 @@ modules.gladiator.prototype.control.events=function() {
 	    }
 	};
 	
+	let path = window.location.pathname;
+	
+	self.share.eventLoop.when(() => (
+	        window.location.pathname !== path &&
+	        window.location.pathname.substring(1,10) === "gladiator"
+	    ), () => {
+	    path = window.location.pathname;
+	    let id = path.replace('/gladiator-', '');
+	    if (!$(`#${id}`).is(':visible')) {
+	        $(`#gladiator a[href="#${id}"]`).trigger('click');
+	    }
+	});
 };
 modules.gladiator.prototype.control.events.prototype = modules.gladiator.prototype;
 modules.gladiator.prototype.display={};
-modules.gladiator.prototype.display.style="";
-modules.gladiator.prototype.display.view=$("<div id=\"gladiator\"> <ul> <li><a href=\"#culture\">Culture</a></li> <li><a href=\"#attributes\">Attributes</a></li> <li><a href=\"#biometrics\">Biometrics</a></li> <li><a href=\"#combatStats\">Combat Stats</a></li> <li><a href=\"#skills\">Skills</a></li> </ul> </div> ");
+modules.gladiator.prototype.display.style="#gladiator.ui-tabs { font-size: 15.3px; }";
+modules.gladiator.prototype.display.view=$("<div id=\"gladiator\"> <ul> <li title=\"Tell Me About This Prospect.\"><a href=\"#culture\"> <i class=\"fas fa-flag\"></i> Culture </a></li> <li title=\"Here's What We Know About This Fighter.\"><a href=\"#biometrics\"> <i class=\"fas fa-plus-square\"></i> Biometrics </a></li> <li title=\"Tell Me This Gladiator's Strengths.\"><a href=\"#attributes\"> <i class=\"fas fa-star-half-alt\"></i> Attributes </a></li> <li title=\"Spend Points; Get Good.\"><a href=\"#skills\"> <i class=\"fas fa-chess\"></i> Skills </a></li> <li title=\"We Hope You'll be Pleased With This Gladiator's Competitive Analysis.\"><a href=\"#combatStats\"> <i class=\"fas fa-fist-raised\"></i> Combat Stats </a></li> <li title=\"(Not Yet Implemented) &nbsp; &nbsp; &nbsp; &nbsp; Get Ready.\"><a href=\"#saveGladiator\"> <i class=\"fas fa-save\"></i> Save </a></li> </ul> <div id=\"saveGladiator\" class=\"item\" title=\"Nuu! ... R.I.P. Save\"> CAN HAZ SAVE!?!? </div> </div> ");
+modules.navigation = function () {
+    const self = this;
+	
+	if (!self.loaded) {
+	    $('head').append("<style>" + self.display.style + "</style>");
+	    $('#game').append(self.display.view);
+	    new self.control.events();
+	}
+};
+modules.navigation.prototype.state = waject();
+modules.navigation.prototype.share = modules.share;
+modules.navigation.prototype.loaded = false;
+modules.navigation.prototype.control={};
+modules.navigation.prototype.control.events=function() {
+    const self = this;
+	
+	let path = window.location.pathname;
+	let hash = window.location.hash;
+	let search = window.location.search;
+	
+	let eventLoop = self.share.eventLoop;
+	
+	self.share.query = new Proxy(
+	    parseQueryString(search), 
+	    {
+	        get (o, name) {
+	            if (name === "string") {
+	                return packQuery(o);
+	            }
+	            return o[name];
+	        },
+	        set (o, name, val) {
+	            if (name === "string") {
+	                let q = parseQueryString(val);
+	                for (let name in o) {
+	                    delete o[name];
+	                }
+	                for (let name in q) {
+	                    o[name] = q[name];
+	                }
+	            } else if (o[name] === val) {
+	                return val;
+	            } else {
+	                o[name] = val;
+	            }
+	            let search = packQuery(o);
+	            window.history.pushState(null, "", path + search + hash);
+	            console.log('query change:', search);
+	            return true;
+	        },
+	        deleteProperty (o, name) {
+	            delete o[name];
+	            let search = packQuery(o);
+	            window.history.pushState(null, "", path + search + hash);
+	            console.log('query change:', search);
+	            return true;
+	        }
+	    }
+	);
+	
+	function encode (str) {
+	    return encodeURIComponent(("" + str).replace(/\s/g, '+'));
+	}
+	
+	function decode (str) {
+	    return decodeURIComponent(("" + str).replace(/\+/g, ' '));
+	}
+	
+	function parseQueryString (query) {
+	    let result = {}
+	    if (query) {
+	        if (/^[?#]/.test(query)) {
+	            query = query.substr(1);
+	        }
+	        result = query.split('&').
+	                reduce((result, param) => {
+	                    let [key, value] = param.split('=');
+	                    if (value !== undefined) {
+	                        result[key] = decode(value);
+	                    } else {
+	                        result[key] = '';
+	                    }
+	                    if (result[key] === "true") {
+	                        result[key] = true;
+	                    }
+	                    if (result[key] === "false") {
+	                        result[key] = false;
+	                    }
+	                    return result;
+	                }, result);
+	    }
+	    return result;
+	};
+	
+	function packQuery () {
+	    let result = "?";
+	    for (let name in self.share.query) {
+	        if (name === "toString") {
+	            continue;
+	        }
+	        let value = self.share.query[name];
+	        result += `${encode(name)}=${encode(value)}&`;
+	    }
+	    return result.substr(0, result.length - 1);
+	}
+	
+	function handleNavigation () {
+	    path = window.location.pathname;
+	    hash = window.location.hash;
+	    search = window.location.search;
+	    let query = self.share.query;
+	
+	    console.log(path, query, hash);
+	    $('#navigation li').removeClass('selected');
+	
+	    if (path.substring(1,10) === "gladiator") {
+	        $('#navigation li.gladiator').addClass('selected');
+	    }
+	    if (query.settings) {
+	        $('#navigation li.settings').addClass('selected');
+	    }
+	
+	    if (hash === "") {
+	        window.history.replaceState(null, "", path + search);
+	    }
+	}
+	
+	eventLoop.when(
+	    () => (
+	        window.location.pathname !== path ||
+	        window.location.hash !== hash ||
+	        window.location.search !== search
+	    ), 
+	    handleNavigation
+	);
+	
+	self.share.eventLoop.on('master-sound', masterSound => {
+	    if (masterSound) {
+	        $('#navigation i.fa-volume-mute').
+	            removeClass('fa-volume-mute').
+	            addClass('fa-volume-up');
+	    } else {
+	        $('#navigation i.fa-volume-up').
+	            removeClass('fa-volume-up').
+	            addClass('fa-volume-mute');
+	    }
+	});
+	
+	handleNavigation();
+	
+	$(document).on('click', ':not(a,link)[href]', function (e) {
+	    let p = path;
+	    let s = self.share.query.string;
+	    let h = hash;
+	
+	    let href = $(this).attr('href');
+	
+	    e.preventDefault();
+	    if (href[0] === "#") {
+	        h = href;
+	    } else if (href[0] === "?") {
+	        self.share.query.string = href;
+	        return;
+	    }  else if (href[0] === "&") {
+	        if (self.share.query.string.length === 0) {
+	            href = href.replace('&', '?');
+	        }
+	        self.share.query.string += href;
+	        return;
+	    } else {
+	        p = href;
+	    }
+	    let target = p + s + h;
+	    window.history.pushState(null, "", target);
+	});
+	
+};
+modules.navigation.prototype.control.events.prototype = modules.navigation.prototype;
+modules.navigation.prototype.display={};
+modules.navigation.prototype.display.style="#navigation { width: 100%; background: rgba(0,0,0,0.72); display: flex; flex-direction: column; flex-flow: row; justify-content: space-between; } #navigation ul.nav-left>li { border-right: 1px solid rgba(255, 255, 255, 0.32); } #navigation ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: row; } #navigation ul>li { padding: 10px; margin: 0; cursor: pointer; } #navigation ul>li:hover, #navigation ul>li.selected { color: rgb(170, 130, 25); background: rgb(0,0,0); } ";
+modules.navigation.prototype.display.view=$("<div id=\"navigation\"> <ul class=\"nav-left\"> <li title=\"Create Your Next Legend.\" href=\"gladiator-culture\"> Create Gladiator </li> <li title=\"(Not Yet Implemented) &nbsp; &nbsp; &nbsp; &nbsp; An Overview of Your Saved Fighters.\"> My Gladiators </li> </ul> <ul class=\"nav-right\"> <li title=\"(Not Yet Implemented) &nbsp; &nbsp; &nbsp; &nbsp; Your Blood &amp; Sand Account.\" href=\"&account=true\"> <i class=\"fas fa-user\"></i> </li> <li title=\"Adjust Sound Settings.\" class=\"sound\" href=\"&soundSettings=true\"> <i class=\"fas fa-volume-mute\"></i> </li> </ul> </div>");
+modules.navigation.prototype.hook={};
 modules.settings = function () {
     const self = this;
 	
@@ -636,7 +893,11 @@ modules.settings.prototype.control.events=function() {
 	        effect: 'explode',
 	        duration: 250
 	    },
+	    beforeClose () {
+	        delete self.share.query.soundSettings;
+	    },
 	    close: function() {
+	        
 	        self.share.sounds.bow.play();
 	        self.state.masterSound = $(this).find('[name=master-sound]').slider('value');
 	        self.state.masterVolume = $(this).find('[name=master-volume]').slider('value');
@@ -644,6 +905,7 @@ modules.settings.prototype.control.events=function() {
 	        self.state.fxVolume = $(this).find('[name=fx-volume]').slider('value');
 	    },
 	    open: function () {
+	        self.share.query.soundSettings = true;
 	        self.share.sounds.switch.play();
 	        $('.ui-widget-overlay').one('click', () => $(this).dialog('close'));
 	    }
@@ -737,11 +999,18 @@ modules.settings.prototype.control.events=function() {
 	    sound.play();
 	});
 	
+	self.share.eventLoop.when(() => (
+	        self.share.query.soundSettings === true &&
+	        !$('#user-settings-dialog').dialog('isOpen')
+	    ), () => {
+	    console.log(self.share.query);
+	    ($('#user-settings-dialog').dialog('open'))
+	});
 };
 modules.settings.prototype.control.events.prototype = modules.settings.prototype;
 modules.settings.prototype.display={};
 modules.settings.prototype.display.style=".user-settings-btn { width: 64px; height: 64px; padding: 0 0; margin: 0 0; display: block; position: absolute; right: 0px; top: 0px; background: rgba(255,255,255,0.5); border-radius: 64px; border: 1px outset rgb(255,255,255,0.5); cursor: pointer; } .user-settings-btn:hover { border: 1px outset rgb(255,255,255,1); } .user-settings-btn:active { border: 1px inset rgb(255,255,255,1); } #user-settings-dialog { width:420px; display: none; background: rgb(0,0,0,0.72); } #user-settings-dialog .note { font-size: 12px; color: #848484; font-family: arial; text-shadow: 0px 0px 0px rgba(255,255,255,0.72); } #user-settings-dialog [name=master-sound] { width: 60px; margin: 11.75px 40px; } #user-settings-dialog [name=master-volume], #user-settings-dialog [name=music-volume], #user-settings-dialog [name=fx-volume] { width: 360px; margin: 11.75px 40px; } #user-settings-dialog .slider .custom-handle { width: 3em; height: 1.6em; top: 50%; margin-top: -.8em; margin-left: -30px; text-align: center; line-height: 1.6em; } ul.userData { list-style: none; background-color: rgba(164, 148, 105, 0.36); margin: 50px 0; padding: 10px; border: 0.5px outset rgba(170, 130, 25, 0.32); border-radius: 3px; } ul.userData>li { display: flex; flex-direction: row; box-shadow: 2px 2px 5px rgba(0,0,0, 0.32); padding: 5px; margin: 5px; background: rgba(0, 0, 0, 0.32); } ul.userData>li>span { padding-top: 6px; flex: 2; }";
-modules.settings.prototype.display.view=$("<div class=\"user-settings-btn\"> <img src=\"/img/cog.svg\" width=\"64px\" height=\"64px\"> </div> <div id=\"user-settings-dialog\" title=\"Settings\"> <h2>Sound Settings</h2> <ul class=\"userData\"> <li> <span>Master Sound</span> <div class=\"slider\" name=\"master-sound\"> <div class=\"ui-slider-handle custom-handle\"> Off </div> </div> </li> <li> <span>Master Volume</span> <div class=\"slider\" name=\"master-volume\"> </div> </li> <li> <span>Music Volume</span> <div class=\"slider\" name=\"music-volume\"> </div> </li> <li> <span>Sound FX Volume</span> <div class=\"slider\" name=\"fx-volume\"> </div> </li> </ul> </div>");
+modules.settings.prototype.display.view=$("<div id=\"user-settings-dialog\" title=\"Settings\"> <h2>Sound Settings</h2> <ul class=\"userData\"> <li> <span>Master Sound</span> <div class=\"slider\" name=\"master-sound\"> <div class=\"ui-slider-handle custom-handle\"> Off </div> </div> </li> <li> <span>Master Volume</span> <div class=\"slider\" name=\"master-volume\"> </div> </li> <li> <span>Music Volume</span> <div class=\"slider\" name=\"music-volume\"> </div> </li> <li> <span>Sound FX Volume</span> <div class=\"slider\" name=\"fx-volume\"> </div> </li> </ul> </div>");
 modules.settings.prototype.hook={};
 modules.settings.prototype.hook.comms=function() {
     const self = this;
@@ -749,6 +1018,7 @@ modules.settings.prototype.hook.comms=function() {
 	    masterSound: null,
 	    masterVolume: 100
 	};
+	self.share.soundSettings = settings;
 	Howler.mute(true);
 	let sounds = self.share.sounds = {
 	    music: new Howl({
@@ -793,6 +1063,7 @@ modules.settings.prototype.hook.comms=function() {
 	    preset: (o, name, val) => {
 	        if (val !== o[name] && val === 0 || val === 1) {
 	            settings.masterSound = val;
+	            self.share.eventLoop.emit('master-sound', val);
 	            if (val) {
 	                Howler.mute(false);
 	            }
@@ -880,13 +1151,13 @@ modules.settings.prototype.hook.comms=function() {
 	    }
 	});
 	socket.on('sound-settings', serverSettings => {
-	    settings = serverSettings;
-	    for (let label in settings) {
+	    self.share.soundSettings = settings = serverSettings;
+	    /*for (let label in settings) {
 	        if (settings[label] === null) {
 	            $('#user-settings-dialog').dialog('open');
 	            return;
 	        }
-	    }
+	    }*/
 	    self.state.masterSound = settings.masterSound;
 	    self.state.masterVolume = settings.masterVolume;
 	    self.state.musicVolume = settings.musicVolume;

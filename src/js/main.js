@@ -12,7 +12,8 @@ var socket = io();
     });
 }());
 $(document).tooltip();
-socket.emit("session-id", document.cookie.session)
-
-modules.fetch('gladiator');
+socket.emit("session-id", document.cookie.session);
+modules.fetch('eventLoop');
+modules.fetch('navigation');
 modules.fetch('settings');
+modules.fetch('gladiator');

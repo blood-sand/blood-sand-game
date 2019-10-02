@@ -1,3 +1,5 @@
+const self = this;
+
 let activeTab = 0;
 const baseTitle = "Blood & Sand";
 const baseContent = document.getElementsByTagName('html')[0].outerHTML;
@@ -23,8 +25,11 @@ function setWindowTitle (url) {
     document.title = title;
 }
 
-$('#gladiator ul>li').each(function (i) {
+$('#gladiator ul>li:has(a[href])').each(function (i) {
     let id = $(this).children('a').attr('href').replace('#', '');
+    if (!(id in modules)) {
+        return;
+    }
     $('head').append('<style>' + modules[id].prototype.display.style + '</style>');
     $('#gladiator').append(modules[id].prototype.display.box);
     modules.fetch(id);
@@ -38,7 +43,7 @@ if (activeTab === 0) {
     setWindowTitle('gladiator-culture');
     window.history.replaceState({
         id: '#culture'
-    }, baseTitle + " | gladiator culture", "gladiator-culture");
+    }, baseTitle + " | gladiator culture", "gladiator-culture" + location.search + location.hash);
 }
 modules.fetch('culture');
 
@@ -51,13 +56,15 @@ $('#gladiator').tabs({
         if (!stateLoad) {
             window.history.pushState({
                 id: ui.newTab.children('a').attr('href')
-            }, "", newUrl);
+            }, "", newUrl + location.search + location.hash);
         }
     },
     activate (event, ui) {
         stateLoad = false;
         let id = ui.newPanel.attr('id').replace('#', '');
-        modules.fetch(id);
+        if (id in modules) {
+            modules.fetch(id);
+        }
     }
 });
 
@@ -68,3 +75,16 @@ window.onpopstate = function (e) {
         $(`a[href="${e.state.id}"]`).trigger('click');
     }
 };
+
+let path = window.location.pathname;
+
+self.share.eventLoop.when(() => (
+        window.location.pathname !== path &&
+        window.location.pathname.substring(1,10) === "gladiator"
+    ), () => {
+    path = window.location.pathname;
+    let id = path.replace('/gladiator-', '');
+    if (!$(`#${id}`).is(':visible')) {
+        $(`#gladiator a[href="#${id}"]`).trigger('click');
+    }
+});

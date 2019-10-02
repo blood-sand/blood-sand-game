@@ -12,7 +12,11 @@ dialog.dialog({
         effect: 'explode',
         duration: 250
     },
+    beforeClose () {
+        delete self.share.query.soundSettings;
+    },
     close: function() {
+        
         self.share.sounds.bow.play();
         self.state.masterSound = $(this).find('[name=master-sound]').slider('value');
         self.state.masterVolume = $(this).find('[name=master-volume]').slider('value');
@@ -20,6 +24,7 @@ dialog.dialog({
         self.state.fxVolume = $(this).find('[name=fx-volume]').slider('value');
     },
     open: function () {
+        self.share.query.soundSettings = true;
         self.share.sounds.switch.play();
         $('.ui-widget-overlay').one('click', () => $(this).dialog('close'));
     }
@@ -111,4 +116,12 @@ $('body').on('click', '.dice', () => {
     let r = randomDie();
     let sound = self.share.sounds["dice" + r];
     sound.play();
+});
+
+self.share.eventLoop.when(() => (
+        self.share.query.soundSettings === true &&
+        !$('#user-settings-dialog').dialog('isOpen')
+    ), () => {
+    console.log(self.share.query);
+    ($('#user-settings-dialog').dialog('open'))
 });
