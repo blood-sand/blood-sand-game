@@ -16,7 +16,7 @@ socket.on("gladiator-attributes", data => {
         slider.children('.custom-handle').text(data[name]);
 
     }
-    self.state.attributes = waject(data, (stats, name, value) => {
+    self.share.attributes = self.state.attributes = waject(data, (stats, name, value) => {
         let abilitySum = stats.abilitySum;
         
         if (name === "abilitySum") {

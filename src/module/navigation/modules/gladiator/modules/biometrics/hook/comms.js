@@ -43,7 +43,7 @@ let biometricLabels = [
     "reach"
 ];
 
-self.state.biometrics = {
+self.share.biometrics = self.state.biometrics = {
     rank: 0,
     age: 0,
     weight: 0,

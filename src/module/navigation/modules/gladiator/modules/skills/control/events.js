@@ -17,7 +17,7 @@ $( "#skills .slider" ).slider({
         let name = $(this).attr('name');
         let max = self.share.skillMaxes[name];
         console.log('slider max:', max);
-        let rank = modules.biometrics.prototype.state.biometrics.rank || 1;
+        let rank = self.share.biometrics.rank || 1;
         let rankMax = rank * 2;
         $('#skills .slider-container').attr('title', `Maximum of ${rankMax} for rank ${rank}`);
         $(this).slider('option', 'max', max);
@@ -28,7 +28,7 @@ $( "#skills .slider" ).slider({
         let name = $(this).attr('name');
         let max = $(this).slider('option', 'max');
         let highestPoint = self.state.skillPoints + $(this).slider('value');
-        let rank = modules.biometrics.prototype.state.biometrics.rank || 1;
+        let rank = self.share.biometrics.rank || 1;
         let rankMax = rank * 2;
         let skillCeiling = rankMax;
         console.log("current value:", $(this).slider('value'));

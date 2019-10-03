@@ -4,8 +4,8 @@ let totalSkillPoints = 0;
 
 function calcTactics (val) {
     let input = {
-        intelligence: modules.attributes.prototype.state.attributes.intelligence,
-        rank: modules.biometrics.prototype.state.biometrics.rank,
+        intelligence: self.share.attributes.intelligence,
+        rank: self.share.biometrics.rank,
         tacticspoints: val
     };
     let generator = {
@@ -30,7 +30,7 @@ self.state.mk({
 
 self.state.mk({
     property: "skillCeiling",
-    value: modules.biometrics.prototype.state.biometrics.rank * 2,
+    value: self.share.biometrics.rank * 2,
 });
 
 self.state.regenerateSkills = function () {
@@ -73,8 +73,8 @@ function setDescription (skill, val) {
 
 function generateSkills (skill, val) {
     let input;
-    let attr = modules.attributes.prototype.state.attributes;
-    let biometrics = modules.biometrics.prototype.state.biometrics;
+    let attr = self.share.attributes;
+    let biometrics = self.share.biometrics;
     if (!attr || !biometrics) {
         input = {
             "skill": skill,
