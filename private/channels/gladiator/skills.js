@@ -75,10 +75,12 @@ module.exports = function (m, local) {
                 }
             }
         }
-        console.log("skill point calc:", total, spent, total-spent)
+        let intelligenceMod = session.attributes.modifiers.final.intelligence - 10;
+        total += intelligenceMod;
+        console.log("skill point calc:", intelligenceMod, total, spent, total-spent)
         return total - spent;
     }
-
+    m.calcSkillPoints = calcSkillPoints;
     socket.on("gladiator-skill-change", data => {
         let invalid = false;
         for (skill in data) {

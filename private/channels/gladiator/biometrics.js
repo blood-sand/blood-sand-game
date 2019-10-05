@@ -83,8 +83,10 @@ module.exports = function (m, local) {
     }
     socket.on('gladiator-biometrics-rank', newRank => {
         let rank = parseInt(newRank);
+        console.log("new rank:", rank);
         if (!isNaN(rank) && rank > 0 && rank < 16) {
             session.rank = newRank;
+            session.biometrics.rank = newRank;
             socket.emit('gladiator-rank', session.rank);
         }
     });

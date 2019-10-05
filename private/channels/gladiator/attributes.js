@@ -41,7 +41,8 @@ module.exports = function (m, local) {
             }
             session.attributes.modifiers.final[field] = final[field];
         }
-
+        session.skills.skillPoints = m.calcSkillPoints();
+        socket.emit("gladiator-skills", session.skills);
         socket.emit("gladiator-attributes", session.attributes);
     }
 
