@@ -12,7 +12,7 @@ module.exports = function (m, local) {
     const socket = local.socket;
     const session = local.session;
 
-    m.handleAttributesChange = function(stats) {
+    local.handleAttributesChange = function(stats) {
         let sum = 0;
         let tempStats = Object.assign(session.attributes);
         //console.log("new stats:", stats);
@@ -33,7 +33,7 @@ module.exports = function (m, local) {
             session.attributes = tempStats;
             
         }
-        m.assignModifiers();
+        local.assignModifiers();
         session.attributes.modifiers.final = {};
         for (let field in session.attributes) {
             if (field === "abilitySum" || field === "modifiers") {
@@ -41,7 +41,7 @@ module.exports = function (m, local) {
             }
             session.attributes.modifiers.final[field] = final[field];
         }
-        session.skills.skillPoints = m.calcSkillPoints();
+        session.skills.skillPoints = local.calcSkillPoints();
         socket.emit("gladiator-skills", session.skills);
         socket.emit("gladiator-attributes", session.attributes);
     }
@@ -84,5 +84,5 @@ module.exports = function (m, local) {
     }
 
     socket.emit("gladiator-attributes", session.attributes);
-    socket.on("gladiator-attributes-change", m.handleAttributesChange);
+    socket.on("gladiator-attributes-change", local.handleAttributesChange);
 }

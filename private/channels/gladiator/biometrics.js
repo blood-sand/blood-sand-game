@@ -60,10 +60,10 @@ module.exports = function (m, local) {
             session.attributes.modifiers.sex = sex;
         }
         if (age || bmi || sex) {
-            m.handleAttributesChange(session.attributes);
+            local.handleAttributesChange(session.attributes);
         }
     }
-    m.assignModifiers = assignModifiers;
+    local.assignModifiers = assignModifiers;
     function generateBiometrics () {
         biometricsGenerator.sex = session.sex;
         biometricsGenerator.culture = session.culture;
