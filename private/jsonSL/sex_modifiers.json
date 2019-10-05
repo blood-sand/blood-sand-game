@@ -1,0 +1,10 @@
+{
+  "input": {
+    "sex": 1
+  },
+  "sex": "input.sex",
+  
+  "strength if sex is 1": "- 2",
+  "perception if sex is 1": "2",
+  "willpower if sex is 1": "1"
+}
