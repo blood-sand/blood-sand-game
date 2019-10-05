@@ -11,10 +11,40 @@ function randomProperty (obj, f = () => {}) {
 
 socket.on("gladiator-attributes", data => {
     for (let name in data) {
+        let fieldTooltip = "";
         let slider = $(`[name=${name}`);
         slider.slider('value', data[name]);
         slider.children('.custom-handle').text(data[name]);
+        if (name in data.modifiers.final) {
+            slider.siblings('.final').text(data.modifiers.final[name]);
+        }
 
+        if (name in data.modifiers.age) {
+            if (data.modifiers.age[name] > 0) {
+                fieldTooltip += "+"
+            }
+            fieldTooltip += `${data.modifiers.age[name]} from age, `;
+        }
+
+        if (name in data.modifiers.bmi) {
+            if (data.modifiers.bmi[name] > 0) {
+                fieldTooltip += "+"
+            }
+            fieldTooltip += `${data.modifiers.bmi[name]} from BMI, `;
+        }
+
+        if (name in data.modifiers.sex) {
+            if (data.modifiers.sex[name] > 0) {
+                fieldTooltip += "+"
+            }
+            fieldTooltip += `${data.modifiers.sex[name]} from sex, `;
+        }
+
+        fieldTooltip = fieldTooltip.substr(0, fieldTooltip.length - 2);
+        if (fieldTooltip.length > 0) {
+            fieldTooltip += ".";
+            slider.parent('li').attr('title', fieldTooltip);
+        }
     }
     self.share.attributes = self.state.attributes = waject(data, (stats, name, value) => {
         let abilitySum = stats.abilitySum;
@@ -41,6 +71,9 @@ socket.on("gladiator-attributes", data => {
                         if (i === "toString") {
                             return false;
                         }
+                        if (i === "modifiers") {
+                            return false;
+                        }
                         if (stats[i] >= MAX_STAT_SIZE) {
                             return false;
                         }
@@ -55,6 +88,9 @@ socket.on("gladiator-attributes", data => {
                             return false;
                         }
                         if (i === "toString") {
+                            return false;
+                        }
+                        if (i === "modifiers") {
                             return false;
                         }
                         if (stats[i] <= MIN_STAT_SIZE) {
@@ -95,8 +131,6 @@ socket.on("gladiator-attributes", data => {
         stats.abilitySum = abilitySum;
         if (!self.state.ignoreChange) {
             socket.emit("gladiator-attributes-change", stats);
-        } else {
-            console.log("ignoring change")
         }
         return false;
     });

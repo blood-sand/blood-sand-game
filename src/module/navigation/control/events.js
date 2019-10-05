@@ -31,14 +31,12 @@ self.share.query = new Proxy(
             }
             let search = packQuery(o);
             window.history.pushState(null, "", path + search + hash);
-            console.log('query change:', search);
             return true;
         },
         deleteProperty (o, name) {
             delete o[name];
             let search = packQuery(o);
             window.history.pushState(null, "", path + search + hash);
-            console.log('query change:', search);
             return true;
         }
     }
@@ -96,7 +94,6 @@ function handleNavigation () {
     search = window.location.search;
     let query = self.share.query;
 
-    console.log(path, query, hash);
     $('#navigation li').removeClass('selected');
 
     if (path.substring(1,10) === "gladiator") {

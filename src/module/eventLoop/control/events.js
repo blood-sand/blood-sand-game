@@ -16,7 +16,6 @@ self.share.eventLoop = new (function eventLoop() {
     };
 
     this.emit = function emit(title, data) {
-        console.log("eventLoop.emit:", title, data, events);
         if (events[title] === undefined) {
             return;
         }

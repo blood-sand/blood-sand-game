@@ -1,30 +1,5 @@
 const self = this;
 
-self.state.mk({
-    property: 'next',
-    value: false,
-    preset: () => {
-        $('#combatStats').hide('slide', {
-            direction: 'left'
-        }, 250);
-        self.share.slideDirection = 'right';
-        modules.fetch('skills');
-        
-    }
-});
-
-self.state.mk({
-    property: 'previous',
-    value: false,
-    preset: () => {
-        $('#combatStats').hide('slide', {
-            direction: 'right'
-        }, 250);
-        self.share.slideDirection = 'left';
-        modules.fetch('biometrics');
-    }
-});
-
 let combatStatsLabels = [
     "health",
     "stamina",
@@ -38,11 +13,9 @@ let combatStatsLabels = [
 ];
 
 socket.on("gladiator-combatStats", data => {
-    console.log("stats:", data);
     combatStatsLabels.forEach(name => {
         if (name in data) {
             let val = data[name];
-            console.log(name, val)
             if (/\./.test("" + val)) {
                 val = val.toFixed(2);
             }

@@ -27,12 +27,12 @@ function setWindowTitle (url) {
 
 $('#gladiator ul>li:has(a[href])').each(function (i) {
     let id = $(this).children('a').attr('href').replace('#', '');
-    if (!(id in modules)) {
+    if (!(id in self.modules)) {
         return;
     }
-    $('head').append('<style>' + modules[id].prototype.display.style + '</style>');
-    $('#gladiator').append(modules[id].prototype.display.box);
-    modules.fetch(id);
+    $('head').append('<style>' + self.modules[id].prototype.display.style + '</style>');
+    $('#gladiator').append(self.modules[id].prototype.display.box);
+    self.modules.fetch(id);
     if (window.location.pathname === ('/gladiator-' + id)) {
         setWindowTitle('gladiator-' + id);
         activeTab = i;
@@ -45,7 +45,7 @@ if (activeTab === 0) {
         id: '#culture'
     }, baseTitle + " | gladiator culture", "gladiator-culture" + location.search + location.hash);
 }
-modules.fetch('culture');
+self.modules.fetch('culture');
 
 $('#gladiator').tabs({
     active: activeTab,
@@ -62,8 +62,8 @@ $('#gladiator').tabs({
     activate (event, ui) {
         stateLoad = false;
         let id = ui.newPanel.attr('id').replace('#', '');
-        if (id in modules) {
-            modules.fetch(id);
+        if (id in self.modules) {
+            self.modules.fetch(id);
         }
     }
 });

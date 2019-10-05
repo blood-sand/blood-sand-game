@@ -2,7 +2,7 @@ let UglifyJS = require('uglify-es');
 let fs = require('fs');
 let path = require('path');
 let dir = 'src/js/';
-let out = 'src/o.js';
+let out = dir + 'o.js';
 
 let scripts = [
     'howler.min.js',
@@ -26,11 +26,11 @@ let result = UglifyJS.minify(code, {
     compress: {
         //drop_console: true
     },
-    /*
+    
     sourceMap: {
         url: "inline"
     }
-    */
+    
 });
 
 //console.log(result);

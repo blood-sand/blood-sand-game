@@ -1,6 +1,5 @@
 const self = this;
 if (!self.loaded) {
-    console.log("first load");
     self.__proto__.generateName = function generateName () {
         if (!self.state.culture || !self.state.sex) {
             return;

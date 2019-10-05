@@ -57,7 +57,6 @@ self.state.mk({
             }
             let element = $('#user-settings-dialog [name=master-sound]');
             
-            console.log("master sound", val, element.find('.custom-handle').text(), o[name])
             if (o[name] === null && val && element.find('.custom-handle').text() === "Off") {
                 //console.log("Fixing slider")
                 element.slider('value', settings.masterSound);
@@ -79,12 +78,6 @@ self.state.mk({
         if (val !== o[name] && val >= 0 && val <= 100) {
             settings.masterVolume = val;
             Howler.volume(val / 100);
-            /*if (val > o[name]) {
-                sounds.up.play();
-            } else {
-                sounds.down.play();
-            }*/
-            //console.log('volume:', val/100)
             socket.emit('sound-settings', settings);
             return true;
         }
@@ -99,11 +92,6 @@ self.state.mk({
         if (val !== o[name] && val >= 0 && val <= 100) {
             settings.musicVolume = val;
             sounds.music.volume(val / 100);
-            /*if (val > o[name]) {
-                sounds.up.play();
-            } else {
-                sounds.down.play();
-            }*/
             socket.emit('sound-settings', settings);
             return true;
         }
@@ -123,11 +111,6 @@ self.state.mk({
                 }
                 sounds[sound].volume(val / 100);
             }
-            /*if (val > o[name]) {
-                sounds.up.play();
-            } else {
-                sounds.down.play();
-            }*/
             socket.emit('sound-settings', settings);
             return true;
         }
@@ -137,12 +120,6 @@ self.state.mk({
 });
 socket.on('sound-settings', serverSettings => {
     self.share.soundSettings = settings = serverSettings;
-    /*for (let label in settings) {
-        if (settings[label] === null) {
-            $('#user-settings-dialog').dialog('open');
-            return;
-        }
-    }*/
     self.state.masterSound = settings.masterSound;
     self.state.masterVolume = settings.masterVolume;
     self.state.musicVolume = settings.musicVolume;
@@ -150,7 +127,6 @@ socket.on('sound-settings', serverSettings => {
     $('[name=master-volume').slider('value', settings.masterVolume);
     $('[name=music-volume').slider('value', settings.musicVolume);
     $('[name=fx-volume').slider('value', settings.fxVolume);
-    
 });
 
 socket.emit("sound-settings-ready")

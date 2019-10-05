@@ -4,8 +4,7 @@ if (!self.loaded) {
     $('head').append("<style>" + self.display.style + "</style>");
     $('#game').append(self.display.view);
     new self.control.events();
-    modules.fetch('settings');
-    modules.fetch('gladiator');
-    modules.fetch('listGladiators');
-    //console.log(self.modules);
+    self.modules.fetch('settings');
+    self.modules.fetch('gladiator');
+    self.modules.fetch('listGladiators');
 }

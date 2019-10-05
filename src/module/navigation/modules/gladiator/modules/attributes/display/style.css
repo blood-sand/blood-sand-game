@@ -6,6 +6,15 @@
     display: block;
     float: left;
 }
+
+#attributes ul>li>.label {
+    flex: 7;
+}
+
+#attributes ul>li>.final {
+    flex: 2;
+}
+
 #attributes .slider {
     width: 480px;
     margin: 11.75px 40px;

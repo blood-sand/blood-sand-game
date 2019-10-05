@@ -106,7 +106,6 @@ $('body').on('slide', '.slider', function (e, ui) {
     } else if (before > after && !self.share.sounds.down.playing()) {
         self.share.sounds.down.play();
     }
-    console.log('slide..',$(this).slider('value'), ui.value);
 })
 
 $('body').on('click', '.dice', () => {
@@ -122,6 +121,5 @@ self.share.eventLoop.when(() => (
         self.share.query.soundSettings === true &&
         !$('#user-settings-dialog').dialog('isOpen')
     ), () => {
-    console.log(self.share.query);
-    ($('#user-settings-dialog').dialog('open'))
+    $('#user-settings-dialog').dialog('open');
 });

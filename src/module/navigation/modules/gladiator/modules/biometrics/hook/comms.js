@@ -56,7 +56,7 @@ socket.on("gladiator-biometrics", data => {
     biometricLabels.forEach(name => {
         if (name in data) {
             let val = data[name];
-            console.log(name, val)
+            //console.log(name, val)
             if (/\./.test("" + val)) {
                 val = val.toFixed(2);
             }

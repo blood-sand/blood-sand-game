@@ -1,13 +1,5 @@
 {
   "input": {
-    "strength": 12,
-    "dexterity": 10,
-    "perception": 10,
-    "endurance": 10,
-    "intelligence": 10,
-    "willpower": 10,
-    "vitality": 10,
-    "dodge": 10,
     "bmi": 16
   },
   "bmi": "input.bmi",

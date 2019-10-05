@@ -290,7 +290,7 @@ for (let label in skills) {
     if (skillMaxes[label] === undefined) {
         skillMaxes[label] = 16;
     }
-    console.log("skillmax:", label, skillMaxes[label], result.skillmax);
+    //console.log("skillmax:", label, skillMaxes[label], result.skillmax);
     $(`#skills .slider[name=${label}]`).
         children('.custom-handle').text(skills[label]);
 
@@ -303,10 +303,10 @@ for (let label in skills) {
         preset: (o, name, val) => {
             
             if (o[name] === val) {
-                console.log("ignoring update:", name, o[name], val);
+                //console.log("ignoring update:", name, o[name], val);
                 return;
             }
-            console.log('skill change:', name, o[name], val);
+            //console.log('skill change:', name, o[name], val);
             let skillPoints = totalSkillPoints;
             for (let skill in o) {
                 if (!(skill in skills) || skill === "toString") {
@@ -318,7 +318,7 @@ for (let label in skills) {
                     skillPoints -= o[skill];
                 }
             }
-            console.log('skill points:', skillPoints);
+            //console.log('skill points:', skillPoints);
             if (skillPoints < 0 && val > o[name]) {
                 return false;
             }
@@ -337,7 +337,7 @@ for (let label in skills) {
                     setDescription(skill, r.skillfinal);
                 }
                 let tacticsVal = calcTactics(val);
-                console.log('tac val:', tacticsVal);
+                //console.log('tac val:', tacticsVal);
                 $(`#skills .slider-container:has([name=${name}])`).
                     siblings('.proficiency').text(tacticsVal.toFixed(2));
                 setDescription(name, val);
@@ -357,7 +357,7 @@ for (let label in skills) {
 }
 
 socket.on("gladiator-skills", data => {
-    console.log("skills:",data);
+    //console.log("skills:",data);
     totalSkillPoints = data.skillPoints;
     self.state.skillPoints = data.skillPoints;
     let t = 120;
