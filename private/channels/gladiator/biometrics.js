@@ -42,6 +42,7 @@ module.exports = function (m, local) {
         let rank = parseInt(newRank);
         if (!isNaN(rank) && rank > 0 && rank < 16) {
             session.rank = newRank;
+            generateBiometrics();
         }
     });
     socket.on('gladiator-biometrics-generate', generateBiometrics);

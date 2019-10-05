@@ -6,5 +6,6 @@ if (!self.loaded) {
     new self.control.events();
     modules.fetch('settings');
     modules.fetch('gladiator');
+    modules.fetch('listGladiators');
     //console.log(self.modules);
 }

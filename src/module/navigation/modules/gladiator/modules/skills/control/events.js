@@ -3,6 +3,7 @@ const self = this;
 socket.on('gladiator-biometrics', data => {
     let rank = data.rank;
     let rankMax = rank * 2;
+    console.log("skills got biometrics update")
     for (let label in self.share.skillMaxes) {
         let skillMax = self.share.skillMaxes[label];
         let max = (rankMax < skillMax) ? rankMax : skillMax;
