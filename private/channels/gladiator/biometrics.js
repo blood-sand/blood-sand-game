@@ -32,9 +32,11 @@ module.exports = function (m, local) {
         
         console.log(session.biometrics);
         socket.emit("gladiator-biometrics", session.biometrics);
+        socket.emit('gladiator-rank', session.rank);
     }
     if (session.biometrics) {
         socket.emit("gladiator-biometrics", session.biometrics);
+        socket.emit('gladiator-rank', session.rank);
     } else {
         generateBiometrics();
     }
@@ -42,7 +44,7 @@ module.exports = function (m, local) {
         let rank = parseInt(newRank);
         if (!isNaN(rank) && rank > 0 && rank < 16) {
             session.rank = newRank;
-            generateBiometrics();
+            socket.emit('gladiator-rank', session.rank);
         }
     });
     socket.on('gladiator-biometrics-generate', generateBiometrics);

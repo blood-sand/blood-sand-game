@@ -613,8 +613,8 @@ modules.skills = function () {
 modules.skills.prototype.control.events=function() {
         const self = this;
 	
-	socket.on('gladiator-biometrics', data => {
-	    let rank = data.rank;
+	socket.on('gladiator-rank', data => {
+	    let rank = data;
 	    let rankMax = rank * 2;
 	    console.log("skills got biometrics update")
 	    for (let label in self.share.skillMaxes) {
@@ -1719,8 +1719,8 @@ modules.skills = function () {
 modules.skills.prototype.control.events=function() {
         const self = this;
 	
-	socket.on('gladiator-biometrics', data => {
-	    let rank = data.rank;
+	socket.on('gladiator-rank', data => {
+	    let rank = data;
 	    let rankMax = rank * 2;
 	    console.log("skills got biometrics update")
 	    for (let label in self.share.skillMaxes) {
@@ -2733,8 +2733,8 @@ modules.skills = function () {
 modules.skills.prototype.control.events=function() {
         const self = this;
 	
-	socket.on('gladiator-biometrics', data => {
-	    let rank = data.rank;
+	socket.on('gladiator-rank', data => {
+	    let rank = data;
 	    let rankMax = rank * 2;
 	    console.log("skills got biometrics update")
 	    for (let label in self.share.skillMaxes) {
