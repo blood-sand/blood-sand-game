@@ -1,54 +1,54 @@
 const self = this;
 
-const catcher = function (o, prop, val) {
-    if (val !== o[prop]) {
-        o[prop] = val;
-        socket.emit(`gladiator-${prop}`, val);
+let updatable = self.share.utility.isServerUpdatable;
+
+self.state.settings = waject({
+    name: '',
+    culture: '',
+    sex: '',
+    serverSettings: {}
+});
+let settings = self.state.settings;
+self.share.cultureSettings = settings;
+
+self.state.names = {};
+
+function updateServer(target) {
+    for (setting in target.serverSettings) {
+        val = target.serverSettings[setting];
+        if (val !== target[setting]) {
+            target.serverSettings[setting] = target[setting];
+            socket.emit(`gladiator-${setting}`, target[setting]);
+        }
     }
-    self.share[prop] = o[prop];
-    $(`[name="${prop}"]`).val(o[prop]);
-    if ($(`[name="${prop}"]`).is('select')) {
-        $(`[name="${prop}"]`).selectric();
-    }
-    return false;
 }
 
-self.state.mk({
-    property: 'culture', 
-    value: $('[name="culture"]').val().toLowerCase(),
-    preset: catcher
+settings.on('set', (target, prop, val) => {
+    target[prop]=val;
+    if (!updatable(target, prop, val)) {
+        return;
+    }
+    updateServer(target);
 });
-
-self.state.mk({
-    property: 'sex', 
-    value: $('[name="sex"]').val().toLowerCase(),
-    preset: catcher
-});
-
-self.state.mk({
-    property: 'name', 
-    value: $('[name="name"]').val().toLowerCase(),
-    preset: catcher
-});
-
-self.share.culture = self.state.culture;
-self.share.sex = self.state.sex;
-self.share.name = self.state.name;
 
 socket.emit("gladiator-culture-ready");
+
 socket.on("gladiator-names", d => {
     self.state.names = d;
 });
-socket.on("gladiator-name", d => {
-    self.state.name = d;
-});
-socket.on("gladiator-sex", d => {
-    self.state.sex = d;
-});
-socket.on("gladiator-culture", d => {
-    self.state.culture = d;
-});
 socket.on("gladiator-culture-info", d => {
     self.state.cultureInfo = d;
+});
+socket.on("gladiator-name", d => {
+    settings.serverSettings.name = d;
+    settings.name = d;
+});
+socket.on("gladiator-sex", d => {
+    settings.serverSettings.sex = d;
+    settings.sex = d;
+});
+socket.on("gladiator-culture", d => {
+    settings.serverSettings.culture = d;
+    settings.culture = d;
 });
 

@@ -4,136 +4,168 @@ const MAX_ABILITY_SUM = 91;
 const MAX_STAT_SIZE = 18;
 const MIN_STAT_SIZE = 3;
 
-function randomProperty (obj, f = () => {}) {
+const attributes = waject({
+    strength: MIN_STAT_SIZE,
+    dexterity: MIN_STAT_SIZE,
+    perception: MIN_STAT_SIZE,
+    endurance: MIN_STAT_SIZE,
+    intelligence: MIN_STAT_SIZE,
+    willpower: MIN_STAT_SIZE,
+    vitality: MIN_STAT_SIZE,
+    abilitySum: MIN_STAT_SIZE * 7,
+    serverSettings: {}
+});
+
+const updatable = self.share.utility.isServerUpdatable;
+self.state.ignoreUpdate = false;
+
+function randomProperty (obj, f = () => true) {
     var keys = Object.keys(obj).filter(f);
     return  keys[keys.length * Math.random() << 0];
 };
+attributes.on('set', 'abilitySum', (target, prop, val) => {
+    if (isNaN(val)) {
+        requestAnimationFrame(() => (
+            attributes[prop] = target[prop])
+        );
+        return false;
+    }
+    let attrPool = {};
+    Object.keys(target).forEach(prop => {
+        if (prop === "abilitySum" || 
+            prop === "serverSettings") {
+            return;
+        }
+        attrPool[prop] = target[prop];
+    });
+    if (val > target.abilitySum) {
+        if (val > MAX_ABILITY_SUM) {
+            val = MAX_ABILITY_SUM;
+        }
+        let diff = val - target.abilitySum;
+        while (diff > 0) {
+            let randProp = randomProperty(attrPool);
+            if (target[randProp] >= MAX_STAT_SIZE) {
+                delete attrPool[randProp];
+                continue;
+            }
+            target[randProp] += 1;
+            diff -= 1;
+        }
+        target.abilitySum = val;
+        return true;
+    }
+    if (val < target.abilitySum) {
+        if (val < (MIN_STAT_SIZE * 7)) {
+            val = MIN_STAT_SIZE * 7;
+        }
+        let diff = target.abilitySum - val;
+        while (diff > 0) {
+            let randProp = randomProperty(attrPool);
+            if (target[randProp] <= MIN_STAT_SIZE) {
+                delete attrPool[randProp];
+                continue;
+            }
+            target[randProp] -= 1;
+            diff -= 1;
+        }
+        target.abilitySum = val;
+        return true;
+    }
+});
+
+attributes.on('set', (target, prop, val) => {
+    if (prop === "serverSettings") {
+        return;
+    }
+
+    if (prop === "abilitySum") {
+        return;
+    }
+
+    if (isNaN(val)) {
+        requestAnimationFrame(() => (
+            attributes[prop] = target[prop])
+        );
+        return false;
+    }
+
+    if (val > target[prop]) {
+        if (val > MAX_STAT_SIZE) {
+            val = MAX_STAT_SIZE;
+        }
+        let diff = val - target[prop];
+        if ((target.abilitySum + diff) > MAX_ABILITY_SUM) {
+            diff -= (target.abilitySum + diff) - MAX_ABILITY_SUM;
+        }
+        target[prop] += diff;
+        target.abilitySum += diff;
+        return true;
+    }
+
+    if (val < target[prop]) {
+        if (val < MIN_STAT_SIZE) {
+            val = MIN_STAT_SIZE;
+        }
+        let diff = target[prop] - val;
+        target[prop] -= diff;
+        target.abilitySum -= diff;
+        return true;
+    }
+});
+
+self.state.attributes = attributes;
+self.share.attributeSettings = attributes;
+self.state.modifiers = {
+    age: {},
+    bmi: {},
+    sex: {},
+    final: {}
+};
+
+attributes.on('set', (target, prop, val) => {
+    if (self.state.ignoreUpdate || 
+        !updatable(target, prop, val)) {
+        return;
+    }
+    self.state.ignoreUpdate = true;
+    let update = {};
+    Object.keys(attributes).forEach(prop => {
+        if (prop === "serverSettings") {
+            return;
+        }
+        update[prop] = attributes[prop];
+    });
+    attributes.serverSettings = update;
+    socket.emit("gladiator-attributes-change", update);
+    self.state.ignoreUpdate = false;
+});
 
 socket.on("gladiator-attributes", data => {
-    for (let name in data) {
-        let fieldTooltip = "";
-        let slider = $(`[name=${name}`);
-        slider.slider('value', data[name]);
-        slider.children('.custom-handle').text(data[name]);
-        if (name in data.modifiers.final) {
-            slider.siblings('.final').text(data.modifiers.final[name]);
+    let serverSettings = {};
+    let same = true;
+    for (prop in data) {
+        if (prop === "abilitySum" ||
+            prop === "modifiers") {
+            continue;
         }
-
-        if (name in data.modifiers.age) {
-            if (data.modifiers.age[name] > 0) {
-                fieldTooltip += "+"
-            }
-            fieldTooltip += `${data.modifiers.age[name]} from age, `;
-        }
-
-        if (name in data.modifiers.bmi) {
-            if (data.modifiers.bmi[name] > 0) {
-                fieldTooltip += "+"
-            }
-            fieldTooltip += `${data.modifiers.bmi[name]} from BMI, `;
-        }
-
-        if (name in data.modifiers.sex) {
-            if (data.modifiers.sex[name] > 0) {
-                fieldTooltip += "+"
-            }
-            fieldTooltip += `${data.modifiers.sex[name]} from sex, `;
-        }
-
-        fieldTooltip = fieldTooltip.substr(0, fieldTooltip.length - 2);
-        if (fieldTooltip.length > 0) {
-            fieldTooltip += ".";
-            slider.parent('li').attr('title', fieldTooltip);
+        serverSettings[prop] = data[prop];
+        if (data[prop] !== attributes[prop]) {
+            attributes[prop] = data[prop];
+            same = false;
         }
     }
-    self.share.attributes = self.state.attributes = waject(data, (stats, name, value) => {
-        let abilitySum = stats.abilitySum;
-        
-        if (name === "abilitySum") {
-            if (value > MAX_ABILITY_SUM) {
-                value = MAX_ABILITY_SUM;
-            }
-            if (value < 0) {
-                value = 0;
-            }
-            let difference = value - stats.abilitySum;
-            stats.abilitySum = value;
-            if (isNaN(difference)) {
-                return false;
-            }
-            while (difference !== 0) {
-                let randProp;
-                if (difference > 0) {
-                    randProp = randomProperty(stats, i => {
-                        if (i === "abilitySum") {
-                            return false;
-                        }
-                        if (i === "toString") {
-                            return false;
-                        }
-                        if (i === "modifiers") {
-                            return false;
-                        }
-                        if (stats[i] >= MAX_STAT_SIZE) {
-                            return false;
-                        }
-                        return true;
-                    });
+    if (!same) {
+        attributes.abilitySum = attributes.abilitySum;
+        serverSettings.abilitySum = attributes.abilitySum;
+        attributes.serverSettings = serverSettings;
+    }
 
-                    stats[randProp] += 1;
-                    difference -= 1;
-                } else {
-                    randProp = randomProperty(stats, i => {
-                        if (i === "abilitySum") {
-                            return false;
-                        }
-                        if (i === "toString") {
-                            return false;
-                        }
-                        if (i === "modifiers") {
-                            return false;
-                        }
-                        if (stats[i] <= MIN_STAT_SIZE) {
-                            return false;
-                        }
-                        return true;
-                    });
-                    stats[randProp] -= 1;
-                    difference += 1;
-                }
-            }
-            if (!self.state.ignoreChange) {
-                socket.emit("gladiator-attributes-change", stats);
-            } else {
-                console.log("ignoring change")
-            }
-            return false;
-        }
-        if (value < MIN_STAT_SIZE) {
-            value = MIN_STAT_SIZE;
-        } 
-
-        if (value > MAX_STAT_SIZE) {
-            value = MAX_STAT_SIZE;
-        }
-        
-        let difference = value - stats[name];
-        
-        abilitySum += difference;
-        if (abilitySum > MAX_ABILITY_SUM) {
-            let overDiff = abilitySum - MAX_ABILITY_SUM;
-            abilitySum = MAX_ABILITY_SUM;
-            stats[name] = value - overDiff;
-
-        } else {
-            stats[name] += difference;
-        }
-        stats.abilitySum = abilitySum;
-        if (!self.state.ignoreChange) {
-            socket.emit("gladiator-attributes-change", stats);
-        }
-        return false;
-    });
+    self.state.modifiers.age = data.modifiers.age;
+    self.state.modifiers.bmi = data.modifiers.bmi;
+    self.state.modifiers.sex = data.modifiers.sex;
+    self.state.modifiers.final = data.modifiers.final;
+    new self.control.modifiers;
 });
 
 socket.emit("gladiator-attributes-ready");

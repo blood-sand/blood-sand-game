@@ -1,69 +1,49 @@
 const self = this;
 
-const catcher = function (o, prop, val) {
-    console.log(prop, "changed from", o[prop], "to", val);
-    if (val !== o[prop]) {
-        o[prop] = val;
-    }
-    self.share[prop] = o[prop];
-    $(`[name="${prop}"]`).val(o[prop]);
-    return false;
-}
-
-self.state.mk({
-    property: 'culture',
-    value: self.share.culture,
-    preset: catcher
-});
-
-self.state.mk({
-    property: 'sex',
-    value: self.share.sex,
-    preset: catcher
-});
-
-self.state.mk({
-    property: 'requestBiometrics',
-    value: false,
-    preset: (o, prop, val) => {
-        if (val) {
-            console.log("requesting biometrics..");
-            socket.emit("gladiator-biometrics-generate");
-            return false;
-        }
-    }
-})
-
-let biometricLabels = [
-    "rank",
-    "age",
-    "weight",
-    "height",
-    "bmi",
-    "reach"
-];
-
-self.share.biometrics = self.state.biometrics = {
+const biometrics = waject({
+    culture: 0,
+    sex: 0,
     rank: 0,
     age: 0,
     weight: 0,
     height: 0,
     bmi: 0,
     reach: 0
-};
+});
+
+let serverRank;
+
+const biometricLabels = Object.keys(biometrics);
+biometricLabels.splice(biometricLabels.indexOf("serverSettings"), 1);
+
+self.share.biometricSettings = biometrics;
+self.state.biometrics = biometrics;
+
+self.state.requestBiometrics = function () {
+    console.log("requesting biometrics..");
+    socket.emit("gladiator-biometrics-generate");
+}
+
+biometrics.on('set', 'rank', (target, prop, val) => {
+    if (serverRank === undefined) {
+        return;
+    }
+    val = parseInt(val);
+    if (val < 1 || val > 15 || isNaN(val)) {
+        requestAnimationFrame(() => (biometrics.rank = serverRank));
+        return false;
+    }
+    target[prop] = val;
+    if (serverRank === val) {
+        return;
+    }
+    serverRank = val;
+    socket.emit('gladiator-biometrics-rank', val);
+});
 
 socket.on("gladiator-biometrics", data => {
-    biometricLabels.forEach(name => {
-        if (name in data) {
-            let val = data[name];
-            //console.log(name, val)
-            if (/\./.test("" + val)) {
-                val = val.toFixed(2);
-            }
-            self.state.biometrics[name] = val;
-            $(`[name="${name}"]`).val(val);
-        }
-    });
+    biometrics['*'] = data;
+    serverRank = data.rank;
 });
 
 socket.emit("gladiator-biometrics-ready");

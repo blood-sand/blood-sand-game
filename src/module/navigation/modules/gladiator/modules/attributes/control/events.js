@@ -1,31 +1,79 @@
 const self = this;
+const eventLoop = self.share.eventLoop;
+const attributes = self.state.attributes;
+const modifiers = self.state.modifiers;
+let cultureSettings;
 
-if (self.share.name) {
-    $('[name="name"]').val(self.share.name);
+function updateSliders() {
+    Object.keys(attributes).forEach(prop => {
+        if (prop === "serverSettings") {
+            return;
+        }
+        $(`#attributes [name=${prop}]`).
+            slider('value', attributes[prop]).
+            children('.custom-handle').
+            text(attributes[prop]);
+    });
 }
+
+eventLoop.after(() => (
+        !cultureSettings &&
+        (cultureSettings = self.share.cultureSettings)
+    ), () => {
+        cultureSettings.bindInput('name', 
+            $('#attributes [name=name]')
+        );
+});
 
 $( "#attributes .slider" ).slider({
     create: function() {
         $(this).children('.custom-handle').text( $(this).slider("value"));
     },
     slide: function( event, ui ) {
-        $(this).children('.custom-handle').text(ui.value);
         let name = $(this).attr('name');
-        if (self.state.attributes && name in self.state.attributes) {
-            self.state.attributes[name] = ui.value;
+        if (ui.value > attributes[name]) {
+            let diff = ui.value - attributes[name];
+            if ((attributes.abilitySum + diff) > 91) {
+                return false;
+            }
         }
+        
+        $(this).children('.custom-handle').text(ui.value);
+        
     },
     min: 3,
     max: 18,
     animate: 'slow'
 });
-$('#attributes [name=abilitySum]').slider('option', 'max', 91).slider('option', 'min', 21);
+$('#attributes [name=abilitySum]').
+    slider('option', 'max', 91).
+    slider('option', 'min', 21);
 
 $('#attributes .randomizeAttributes').on('click', e => {
-    let abilitySum = $('#attributes [name=abilitySum]');
+    let sum = attributes.abilitySum;
+    self.state.ignoreUpdate = true;
+    attributes.abilitySum = 21;
+    self.state.ignoreUpdate = false;
+    attributes.abilitySum = sum;
+    updateSliders();
+});
 
-    abilitySum.slider('option', 'slide').call(abilitySum, null, {value: 21});
-    setTimeout(() => {
-        abilitySum.slider('option', 'slide').call(abilitySum, null, {value: 91});
-    }, 700);
+$('#attributes ul>li .slider').each(function () {
+    let name = $(this).attr('name');
+
+    attributes.bindInput({
+        property: name,
+        element: $(this),
+        event: 'slidestop',
+        outHandler (element, value) {
+            element.
+                slider('value', value).
+                children('.custom-handle').
+                    text(value);
+        },
+        inHandler (element, proxy, prop) {
+            proxy[prop] = element.slider('value');
+            return updateSliders();
+        }
+    });
 });

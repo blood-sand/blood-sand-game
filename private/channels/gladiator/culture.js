@@ -36,21 +36,25 @@ module.exports = function (m, local) {
 
     socket.emit("gladiator-names", names);
     socket.emit("gladiator-culture-info", cultureInfo);
-    if (session.name) {
-        socket.emit("gladiator-name", session.name);
-    } else {
+    
+    if (session.name === undefined) {
         session.name = "";
     }
-    if (session.sex > -1 && session.sex < NUM_SEXES) {
-        socket.emit("gladiator-sex", Object.keys(sexes)[session.sex]);
-    } else {
+
+    if (session.sex === undefined || session.sex < 0 || session.sex >= NUM_SEXES) {
         session.sex = 0;
     }
-    if (session.culture > -1 && session.culture < NUM_CULTURES) {
-        socket.emit("gladiator-culture", Object.keys(cultures)[session.culture]);
-    } else {
-        session.culture = 0;
+
+    if (session.culture === undefined || 
+        session.culture < 0 || 
+        session.culture >= NUM_CULTURES) {
+            session.culture = 0;
     }
+
+    socket.emit("gladiator-name", session.name);
+    socket.emit("gladiator-sex", Object.keys(sexes)[session.sex]);
+    socket.emit("gladiator-culture", Object.keys(cultures)[session.culture]);
+
     socket.on('gladiator-culture', culture => {
         session.culture = (culture in cultures ? cultures[culture] : 0);
         console.log("new culture:", session.culture);

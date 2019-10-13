@@ -5,7 +5,8 @@ self.share.eventLoop = new (function eventLoop() {
     const interval = 250;
 
     const events = {};
-    const checkers = [];
+    const whenCheckers = [];
+    const afterCheckers = [];
 
     this.on = function on(title, handle) {
         if (events[title] === undefined) {
@@ -23,17 +24,31 @@ self.share.eventLoop = new (function eventLoop() {
     };
 
     this.when = function (checker, handler) {
-        checkers.push(() => {
+        whenCheckers.push(() => {
             if (checker()) {
                 handler();
             }
         });
     };
+
+    this.after = function (checker, handler) {
+        afterCheckers.push(function action () {
+            if (checker()) {
+                afterCheckers.splice(
+                    afterCheckers.indexOf(action), 
+                    1
+                );
+                handler();
+            }
+        });
+    };
+
     function tick () {
         let now = Date.now();
         if ((lastUpdate + interval) < now) {
             lastUpdate = now;
-            checkers.forEach(fn => fn());
+            whenCheckers.forEach(fn => fn());
+            afterCheckers.forEach(fn => fn());
         }
         return window.requestAnimationFrame(tick);
     }

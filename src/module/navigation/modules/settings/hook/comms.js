@@ -1,9 +1,16 @@
 const self = this;
-let settings = {
-    masterSound: null,
-    masterVolume: 100
-};
+const state = self.state;
+let pendingMessage = true;
+
+let settings = self.state.settings = waject({
+    masterSound: 0,
+    masterVolume: 0,
+    musicVolume: 0,
+    fxVolume: 0,
+    serverSettings: {}
+});
 self.share.soundSettings = settings;
+
 Howler.mute(true);
 let sounds = self.share.sounds = {
     music: new Howl({
@@ -41,92 +48,44 @@ let sounds = self.share.sounds = {
     })
 };
 
+function sendUpdate(target) {
+    target.serverSettings = {
+        masterSound: target.masterSound,
+        masterVolume: target.masterVolume,
+        musicVolume: target.musicVolume,
+        fxVolume: target.fxVolume
+    };
+    socket.emit('sound-settings', target.serverSettings);
+    pendingMessage = false;
+}
 
-self.state.mk({
-    property: 'masterSound',
-    value: null,
-    preset: (o, name, val) => {
-        if (val !== o[name] && val === 0 || val === 1) {
-            settings.masterSound = val;
-            self.share.eventLoop.emit('master-sound', val);
-            if (val) {
-                Howler.mute(false);
-            }
-            if (!val) {
-                Howler.mute(true);
-            }
-            let element = $('#user-settings-dialog [name=master-sound]');
-            
-            if (o[name] === null && val && element.find('.custom-handle').text() === "Off") {
-                //console.log("Fixing slider")
-                element.slider('value', settings.masterSound);
-                element.find('.custom-handle').text(settings.masterSound ? 'On' : 'Off');
-            }
-            socket.emit('sound-settings', settings);
-            
-            return true;
-        }
-        
-        return false;
+// initialize settings state
+new self.hook.settingState;
+
+
+// Emit a socket sound-settings event.
+// This allows the server to stay in-sync
+// with the client when changes occur.
+settings.on('set', (target, prop, val) => {
+    if (pendingMessage) {
+        return;
+    }
+    if (!self.share.utility.isServerUpdatable(target)) {
+        return;
+    }
+    pendingMessage = true;
+    if (self.share.mouseIsDown) {
+        $(document).one('mouseup', () => sendUpdate(target));
+    } else {
+        sendUpdate(target);
     }
 });
 
-self.state.mk({
-    property: 'masterVolume',
-    value: null,
-    preset: (o, name, val) => {
-        if (val !== o[name] && val >= 0 && val <= 100) {
-            settings.masterVolume = val;
-            Howler.volume(val / 100);
-            socket.emit('sound-settings', settings);
-            return true;
-        }
-        
-        return false;
-    }
-});
-self.state.mk({
-    property: 'musicVolume',
-    value: null,
-    preset: (o, name, val) => {
-        if (val !== o[name] && val >= 0 && val <= 100) {
-            settings.musicVolume = val;
-            sounds.music.volume(val / 100);
-            socket.emit('sound-settings', settings);
-            return true;
-        }
-        
-        return false;
-    }
-});
-self.state.mk({
-    property: 'fxVolume',
-    value: null,
-    preset: (o, name, val) => {
-        if (val !== o[name] && val >= 0 && val <= 100) {
-            settings.fxVolume = val;
-            for (let sound in sounds) {
-                if (sound === "music") {
-                    continue;
-                }
-                sounds[sound].volume(val / 100);
-            }
-            socket.emit('sound-settings', settings);
-            return true;
-        }
-        
-        return false;
-    }
-});
+
 socket.on('sound-settings', serverSettings => {
-    self.share.soundSettings = settings = serverSettings;
-    self.state.masterSound = settings.masterSound;
-    self.state.masterVolume = settings.masterVolume;
-    self.state.musicVolume = settings.musicVolume;
-    self.state.fxVolume = settings.fxVolume;
-    $('[name=master-volume').slider('value', settings.masterVolume);
-    $('[name=music-volume').slider('value', settings.musicVolume);
-    $('[name=fx-volume').slider('value', settings.fxVolume);
+    settings.serverSettings = serverSettings;
+    settings['*'] = serverSettings;
+    pendingMessage = false;
 });
 
-socket.emit("sound-settings-ready")
+socket.emit("sound-settings-ready");

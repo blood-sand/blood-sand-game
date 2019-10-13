@@ -101,7 +101,7 @@ function importModules(MAIN_DIR, parent="window") {
     };
     ${subModules}
     ${parent}.modules.${moduleName}.prototype.parent = ${parent};
-    ${parent}.modules.${moduleName}.prototype.state = waject();
+    ${parent}.modules.${moduleName}.prototype.state = {};
     ${parent}.modules.${moduleName}.prototype.share = __SHARE__;
     ${parent}.modules.${moduleName}.prototype.loaded = false;
     `;

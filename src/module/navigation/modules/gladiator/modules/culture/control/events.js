@@ -1,10 +1,27 @@
 const self = this;
 
+const settings = self.state.settings;
+
 function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+
+function generateName () {
+    if (!settings.culture || !settings.sex) {
+        return;
+    }
+    let ref = self.state.names[settings.culture]
+    if (ref) {
+        ref = ref[settings.sex];
+    }
+    if (!ref) {
+        return;
+    }
+    let randName = ref[Math.floor(Math.random()*ref.length)];
+    settings.name = randName;
+};
 
 const sexes = [
     "male",
@@ -23,30 +40,31 @@ const cultures = [
     "scythian"
 ];
 
-$('body').on('change', '[name="culture"]', e => {
-    self.state.culture = $(e.target).val();
+settings.bindInput('name', 
+    $('#culture [name=name]')
+);
+settings.bindInput({
+    property: 'culture',
+    element: $('#culture [name=culture]'),
+    outHandler: (element, val) => 
+        $(element).val(val).selectric()
+});
+settings.bindInput({
+    property: 'sex',
+    element: $('#culture [name=sex]'),
+    outHandler: (element, val) => 
+        $(element).val(val).selectric()
 });
 
-$('body').on('change', '[name="sex"]', e => {
-    self.state.sex = $(e.target).val();
-});
+$('#culture select').selectric();
 
-$('body').on('change', '[name="name"]', e => {
-    self.state.name = e.target.value;
+$('#culture').on('click', '.randomizeName', e => {
+    generateName();
 });
-$('body').on('click', '.randomizeName', e => {
-    self.generateName();
-});
-$('body').on('click', '.randomizeCulture', e => {
+$('#culture').on('click', '.randomizeCulture', e => {
     let randCulture = getRandomInt(0, 9);
     let randSex = getRandomInt(0, 1);
-    self.state.culture = cultures[randCulture];
-    self.state.sex = sexes[randSex];
-    self.generateName();
-});
-$('[name="cultureNext').on('click', e => {
-    if (self.state.culture === "culture") {
-        return;
-    }
-    self.state.next = true;
+    settings.culture = cultures[randCulture];
+    settings.sex = sexes[randSex];
+    generateName();
 });

@@ -10,7 +10,7 @@ let scripts = [
     'jquery-ui.min.js',
     'jquery.selectric.js',
     'jquery-ui-touch-punch.min.js',
-    'waject.js',
+    'waject2.js',
     'json-sl.js',
     'compressedModules.js',
     'main.js'

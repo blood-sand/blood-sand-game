@@ -28,7 +28,7 @@ module.exports = function (m, local) {
     }
 
     function assignModifiers () {
-        if (!session.attributes) {
+        if (!session.attributes || !local.handleAttributesChange) {
             return;
         }
 

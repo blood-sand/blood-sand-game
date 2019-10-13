@@ -12,6 +12,9 @@ var socket = io();
     });
 }());
 $(document).tooltip();
+
 socket.emit("session-id", document.cookie.session);
+
+modules.fetch('utility');
 modules.fetch('eventLoop');
 modules.fetch('navigation');
