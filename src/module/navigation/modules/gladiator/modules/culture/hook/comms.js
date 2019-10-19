@@ -13,7 +13,9 @@ self.share.cultureSettings = settings;
 
 self.state.names = {};
 
-function updateServer(target) {
+function updateServer(result) {
+    let target = result.target;
+    target[result.key] = result.value;
     for (setting in target.serverSettings) {
         val = target.serverSettings[setting];
         if (val !== target[setting]) {
@@ -23,12 +25,11 @@ function updateServer(target) {
     }
 }
 
-settings.on('set', (target, prop, val) => {
-    target[prop]=val;
-    if (!updatable(target, prop, val)) {
+settings.on('set', (result) => {
+    if (!updatable(result)) {
         return;
     }
-    updateServer(target);
+    updateServer(result);
 });
 
 socket.emit("gladiator-culture-ready");

@@ -5,7 +5,11 @@ if (typeof window !== "undefined") {
 }
 
 function waject (o = {}) {
-    let listeners = {
+    if (!(this instanceof waject)) {
+        return new waject(...arguments);
+    }
+    this.target = o;
+    let listeners = this.listeners = {
         getters: {
             "*": []
         },
@@ -13,50 +17,36 @@ function waject (o = {}) {
             "*": []
         }
     };
-    function handleOn(e, prop, fn) {
-        let group;
-        if (e === "get") {
-            group = "getters";
-        } else if (e === "set") {
-            group = "setters";
-        }
+    let extensions = {};
 
-        if (typeof prop === "function") {
-            fn = prop;
-            prop = "*";
-        }
-
-        if (!(prop in listeners[group])) {
-            listeners[group][prop] = [];
-        }
-        listeners[group][prop].push(fn);
+    for (let name in this.constructor.extensions) {
+        extensions[name] = this.constructor.extensions[name].bind(this);
     }
 
-    function handleBindInput(
-            prop, 
-            element, 
-            event='change',
-            inHandler=(element, p, prop) => {
-                p[prop] = $(element).val();
-            },
-            outHandler=(element, val) => {
-                $(element).val(val);
-            }) {
-        if (typeof prop === "object") {
-            element = prop.element;
-            event = prop.event || event;
-            inHandler = prop.inHandler || inHandler;
-            outHandler = prop.outHandler || outHandler;
-            prop = prop.property;
-        }
-        $(element).on(event, () => 
-            inHandler(element, p, prop));
-        p.on('set', prop, (target, prop, val) => 
-            outHandler(element, val));
-        outHandler(element, o[prop]);
+    function createResult (target, key, value, receiver) {
+        let result = {value};
+        Object.defineProperty(result, 'key', {
+            value: key,
+            configurable: false,
+            writable: false,
+            enumerable: true
+        });
+        Object.defineProperty(result, 'target', {
+            value: target,
+            configurable: false,
+            writable: false,
+            enumerable: true
+        });
+        Object.defineProperty(result, 'receiver', {
+            value: receiver,
+            configurable: false,
+            writable: false,
+            enumerable: true
+        });
+        return result;
     }
 
-    let p = new Proxy(o, {
+    this.proxy = new Proxy(o, {
         has (target, key) {
             return (
                 target.hasOwnProperty(key) && 
@@ -64,46 +54,33 @@ function waject (o = {}) {
             );
         },
         get (target, key, receiver) {
-            if (key === "on") {
-                return handleOn;
+            if (key in extensions) {
+                return extensions[key];
             }
-            if (key === "bindInput") {
-                return handleBindInput;
-            }
+            
             if (key === "*") {
+                let copy = {};
                 for (let prop in target) {
                     if (target.hasOwnProperty(prop)) {
-                        // force getter:
-                        receiver[prop];
+                        copy[prop] = receiver[prop];
                     }
                 }
-                return target;
+                return copy;
             }
+
+            let result = createResult(target, key, target[key], receiver);
             if (key in listeners.getters) {
-                for (let i = 0; i < listeners.getters[key].length; i += 1) {
-                    let alternate = listeners.getters[key][i](...arguments);
-                    if (alternate !== target[key]) {
-                        return alternate;
-                    }
-                }
+                listeners.getters[key].forEach(fn => fn(result));
             }
-            for (let i = 0; i < listeners.getters["*"].length; i += 1) {
-                let alternate = listeners.getters["*"][i](...arguments);
-                if (alternate !== target["*"]) {
-                    return alternate;
-                }
-            }
-            return Reflect.get(...arguments);
+            listeners.getters['*'].forEach(fn => fn(result));
+            return result.value;
         },
         set (target, key, value, receiver) {
-            let oldVal = target[key];
-            let ignoreDefault = false;
-            let cycle = true;
-
-            if (key === "on") {
-                console.log("Cannot set 'on' property of Waject.");
+            if (key in extensions) {
+                console.warn(`Waject: Ignoring set to '${key}' property, because it's an extension.`);
                 return false;
             }
+
             if (key === "*") {
                 if (typeof value === "object") {
                     let isCompatible = true;
@@ -129,50 +106,55 @@ function waject (o = {}) {
                 return target;
             }
 
+            let result = createResult(...arguments);
+            result.cycle = true;
+
             if (key in listeners.setters) {
                 listeners.setters[key].
                     forEach(fn => {
-                        if (!cycle) {
+                        if (!result.cycle) {
                             return;
                         }
-                        let result = fn(target, key, value);
-
-                        if (result === true) {
-                            ignoreDefault = true;
-                        }
-
-                        if (result === false) {
-                            cycle = false;
-                        }
-
-                        if (oldVal !== target[key]) {
-                            value = target[key];
-                        }
+                        fn(result);
                     });
             }
 
             listeners.setters["*"].
                 forEach(fn => {
-                    if (!cycle) {
+                    if (!result.cycle) {
                         return;
                     }
-                    let result = fn(target, key, value);
-
-                    if (result === true) {
-                        ignoreDefault = true;
-                    }
-                    
-                    if (oldVal !== target[key]) {
-                        value = target[key];
-                    }
+                    fn(result);
                 });
 
-            if (!ignoreDefault && oldVal === target[key]) {
-                target[key] = value;
-            }
-
+            target[key] = result.value;
             return target[key];
         }
     });
-    return p;
+    return this.proxy;
 }
+
+waject.extensions = {};
+
+waject.extend = function (interceptProp, handler) {
+    this.extensions[interceptProp] = handler;
+};
+
+waject.extend('on', function (e, prop, fn) {
+    let group;
+    if (e === "get") {
+        group = "getters";
+    } else if (e === "set") {
+        group = "setters";
+    }
+
+    if (typeof prop === "function") {
+        fn = prop;
+        prop = "*";
+    }
+
+    if (!(prop in this.listeners[group])) {
+        this.listeners[group][prop] = [];
+    }
+    this.listeners[group][prop].push(fn);
+});

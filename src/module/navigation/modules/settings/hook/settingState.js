@@ -2,8 +2,9 @@ const self = this;
 const settings = self.state.settings;
 
 function putBetween (min, max) {
-    return function (target, prop, val) {
-        val = Math.round(parseInt(val));
+    return function (result) {
+
+        val = Math.round(parseInt(result.value));
         if (val < min) {
             val = min;
         } else if (val > max) {
@@ -14,8 +15,7 @@ function putBetween (min, max) {
             val = min;
         }
 
-        target[prop] = val;
-        return true;
+        result.value = val;
     };
 }
 
@@ -25,17 +25,16 @@ settings.on('set', 'masterSound', putBetween(0, 1));
 // Emit a master-sound event 
 // This allows things outside of
 // this module to listen for changes.
-settings.on('set', 'masterSound', (target, prop, val) => {
-    self.share.eventLoop.emit('master-sound', val);
-}
-);
+settings.on('set', 'masterSound', (result) => {
+    self.share.eventLoop.emit('master-sound', result.value);
+});
 
 // Enable/Disable all Audio
-settings.on('set', 'masterSound', (target, prop, val) => {
-    if (val) {
+settings.on('set', 'masterSound', (result) => {
+    if (result.value) {
         Howler.mute(false);
     }
-    if (!val) {
+    if (!result.value) {
         Howler.mute(true);
     }
 });
@@ -44,28 +43,28 @@ settings.on('set', 'masterSound', (target, prop, val) => {
 settings.on('set', 'masterVolume', putBetween(0, 100));
 
 // Set Master Volume
-settings.on('set', 'masterVolume', (target, prop, val) => {
-    Howler.volume(val / 100);
+settings.on('set', 'masterVolume', (result) => {
+    Howler.volume(result.value / 100);
 });
 
 // Ensure musicVolume is between 0 and 100.
 settings.on('set', 'musicVolume', putBetween(0, 100));
 
 // Set Music Volume
-settings.on('set', 'musicVolume', (target, prop, val) => {
-    self.share.sounds.music.volume(val / 100);
+settings.on('set', 'musicVolume', (result) => {
+    self.share.sounds.music.volume(result.value / 100);
 });
 
 // Ensure fxVolume is between 0 and 100.
 settings.on('set', 'fxVolume', putBetween(0, 100));
 
 // Set Music Volume
-settings.on('set', 'fxVolume', (target, prop, val) => {
+settings.on('set', 'fxVolume', (result) => {
     let sounds = self.share.sounds;
     for (let sound in sounds) {
         if (sound === "music") {
             continue;
         }
-        sounds[sound].volume(val / 100);
+        sounds[sound].volume(result.value / 100);
     }
 });

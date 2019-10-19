@@ -23,12 +23,15 @@ function randomProperty (obj, f = () => true) {
     var keys = Object.keys(obj).filter(f);
     return  keys[keys.length * Math.random() << 0];
 };
-attributes.on('set', 'abilitySum', (target, prop, val) => {
+attributes.on('set', 'abilitySum', (result) => {
+    let target = result.target;
+    let val = result.value;
+    let prop = result.key;
+
     if (isNaN(val)) {
-        requestAnimationFrame(() => (
-            attributes[prop] = target[prop])
-        );
-        return false;
+        result.value = target[prop];
+        result.cycle = false;
+        return;
     }
     let attrPool = {};
     Object.keys(target).forEach(prop => {
@@ -52,8 +55,8 @@ attributes.on('set', 'abilitySum', (target, prop, val) => {
             target[randProp] += 1;
             diff -= 1;
         }
-        target.abilitySum = val;
-        return true;
+        result.value = val;
+        return;
     }
     if (val < target.abilitySum) {
         if (val < (MIN_STAT_SIZE * 7)) {
@@ -69,12 +72,15 @@ attributes.on('set', 'abilitySum', (target, prop, val) => {
             target[randProp] -= 1;
             diff -= 1;
         }
-        target.abilitySum = val;
-        return true;
+        result.value = val;
+        return;
     }
 });
 
-attributes.on('set', (target, prop, val) => {
+attributes.on('set', (result) => {
+    let target = result.target;
+    let val = result.value;
+    let prop = result.key;
     if (prop === "serverSettings") {
         return;
     }
@@ -84,10 +90,9 @@ attributes.on('set', (target, prop, val) => {
     }
 
     if (isNaN(val)) {
-        requestAnimationFrame(() => (
-            attributes[prop] = target[prop])
-        );
-        return false;
+        result.value = target[prop];
+        result.cycle = false;
+        return;
     }
 
     if (val > target[prop]) {
@@ -98,9 +103,9 @@ attributes.on('set', (target, prop, val) => {
         if ((target.abilitySum + diff) > MAX_ABILITY_SUM) {
             diff -= (target.abilitySum + diff) - MAX_ABILITY_SUM;
         }
-        target[prop] += diff;
+        result.value = target[prop] + diff;
         target.abilitySum += diff;
-        return true;
+        return;
     }
 
     if (val < target[prop]) {
@@ -108,9 +113,9 @@ attributes.on('set', (target, prop, val) => {
             val = MIN_STAT_SIZE;
         }
         let diff = target[prop] - val;
-        target[prop] -= diff;
+        result.value = target[prop] - diff;
         target.abilitySum -= diff;
-        return true;
+        return;
     }
 });
 
@@ -123,15 +128,19 @@ self.state.modifiers = {
     final: {}
 };
 
-attributes.on('set', (target, prop, val) => {
+attributes.on('set', (result) => {
     if (self.state.ignoreUpdate || 
-        !updatable(target, prop, val)) {
+        !updatable(result)) {
         return;
     }
     self.state.ignoreUpdate = true;
     let update = {};
     Object.keys(attributes).forEach(prop => {
         if (prop === "serverSettings") {
+            return;
+        }
+        if (prop === result.key) {
+            update[prop] = result.value;
             return;
         }
         update[prop] = attributes[prop];

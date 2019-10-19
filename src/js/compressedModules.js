@@ -299,12 +299,15 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    var keys = Object.keys(obj).filter(f);
 	    return  keys[keys.length * Math.random() << 0];
 	};
-	attributes.on('set', 'abilitySum', (target, prop, val) => {
+	attributes.on('set', 'abilitySum', (result) => {
+	    let target = result.target;
+	    let val = result.value;
+	    let prop = result.key;
+	
 	    if (isNaN(val)) {
-	        requestAnimationFrame(() => (
-	            attributes[prop] = target[prop])
-	        );
-	        return false;
+	        result.value = target[prop];
+	        result.cycle = false;
+	        return;
 	    }
 	    let attrPool = {};
 	    Object.keys(target).forEach(prop => {
@@ -328,8 +331,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	            target[randProp] += 1;
 	            diff -= 1;
 	        }
-	        target.abilitySum = val;
-	        return true;
+	        result.value = val;
+	        return;
 	    }
 	    if (val < target.abilitySum) {
 	        if (val < (MIN_STAT_SIZE * 7)) {
@@ -345,12 +348,15 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	            target[randProp] -= 1;
 	            diff -= 1;
 	        }
-	        target.abilitySum = val;
-	        return true;
+	        result.value = val;
+	        return;
 	    }
 	});
 	
-	attributes.on('set', (target, prop, val) => {
+	attributes.on('set', (result) => {
+	    let target = result.target;
+	    let val = result.value;
+	    let prop = result.key;
 	    if (prop === "serverSettings") {
 	        return;
 	    }
@@ -360,10 +366,9 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    }
 	
 	    if (isNaN(val)) {
-	        requestAnimationFrame(() => (
-	            attributes[prop] = target[prop])
-	        );
-	        return false;
+	        result.value = target[prop];
+	        result.cycle = false;
+	        return;
 	    }
 	
 	    if (val > target[prop]) {
@@ -374,9 +379,9 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	        if ((target.abilitySum + diff) > MAX_ABILITY_SUM) {
 	            diff -= (target.abilitySum + diff) - MAX_ABILITY_SUM;
 	        }
-	        target[prop] += diff;
+	        result.value = target[prop] + diff;
 	        target.abilitySum += diff;
-	        return true;
+	        return;
 	    }
 	
 	    if (val < target[prop]) {
@@ -384,9 +389,9 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	            val = MIN_STAT_SIZE;
 	        }
 	        let diff = target[prop] - val;
-	        target[prop] -= diff;
+	        result.value = target[prop] - diff;
 	        target.abilitySum -= diff;
-	        return true;
+	        return;
 	    }
 	});
 	
@@ -399,15 +404,19 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    final: {}
 	};
 	
-	attributes.on('set', (target, prop, val) => {
+	attributes.on('set', (result) => {
 	    if (self.state.ignoreUpdate || 
-	        !updatable(target, prop, val)) {
+	        !updatable(result)) {
 	        return;
 	    }
 	    self.state.ignoreUpdate = true;
 	    let update = {};
 	    Object.keys(attributes).forEach(prop => {
 	        if (prop === "serverSettings") {
+	            return;
+	        }
+	        if (prop === result.key) {
+	            update[prop] = result.value;
 	            return;
 	        }
 	        update[prop] = attributes[prop];
@@ -453,7 +462,6 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	if (!self.loaded) {
 	    new self.hook.comms();
 	    new self.control.events();
-	    //$('select').selectric();
 	}
 	
     };
@@ -723,7 +731,9 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.
 	
 	self.state.names = {};
 	
-	function updateServer(target) {
+	function updateServer(result) {
+	    let target = result.target;
+	    target[result.key] = result.value;
 	    for (setting in target.serverSettings) {
 	        val = target.serverSettings[setting];
 	        if (val !== target[setting]) {
@@ -733,12 +743,11 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.
 	    }
 	}
 	
-	settings.on('set', (target, prop, val) => {
-	    target[prop]=val;
-	    if (!updatable(target, prop, val)) {
+	settings.on('set', (result) => {
+	    if (!updatable(result)) {
 	        return;
 	    }
-	    updateServer(target);
+	    updateServer(result);
 	});
 	
 	socket.emit("gladiator-culture-ready");
@@ -1514,12 +1523,15 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    var keys = Object.keys(obj).filter(f);
 	    return  keys[keys.length * Math.random() << 0];
 	};
-	attributes.on('set', 'abilitySum', (target, prop, val) => {
+	attributes.on('set', 'abilitySum', (result) => {
+	    let target = result.target;
+	    let val = result.value;
+	    let prop = result.key;
+	
 	    if (isNaN(val)) {
-	        requestAnimationFrame(() => (
-	            attributes[prop] = target[prop])
-	        );
-	        return false;
+	        result.value = target[prop];
+	        result.cycle = false;
+	        return;
 	    }
 	    let attrPool = {};
 	    Object.keys(target).forEach(prop => {
@@ -1543,8 +1555,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	            target[randProp] += 1;
 	            diff -= 1;
 	        }
-	        target.abilitySum = val;
-	        return true;
+	        result.value = val;
+	        return;
 	    }
 	    if (val < target.abilitySum) {
 	        if (val < (MIN_STAT_SIZE * 7)) {
@@ -1560,12 +1572,15 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	            target[randProp] -= 1;
 	            diff -= 1;
 	        }
-	        target.abilitySum = val;
-	        return true;
+	        result.value = val;
+	        return;
 	    }
 	});
 	
-	attributes.on('set', (target, prop, val) => {
+	attributes.on('set', (result) => {
+	    let target = result.target;
+	    let val = result.value;
+	    let prop = result.key;
 	    if (prop === "serverSettings") {
 	        return;
 	    }
@@ -1575,10 +1590,9 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    }
 	
 	    if (isNaN(val)) {
-	        requestAnimationFrame(() => (
-	            attributes[prop] = target[prop])
-	        );
-	        return false;
+	        result.value = target[prop];
+	        result.cycle = false;
+	        return;
 	    }
 	
 	    if (val > target[prop]) {
@@ -1589,9 +1603,9 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	        if ((target.abilitySum + diff) > MAX_ABILITY_SUM) {
 	            diff -= (target.abilitySum + diff) - MAX_ABILITY_SUM;
 	        }
-	        target[prop] += diff;
+	        result.value = target[prop] + diff;
 	        target.abilitySum += diff;
-	        return true;
+	        return;
 	    }
 	
 	    if (val < target[prop]) {
@@ -1599,9 +1613,9 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	            val = MIN_STAT_SIZE;
 	        }
 	        let diff = target[prop] - val;
-	        target[prop] -= diff;
+	        result.value = target[prop] - diff;
 	        target.abilitySum -= diff;
-	        return true;
+	        return;
 	    }
 	});
 	
@@ -1614,15 +1628,19 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    final: {}
 	};
 	
-	attributes.on('set', (target, prop, val) => {
+	attributes.on('set', (result) => {
 	    if (self.state.ignoreUpdate || 
-	        !updatable(target, prop, val)) {
+	        !updatable(result)) {
 	        return;
 	    }
 	    self.state.ignoreUpdate = true;
 	    let update = {};
 	    Object.keys(attributes).forEach(prop => {
 	        if (prop === "serverSettings") {
+	            return;
+	        }
+	        if (prop === result.key) {
+	            update[prop] = result.value;
 	            return;
 	        }
 	        update[prop] = attributes[prop];
@@ -1668,7 +1686,6 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	if (!self.loaded) {
 	    new self.hook.comms();
 	    new self.control.events();
-	    //$('select').selectric();
 	}
 	
     };
@@ -1938,7 +1955,9 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.
 	
 	self.state.names = {};
 	
-	function updateServer(target) {
+	function updateServer(result) {
+	    let target = result.target;
+	    target[result.key] = result.value;
 	    for (setting in target.serverSettings) {
 	        val = target.serverSettings[setting];
 	        if (val !== target[setting]) {
@@ -1948,12 +1967,11 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.
 	    }
 	}
 	
-	settings.on('set', (target, prop, val) => {
-	    target[prop]=val;
-	    if (!updatable(target, prop, val)) {
+	settings.on('set', (result) => {
+	    if (!updatable(result)) {
 	        return;
 	    }
-	    updateServer(target);
+	    updateServer(result);
 	});
 	
 	socket.emit("gladiator-culture-ready");
@@ -2646,12 +2664,15 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    var keys = Object.keys(obj).filter(f);
 	    return  keys[keys.length * Math.random() << 0];
 	};
-	attributes.on('set', 'abilitySum', (target, prop, val) => {
+	attributes.on('set', 'abilitySum', (result) => {
+	    let target = result.target;
+	    let val = result.value;
+	    let prop = result.key;
+	
 	    if (isNaN(val)) {
-	        requestAnimationFrame(() => (
-	            attributes[prop] = target[prop])
-	        );
-	        return false;
+	        result.value = target[prop];
+	        result.cycle = false;
+	        return;
 	    }
 	    let attrPool = {};
 	    Object.keys(target).forEach(prop => {
@@ -2675,8 +2696,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	            target[randProp] += 1;
 	            diff -= 1;
 	        }
-	        target.abilitySum = val;
-	        return true;
+	        result.value = val;
+	        return;
 	    }
 	    if (val < target.abilitySum) {
 	        if (val < (MIN_STAT_SIZE * 7)) {
@@ -2692,12 +2713,15 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	            target[randProp] -= 1;
 	            diff -= 1;
 	        }
-	        target.abilitySum = val;
-	        return true;
+	        result.value = val;
+	        return;
 	    }
 	});
 	
-	attributes.on('set', (target, prop, val) => {
+	attributes.on('set', (result) => {
+	    let target = result.target;
+	    let val = result.value;
+	    let prop = result.key;
 	    if (prop === "serverSettings") {
 	        return;
 	    }
@@ -2707,10 +2731,9 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    }
 	
 	    if (isNaN(val)) {
-	        requestAnimationFrame(() => (
-	            attributes[prop] = target[prop])
-	        );
-	        return false;
+	        result.value = target[prop];
+	        result.cycle = false;
+	        return;
 	    }
 	
 	    if (val > target[prop]) {
@@ -2721,9 +2744,9 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	        if ((target.abilitySum + diff) > MAX_ABILITY_SUM) {
 	            diff -= (target.abilitySum + diff) - MAX_ABILITY_SUM;
 	        }
-	        target[prop] += diff;
+	        result.value = target[prop] + diff;
 	        target.abilitySum += diff;
-	        return true;
+	        return;
 	    }
 	
 	    if (val < target[prop]) {
@@ -2731,9 +2754,9 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	            val = MIN_STAT_SIZE;
 	        }
 	        let diff = target[prop] - val;
-	        target[prop] -= diff;
+	        result.value = target[prop] - diff;
 	        target.abilitySum -= diff;
-	        return true;
+	        return;
 	    }
 	});
 	
@@ -2746,15 +2769,19 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    final: {}
 	};
 	
-	attributes.on('set', (target, prop, val) => {
+	attributes.on('set', (result) => {
 	    if (self.state.ignoreUpdate || 
-	        !updatable(target, prop, val)) {
+	        !updatable(result)) {
 	        return;
 	    }
 	    self.state.ignoreUpdate = true;
 	    let update = {};
 	    Object.keys(attributes).forEach(prop => {
 	        if (prop === "serverSettings") {
+	            return;
+	        }
+	        if (prop === result.key) {
+	            update[prop] = result.value;
 	            return;
 	        }
 	        update[prop] = attributes[prop];
@@ -2800,7 +2827,6 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	if (!self.loaded) {
 	    new self.hook.comms();
 	    new self.control.events();
-	    //$('select').selectric();
 	}
 	
     };
@@ -3070,7 +3096,9 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.
 	
 	self.state.names = {};
 	
-	function updateServer(target) {
+	function updateServer(result) {
+	    let target = result.target;
+	    target[result.key] = result.value;
 	    for (setting in target.serverSettings) {
 	        val = target.serverSettings[setting];
 	        if (val !== target[setting]) {
@@ -3080,12 +3108,11 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.
 	    }
 	}
 	
-	settings.on('set', (target, prop, val) => {
-	    target[prop]=val;
-	    if (!updatable(target, prop, val)) {
+	settings.on('set', (result) => {
+	    if (!updatable(result)) {
 	        return;
 	    }
-	    updateServer(target);
+	    updateServer(result);
 	});
 	
 	socket.emit("gladiator-culture-ready");
@@ -3809,18 +3836,18 @@ window.modules.navigation.prototype.modules.settings.prototype.hook.comms=functi
 	// Emit a socket sound-settings event.
 	// This allows the server to stay in-sync
 	// with the client when changes occur.
-	settings.on('set', (target, prop, val) => {
+	settings.on('set', result => {
 	    if (pendingMessage) {
 	        return;
 	    }
-	    if (!self.share.utility.isServerUpdatable(target)) {
+	    if (!self.share.utility.isServerUpdatable(result)) {
 	        return;
 	    }
 	    pendingMessage = true;
 	    if (self.share.mouseIsDown) {
-	        $(document).one('mouseup', () => sendUpdate(target));
+	        $(document).one('mouseup', () => sendUpdate(result.target));
 	    } else {
-	        sendUpdate(target);
+	        sendUpdate(result.target);
 	    }
 	});
 	
@@ -3839,8 +3866,9 @@ window.modules.navigation.prototype.modules.settings.prototype.hook.settingState
 	const settings = self.state.settings;
 	
 	function putBetween (min, max) {
-	    return function (target, prop, val) {
-	        val = Math.round(parseInt(val));
+	    return function (result) {
+	
+	        val = Math.round(parseInt(result.value));
 	        if (val < min) {
 	            val = min;
 	        } else if (val > max) {
@@ -3851,8 +3879,7 @@ window.modules.navigation.prototype.modules.settings.prototype.hook.settingState
 	            val = min;
 	        }
 	
-	        target[prop] = val;
-	        return true;
+	        result.value = val;
 	    };
 	}
 	
@@ -3862,17 +3889,16 @@ window.modules.navigation.prototype.modules.settings.prototype.hook.settingState
 	// Emit a master-sound event 
 	// This allows things outside of
 	// this module to listen for changes.
-	settings.on('set', 'masterSound', (target, prop, val) => {
-	    self.share.eventLoop.emit('master-sound', val);
-	}
-	);
+	settings.on('set', 'masterSound', (result) => {
+	    self.share.eventLoop.emit('master-sound', result.value);
+	});
 	
 	// Enable/Disable all Audio
-	settings.on('set', 'masterSound', (target, prop, val) => {
-	    if (val) {
+	settings.on('set', 'masterSound', (result) => {
+	    if (result.value) {
 	        Howler.mute(false);
 	    }
-	    if (!val) {
+	    if (!result.value) {
 	        Howler.mute(true);
 	    }
 	});
@@ -3881,29 +3907,29 @@ window.modules.navigation.prototype.modules.settings.prototype.hook.settingState
 	settings.on('set', 'masterVolume', putBetween(0, 100));
 	
 	// Set Master Volume
-	settings.on('set', 'masterVolume', (target, prop, val) => {
-	    Howler.volume(val / 100);
+	settings.on('set', 'masterVolume', (result) => {
+	    Howler.volume(result.value / 100);
 	});
 	
 	// Ensure musicVolume is between 0 and 100.
 	settings.on('set', 'musicVolume', putBetween(0, 100));
 	
 	// Set Music Volume
-	settings.on('set', 'musicVolume', (target, prop, val) => {
-	    self.share.sounds.music.volume(val / 100);
+	settings.on('set', 'musicVolume', (result) => {
+	    self.share.sounds.music.volume(result.value / 100);
 	});
 	
 	// Ensure fxVolume is between 0 and 100.
 	settings.on('set', 'fxVolume', putBetween(0, 100));
 	
 	// Set Music Volume
-	settings.on('set', 'fxVolume', (target, prop, val) => {
+	settings.on('set', 'fxVolume', (result) => {
 	    let sounds = self.share.sounds;
 	    for (let sound in sounds) {
 	        if (sound === "music") {
 	            continue;
 	        }
-	        sounds[sound].volume(val / 100);
+	        sounds[sound].volume(result.value / 100);
 	    }
 	});
 	
@@ -4085,6 +4111,7 @@ window.modules.utility = function () {
 	
 	if (!self.loaded) {
 	    self.share.utility = {};
+	    new self.manipulators.waject;
 	    new self.functions.isServerUpdatable;
 	}
     };
@@ -4281,12 +4308,15 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    var keys = Object.keys(obj).filter(f);
 	    return  keys[keys.length * Math.random() << 0];
 	};
-	attributes.on('set', 'abilitySum', (target, prop, val) => {
+	attributes.on('set', 'abilitySum', (result) => {
+	    let target = result.target;
+	    let val = result.value;
+	    let prop = result.key;
+	
 	    if (isNaN(val)) {
-	        requestAnimationFrame(() => (
-	            attributes[prop] = target[prop])
-	        );
-	        return false;
+	        result.value = target[prop];
+	        result.cycle = false;
+	        return;
 	    }
 	    let attrPool = {};
 	    Object.keys(target).forEach(prop => {
@@ -4310,8 +4340,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	            target[randProp] += 1;
 	            diff -= 1;
 	        }
-	        target.abilitySum = val;
-	        return true;
+	        result.value = val;
+	        return;
 	    }
 	    if (val < target.abilitySum) {
 	        if (val < (MIN_STAT_SIZE * 7)) {
@@ -4327,12 +4357,15 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	            target[randProp] -= 1;
 	            diff -= 1;
 	        }
-	        target.abilitySum = val;
-	        return true;
+	        result.value = val;
+	        return;
 	    }
 	});
 	
-	attributes.on('set', (target, prop, val) => {
+	attributes.on('set', (result) => {
+	    let target = result.target;
+	    let val = result.value;
+	    let prop = result.key;
 	    if (prop === "serverSettings") {
 	        return;
 	    }
@@ -4342,10 +4375,9 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    }
 	
 	    if (isNaN(val)) {
-	        requestAnimationFrame(() => (
-	            attributes[prop] = target[prop])
-	        );
-	        return false;
+	        result.value = target[prop];
+	        result.cycle = false;
+	        return;
 	    }
 	
 	    if (val > target[prop]) {
@@ -4356,9 +4388,9 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	        if ((target.abilitySum + diff) > MAX_ABILITY_SUM) {
 	            diff -= (target.abilitySum + diff) - MAX_ABILITY_SUM;
 	        }
-	        target[prop] += diff;
+	        result.value = target[prop] + diff;
 	        target.abilitySum += diff;
-	        return true;
+	        return;
 	    }
 	
 	    if (val < target[prop]) {
@@ -4366,9 +4398,9 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	            val = MIN_STAT_SIZE;
 	        }
 	        let diff = target[prop] - val;
-	        target[prop] -= diff;
+	        result.value = target[prop] - diff;
 	        target.abilitySum -= diff;
-	        return true;
+	        return;
 	    }
 	});
 	
@@ -4381,15 +4413,19 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    final: {}
 	};
 	
-	attributes.on('set', (target, prop, val) => {
+	attributes.on('set', (result) => {
 	    if (self.state.ignoreUpdate || 
-	        !updatable(target, prop, val)) {
+	        !updatable(result)) {
 	        return;
 	    }
 	    self.state.ignoreUpdate = true;
 	    let update = {};
 	    Object.keys(attributes).forEach(prop => {
 	        if (prop === "serverSettings") {
+	            return;
+	        }
+	        if (prop === result.key) {
+	            update[prop] = result.value;
 	            return;
 	        }
 	        update[prop] = attributes[prop];
@@ -4435,7 +4471,6 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	if (!self.loaded) {
 	    new self.hook.comms();
 	    new self.control.events();
-	    //$('select').selectric();
 	}
 	
     };
@@ -4705,7 +4740,9 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.
 	
 	self.state.names = {};
 	
-	function updateServer(target) {
+	function updateServer(result) {
+	    let target = result.target;
+	    target[result.key] = result.value;
 	    for (setting in target.serverSettings) {
 	        val = target.serverSettings[setting];
 	        if (val !== target[setting]) {
@@ -4715,12 +4752,11 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.
 	    }
 	}
 	
-	settings.on('set', (target, prop, val) => {
-	    target[prop]=val;
-	    if (!updatable(target, prop, val)) {
+	settings.on('set', (result) => {
+	    if (!updatable(result)) {
 	        return;
 	    }
-	    updateServer(target);
+	    updateServer(result);
 	});
 	
 	socket.emit("gladiator-culture-ready");
@@ -5496,12 +5532,15 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    var keys = Object.keys(obj).filter(f);
 	    return  keys[keys.length * Math.random() << 0];
 	};
-	attributes.on('set', 'abilitySum', (target, prop, val) => {
+	attributes.on('set', 'abilitySum', (result) => {
+	    let target = result.target;
+	    let val = result.value;
+	    let prop = result.key;
+	
 	    if (isNaN(val)) {
-	        requestAnimationFrame(() => (
-	            attributes[prop] = target[prop])
-	        );
-	        return false;
+	        result.value = target[prop];
+	        result.cycle = false;
+	        return;
 	    }
 	    let attrPool = {};
 	    Object.keys(target).forEach(prop => {
@@ -5525,8 +5564,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	            target[randProp] += 1;
 	            diff -= 1;
 	        }
-	        target.abilitySum = val;
-	        return true;
+	        result.value = val;
+	        return;
 	    }
 	    if (val < target.abilitySum) {
 	        if (val < (MIN_STAT_SIZE * 7)) {
@@ -5542,12 +5581,15 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	            target[randProp] -= 1;
 	            diff -= 1;
 	        }
-	        target.abilitySum = val;
-	        return true;
+	        result.value = val;
+	        return;
 	    }
 	});
 	
-	attributes.on('set', (target, prop, val) => {
+	attributes.on('set', (result) => {
+	    let target = result.target;
+	    let val = result.value;
+	    let prop = result.key;
 	    if (prop === "serverSettings") {
 	        return;
 	    }
@@ -5557,10 +5599,9 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    }
 	
 	    if (isNaN(val)) {
-	        requestAnimationFrame(() => (
-	            attributes[prop] = target[prop])
-	        );
-	        return false;
+	        result.value = target[prop];
+	        result.cycle = false;
+	        return;
 	    }
 	
 	    if (val > target[prop]) {
@@ -5571,9 +5612,9 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	        if ((target.abilitySum + diff) > MAX_ABILITY_SUM) {
 	            diff -= (target.abilitySum + diff) - MAX_ABILITY_SUM;
 	        }
-	        target[prop] += diff;
+	        result.value = target[prop] + diff;
 	        target.abilitySum += diff;
-	        return true;
+	        return;
 	    }
 	
 	    if (val < target[prop]) {
@@ -5581,9 +5622,9 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	            val = MIN_STAT_SIZE;
 	        }
 	        let diff = target[prop] - val;
-	        target[prop] -= diff;
+	        result.value = target[prop] - diff;
 	        target.abilitySum -= diff;
-	        return true;
+	        return;
 	    }
 	});
 	
@@ -5596,15 +5637,19 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    final: {}
 	};
 	
-	attributes.on('set', (target, prop, val) => {
+	attributes.on('set', (result) => {
 	    if (self.state.ignoreUpdate || 
-	        !updatable(target, prop, val)) {
+	        !updatable(result)) {
 	        return;
 	    }
 	    self.state.ignoreUpdate = true;
 	    let update = {};
 	    Object.keys(attributes).forEach(prop => {
 	        if (prop === "serverSettings") {
+	            return;
+	        }
+	        if (prop === result.key) {
+	            update[prop] = result.value;
 	            return;
 	        }
 	        update[prop] = attributes[prop];
@@ -5650,7 +5695,6 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	if (!self.loaded) {
 	    new self.hook.comms();
 	    new self.control.events();
-	    //$('select').selectric();
 	}
 	
     };
@@ -5920,7 +5964,9 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.
 	
 	self.state.names = {};
 	
-	function updateServer(target) {
+	function updateServer(result) {
+	    let target = result.target;
+	    target[result.key] = result.value;
 	    for (setting in target.serverSettings) {
 	        val = target.serverSettings[setting];
 	        if (val !== target[setting]) {
@@ -5930,12 +5976,11 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.
 	    }
 	}
 	
-	settings.on('set', (target, prop, val) => {
-	    target[prop]=val;
-	    if (!updatable(target, prop, val)) {
+	settings.on('set', (result) => {
+	    if (!updatable(result)) {
 	        return;
 	    }
-	    updateServer(target);
+	    updateServer(result);
 	});
 	
 	socket.emit("gladiator-culture-ready");
@@ -6628,12 +6673,15 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    var keys = Object.keys(obj).filter(f);
 	    return  keys[keys.length * Math.random() << 0];
 	};
-	attributes.on('set', 'abilitySum', (target, prop, val) => {
+	attributes.on('set', 'abilitySum', (result) => {
+	    let target = result.target;
+	    let val = result.value;
+	    let prop = result.key;
+	
 	    if (isNaN(val)) {
-	        requestAnimationFrame(() => (
-	            attributes[prop] = target[prop])
-	        );
-	        return false;
+	        result.value = target[prop];
+	        result.cycle = false;
+	        return;
 	    }
 	    let attrPool = {};
 	    Object.keys(target).forEach(prop => {
@@ -6657,8 +6705,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	            target[randProp] += 1;
 	            diff -= 1;
 	        }
-	        target.abilitySum = val;
-	        return true;
+	        result.value = val;
+	        return;
 	    }
 	    if (val < target.abilitySum) {
 	        if (val < (MIN_STAT_SIZE * 7)) {
@@ -6674,12 +6722,15 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	            target[randProp] -= 1;
 	            diff -= 1;
 	        }
-	        target.abilitySum = val;
-	        return true;
+	        result.value = val;
+	        return;
 	    }
 	});
 	
-	attributes.on('set', (target, prop, val) => {
+	attributes.on('set', (result) => {
+	    let target = result.target;
+	    let val = result.value;
+	    let prop = result.key;
 	    if (prop === "serverSettings") {
 	        return;
 	    }
@@ -6689,10 +6740,9 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    }
 	
 	    if (isNaN(val)) {
-	        requestAnimationFrame(() => (
-	            attributes[prop] = target[prop])
-	        );
-	        return false;
+	        result.value = target[prop];
+	        result.cycle = false;
+	        return;
 	    }
 	
 	    if (val > target[prop]) {
@@ -6703,9 +6753,9 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	        if ((target.abilitySum + diff) > MAX_ABILITY_SUM) {
 	            diff -= (target.abilitySum + diff) - MAX_ABILITY_SUM;
 	        }
-	        target[prop] += diff;
+	        result.value = target[prop] + diff;
 	        target.abilitySum += diff;
-	        return true;
+	        return;
 	    }
 	
 	    if (val < target[prop]) {
@@ -6713,9 +6763,9 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	            val = MIN_STAT_SIZE;
 	        }
 	        let diff = target[prop] - val;
-	        target[prop] -= diff;
+	        result.value = target[prop] - diff;
 	        target.abilitySum -= diff;
-	        return true;
+	        return;
 	    }
 	});
 	
@@ -6728,15 +6778,19 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    final: {}
 	};
 	
-	attributes.on('set', (target, prop, val) => {
+	attributes.on('set', (result) => {
 	    if (self.state.ignoreUpdate || 
-	        !updatable(target, prop, val)) {
+	        !updatable(result)) {
 	        return;
 	    }
 	    self.state.ignoreUpdate = true;
 	    let update = {};
 	    Object.keys(attributes).forEach(prop => {
 	        if (prop === "serverSettings") {
+	            return;
+	        }
+	        if (prop === result.key) {
+	            update[prop] = result.value;
 	            return;
 	        }
 	        update[prop] = attributes[prop];
@@ -6782,7 +6836,6 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	if (!self.loaded) {
 	    new self.hook.comms();
 	    new self.control.events();
-	    //$('select').selectric();
 	}
 	
     };
@@ -7052,7 +7105,9 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.
 	
 	self.state.names = {};
 	
-	function updateServer(target) {
+	function updateServer(result) {
+	    let target = result.target;
+	    target[result.key] = result.value;
 	    for (setting in target.serverSettings) {
 	        val = target.serverSettings[setting];
 	        if (val !== target[setting]) {
@@ -7062,12 +7117,11 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.
 	    }
 	}
 	
-	settings.on('set', (target, prop, val) => {
-	    target[prop]=val;
-	    if (!updatable(target, prop, val)) {
+	settings.on('set', (result) => {
+	    if (!updatable(result)) {
 	        return;
 	    }
-	    updateServer(target);
+	    updateServer(result);
 	});
 	
 	socket.emit("gladiator-culture-ready");
@@ -7791,18 +7845,18 @@ window.modules.navigation.prototype.modules.settings.prototype.hook.comms=functi
 	// Emit a socket sound-settings event.
 	// This allows the server to stay in-sync
 	// with the client when changes occur.
-	settings.on('set', (target, prop, val) => {
+	settings.on('set', result => {
 	    if (pendingMessage) {
 	        return;
 	    }
-	    if (!self.share.utility.isServerUpdatable(target)) {
+	    if (!self.share.utility.isServerUpdatable(result)) {
 	        return;
 	    }
 	    pendingMessage = true;
 	    if (self.share.mouseIsDown) {
-	        $(document).one('mouseup', () => sendUpdate(target));
+	        $(document).one('mouseup', () => sendUpdate(result.target));
 	    } else {
-	        sendUpdate(target);
+	        sendUpdate(result.target);
 	    }
 	});
 	
@@ -7821,8 +7875,9 @@ window.modules.navigation.prototype.modules.settings.prototype.hook.settingState
 	const settings = self.state.settings;
 	
 	function putBetween (min, max) {
-	    return function (target, prop, val) {
-	        val = Math.round(parseInt(val));
+	    return function (result) {
+	
+	        val = Math.round(parseInt(result.value));
 	        if (val < min) {
 	            val = min;
 	        } else if (val > max) {
@@ -7833,8 +7888,7 @@ window.modules.navigation.prototype.modules.settings.prototype.hook.settingState
 	            val = min;
 	        }
 	
-	        target[prop] = val;
-	        return true;
+	        result.value = val;
 	    };
 	}
 	
@@ -7844,17 +7898,16 @@ window.modules.navigation.prototype.modules.settings.prototype.hook.settingState
 	// Emit a master-sound event 
 	// This allows things outside of
 	// this module to listen for changes.
-	settings.on('set', 'masterSound', (target, prop, val) => {
-	    self.share.eventLoop.emit('master-sound', val);
-	}
-	);
+	settings.on('set', 'masterSound', (result) => {
+	    self.share.eventLoop.emit('master-sound', result.value);
+	});
 	
 	// Enable/Disable all Audio
-	settings.on('set', 'masterSound', (target, prop, val) => {
-	    if (val) {
+	settings.on('set', 'masterSound', (result) => {
+	    if (result.value) {
 	        Howler.mute(false);
 	    }
-	    if (!val) {
+	    if (!result.value) {
 	        Howler.mute(true);
 	    }
 	});
@@ -7863,29 +7916,29 @@ window.modules.navigation.prototype.modules.settings.prototype.hook.settingState
 	settings.on('set', 'masterVolume', putBetween(0, 100));
 	
 	// Set Master Volume
-	settings.on('set', 'masterVolume', (target, prop, val) => {
-	    Howler.volume(val / 100);
+	settings.on('set', 'masterVolume', (result) => {
+	    Howler.volume(result.value / 100);
 	});
 	
 	// Ensure musicVolume is between 0 and 100.
 	settings.on('set', 'musicVolume', putBetween(0, 100));
 	
 	// Set Music Volume
-	settings.on('set', 'musicVolume', (target, prop, val) => {
-	    self.share.sounds.music.volume(val / 100);
+	settings.on('set', 'musicVolume', (result) => {
+	    self.share.sounds.music.volume(result.value / 100);
 	});
 	
 	// Ensure fxVolume is between 0 and 100.
 	settings.on('set', 'fxVolume', putBetween(0, 100));
 	
 	// Set Music Volume
-	settings.on('set', 'fxVolume', (target, prop, val) => {
+	settings.on('set', 'fxVolume', (result) => {
 	    let sounds = self.share.sounds;
 	    for (let sound in sounds) {
 	        if (sound === "music") {
 	            continue;
 	        }
-	        sounds[sound].volume(val / 100);
+	        sounds[sound].volume(result.value / 100);
 	    }
 	});
 	
@@ -7898,13 +7951,16 @@ window.modules.navigation.prototype.modules.settings.prototype.hook.settingState
     window.modules.utility.prototype.loaded = false;
     window.modules.utility.prototype.functions={};
 window.modules.utility.prototype.functions.isServerUpdatable=function() {
-        this.share.utility.isServerUpdatable = function isServerUpdatable(target, prop, val) {
+        this.share.utility.isServerUpdatable = function isServerUpdatable(result) {
+	    let target = result.target;
 	    let s = target.serverSettings;
-	
+	    
 	    if (Object.keys(s).length !== Object.keys(target).length - 1) {
 	        return false;
 	    }
-	
+	    if (result.target.serverSettings[result.key] !== result.value) {
+	        return true;
+	    }
 	    for (let setting in s) {
 	        if (target[setting] !== s[setting]) {
 	            return true;
@@ -7915,3 +7971,31 @@ window.modules.utility.prototype.functions.isServerUpdatable=function() {
 	}
     };
     window.modules.utility.prototype.functions.isServerUpdatable.prototype = window.modules.utility.prototype;
+window.modules.utility.prototype.manipulators={};
+window.modules.utility.prototype.manipulators.waject=function() {
+        waject.extend('bindInput', function (
+	        prop, 
+	        element, 
+	        event='change',
+	        inHandler=(element, p, prop) => {
+	            p[prop] = $(element).val();
+	        },
+	        outHandler=(element, val) => {
+	            $(element).val(val);
+	        }) {
+	    if (typeof prop === "object") {
+	        element = prop.element;
+	        event = prop.event || event;
+	        inHandler = prop.inHandler || inHandler;
+	        outHandler = prop.outHandler || outHandler;
+	        prop = prop.property;
+	    }
+	    $(element).on(event, () => 
+	        inHandler(element, this.proxy, prop));
+	    this.proxy.on('set', prop, (result) => 
+	        outHandler(element, result.value));
+	    outHandler(element, this.target[prop]);
+	});
+	
+    };
+    window.modules.utility.prototype.manipulators.waject.prototype = window.modules.utility.prototype;

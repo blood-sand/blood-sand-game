@@ -47,3 +47,55 @@ state['*'] = {
 };
 
 console.log(state['*'])
+
+
+
+
+
+
+
+
+
+var example = waject();
+var stats = {};
+example.on('get', result => {
+    let prop = result.key;
+    if (prop in stats) {
+        stats[prop] += 1;
+    } else {
+        stats[prop] = 1;
+    }
+});
+
+example.on('get', 'favorite', result => {
+    if ('favorite' in stats) {
+        delete stats.favorite;
+    }
+});
+
+example.on('get', 'favorite', result => {
+    let s = Object.keys(stats);
+    console.log(s);
+    if (s.length === 0) {
+        result.value = undefined;
+        return;
+    }
+    result.value = Object.keys(stats).reduce((biggest, current) => {
+        console.log(biggest, stats[biggest]);
+        console.log(current, stats[current]);
+        return stats[biggest] > stats[current] ? biggest : current;
+    });
+});
+
+example.on('get', 'favorite', result => {
+    console.log("Asking for favorite..", result);
+});
+
+example.fruit;
+example.fruit;
+example.sport;
+example.favorite;
+example.sport;
+example.favorite;
+example.sport;
+example.favorite;

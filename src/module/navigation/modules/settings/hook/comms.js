@@ -66,18 +66,18 @@ new self.hook.settingState;
 // Emit a socket sound-settings event.
 // This allows the server to stay in-sync
 // with the client when changes occur.
-settings.on('set', (target, prop, val) => {
+settings.on('set', result => {
     if (pendingMessage) {
         return;
     }
-    if (!self.share.utility.isServerUpdatable(target)) {
+    if (!self.share.utility.isServerUpdatable(result)) {
         return;
     }
     pendingMessage = true;
     if (self.share.mouseIsDown) {
-        $(document).one('mouseup', () => sendUpdate(target));
+        $(document).one('mouseup', () => sendUpdate(result.target));
     } else {
-        sendUpdate(target);
+        sendUpdate(result.target);
     }
 });
 
