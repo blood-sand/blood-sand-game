@@ -3658,12 +3658,10 @@ window.modules.navigation.prototype.modules.settings.prototype.control.sliders=f
 	        max: 1,
 	        step: 1,
 	        create () {
-	            settings.on('set', 'masterSound', (target, prop, val) => {
+	            settings.on('set', 'masterSound', result => 
 	                $(this).
-	                    slider('value', val).
-	                    children('.custom-handle').text(val ? 'On' : 'Off');
-	                return val;
-	            });
+	                    slider('value', result.value).
+	                    children('.custom-handle').text(result.value ? 'On' : 'Off'));
 	        },
 	        slide (event, ui) {
 	            settings.masterSound = ui.value;
@@ -3677,10 +3675,8 @@ window.modules.navigation.prototype.modules.settings.prototype.control.sliders=f
 	        max: 100,
 	        step: 5,
 	        create () {
-	            settings.on('set', 'masterVolume', (target, prop, val) => {
-	                $(this).slider('value', val);
-	                return val;
-	            });
+	            settings.on('set', 'masterVolume', result => 
+	                $(this).slider('value', result.value));
 	        },
 	        slide (event, ui) {
 	            settings.masterVolume = ui.value;
@@ -3694,10 +3690,8 @@ window.modules.navigation.prototype.modules.settings.prototype.control.sliders=f
 	        max: 100,
 	        step: 5,
 	        create () {
-	            settings.on('set', 'musicVolume', (target, prop, val) => {
-	                $(this).slider('value', val);
-	                return val;
-	            });
+	            settings.on('set', 'musicVolume', result => 
+	                $(this).slider('value', result.value));
 	        },
 	        slide (event, ui) {
 	            settings.musicVolume = ui.value;
@@ -3711,10 +3705,8 @@ window.modules.navigation.prototype.modules.settings.prototype.control.sliders=f
 	        max: 100,
 	        step: 5,
 	        create: function() {
-	            settings.on('set', 'fxVolume', (target, prop, val) => {
-	                $(this).slider('value', val);
-	                return val;
-	            });
+	            settings.on('set', 'fxVolume', result => 
+	                $(this).slider('value', result.value));
 	        },
 	        slide: function (event, ui) {
 	            settings.fxVolume = ui.value;
@@ -7667,12 +7659,10 @@ window.modules.navigation.prototype.modules.settings.prototype.control.sliders=f
 	        max: 1,
 	        step: 1,
 	        create () {
-	            settings.on('set', 'masterSound', (target, prop, val) => {
+	            settings.on('set', 'masterSound', result => 
 	                $(this).
-	                    slider('value', val).
-	                    children('.custom-handle').text(val ? 'On' : 'Off');
-	                return val;
-	            });
+	                    slider('value', result.value).
+	                    children('.custom-handle').text(result.value ? 'On' : 'Off'));
 	        },
 	        slide (event, ui) {
 	            settings.masterSound = ui.value;
@@ -7686,10 +7676,8 @@ window.modules.navigation.prototype.modules.settings.prototype.control.sliders=f
 	        max: 100,
 	        step: 5,
 	        create () {
-	            settings.on('set', 'masterVolume', (target, prop, val) => {
-	                $(this).slider('value', val);
-	                return val;
-	            });
+	            settings.on('set', 'masterVolume', result => 
+	                $(this).slider('value', result.value));
 	        },
 	        slide (event, ui) {
 	            settings.masterVolume = ui.value;
@@ -7703,10 +7691,8 @@ window.modules.navigation.prototype.modules.settings.prototype.control.sliders=f
 	        max: 100,
 	        step: 5,
 	        create () {
-	            settings.on('set', 'musicVolume', (target, prop, val) => {
-	                $(this).slider('value', val);
-	                return val;
-	            });
+	            settings.on('set', 'musicVolume', result => 
+	                $(this).slider('value', result.value));
 	        },
 	        slide (event, ui) {
 	            settings.musicVolume = ui.value;
@@ -7720,10 +7706,8 @@ window.modules.navigation.prototype.modules.settings.prototype.control.sliders=f
 	        max: 100,
 	        step: 5,
 	        create: function() {
-	            settings.on('set', 'fxVolume', (target, prop, val) => {
-	                $(this).slider('value', val);
-	                return val;
-	            });
+	            settings.on('set', 'fxVolume', result => 
+	                $(this).slider('value', result.value));
 	        },
 	        slide: function (event, ui) {
 	            settings.fxVolume = ui.value;
