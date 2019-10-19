@@ -215,13 +215,13 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	        element: $(this),
 	        event: 'slidestop',
 	        outHandler (element, value) {
-	            element.
+	            $(element).
 	                slider('value', value).
 	                children('.custom-handle').
 	                    text(value);
 	        },
 	        inHandler (element, proxy, prop) {
-	            proxy[prop] = element.slider('value');
+	            proxy[prop] = $(element).slider('value');
 	            return updateSliders();
 	        }
 	    });
@@ -542,16 +542,16 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	    socket.emit("gladiator-biometrics-generate");
 	}
 	
-	biometrics.on('set', 'rank', (target, prop, val) => {
+	biometrics.on('set', 'rank', result => {
 	    if (serverRank === undefined) {
 	        return;
 	    }
-	    val = parseInt(val);
+	    val = parseInt(result.value);
 	    if (val < 1 || val > 15 || isNaN(val)) {
-	        requestAnimationFrame(() => (biometrics.rank = serverRank));
-	        return false;
+	        result.value = serverRank;
+	        return;
 	    }
-	    target[prop] = val;
+	    result.value = val;
 	    if (serverRank === val) {
 	        return;
 	    }
@@ -1439,13 +1439,13 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	        element: $(this),
 	        event: 'slidestop',
 	        outHandler (element, value) {
-	            element.
+	            $(element).
 	                slider('value', value).
 	                children('.custom-handle').
 	                    text(value);
 	        },
 	        inHandler (element, proxy, prop) {
-	            proxy[prop] = element.slider('value');
+	            proxy[prop] = $(element).slider('value');
 	            return updateSliders();
 	        }
 	    });
@@ -1766,16 +1766,16 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	    socket.emit("gladiator-biometrics-generate");
 	}
 	
-	biometrics.on('set', 'rank', (target, prop, val) => {
+	biometrics.on('set', 'rank', result => {
 	    if (serverRank === undefined) {
 	        return;
 	    }
-	    val = parseInt(val);
+	    val = parseInt(result.value);
 	    if (val < 1 || val > 15 || isNaN(val)) {
-	        requestAnimationFrame(() => (biometrics.rank = serverRank));
-	        return false;
+	        result.value = serverRank;
+	        return;
 	    }
-	    target[prop] = val;
+	    result.value = val;
 	    if (serverRank === val) {
 	        return;
 	    }
@@ -2580,13 +2580,13 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	        element: $(this),
 	        event: 'slidestop',
 	        outHandler (element, value) {
-	            element.
+	            $(element).
 	                slider('value', value).
 	                children('.custom-handle').
 	                    text(value);
 	        },
 	        inHandler (element, proxy, prop) {
-	            proxy[prop] = element.slider('value');
+	            proxy[prop] = $(element).slider('value');
 	            return updateSliders();
 	        }
 	    });
@@ -2907,16 +2907,16 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	    socket.emit("gladiator-biometrics-generate");
 	}
 	
-	biometrics.on('set', 'rank', (target, prop, val) => {
+	biometrics.on('set', 'rank', result => {
 	    if (serverRank === undefined) {
 	        return;
 	    }
-	    val = parseInt(val);
+	    val = parseInt(result.value);
 	    if (val < 1 || val > 15 || isNaN(val)) {
-	        requestAnimationFrame(() => (biometrics.rank = serverRank));
-	        return false;
+	        result.value = serverRank;
+	        return;
 	    }
-	    target[prop] = val;
+	    result.value = val;
 	    if (serverRank === val) {
 	        return;
 	    }
@@ -4216,13 +4216,13 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	        element: $(this),
 	        event: 'slidestop',
 	        outHandler (element, value) {
-	            element.
+	            $(element).
 	                slider('value', value).
 	                children('.custom-handle').
 	                    text(value);
 	        },
 	        inHandler (element, proxy, prop) {
-	            proxy[prop] = element.slider('value');
+	            proxy[prop] = $(element).slider('value');
 	            return updateSliders();
 	        }
 	    });
@@ -4543,16 +4543,16 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	    socket.emit("gladiator-biometrics-generate");
 	}
 	
-	biometrics.on('set', 'rank', (target, prop, val) => {
+	biometrics.on('set', 'rank', result => {
 	    if (serverRank === undefined) {
 	        return;
 	    }
-	    val = parseInt(val);
+	    val = parseInt(result.value);
 	    if (val < 1 || val > 15 || isNaN(val)) {
-	        requestAnimationFrame(() => (biometrics.rank = serverRank));
-	        return false;
+	        result.value = serverRank;
+	        return;
 	    }
-	    target[prop] = val;
+	    result.value = val;
 	    if (serverRank === val) {
 	        return;
 	    }
@@ -5440,13 +5440,13 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	        element: $(this),
 	        event: 'slidestop',
 	        outHandler (element, value) {
-	            element.
+	            $(element).
 	                slider('value', value).
 	                children('.custom-handle').
 	                    text(value);
 	        },
 	        inHandler (element, proxy, prop) {
-	            proxy[prop] = element.slider('value');
+	            proxy[prop] = $(element).slider('value');
 	            return updateSliders();
 	        }
 	    });
@@ -5767,16 +5767,16 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	    socket.emit("gladiator-biometrics-generate");
 	}
 	
-	biometrics.on('set', 'rank', (target, prop, val) => {
+	biometrics.on('set', 'rank', result => {
 	    if (serverRank === undefined) {
 	        return;
 	    }
-	    val = parseInt(val);
+	    val = parseInt(result.value);
 	    if (val < 1 || val > 15 || isNaN(val)) {
-	        requestAnimationFrame(() => (biometrics.rank = serverRank));
-	        return false;
+	        result.value = serverRank;
+	        return;
 	    }
-	    target[prop] = val;
+	    result.value = val;
 	    if (serverRank === val) {
 	        return;
 	    }
@@ -6581,13 +6581,13 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	        element: $(this),
 	        event: 'slidestop',
 	        outHandler (element, value) {
-	            element.
+	            $(element).
 	                slider('value', value).
 	                children('.custom-handle').
 	                    text(value);
 	        },
 	        inHandler (element, proxy, prop) {
-	            proxy[prop] = element.slider('value');
+	            proxy[prop] = $(element).slider('value');
 	            return updateSliders();
 	        }
 	    });
@@ -6908,16 +6908,16 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	    socket.emit("gladiator-biometrics-generate");
 	}
 	
-	biometrics.on('set', 'rank', (target, prop, val) => {
+	biometrics.on('set', 'rank', result => {
 	    if (serverRank === undefined) {
 	        return;
 	    }
-	    val = parseInt(val);
+	    val = parseInt(result.value);
 	    if (val < 1 || val > 15 || isNaN(val)) {
-	        requestAnimationFrame(() => (biometrics.rank = serverRank));
-	        return false;
+	        result.value = serverRank;
+	        return;
 	    }
-	    target[prop] = val;
+	    result.value = val;
 	    if (serverRank === val) {
 	        return;
 	    }
@@ -7961,7 +7961,7 @@ window.modules.utility.prototype.manipulators.waject=function() {
 	        prop, 
 	        element, 
 	        event='change',
-	        inHandler=(element, p, prop) => {
+	        inHandler= (element, p, prop) => {
 	            p[prop] = $(element).val();
 	        },
 	        outHandler=(element, val) => {
@@ -7974,8 +7974,8 @@ window.modules.utility.prototype.manipulators.waject=function() {
 	        outHandler = prop.outHandler || outHandler;
 	        prop = prop.property;
 	    }
-	    $(element).on(event, () => 
-	        inHandler(element, this.proxy, prop));
+	    $(element).on(event, e => 
+	        inHandler(e.target, this.proxy, prop));
 	    this.proxy.on('set', prop, (result) => 
 	        outHandler(element, result.value));
 	    outHandler(element, this.target[prop]);

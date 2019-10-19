@@ -126,7 +126,6 @@ function waject (o = {}) {
                     }
                     fn(result);
                 });
-
             target[key] = result.value;
             return target[key];
         }

@@ -66,13 +66,13 @@ $('#attributes ul>li .slider').each(function () {
         element: $(this),
         event: 'slidestop',
         outHandler (element, value) {
-            element.
+            $(element).
                 slider('value', value).
                 children('.custom-handle').
                     text(value);
         },
         inHandler (element, proxy, prop) {
-            proxy[prop] = element.slider('value');
+            proxy[prop] = $(element).slider('value');
             return updateSliders();
         }
     });

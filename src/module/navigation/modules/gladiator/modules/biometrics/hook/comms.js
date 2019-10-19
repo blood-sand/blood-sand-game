@@ -24,16 +24,16 @@ self.state.requestBiometrics = function () {
     socket.emit("gladiator-biometrics-generate");
 }
 
-biometrics.on('set', 'rank', (target, prop, val) => {
+biometrics.on('set', 'rank', result => {
     if (serverRank === undefined) {
         return;
     }
-    val = parseInt(val);
+    val = parseInt(result.value);
     if (val < 1 || val > 15 || isNaN(val)) {
-        requestAnimationFrame(() => (biometrics.rank = serverRank));
-        return false;
+        result.value = serverRank;
+        return;
     }
-    target[prop] = val;
+    result.value = val;
     if (serverRank === val) {
         return;
     }
