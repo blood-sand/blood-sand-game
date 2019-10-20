@@ -1,4 +1,4 @@
+// Main
 const self = this;
 
-if (!self.loaded) {
-}
+if (!self.loaded) {}

@@ -3,18 +3,18 @@
     "age": 42
   },
   "age": "input.age",
-  
+
   "dexterity if age in range(16,18)": "2",
   "perception if age in range(16,18)": "2",
   "strength if age in range(16,18)": "- 2",
   "willpower if age in range(16,18)": "- 2",
-  
+
   "dexterity if age in range(19,21)": "2",
   "endurance if age in range(19,21)": "1",
   "perception if age in range(19,21)": "2",
   "strength if age in range(19,21)": "- 1",
   "willpower if age in range(19,21)": "- 2",
-  
+
   "dexterity if age in range(22,24)": "2",
   "endurance if age in range(22,24)": "1",
   "perception if age in range(22,24)": "1",
@@ -24,46 +24,46 @@
   "perception if age in range(25,26)": "1",
   "strength if age in range(25,26)": "1",
   "willpower if age in range(25,26)": "1",
-  
+
   "dexterity if age in range(27,30)": "1",
   "endurance if age in range(27,30)": "1",
   "vitality if age in range(27,30)": "1",
   "strength if age in range(27,30)": "1",
   "willpower if age in range(27,30)": "1",
-  
+
   "vitality if age in range(31,32)": "2",
   "strength if age in range(31,32)": "2",
   "willpower if age in range(31,32)": "1",
-  
+
   "vitality if age in range(33,34)": "1",
   "strength if age in range(33,34)": "2",
   "willpower if age in range(33,34)": "1",
-  
+
   "dexterity if age in range(35,38)": "- 1",
   "endurance if age in range(35,38)": "- 1",
   "vitality if age in range(35,38)": "1",
   "strength if age in range(35,38)": "1",
-  "willpower if age in range(35,38)": "2",  
+  "willpower if age in range(35,38)": "2",
   "perception if age in range(35,38)": "- 1",
-  
+
   "dexterity if age in range(39,42)": "- 2",
   "endurance if age in range(39,42)": "- 2",
   "vitality if age in range(39,42)": "1",
-  "willpower if age in range(39,42)": "2",  
+  "willpower if age in range(39,42)": "2",
   "perception if age in range(39,42)": "- 1",
-  
+
   "dexterity if age in range(43,45)": "- 3",
   "endurance if age in range(43,45)": "- 3",
-  "willpower if age in range(43,45)": "2",  
+  "willpower if age in range(43,45)": "2",
   "perception if age in range(43,45)": "- 2",
-  
+
   "dexterity if age in range(46,48)": "- 3",
   "endurance if age in range(46,48)": "- 3",
-  "willpower if age in range(46,48)": "2",  
+  "willpower if age in range(46,48)": "2",
   "perception if age in range(46,48)": "- 3",
   "vitality if age in range(46,48)": "- 2",
   "strength if age in range(46,48)": "- 1",
-  
+
   "dexterity if age > 49": "- 4",
   "endurance if age > 49": "- 4",
   "willpower if age > 49": "2",

@@ -1,12 +1,12 @@
 const __SHARE__ = {};
 window.modules = {
-        share: __SHARE__,
-        fetch: function (name) {
-            let m = new this[name];
-            this[name].prototype.loaded = true;
-            return m;
-        }
-    };
+    share: __SHARE__,
+    fetch: function (name) {
+      let m = new this[name];
+      this[name].prototype.loaded = true;
+      return m;
+    }
+  };
 window.modules.eventLoop = function () {
         const self = this;
 	
@@ -14,12 +14,12 @@ window.modules.eventLoop = function () {
 	    new self.control.events();
 	    new self.control.mouseState();
 	}
-    };
-    
-    window.modules.eventLoop.prototype.parent = window;
-    window.modules.eventLoop.prototype.state = {};
-    window.modules.eventLoop.prototype.share = __SHARE__;
-    window.modules.eventLoop.prototype.loaded = false;
+      };
+      
+      window.modules.eventLoop.prototype.parent = window;
+      window.modules.eventLoop.prototype.state = {};
+      window.modules.eventLoop.prototype.share = __SHARE__;
+      window.modules.eventLoop.prototype.loaded = false;
     window.modules.eventLoop.prototype.control={};
 window.modules.eventLoop.prototype.control.events=function() {
         const self = this;
@@ -78,8 +78,8 @@ window.modules.eventLoop.prototype.control.events=function() {
 	    }
 	    window.requestAnimationFrame(tick);
 	});
-    };
-    window.modules.eventLoop.prototype.control.events.prototype = window.modules.eventLoop.prototype;
+      };
+      window.modules.eventLoop.prototype.control.events.prototype = window.modules.eventLoop.prototype;
 window.modules.eventLoop.prototype.control.mouseState=function() {
         const self = this;
 	
@@ -92,8 +92,8 @@ window.modules.eventLoop.prototype.control.mouseState=function() {
 	$(document).on('mouseup', () => {
 	    self.share.mouseIsDown = false;
 	});
-    };
-    window.modules.eventLoop.prototype.control.mouseState.prototype = window.modules.eventLoop.prototype;
+      };
+      window.modules.eventLoop.prototype.control.mouseState.prototype = window.modules.eventLoop.prototype;
 window.modules.navigation = function () {
         const self = this;
 	
@@ -105,15 +105,15 @@ window.modules.navigation = function () {
 	    self.modules.fetch('gladiator');
 	    self.modules.fetch('listGladiators');
 	}
-    };
-    window.modules.navigation.prototype.modules = {
-        share: __SHARE__,
-        fetch: function (name) {
-            let m = new this[name];
-            this[name].prototype.loaded = true;
-            return m;
-        }
-    };
+      };
+      window.modules.navigation.prototype.modules = {
+    share: __SHARE__,
+    fetch: function (name) {
+      let m = new this[name];
+      this[name].prototype.loaded = true;
+      return m;
+    }
+  };
 window.modules.navigation.prototype.modules.gladiator = function () {
         const self = this;
 	
@@ -122,15 +122,15 @@ window.modules.navigation.prototype.modules.gladiator = function () {
 	    $('#game').append(self.display.view);
 	    new self.control.events();
 	}
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules = {
-        share: __SHARE__,
-        fetch: function (name) {
-            let m = new this[name];
-            this[name].prototype.loaded = true;
-            return m;
-        }
-    };
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules = {
+    share: __SHARE__,
+    fetch: function (name) {
+      let m = new this[name];
+      this[name].prototype.loaded = true;
+      return m;
+    }
+  };
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes = function () {
         const self = this;
 	
@@ -139,12 +139,12 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    new self.control.events();
 	}
 	
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.events=function() {
         const self = this;
@@ -226,8 +226,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	        }
 	    });
 	});
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.modifiers=function() {
         const self = this;
 	
@@ -267,8 +267,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    }
 	    slider.parent('li').attr('title', fieldTooltip);
 	});
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.modifiers.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.modifiers.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.display.box=$("<div id=\"attributes\" class=\"item\"> <span> <img title=\"Don't have time for this? Generate random Attributes.\" src=\"/img/dice.png\" class=\"randomizeAttributes dice\"> Attributes For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <ul class=\"gladiatorData\"> <li> <span class=\"label\">strength</span> <div class=\"slider\" name=\"strength\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">dexterity</span> <div class=\"slider\" name=\"dexterity\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">perception</span> <div class=\"slider\" name=\"perception\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">endurance</span> <div class=\"slider\" name=\"endurance\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">intelligence</span> <div class=\"slider\" name=\"intelligence\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">willpower</span> <div class=\"slider\" name=\"willpower\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">vitality</span> <div class=\"slider\" name=\"vitality\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span>ability sum</span> <div class=\"slider\" name=\"abilitySum\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.display.style="#attributes div < button[name=\"attributesNext\"] { display: block; } #attributes button[name=\"attributesPrevious\"] { display: block; float: left; } #attributes ul>li>.label { flex: 7; } #attributes ul>li>.final { flex: 2; } #attributes .slider { width: 480px; margin: 11.75px 40px; } #attributes input[name=\"name\"] { width: 57%; } #attributes button[name=\"attributesNext\"] { display: block; float: right; }";
@@ -454,8 +454,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	});
 	
 	socket.emit("gladiator-attributes-ready");
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics = function () {
         const self = this;
 	
@@ -464,12 +464,12 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	    new self.control.events();
 	}
 	
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.control.events=function() {
         const self = this;
@@ -509,8 +509,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	    self.state.requestBiometrics
 	);
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.display.box=$("<div id=\"biometrics\" class=\"item\"> <span> <img title=\"Don't Like These? Generate new Biometrics. This will not overwrite culture, sex, rank or name.\" src=\"/img/dice.png\" class=\"randomizeBiometrics dice\"> Biometrics For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <ul class=\"gladiatorData\"> <li> <span>Culture</span> <select class=\"stat\" name=\"culture\"> <option>roman</option> <option>gallic</option> <option>germanic</option> <option>syrian</option> <option>numidian</option> <option>thracian</option> <option>greek</option> <option>iberian</option> <option>judean</option> <option>scythian</option> </select> </li> <li> <span>Sex</span> <select class=\"stat\" name=\"sex\"> <option>male</option> <option>female</option> </select> </li> <li> <span>Rank</span> <input type=\"number\" class=\"stat\" name=\"rank\" min=1 max=15> </li> <li> <span>Age</span> <input type=\"number\" class=\"stat\" name=\"age\" readonly> </li> <li> <span>Weight</span> <input type=\"number\" class=\"stat\" name=\"weight\" readonly> </li> <li> <span>Height</span> <input type=\"number\" class=\"stat\" name=\"height\" readonly> </li> <li> <span>BMI</span> <input type=\"number\" class=\"stat\" name=\"bmi\" readonly> </li> <li> <span>Reach</span> <input type=\"number\" class=\"stat\" name=\"reach\" readonly> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.display.style="div < button[name=\"biometricsNext\"] { display: block; } button[name=\"biometricsPrevious\"] { display: block; float: left; } #biometrics input[name=\"name\"] { width: 50%; } #biometrics select { width: 150px; } button[name=\"biometricsNext\"] { display: block; float: right; }";
@@ -566,8 +566,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	
 	socket.emit("gladiator-biometrics-ready");
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats = function () {
         const self = this;
 	
@@ -577,20 +577,20 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatSt
 	} else {
 	    //socket.emit("gladiator-combatStats-generate");
 	}
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.control.events=function() {
         const self = this;
 	
 	$('#combatStats [name=name]').val(self.share.name);
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.display.box=$("<div id=\"combatStats\" class=\"item\"> <span> Combat Statistics For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <ul class=\"gladiatorData\"> <li title=\"Affected by endurance, lifestyle, rank, vitality, weight, and willpower.\"> <span>Health</span> <input type=\"number\" class=\"stat\" name=\"health\" readonly> </li> <li title=\"Affected by endurance, lifestyle, rank, vitality, willpower.\"> <span>Stamina</span> <input type=\"number\" class=\"stat\" name=\"stamina\" readonly> </li> <li> <span>Stamina Recovery</span> <input type=\"number\" class=\"stat\" name=\"staminaRecovery\" readonly> </li> <li> <span>Initiative</span> <input type=\"number\" class=\"stat\" name=\"initiative\" readonly> </li> <li> <span>Nerve</span> <input type=\"number\" class=\"stat\" name=\"nerve\" readonly> </li> <li> <span>Offense</span> <input type=\"number\" class=\"stat\" name=\"offense\" readonly> </li> <li> <span>Defense</span> <input type=\"number\" class=\"stat\" name=\"defense\" readonly> </li> <li> <span>Dodge</span> <input type=\"number\" class=\"stat\" name=\"dodge\" readonly> </li> <li> <span>Parry</span> <input type=\"number\" class=\"stat\" name=\"parry\" readonly> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.display.style="div < button[name=\"combatStatsNext\"] { display: block; } button[name=\"combatStatsPrevious\"] { display: block; float: left; } #combatStats input[name=\"name\"] { width: 50%; } #combatStats select { width: 150px; } button[name=\"combatStatsNext\"] { display: block; float: right; }";
@@ -623,20 +623,20 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatSt
 	});
 	
 	socket.emit("gladiator-combatStats-ready");
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture = function () {
         const self = this;
 	if (!self.loaded) {
 	    new self.hook.comms();
 	    new self.control.events();
 	}
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.control.events=function() {
         const self = this;
@@ -709,8 +709,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.
 	    settings.sex = sexes[randSex];
 	    generateName();
 	});
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.display.box=$("<div id=\"culture\" class=\"item\"> <span> <img title=\"Randomly Generate Culture, Sex and Name.\" src=\"/img/dice.png\" class=\"randomizeCulture dice\"> Culture of <input name=\"name\" placeholder=\"Name This Fighter\"> </span> <ul class=\"gladiatorData\"> <li> <span>Culture</span> <select class=\"stat\" name=\"culture\"> <option>roman</option> <option>gallic</option> <option>germanic</option> <option>syrian</option> <option>numidian</option> <option>thracian</option> <option>greek</option> <option>iberian</option> <option>judean</option> <option>scythian</option> </select> </li> <li> <span>Sex</span> <select class=\"stat\" name=\"sex\"> <option>male</option> <option>female</option> </select> </li> <li> <span> Name <img title=\"Randomly Generate a name based on The Fighter's Culture and Sex.\" src=\"/img/dice.png\" class=\"randomizeName dice\"> </span> <input class=\"stat\" name=\"name\"> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.display.style="div < button[name=\"cultureNext\"] { display: block; } #culture input[name=\"name\"] { width: 450px; } button[name=\"cultureNext\"] { display: block; float:right; } ";
@@ -772,8 +772,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.
 	});
 	
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills = function () {
         const self = this;
 	
@@ -784,12 +784,12 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills =
 	    //self.state.regenerateSkills();
 	}
 	
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.control.events=function() {
         const self = this;
@@ -853,8 +853,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.p
 	    max: 16,
 	    animate: 'slow'
 	});
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.display.box=$("<div id=\"skills\" class=\"item\"> <span> Skills For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <div> <span>Skill Points:</span> <span name=\"skillPoints\">10</span> </div> <ul class=\"gladiatorData\"> <li> <span>tactics</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"tactics\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\">n</span> <span class=\"description\">Abyssmal</span> </li> <li> <span>dodge</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"dodge\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>parry</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"parry\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>shield</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"shield\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>bash</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"bash\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>charge</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"charge\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>spear</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"spear\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>light Blade</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"lightBlade\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>heavy Blade</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"heavyBlade\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>bludgeoning</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"bludgeoning\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>axe</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"axe\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>riposte</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"riposte\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>close Combat</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"closeCombat\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>feint</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"feint\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>dirty Trick</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"dirtyTrick\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>appraise</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"appraise\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.display.style="#skills div < button[name=\"skillsNext\"] { display: block; } #skills button[name=\"skillsPrevious\"] { display: block; float: left; } #skills .slider { width: 200px; margin: 11.75px 40px; } #skills input[name=\"name\"] { width: 57%; } #skills button[name=\"skillsNext\"] { display: block; float: right; color: rgba(255,255,255,0.72); } #skills .proficiency { text-align: center; } #skills .slider-container { color: rgba(170, 130, 25, 0.5); background: rgba(0, 0, 0, 0.32); border: 1px solid rgba(0,0,0,0.72); padding-left: 5px; padding-right: 5px; display: flex; flex-direction: row; width: 350px; } #skills .min { text-align: right; } #skills .max { text-align: left; } #skills .max, #skills .min { flex-grow: 0; padding-top: 8px; } #skills ul.gladiatorData>li>span:nth-child(1) { flex-grow: 3; }";
@@ -1237,13 +1237,13 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.p
 	
 	socket.emit("gladiator-skills-ready");
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype;
 
-    window.modules.navigation.prototype.modules.gladiator.prototype.parent = window.modules.navigation.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.loaded = false;
+      window.modules.navigation.prototype.modules.gladiator.prototype.parent = window.modules.navigation.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.control.events=function() {
         const self = this;
@@ -1336,8 +1336,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.control.events=f
 	        $(`#gladiator a[href="#${id}"]`).trigger('click');
 	    }
 	});
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.display.style="#gladiator.ui-tabs { font-size: 15.3px; }";
 window.modules.navigation.prototype.modules.gladiator.prototype.display.view=$("<div id=\"gladiator\"> <ul> <li title=\"Tell Me About This Prospect.\"><a href=\"#culture\"> <i class=\"fas fa-flag\"></i> Culture </a></li> <li title=\"Here's What We Know About This Fighter.\"><a href=\"#biometrics\"> <i class=\"fas fa-diagnoses\"></i> Biometrics </a></li> <li title=\"Tell Me This Gladiator's Strengths.\"><a href=\"#attributes\"> <i class=\"fas fa-star-half-alt\"></i> Attributes </a></li> <li title=\"Spend Points; Get Good.\"><a href=\"#skills\"> <i class=\"fas fa-chess\"></i> Skills </a></li> <li title=\"We Hope You'll be Pleased With This Gladiator's Competitive Analysis.\"><a href=\"#combatStats\"> <i class=\"fas fa-fist-raised\"></i> Combat Stats </a></li> <li title=\"(Not Yet Implemented) &nbsp; &nbsp; &nbsp; &nbsp; Get Ready.\"><a href=\"#saveGladiator\"> <i class=\"fas fa-save\"></i> Save </a></li> </ul> <div id=\"saveGladiator\" class=\"item\" title=\"Nuu! ... R.I.P. Save\"> CAN HAZ SAVE!?!? </div> </div> ");
@@ -1346,15 +1346,15 @@ window.modules.navigation.prototype.modules.listGladiators = function () {
 	
 	if (!self.loaded) {
 	}
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules = {
-        share: __SHARE__,
-        fetch: function (name) {
-            let m = new this[name];
-            this[name].prototype.loaded = true;
-            return m;
-        }
-    };
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules = {
+    share: __SHARE__,
+    fetch: function (name) {
+      let m = new this[name];
+      this[name].prototype.loaded = true;
+      return m;
+    }
+  };
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes = function () {
         const self = this;
 	
@@ -1363,12 +1363,12 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    new self.control.events();
 	}
 	
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.events=function() {
         const self = this;
@@ -1450,8 +1450,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	        }
 	    });
 	});
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.modifiers=function() {
         const self = this;
 	
@@ -1491,8 +1491,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    }
 	    slider.parent('li').attr('title', fieldTooltip);
 	});
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.modifiers.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.modifiers.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.display.box=$("<div id=\"attributes\" class=\"item\"> <span> <img title=\"Don't have time for this? Generate random Attributes.\" src=\"/img/dice.png\" class=\"randomizeAttributes dice\"> Attributes For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <ul class=\"gladiatorData\"> <li> <span class=\"label\">strength</span> <div class=\"slider\" name=\"strength\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">dexterity</span> <div class=\"slider\" name=\"dexterity\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">perception</span> <div class=\"slider\" name=\"perception\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">endurance</span> <div class=\"slider\" name=\"endurance\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">intelligence</span> <div class=\"slider\" name=\"intelligence\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">willpower</span> <div class=\"slider\" name=\"willpower\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">vitality</span> <div class=\"slider\" name=\"vitality\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span>ability sum</span> <div class=\"slider\" name=\"abilitySum\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.display.style="#attributes div < button[name=\"attributesNext\"] { display: block; } #attributes button[name=\"attributesPrevious\"] { display: block; float: left; } #attributes ul>li>.label { flex: 7; } #attributes ul>li>.final { flex: 2; } #attributes .slider { width: 480px; margin: 11.75px 40px; } #attributes input[name=\"name\"] { width: 57%; } #attributes button[name=\"attributesNext\"] { display: block; float: right; }";
@@ -1678,8 +1678,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	});
 	
 	socket.emit("gladiator-attributes-ready");
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics = function () {
         const self = this;
 	
@@ -1688,12 +1688,12 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	    new self.control.events();
 	}
 	
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.control.events=function() {
         const self = this;
@@ -1733,8 +1733,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	    self.state.requestBiometrics
 	);
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.display.box=$("<div id=\"biometrics\" class=\"item\"> <span> <img title=\"Don't Like These? Generate new Biometrics. This will not overwrite culture, sex, rank or name.\" src=\"/img/dice.png\" class=\"randomizeBiometrics dice\"> Biometrics For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <ul class=\"gladiatorData\"> <li> <span>Culture</span> <select class=\"stat\" name=\"culture\"> <option>roman</option> <option>gallic</option> <option>germanic</option> <option>syrian</option> <option>numidian</option> <option>thracian</option> <option>greek</option> <option>iberian</option> <option>judean</option> <option>scythian</option> </select> </li> <li> <span>Sex</span> <select class=\"stat\" name=\"sex\"> <option>male</option> <option>female</option> </select> </li> <li> <span>Rank</span> <input type=\"number\" class=\"stat\" name=\"rank\" min=1 max=15> </li> <li> <span>Age</span> <input type=\"number\" class=\"stat\" name=\"age\" readonly> </li> <li> <span>Weight</span> <input type=\"number\" class=\"stat\" name=\"weight\" readonly> </li> <li> <span>Height</span> <input type=\"number\" class=\"stat\" name=\"height\" readonly> </li> <li> <span>BMI</span> <input type=\"number\" class=\"stat\" name=\"bmi\" readonly> </li> <li> <span>Reach</span> <input type=\"number\" class=\"stat\" name=\"reach\" readonly> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.display.style="div < button[name=\"biometricsNext\"] { display: block; } button[name=\"biometricsPrevious\"] { display: block; float: left; } #biometrics input[name=\"name\"] { width: 50%; } #biometrics select { width: 150px; } button[name=\"biometricsNext\"] { display: block; float: right; }";
@@ -1790,8 +1790,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	
 	socket.emit("gladiator-biometrics-ready");
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats = function () {
         const self = this;
 	
@@ -1801,20 +1801,20 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatSt
 	} else {
 	    //socket.emit("gladiator-combatStats-generate");
 	}
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.control.events=function() {
         const self = this;
 	
 	$('#combatStats [name=name]').val(self.share.name);
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.display.box=$("<div id=\"combatStats\" class=\"item\"> <span> Combat Statistics For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <ul class=\"gladiatorData\"> <li title=\"Affected by endurance, lifestyle, rank, vitality, weight, and willpower.\"> <span>Health</span> <input type=\"number\" class=\"stat\" name=\"health\" readonly> </li> <li title=\"Affected by endurance, lifestyle, rank, vitality, willpower.\"> <span>Stamina</span> <input type=\"number\" class=\"stat\" name=\"stamina\" readonly> </li> <li> <span>Stamina Recovery</span> <input type=\"number\" class=\"stat\" name=\"staminaRecovery\" readonly> </li> <li> <span>Initiative</span> <input type=\"number\" class=\"stat\" name=\"initiative\" readonly> </li> <li> <span>Nerve</span> <input type=\"number\" class=\"stat\" name=\"nerve\" readonly> </li> <li> <span>Offense</span> <input type=\"number\" class=\"stat\" name=\"offense\" readonly> </li> <li> <span>Defense</span> <input type=\"number\" class=\"stat\" name=\"defense\" readonly> </li> <li> <span>Dodge</span> <input type=\"number\" class=\"stat\" name=\"dodge\" readonly> </li> <li> <span>Parry</span> <input type=\"number\" class=\"stat\" name=\"parry\" readonly> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.display.style="div < button[name=\"combatStatsNext\"] { display: block; } button[name=\"combatStatsPrevious\"] { display: block; float: left; } #combatStats input[name=\"name\"] { width: 50%; } #combatStats select { width: 150px; } button[name=\"combatStatsNext\"] { display: block; float: right; }";
@@ -1847,20 +1847,20 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatSt
 	});
 	
 	socket.emit("gladiator-combatStats-ready");
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture = function () {
         const self = this;
 	if (!self.loaded) {
 	    new self.hook.comms();
 	    new self.control.events();
 	}
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.control.events=function() {
         const self = this;
@@ -1933,8 +1933,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.
 	    settings.sex = sexes[randSex];
 	    generateName();
 	});
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.display.box=$("<div id=\"culture\" class=\"item\"> <span> <img title=\"Randomly Generate Culture, Sex and Name.\" src=\"/img/dice.png\" class=\"randomizeCulture dice\"> Culture of <input name=\"name\" placeholder=\"Name This Fighter\"> </span> <ul class=\"gladiatorData\"> <li> <span>Culture</span> <select class=\"stat\" name=\"culture\"> <option>roman</option> <option>gallic</option> <option>germanic</option> <option>syrian</option> <option>numidian</option> <option>thracian</option> <option>greek</option> <option>iberian</option> <option>judean</option> <option>scythian</option> </select> </li> <li> <span>Sex</span> <select class=\"stat\" name=\"sex\"> <option>male</option> <option>female</option> </select> </li> <li> <span> Name <img title=\"Randomly Generate a name based on The Fighter's Culture and Sex.\" src=\"/img/dice.png\" class=\"randomizeName dice\"> </span> <input class=\"stat\" name=\"name\"> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.display.style="div < button[name=\"cultureNext\"] { display: block; } #culture input[name=\"name\"] { width: 450px; } button[name=\"cultureNext\"] { display: block; float:right; } ";
@@ -1996,8 +1996,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.
 	});
 	
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills = function () {
         const self = this;
 	
@@ -2008,12 +2008,12 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills =
 	    //self.state.regenerateSkills();
 	}
 	
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.control.events=function() {
         const self = this;
@@ -2077,8 +2077,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.p
 	    max: 16,
 	    animate: 'slow'
 	});
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.display.box=$("<div id=\"skills\" class=\"item\"> <span> Skills For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <div> <span>Skill Points:</span> <span name=\"skillPoints\">10</span> </div> <ul class=\"gladiatorData\"> <li> <span>tactics</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"tactics\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\">n</span> <span class=\"description\">Abyssmal</span> </li> <li> <span>dodge</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"dodge\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>parry</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"parry\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>shield</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"shield\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>bash</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"bash\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>charge</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"charge\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>spear</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"spear\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>light Blade</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"lightBlade\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>heavy Blade</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"heavyBlade\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>bludgeoning</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"bludgeoning\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>axe</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"axe\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>riposte</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"riposte\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>close Combat</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"closeCombat\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>feint</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"feint\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>dirty Trick</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"dirtyTrick\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>appraise</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"appraise\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.display.style="#skills div < button[name=\"skillsNext\"] { display: block; } #skills button[name=\"skillsPrevious\"] { display: block; float: left; } #skills .slider { width: 200px; margin: 11.75px 40px; } #skills input[name=\"name\"] { width: 57%; } #skills button[name=\"skillsNext\"] { display: block; float: right; color: rgba(255,255,255,0.72); } #skills .proficiency { text-align: center; } #skills .slider-container { color: rgba(170, 130, 25, 0.5); background: rgba(0, 0, 0, 0.32); border: 1px solid rgba(0,0,0,0.72); padding-left: 5px; padding-right: 5px; display: flex; flex-direction: row; width: 350px; } #skills .min { text-align: right; } #skills .max { text-align: left; } #skills .max, #skills .min { flex-grow: 0; padding-top: 8px; } #skills ul.gladiatorData>li>span:nth-child(1) { flex-grow: 3; }";
@@ -2461,20 +2461,20 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.p
 	
 	socket.emit("gladiator-skills-ready");
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype;
 
-    window.modules.navigation.prototype.modules.listGladiators.prototype.parent = window.modules.navigation.prototype;
-    window.modules.navigation.prototype.modules.listGladiators.prototype.state = {};
-    window.modules.navigation.prototype.modules.listGladiators.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.listGladiators.prototype.loaded = false;
+      window.modules.navigation.prototype.modules.listGladiators.prototype.parent = window.modules.navigation.prototype;
+      window.modules.navigation.prototype.modules.listGladiators.prototype.state = {};
+      window.modules.navigation.prototype.modules.listGladiators.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.listGladiators.prototype.loaded = false;
     window.modules.navigation.prototype.modules.listGladiators.prototype.display={};
 window.modules.navigation.prototype.modules.listGladiators.prototype.display.view=$("");
 window.modules.navigation.prototype.modules.listGladiators.prototype.hook={};
 window.modules.navigation.prototype.modules.listGladiators.prototype.hook.comms=function() {
         
-    };
-    window.modules.navigation.prototype.modules.listGladiators.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.listGladiators.prototype;
+      };
+      window.modules.navigation.prototype.modules.listGladiators.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.listGladiators.prototype;
 window.modules.navigation.prototype.modules.settings = function () {
         const self = this;
 	
@@ -2487,15 +2487,15 @@ window.modules.navigation.prototype.modules.settings = function () {
 	    new self.control.dialog();
 	    new self.control.sounds();
 	}
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules = {
-        share: __SHARE__,
-        fetch: function (name) {
-            let m = new this[name];
-            this[name].prototype.loaded = true;
-            return m;
-        }
-    };
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules = {
+    share: __SHARE__,
+    fetch: function (name) {
+      let m = new this[name];
+      this[name].prototype.loaded = true;
+      return m;
+    }
+  };
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes = function () {
         const self = this;
 	
@@ -2504,12 +2504,12 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    new self.control.events();
 	}
 	
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.events=function() {
         const self = this;
@@ -2591,8 +2591,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	        }
 	    });
 	});
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.modifiers=function() {
         const self = this;
 	
@@ -2632,8 +2632,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    }
 	    slider.parent('li').attr('title', fieldTooltip);
 	});
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.modifiers.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.modifiers.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.display.box=$("<div id=\"attributes\" class=\"item\"> <span> <img title=\"Don't have time for this? Generate random Attributes.\" src=\"/img/dice.png\" class=\"randomizeAttributes dice\"> Attributes For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <ul class=\"gladiatorData\"> <li> <span class=\"label\">strength</span> <div class=\"slider\" name=\"strength\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">dexterity</span> <div class=\"slider\" name=\"dexterity\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">perception</span> <div class=\"slider\" name=\"perception\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">endurance</span> <div class=\"slider\" name=\"endurance\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">intelligence</span> <div class=\"slider\" name=\"intelligence\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">willpower</span> <div class=\"slider\" name=\"willpower\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">vitality</span> <div class=\"slider\" name=\"vitality\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span>ability sum</span> <div class=\"slider\" name=\"abilitySum\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.display.style="#attributes div < button[name=\"attributesNext\"] { display: block; } #attributes button[name=\"attributesPrevious\"] { display: block; float: left; } #attributes ul>li>.label { flex: 7; } #attributes ul>li>.final { flex: 2; } #attributes .slider { width: 480px; margin: 11.75px 40px; } #attributes input[name=\"name\"] { width: 57%; } #attributes button[name=\"attributesNext\"] { display: block; float: right; }";
@@ -2819,8 +2819,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	});
 	
 	socket.emit("gladiator-attributes-ready");
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics = function () {
         const self = this;
 	
@@ -2829,12 +2829,12 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	    new self.control.events();
 	}
 	
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.control.events=function() {
         const self = this;
@@ -2874,8 +2874,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	    self.state.requestBiometrics
 	);
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.display.box=$("<div id=\"biometrics\" class=\"item\"> <span> <img title=\"Don't Like These? Generate new Biometrics. This will not overwrite culture, sex, rank or name.\" src=\"/img/dice.png\" class=\"randomizeBiometrics dice\"> Biometrics For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <ul class=\"gladiatorData\"> <li> <span>Culture</span> <select class=\"stat\" name=\"culture\"> <option>roman</option> <option>gallic</option> <option>germanic</option> <option>syrian</option> <option>numidian</option> <option>thracian</option> <option>greek</option> <option>iberian</option> <option>judean</option> <option>scythian</option> </select> </li> <li> <span>Sex</span> <select class=\"stat\" name=\"sex\"> <option>male</option> <option>female</option> </select> </li> <li> <span>Rank</span> <input type=\"number\" class=\"stat\" name=\"rank\" min=1 max=15> </li> <li> <span>Age</span> <input type=\"number\" class=\"stat\" name=\"age\" readonly> </li> <li> <span>Weight</span> <input type=\"number\" class=\"stat\" name=\"weight\" readonly> </li> <li> <span>Height</span> <input type=\"number\" class=\"stat\" name=\"height\" readonly> </li> <li> <span>BMI</span> <input type=\"number\" class=\"stat\" name=\"bmi\" readonly> </li> <li> <span>Reach</span> <input type=\"number\" class=\"stat\" name=\"reach\" readonly> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.display.style="div < button[name=\"biometricsNext\"] { display: block; } button[name=\"biometricsPrevious\"] { display: block; float: left; } #biometrics input[name=\"name\"] { width: 50%; } #biometrics select { width: 150px; } button[name=\"biometricsNext\"] { display: block; float: right; }";
@@ -2931,8 +2931,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	
 	socket.emit("gladiator-biometrics-ready");
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats = function () {
         const self = this;
 	
@@ -2942,20 +2942,20 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatSt
 	} else {
 	    //socket.emit("gladiator-combatStats-generate");
 	}
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.control.events=function() {
         const self = this;
 	
 	$('#combatStats [name=name]').val(self.share.name);
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.display.box=$("<div id=\"combatStats\" class=\"item\"> <span> Combat Statistics For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <ul class=\"gladiatorData\"> <li title=\"Affected by endurance, lifestyle, rank, vitality, weight, and willpower.\"> <span>Health</span> <input type=\"number\" class=\"stat\" name=\"health\" readonly> </li> <li title=\"Affected by endurance, lifestyle, rank, vitality, willpower.\"> <span>Stamina</span> <input type=\"number\" class=\"stat\" name=\"stamina\" readonly> </li> <li> <span>Stamina Recovery</span> <input type=\"number\" class=\"stat\" name=\"staminaRecovery\" readonly> </li> <li> <span>Initiative</span> <input type=\"number\" class=\"stat\" name=\"initiative\" readonly> </li> <li> <span>Nerve</span> <input type=\"number\" class=\"stat\" name=\"nerve\" readonly> </li> <li> <span>Offense</span> <input type=\"number\" class=\"stat\" name=\"offense\" readonly> </li> <li> <span>Defense</span> <input type=\"number\" class=\"stat\" name=\"defense\" readonly> </li> <li> <span>Dodge</span> <input type=\"number\" class=\"stat\" name=\"dodge\" readonly> </li> <li> <span>Parry</span> <input type=\"number\" class=\"stat\" name=\"parry\" readonly> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.display.style="div < button[name=\"combatStatsNext\"] { display: block; } button[name=\"combatStatsPrevious\"] { display: block; float: left; } #combatStats input[name=\"name\"] { width: 50%; } #combatStats select { width: 150px; } button[name=\"combatStatsNext\"] { display: block; float: right; }";
@@ -2988,20 +2988,20 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatSt
 	});
 	
 	socket.emit("gladiator-combatStats-ready");
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture = function () {
         const self = this;
 	if (!self.loaded) {
 	    new self.hook.comms();
 	    new self.control.events();
 	}
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.control.events=function() {
         const self = this;
@@ -3074,8 +3074,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.
 	    settings.sex = sexes[randSex];
 	    generateName();
 	});
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.display.box=$("<div id=\"culture\" class=\"item\"> <span> <img title=\"Randomly Generate Culture, Sex and Name.\" src=\"/img/dice.png\" class=\"randomizeCulture dice\"> Culture of <input name=\"name\" placeholder=\"Name This Fighter\"> </span> <ul class=\"gladiatorData\"> <li> <span>Culture</span> <select class=\"stat\" name=\"culture\"> <option>roman</option> <option>gallic</option> <option>germanic</option> <option>syrian</option> <option>numidian</option> <option>thracian</option> <option>greek</option> <option>iberian</option> <option>judean</option> <option>scythian</option> </select> </li> <li> <span>Sex</span> <select class=\"stat\" name=\"sex\"> <option>male</option> <option>female</option> </select> </li> <li> <span> Name <img title=\"Randomly Generate a name based on The Fighter's Culture and Sex.\" src=\"/img/dice.png\" class=\"randomizeName dice\"> </span> <input class=\"stat\" name=\"name\"> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.display.style="div < button[name=\"cultureNext\"] { display: block; } #culture input[name=\"name\"] { width: 450px; } button[name=\"cultureNext\"] { display: block; float:right; } ";
@@ -3137,8 +3137,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.
 	});
 	
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills = function () {
         const self = this;
 	
@@ -3149,12 +3149,12 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills =
 	    //self.state.regenerateSkills();
 	}
 	
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.control.events=function() {
         const self = this;
@@ -3218,8 +3218,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.p
 	    max: 16,
 	    animate: 'slow'
 	});
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.display.box=$("<div id=\"skills\" class=\"item\"> <span> Skills For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <div> <span>Skill Points:</span> <span name=\"skillPoints\">10</span> </div> <ul class=\"gladiatorData\"> <li> <span>tactics</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"tactics\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\">n</span> <span class=\"description\">Abyssmal</span> </li> <li> <span>dodge</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"dodge\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>parry</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"parry\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>shield</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"shield\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>bash</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"bash\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>charge</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"charge\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>spear</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"spear\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>light Blade</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"lightBlade\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>heavy Blade</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"heavyBlade\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>bludgeoning</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"bludgeoning\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>axe</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"axe\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>riposte</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"riposte\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>close Combat</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"closeCombat\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>feint</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"feint\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>dirty Trick</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"dirtyTrick\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>appraise</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"appraise\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.display.style="#skills div < button[name=\"skillsNext\"] { display: block; } #skills button[name=\"skillsPrevious\"] { display: block; float: left; } #skills .slider { width: 200px; margin: 11.75px 40px; } #skills input[name=\"name\"] { width: 57%; } #skills button[name=\"skillsNext\"] { display: block; float: right; color: rgba(255,255,255,0.72); } #skills .proficiency { text-align: center; } #skills .slider-container { color: rgba(170, 130, 25, 0.5); background: rgba(0, 0, 0, 0.32); border: 1px solid rgba(0,0,0,0.72); padding-left: 5px; padding-right: 5px; display: flex; flex-direction: row; width: 350px; } #skills .min { text-align: right; } #skills .max { text-align: left; } #skills .max, #skills .min { flex-grow: 0; padding-top: 8px; } #skills ul.gladiatorData>li>span:nth-child(1) { flex-grow: 3; }";
@@ -3602,13 +3602,13 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.p
 	
 	socket.emit("gladiator-skills-ready");
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype;
 
-    window.modules.navigation.prototype.modules.settings.prototype.parent = window.modules.navigation.prototype;
-    window.modules.navigation.prototype.modules.settings.prototype.state = {};
-    window.modules.navigation.prototype.modules.settings.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.settings.prototype.loaded = false;
+      window.modules.navigation.prototype.modules.settings.prototype.parent = window.modules.navigation.prototype;
+      window.modules.navigation.prototype.modules.settings.prototype.state = {};
+      window.modules.navigation.prototype.modules.settings.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.settings.prototype.loaded = false;
     window.modules.navigation.prototype.modules.settings.prototype.control={};
 window.modules.navigation.prototype.modules.settings.prototype.control.dialog=function() {
         const self = this;
@@ -3645,8 +3645,8 @@ window.modules.navigation.prototype.modules.settings.prototype.control.dialog=fu
 	        $('.ui-widget-overlay').one('click', () => $(this).dialog('close'));
 	    }
 	});
-    };
-    window.modules.navigation.prototype.modules.settings.prototype.control.dialog.prototype = window.modules.navigation.prototype.modules.settings.prototype;
+      };
+      window.modules.navigation.prototype.modules.settings.prototype.control.dialog.prototype = window.modules.navigation.prototype.modules.settings.prototype;
 window.modules.navigation.prototype.modules.settings.prototype.control.sliders=function() {
         const self = this;
 	const settings = self.state.settings;
@@ -3714,8 +3714,8 @@ window.modules.navigation.prototype.modules.settings.prototype.control.sliders=f
 	        animate: 'fast'
 	    });
 	});
-    };
-    window.modules.navigation.prototype.modules.settings.prototype.control.sliders.prototype = window.modules.navigation.prototype.modules.settings.prototype;
+      };
+      window.modules.navigation.prototype.modules.settings.prototype.control.sliders.prototype = window.modules.navigation.prototype.modules.settings.prototype;
 window.modules.navigation.prototype.modules.settings.prototype.control.sounds=function() {
         const self = this;
 	
@@ -3753,8 +3753,8 @@ window.modules.navigation.prototype.modules.settings.prototype.control.sounds=fu
 	    let sound = self.share.sounds["dice" + r];
 	    sound.play();
 	});
-    };
-    window.modules.navigation.prototype.modules.settings.prototype.control.sounds.prototype = window.modules.navigation.prototype.modules.settings.prototype;
+      };
+      window.modules.navigation.prototype.modules.settings.prototype.control.sounds.prototype = window.modules.navigation.prototype.modules.settings.prototype;
 window.modules.navigation.prototype.modules.settings.prototype.display={};
 window.modules.navigation.prototype.modules.settings.prototype.display.style=".user-settings-btn { width: 64px; height: 64px; padding: 0 0; margin: 0 0; display: block; position: absolute; right: 0px; top: 0px; background: rgba(255,255,255,0.5); border-radius: 64px; border: 1px outset rgb(255,255,255,0.5); cursor: pointer; } .user-settings-btn:hover { border: 1px outset rgb(255,255,255,1); } .user-settings-btn:active { border: 1px inset rgb(255,255,255,1); } #user-settings-dialog { width:420px; display: none; background: rgb(0,0,0,0.72); } #user-settings-dialog .note { font-size: 12px; color: #848484; font-family: arial; text-shadow: 0px 0px 0px rgba(255,255,255,0.72); } #user-settings-dialog [name=master-sound] { width: 60px; margin: 11.75px 40px; } #user-settings-dialog [name=master-volume], #user-settings-dialog [name=music-volume], #user-settings-dialog [name=fx-volume] { width: 360px; margin: 11.75px 40px; } #user-settings-dialog .slider .custom-handle { width: 3em; height: 1.6em; top: 50%; margin-top: -.8em; margin-left: -30px; text-align: center; line-height: 1.6em; } ul.userData { list-style: none; background-color: rgba(164, 148, 105, 0.36); margin: 50px 0; padding: 10px; border: 0.5px outset rgba(170, 130, 25, 0.32); border-radius: 3px; } ul.userData>li { display: flex; flex-direction: row; box-shadow: 2px 2px 5px rgba(0,0,0, 0.32); padding: 5px; margin: 5px; background: rgba(0, 0, 0, 0.32); } ul.userData>li>span { padding-top: 6px; flex: 2; }";
 window.modules.navigation.prototype.modules.settings.prototype.display.view=$("<div id=\"user-settings-dialog\" title=\"Settings\"> <h2>Sound Settings</h2> <ul class=\"userData\"> <li> <span>Master Sound</span> <div class=\"slider\" name=\"master-sound\"> <div class=\"ui-slider-handle custom-handle\"> Off </div> </div> </li> <li> <span>Master Volume</span> <div class=\"slider\" name=\"master-volume\"> </div> </li> <li> <span>Music Volume</span> <div class=\"slider\" name=\"music-volume\"> </div> </li> <li> <span>Sound FX Volume</span> <div class=\"slider\" name=\"fx-volume\"> </div> </li> </ul> </div>");
@@ -3851,8 +3851,8 @@ window.modules.navigation.prototype.modules.settings.prototype.hook.comms=functi
 	});
 	
 	socket.emit("sound-settings-ready");
-    };
-    window.modules.navigation.prototype.modules.settings.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.settings.prototype;
+      };
+      window.modules.navigation.prototype.modules.settings.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.settings.prototype;
 window.modules.navigation.prototype.modules.settings.prototype.hook.settingState=function() {
         const self = this;
 	const settings = self.state.settings;
@@ -3925,13 +3925,13 @@ window.modules.navigation.prototype.modules.settings.prototype.hook.settingState
 	    }
 	});
 	
-    };
-    window.modules.navigation.prototype.modules.settings.prototype.hook.settingState.prototype = window.modules.navigation.prototype.modules.settings.prototype;
+      };
+      window.modules.navigation.prototype.modules.settings.prototype.hook.settingState.prototype = window.modules.navigation.prototype.modules.settings.prototype;
 
-    window.modules.navigation.prototype.parent = window;
-    window.modules.navigation.prototype.state = {};
-    window.modules.navigation.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.loaded = false;
+      window.modules.navigation.prototype.parent = window;
+      window.modules.navigation.prototype.state = {};
+      window.modules.navigation.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.loaded = false;
     window.modules.navigation.prototype.control={};
 window.modules.navigation.prototype.control.events=function() {
         const self = this;
@@ -4093,8 +4093,8 @@ window.modules.navigation.prototype.control.events=function() {
 	    window.history.pushState(null, "", target);
 	});
 	
-    };
-    window.modules.navigation.prototype.control.events.prototype = window.modules.navigation.prototype;
+      };
+      window.modules.navigation.prototype.control.events.prototype = window.modules.navigation.prototype;
 window.modules.navigation.prototype.display={};
 window.modules.navigation.prototype.display.style="#navigation { width: 100%; background: rgba(0,0,0,0.72); display: flex; flex-direction: column; flex-flow: row; justify-content: space-between; } #navigation ul.nav-left>li { border-right: 1px solid rgba(255, 255, 255, 0.32); } #navigation ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: row; } #navigation ul>li { padding: 10px; margin: 0; cursor: pointer; } #navigation ul>li:hover, #navigation ul>li.selected { color: rgb(170, 130, 25); background: rgb(0,0,0); } ";
 window.modules.navigation.prototype.display.view=$("<div id=\"navigation\"> <ul class=\"nav-left\"> <li title=\"Create Your Next Legend.\" href=\"gladiator-culture\"> Create Gladiator </li> <li title=\"(Not Yet Implemented) &nbsp; &nbsp; &nbsp; &nbsp; An Overview of Your Saved Fighters.\"> My Gladiators </li> </ul> <ul class=\"nav-right\"> <li title=\"(Not Yet Implemented) &nbsp; &nbsp; &nbsp; &nbsp; Your Blood &amp; Sand Account.\" href=\"&account=true\"> <i class=\"fas fa-user\"></i> </li> <li title=\"Adjust Sound Settings.\" class=\"sound\" href=\"&soundSettings=true\"> <i class=\"fas fa-volume-mute\"></i> </li> </ul> </div>");
@@ -4106,15 +4106,15 @@ window.modules.utility = function () {
 	    new self.manipulators.waject;
 	    new self.functions.isServerUpdatable;
 	}
-    };
-    window.modules.navigation.prototype.modules = {
-        share: __SHARE__,
-        fetch: function (name) {
-            let m = new this[name];
-            this[name].prototype.loaded = true;
-            return m;
-        }
-    };
+      };
+      window.modules.navigation.prototype.modules = {
+    share: __SHARE__,
+    fetch: function (name) {
+      let m = new this[name];
+      this[name].prototype.loaded = true;
+      return m;
+    }
+  };
 window.modules.navigation.prototype.modules.gladiator = function () {
         const self = this;
 	
@@ -4123,15 +4123,15 @@ window.modules.navigation.prototype.modules.gladiator = function () {
 	    $('#game').append(self.display.view);
 	    new self.control.events();
 	}
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules = {
-        share: __SHARE__,
-        fetch: function (name) {
-            let m = new this[name];
-            this[name].prototype.loaded = true;
-            return m;
-        }
-    };
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules = {
+    share: __SHARE__,
+    fetch: function (name) {
+      let m = new this[name];
+      this[name].prototype.loaded = true;
+      return m;
+    }
+  };
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes = function () {
         const self = this;
 	
@@ -4140,12 +4140,12 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    new self.control.events();
 	}
 	
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.events=function() {
         const self = this;
@@ -4227,8 +4227,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	        }
 	    });
 	});
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.modifiers=function() {
         const self = this;
 	
@@ -4268,8 +4268,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    }
 	    slider.parent('li').attr('title', fieldTooltip);
 	});
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.modifiers.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.modifiers.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.display.box=$("<div id=\"attributes\" class=\"item\"> <span> <img title=\"Don't have time for this? Generate random Attributes.\" src=\"/img/dice.png\" class=\"randomizeAttributes dice\"> Attributes For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <ul class=\"gladiatorData\"> <li> <span class=\"label\">strength</span> <div class=\"slider\" name=\"strength\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">dexterity</span> <div class=\"slider\" name=\"dexterity\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">perception</span> <div class=\"slider\" name=\"perception\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">endurance</span> <div class=\"slider\" name=\"endurance\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">intelligence</span> <div class=\"slider\" name=\"intelligence\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">willpower</span> <div class=\"slider\" name=\"willpower\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">vitality</span> <div class=\"slider\" name=\"vitality\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span>ability sum</span> <div class=\"slider\" name=\"abilitySum\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.display.style="#attributes div < button[name=\"attributesNext\"] { display: block; } #attributes button[name=\"attributesPrevious\"] { display: block; float: left; } #attributes ul>li>.label { flex: 7; } #attributes ul>li>.final { flex: 2; } #attributes .slider { width: 480px; margin: 11.75px 40px; } #attributes input[name=\"name\"] { width: 57%; } #attributes button[name=\"attributesNext\"] { display: block; float: right; }";
@@ -4455,8 +4455,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	});
 	
 	socket.emit("gladiator-attributes-ready");
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics = function () {
         const self = this;
 	
@@ -4465,12 +4465,12 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	    new self.control.events();
 	}
 	
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.control.events=function() {
         const self = this;
@@ -4510,8 +4510,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	    self.state.requestBiometrics
 	);
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.display.box=$("<div id=\"biometrics\" class=\"item\"> <span> <img title=\"Don't Like These? Generate new Biometrics. This will not overwrite culture, sex, rank or name.\" src=\"/img/dice.png\" class=\"randomizeBiometrics dice\"> Biometrics For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <ul class=\"gladiatorData\"> <li> <span>Culture</span> <select class=\"stat\" name=\"culture\"> <option>roman</option> <option>gallic</option> <option>germanic</option> <option>syrian</option> <option>numidian</option> <option>thracian</option> <option>greek</option> <option>iberian</option> <option>judean</option> <option>scythian</option> </select> </li> <li> <span>Sex</span> <select class=\"stat\" name=\"sex\"> <option>male</option> <option>female</option> </select> </li> <li> <span>Rank</span> <input type=\"number\" class=\"stat\" name=\"rank\" min=1 max=15> </li> <li> <span>Age</span> <input type=\"number\" class=\"stat\" name=\"age\" readonly> </li> <li> <span>Weight</span> <input type=\"number\" class=\"stat\" name=\"weight\" readonly> </li> <li> <span>Height</span> <input type=\"number\" class=\"stat\" name=\"height\" readonly> </li> <li> <span>BMI</span> <input type=\"number\" class=\"stat\" name=\"bmi\" readonly> </li> <li> <span>Reach</span> <input type=\"number\" class=\"stat\" name=\"reach\" readonly> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.display.style="div < button[name=\"biometricsNext\"] { display: block; } button[name=\"biometricsPrevious\"] { display: block; float: left; } #biometrics input[name=\"name\"] { width: 50%; } #biometrics select { width: 150px; } button[name=\"biometricsNext\"] { display: block; float: right; }";
@@ -4567,8 +4567,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	
 	socket.emit("gladiator-biometrics-ready");
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats = function () {
         const self = this;
 	
@@ -4578,20 +4578,20 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatSt
 	} else {
 	    //socket.emit("gladiator-combatStats-generate");
 	}
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.control.events=function() {
         const self = this;
 	
 	$('#combatStats [name=name]').val(self.share.name);
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.display.box=$("<div id=\"combatStats\" class=\"item\"> <span> Combat Statistics For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <ul class=\"gladiatorData\"> <li title=\"Affected by endurance, lifestyle, rank, vitality, weight, and willpower.\"> <span>Health</span> <input type=\"number\" class=\"stat\" name=\"health\" readonly> </li> <li title=\"Affected by endurance, lifestyle, rank, vitality, willpower.\"> <span>Stamina</span> <input type=\"number\" class=\"stat\" name=\"stamina\" readonly> </li> <li> <span>Stamina Recovery</span> <input type=\"number\" class=\"stat\" name=\"staminaRecovery\" readonly> </li> <li> <span>Initiative</span> <input type=\"number\" class=\"stat\" name=\"initiative\" readonly> </li> <li> <span>Nerve</span> <input type=\"number\" class=\"stat\" name=\"nerve\" readonly> </li> <li> <span>Offense</span> <input type=\"number\" class=\"stat\" name=\"offense\" readonly> </li> <li> <span>Defense</span> <input type=\"number\" class=\"stat\" name=\"defense\" readonly> </li> <li> <span>Dodge</span> <input type=\"number\" class=\"stat\" name=\"dodge\" readonly> </li> <li> <span>Parry</span> <input type=\"number\" class=\"stat\" name=\"parry\" readonly> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.display.style="div < button[name=\"combatStatsNext\"] { display: block; } button[name=\"combatStatsPrevious\"] { display: block; float: left; } #combatStats input[name=\"name\"] { width: 50%; } #combatStats select { width: 150px; } button[name=\"combatStatsNext\"] { display: block; float: right; }";
@@ -4624,20 +4624,20 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatSt
 	});
 	
 	socket.emit("gladiator-combatStats-ready");
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture = function () {
         const self = this;
 	if (!self.loaded) {
 	    new self.hook.comms();
 	    new self.control.events();
 	}
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.control.events=function() {
         const self = this;
@@ -4710,8 +4710,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.
 	    settings.sex = sexes[randSex];
 	    generateName();
 	});
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.display.box=$("<div id=\"culture\" class=\"item\"> <span> <img title=\"Randomly Generate Culture, Sex and Name.\" src=\"/img/dice.png\" class=\"randomizeCulture dice\"> Culture of <input name=\"name\" placeholder=\"Name This Fighter\"> </span> <ul class=\"gladiatorData\"> <li> <span>Culture</span> <select class=\"stat\" name=\"culture\"> <option>roman</option> <option>gallic</option> <option>germanic</option> <option>syrian</option> <option>numidian</option> <option>thracian</option> <option>greek</option> <option>iberian</option> <option>judean</option> <option>scythian</option> </select> </li> <li> <span>Sex</span> <select class=\"stat\" name=\"sex\"> <option>male</option> <option>female</option> </select> </li> <li> <span> Name <img title=\"Randomly Generate a name based on The Fighter's Culture and Sex.\" src=\"/img/dice.png\" class=\"randomizeName dice\"> </span> <input class=\"stat\" name=\"name\"> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.display.style="div < button[name=\"cultureNext\"] { display: block; } #culture input[name=\"name\"] { width: 450px; } button[name=\"cultureNext\"] { display: block; float:right; } ";
@@ -4773,8 +4773,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.
 	});
 	
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills = function () {
         const self = this;
 	
@@ -4785,12 +4785,12 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills =
 	    //self.state.regenerateSkills();
 	}
 	
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.control.events=function() {
         const self = this;
@@ -4854,8 +4854,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.p
 	    max: 16,
 	    animate: 'slow'
 	});
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.display.box=$("<div id=\"skills\" class=\"item\"> <span> Skills For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <div> <span>Skill Points:</span> <span name=\"skillPoints\">10</span> </div> <ul class=\"gladiatorData\"> <li> <span>tactics</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"tactics\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\">n</span> <span class=\"description\">Abyssmal</span> </li> <li> <span>dodge</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"dodge\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>parry</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"parry\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>shield</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"shield\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>bash</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"bash\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>charge</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"charge\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>spear</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"spear\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>light Blade</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"lightBlade\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>heavy Blade</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"heavyBlade\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>bludgeoning</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"bludgeoning\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>axe</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"axe\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>riposte</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"riposte\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>close Combat</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"closeCombat\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>feint</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"feint\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>dirty Trick</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"dirtyTrick\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>appraise</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"appraise\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.display.style="#skills div < button[name=\"skillsNext\"] { display: block; } #skills button[name=\"skillsPrevious\"] { display: block; float: left; } #skills .slider { width: 200px; margin: 11.75px 40px; } #skills input[name=\"name\"] { width: 57%; } #skills button[name=\"skillsNext\"] { display: block; float: right; color: rgba(255,255,255,0.72); } #skills .proficiency { text-align: center; } #skills .slider-container { color: rgba(170, 130, 25, 0.5); background: rgba(0, 0, 0, 0.32); border: 1px solid rgba(0,0,0,0.72); padding-left: 5px; padding-right: 5px; display: flex; flex-direction: row; width: 350px; } #skills .min { text-align: right; } #skills .max { text-align: left; } #skills .max, #skills .min { flex-grow: 0; padding-top: 8px; } #skills ul.gladiatorData>li>span:nth-child(1) { flex-grow: 3; }";
@@ -5238,13 +5238,13 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.p
 	
 	socket.emit("gladiator-skills-ready");
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype;
 
-    window.modules.navigation.prototype.modules.gladiator.prototype.parent = window.modules.navigation.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.loaded = false;
+      window.modules.navigation.prototype.modules.gladiator.prototype.parent = window.modules.navigation.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.control.events=function() {
         const self = this;
@@ -5337,8 +5337,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.control.events=f
 	        $(`#gladiator a[href="#${id}"]`).trigger('click');
 	    }
 	});
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.display.style="#gladiator.ui-tabs { font-size: 15.3px; }";
 window.modules.navigation.prototype.modules.gladiator.prototype.display.view=$("<div id=\"gladiator\"> <ul> <li title=\"Tell Me About This Prospect.\"><a href=\"#culture\"> <i class=\"fas fa-flag\"></i> Culture </a></li> <li title=\"Here's What We Know About This Fighter.\"><a href=\"#biometrics\"> <i class=\"fas fa-diagnoses\"></i> Biometrics </a></li> <li title=\"Tell Me This Gladiator's Strengths.\"><a href=\"#attributes\"> <i class=\"fas fa-star-half-alt\"></i> Attributes </a></li> <li title=\"Spend Points; Get Good.\"><a href=\"#skills\"> <i class=\"fas fa-chess\"></i> Skills </a></li> <li title=\"We Hope You'll be Pleased With This Gladiator's Competitive Analysis.\"><a href=\"#combatStats\"> <i class=\"fas fa-fist-raised\"></i> Combat Stats </a></li> <li title=\"(Not Yet Implemented) &nbsp; &nbsp; &nbsp; &nbsp; Get Ready.\"><a href=\"#saveGladiator\"> <i class=\"fas fa-save\"></i> Save </a></li> </ul> <div id=\"saveGladiator\" class=\"item\" title=\"Nuu! ... R.I.P. Save\"> CAN HAZ SAVE!?!? </div> </div> ");
@@ -5347,15 +5347,15 @@ window.modules.navigation.prototype.modules.listGladiators = function () {
 	
 	if (!self.loaded) {
 	}
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules = {
-        share: __SHARE__,
-        fetch: function (name) {
-            let m = new this[name];
-            this[name].prototype.loaded = true;
-            return m;
-        }
-    };
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules = {
+    share: __SHARE__,
+    fetch: function (name) {
+      let m = new this[name];
+      this[name].prototype.loaded = true;
+      return m;
+    }
+  };
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes = function () {
         const self = this;
 	
@@ -5364,12 +5364,12 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    new self.control.events();
 	}
 	
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.events=function() {
         const self = this;
@@ -5451,8 +5451,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	        }
 	    });
 	});
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.modifiers=function() {
         const self = this;
 	
@@ -5492,8 +5492,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    }
 	    slider.parent('li').attr('title', fieldTooltip);
 	});
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.modifiers.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.modifiers.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.display.box=$("<div id=\"attributes\" class=\"item\"> <span> <img title=\"Don't have time for this? Generate random Attributes.\" src=\"/img/dice.png\" class=\"randomizeAttributes dice\"> Attributes For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <ul class=\"gladiatorData\"> <li> <span class=\"label\">strength</span> <div class=\"slider\" name=\"strength\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">dexterity</span> <div class=\"slider\" name=\"dexterity\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">perception</span> <div class=\"slider\" name=\"perception\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">endurance</span> <div class=\"slider\" name=\"endurance\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">intelligence</span> <div class=\"slider\" name=\"intelligence\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">willpower</span> <div class=\"slider\" name=\"willpower\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">vitality</span> <div class=\"slider\" name=\"vitality\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span>ability sum</span> <div class=\"slider\" name=\"abilitySum\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.display.style="#attributes div < button[name=\"attributesNext\"] { display: block; } #attributes button[name=\"attributesPrevious\"] { display: block; float: left; } #attributes ul>li>.label { flex: 7; } #attributes ul>li>.final { flex: 2; } #attributes .slider { width: 480px; margin: 11.75px 40px; } #attributes input[name=\"name\"] { width: 57%; } #attributes button[name=\"attributesNext\"] { display: block; float: right; }";
@@ -5679,8 +5679,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	});
 	
 	socket.emit("gladiator-attributes-ready");
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics = function () {
         const self = this;
 	
@@ -5689,12 +5689,12 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	    new self.control.events();
 	}
 	
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.control.events=function() {
         const self = this;
@@ -5734,8 +5734,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	    self.state.requestBiometrics
 	);
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.display.box=$("<div id=\"biometrics\" class=\"item\"> <span> <img title=\"Don't Like These? Generate new Biometrics. This will not overwrite culture, sex, rank or name.\" src=\"/img/dice.png\" class=\"randomizeBiometrics dice\"> Biometrics For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <ul class=\"gladiatorData\"> <li> <span>Culture</span> <select class=\"stat\" name=\"culture\"> <option>roman</option> <option>gallic</option> <option>germanic</option> <option>syrian</option> <option>numidian</option> <option>thracian</option> <option>greek</option> <option>iberian</option> <option>judean</option> <option>scythian</option> </select> </li> <li> <span>Sex</span> <select class=\"stat\" name=\"sex\"> <option>male</option> <option>female</option> </select> </li> <li> <span>Rank</span> <input type=\"number\" class=\"stat\" name=\"rank\" min=1 max=15> </li> <li> <span>Age</span> <input type=\"number\" class=\"stat\" name=\"age\" readonly> </li> <li> <span>Weight</span> <input type=\"number\" class=\"stat\" name=\"weight\" readonly> </li> <li> <span>Height</span> <input type=\"number\" class=\"stat\" name=\"height\" readonly> </li> <li> <span>BMI</span> <input type=\"number\" class=\"stat\" name=\"bmi\" readonly> </li> <li> <span>Reach</span> <input type=\"number\" class=\"stat\" name=\"reach\" readonly> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.display.style="div < button[name=\"biometricsNext\"] { display: block; } button[name=\"biometricsPrevious\"] { display: block; float: left; } #biometrics input[name=\"name\"] { width: 50%; } #biometrics select { width: 150px; } button[name=\"biometricsNext\"] { display: block; float: right; }";
@@ -5791,8 +5791,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	
 	socket.emit("gladiator-biometrics-ready");
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats = function () {
         const self = this;
 	
@@ -5802,20 +5802,20 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatSt
 	} else {
 	    //socket.emit("gladiator-combatStats-generate");
 	}
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.control.events=function() {
         const self = this;
 	
 	$('#combatStats [name=name]').val(self.share.name);
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.display.box=$("<div id=\"combatStats\" class=\"item\"> <span> Combat Statistics For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <ul class=\"gladiatorData\"> <li title=\"Affected by endurance, lifestyle, rank, vitality, weight, and willpower.\"> <span>Health</span> <input type=\"number\" class=\"stat\" name=\"health\" readonly> </li> <li title=\"Affected by endurance, lifestyle, rank, vitality, willpower.\"> <span>Stamina</span> <input type=\"number\" class=\"stat\" name=\"stamina\" readonly> </li> <li> <span>Stamina Recovery</span> <input type=\"number\" class=\"stat\" name=\"staminaRecovery\" readonly> </li> <li> <span>Initiative</span> <input type=\"number\" class=\"stat\" name=\"initiative\" readonly> </li> <li> <span>Nerve</span> <input type=\"number\" class=\"stat\" name=\"nerve\" readonly> </li> <li> <span>Offense</span> <input type=\"number\" class=\"stat\" name=\"offense\" readonly> </li> <li> <span>Defense</span> <input type=\"number\" class=\"stat\" name=\"defense\" readonly> </li> <li> <span>Dodge</span> <input type=\"number\" class=\"stat\" name=\"dodge\" readonly> </li> <li> <span>Parry</span> <input type=\"number\" class=\"stat\" name=\"parry\" readonly> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.display.style="div < button[name=\"combatStatsNext\"] { display: block; } button[name=\"combatStatsPrevious\"] { display: block; float: left; } #combatStats input[name=\"name\"] { width: 50%; } #combatStats select { width: 150px; } button[name=\"combatStatsNext\"] { display: block; float: right; }";
@@ -5848,20 +5848,20 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatSt
 	});
 	
 	socket.emit("gladiator-combatStats-ready");
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture = function () {
         const self = this;
 	if (!self.loaded) {
 	    new self.hook.comms();
 	    new self.control.events();
 	}
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.control.events=function() {
         const self = this;
@@ -5934,8 +5934,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.
 	    settings.sex = sexes[randSex];
 	    generateName();
 	});
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.display.box=$("<div id=\"culture\" class=\"item\"> <span> <img title=\"Randomly Generate Culture, Sex and Name.\" src=\"/img/dice.png\" class=\"randomizeCulture dice\"> Culture of <input name=\"name\" placeholder=\"Name This Fighter\"> </span> <ul class=\"gladiatorData\"> <li> <span>Culture</span> <select class=\"stat\" name=\"culture\"> <option>roman</option> <option>gallic</option> <option>germanic</option> <option>syrian</option> <option>numidian</option> <option>thracian</option> <option>greek</option> <option>iberian</option> <option>judean</option> <option>scythian</option> </select> </li> <li> <span>Sex</span> <select class=\"stat\" name=\"sex\"> <option>male</option> <option>female</option> </select> </li> <li> <span> Name <img title=\"Randomly Generate a name based on The Fighter's Culture and Sex.\" src=\"/img/dice.png\" class=\"randomizeName dice\"> </span> <input class=\"stat\" name=\"name\"> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.display.style="div < button[name=\"cultureNext\"] { display: block; } #culture input[name=\"name\"] { width: 450px; } button[name=\"cultureNext\"] { display: block; float:right; } ";
@@ -5997,8 +5997,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.
 	});
 	
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills = function () {
         const self = this;
 	
@@ -6009,12 +6009,12 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills =
 	    //self.state.regenerateSkills();
 	}
 	
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.control.events=function() {
         const self = this;
@@ -6078,8 +6078,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.p
 	    max: 16,
 	    animate: 'slow'
 	});
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.display.box=$("<div id=\"skills\" class=\"item\"> <span> Skills For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <div> <span>Skill Points:</span> <span name=\"skillPoints\">10</span> </div> <ul class=\"gladiatorData\"> <li> <span>tactics</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"tactics\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\">n</span> <span class=\"description\">Abyssmal</span> </li> <li> <span>dodge</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"dodge\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>parry</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"parry\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>shield</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"shield\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>bash</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"bash\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>charge</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"charge\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>spear</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"spear\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>light Blade</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"lightBlade\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>heavy Blade</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"heavyBlade\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>bludgeoning</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"bludgeoning\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>axe</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"axe\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>riposte</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"riposte\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>close Combat</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"closeCombat\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>feint</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"feint\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>dirty Trick</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"dirtyTrick\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>appraise</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"appraise\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.display.style="#skills div < button[name=\"skillsNext\"] { display: block; } #skills button[name=\"skillsPrevious\"] { display: block; float: left; } #skills .slider { width: 200px; margin: 11.75px 40px; } #skills input[name=\"name\"] { width: 57%; } #skills button[name=\"skillsNext\"] { display: block; float: right; color: rgba(255,255,255,0.72); } #skills .proficiency { text-align: center; } #skills .slider-container { color: rgba(170, 130, 25, 0.5); background: rgba(0, 0, 0, 0.32); border: 1px solid rgba(0,0,0,0.72); padding-left: 5px; padding-right: 5px; display: flex; flex-direction: row; width: 350px; } #skills .min { text-align: right; } #skills .max { text-align: left; } #skills .max, #skills .min { flex-grow: 0; padding-top: 8px; } #skills ul.gladiatorData>li>span:nth-child(1) { flex-grow: 3; }";
@@ -6462,20 +6462,20 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.p
 	
 	socket.emit("gladiator-skills-ready");
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype;
 
-    window.modules.navigation.prototype.modules.listGladiators.prototype.parent = window.modules.navigation.prototype;
-    window.modules.navigation.prototype.modules.listGladiators.prototype.state = {};
-    window.modules.navigation.prototype.modules.listGladiators.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.listGladiators.prototype.loaded = false;
+      window.modules.navigation.prototype.modules.listGladiators.prototype.parent = window.modules.navigation.prototype;
+      window.modules.navigation.prototype.modules.listGladiators.prototype.state = {};
+      window.modules.navigation.prototype.modules.listGladiators.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.listGladiators.prototype.loaded = false;
     window.modules.navigation.prototype.modules.listGladiators.prototype.display={};
 window.modules.navigation.prototype.modules.listGladiators.prototype.display.view=$("");
 window.modules.navigation.prototype.modules.listGladiators.prototype.hook={};
 window.modules.navigation.prototype.modules.listGladiators.prototype.hook.comms=function() {
         
-    };
-    window.modules.navigation.prototype.modules.listGladiators.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.listGladiators.prototype;
+      };
+      window.modules.navigation.prototype.modules.listGladiators.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.listGladiators.prototype;
 window.modules.navigation.prototype.modules.settings = function () {
         const self = this;
 	
@@ -6488,15 +6488,15 @@ window.modules.navigation.prototype.modules.settings = function () {
 	    new self.control.dialog();
 	    new self.control.sounds();
 	}
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules = {
-        share: __SHARE__,
-        fetch: function (name) {
-            let m = new this[name];
-            this[name].prototype.loaded = true;
-            return m;
-        }
-    };
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules = {
+    share: __SHARE__,
+    fetch: function (name) {
+      let m = new this[name];
+      this[name].prototype.loaded = true;
+      return m;
+    }
+  };
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes = function () {
         const self = this;
 	
@@ -6505,12 +6505,12 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    new self.control.events();
 	}
 	
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.events=function() {
         const self = this;
@@ -6592,8 +6592,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	        }
 	    });
 	});
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.modifiers=function() {
         const self = this;
 	
@@ -6633,8 +6633,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	    }
 	    slider.parent('li').attr('title', fieldTooltip);
 	});
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.modifiers.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.modifiers.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.display.box=$("<div id=\"attributes\" class=\"item\"> <span> <img title=\"Don't have time for this? Generate random Attributes.\" src=\"/img/dice.png\" class=\"randomizeAttributes dice\"> Attributes For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <ul class=\"gladiatorData\"> <li> <span class=\"label\">strength</span> <div class=\"slider\" name=\"strength\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">dexterity</span> <div class=\"slider\" name=\"dexterity\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">perception</span> <div class=\"slider\" name=\"perception\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">endurance</span> <div class=\"slider\" name=\"endurance\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">intelligence</span> <div class=\"slider\" name=\"intelligence\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">willpower</span> <div class=\"slider\" name=\"willpower\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span class=\"label\">vitality</span> <div class=\"slider\" name=\"vitality\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"final\"> 0 </span> </li> <li> <span>ability sum</span> <div class=\"slider\" name=\"abilitySum\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.display.style="#attributes div < button[name=\"attributesNext\"] { display: block; } #attributes button[name=\"attributesPrevious\"] { display: block; float: left; } #attributes ul>li>.label { flex: 7; } #attributes ul>li>.final { flex: 2; } #attributes .slider { width: 480px; margin: 11.75px 40px; } #attributes input[name=\"name\"] { width: 57%; } #attributes button[name=\"attributesNext\"] { display: block; float: right; }";
@@ -6820,8 +6820,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
 	});
 	
 	socket.emit("gladiator-attributes-ready");
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics = function () {
         const self = this;
 	
@@ -6830,12 +6830,12 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	    new self.control.events();
 	}
 	
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.control.events=function() {
         const self = this;
@@ -6875,8 +6875,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	    self.state.requestBiometrics
 	);
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.display.box=$("<div id=\"biometrics\" class=\"item\"> <span> <img title=\"Don't Like These? Generate new Biometrics. This will not overwrite culture, sex, rank or name.\" src=\"/img/dice.png\" class=\"randomizeBiometrics dice\"> Biometrics For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <ul class=\"gladiatorData\"> <li> <span>Culture</span> <select class=\"stat\" name=\"culture\"> <option>roman</option> <option>gallic</option> <option>germanic</option> <option>syrian</option> <option>numidian</option> <option>thracian</option> <option>greek</option> <option>iberian</option> <option>judean</option> <option>scythian</option> </select> </li> <li> <span>Sex</span> <select class=\"stat\" name=\"sex\"> <option>male</option> <option>female</option> </select> </li> <li> <span>Rank</span> <input type=\"number\" class=\"stat\" name=\"rank\" min=1 max=15> </li> <li> <span>Age</span> <input type=\"number\" class=\"stat\" name=\"age\" readonly> </li> <li> <span>Weight</span> <input type=\"number\" class=\"stat\" name=\"weight\" readonly> </li> <li> <span>Height</span> <input type=\"number\" class=\"stat\" name=\"height\" readonly> </li> <li> <span>BMI</span> <input type=\"number\" class=\"stat\" name=\"bmi\" readonly> </li> <li> <span>Reach</span> <input type=\"number\" class=\"stat\" name=\"reach\" readonly> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.display.style="div < button[name=\"biometricsNext\"] { display: block; } button[name=\"biometricsPrevious\"] { display: block; float: left; } #biometrics input[name=\"name\"] { width: 50%; } #biometrics select { width: 150px; } button[name=\"biometricsNext\"] { display: block; float: right; }";
@@ -6932,8 +6932,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	
 	socket.emit("gladiator-biometrics-ready");
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats = function () {
         const self = this;
 	
@@ -6943,20 +6943,20 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatSt
 	} else {
 	    //socket.emit("gladiator-combatStats-generate");
 	}
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.control.events=function() {
         const self = this;
 	
 	$('#combatStats [name=name]').val(self.share.name);
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.display.box=$("<div id=\"combatStats\" class=\"item\"> <span> Combat Statistics For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <ul class=\"gladiatorData\"> <li title=\"Affected by endurance, lifestyle, rank, vitality, weight, and willpower.\"> <span>Health</span> <input type=\"number\" class=\"stat\" name=\"health\" readonly> </li> <li title=\"Affected by endurance, lifestyle, rank, vitality, willpower.\"> <span>Stamina</span> <input type=\"number\" class=\"stat\" name=\"stamina\" readonly> </li> <li> <span>Stamina Recovery</span> <input type=\"number\" class=\"stat\" name=\"staminaRecovery\" readonly> </li> <li> <span>Initiative</span> <input type=\"number\" class=\"stat\" name=\"initiative\" readonly> </li> <li> <span>Nerve</span> <input type=\"number\" class=\"stat\" name=\"nerve\" readonly> </li> <li> <span>Offense</span> <input type=\"number\" class=\"stat\" name=\"offense\" readonly> </li> <li> <span>Defense</span> <input type=\"number\" class=\"stat\" name=\"defense\" readonly> </li> <li> <span>Dodge</span> <input type=\"number\" class=\"stat\" name=\"dodge\" readonly> </li> <li> <span>Parry</span> <input type=\"number\" class=\"stat\" name=\"parry\" readonly> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.display.style="div < button[name=\"combatStatsNext\"] { display: block; } button[name=\"combatStatsPrevious\"] { display: block; float: left; } #combatStats input[name=\"name\"] { width: 50%; } #combatStats select { width: 150px; } button[name=\"combatStatsNext\"] { display: block; float: right; }";
@@ -6989,20 +6989,20 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatSt
 	});
 	
 	socket.emit("gladiator-combatStats-ready");
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture = function () {
         const self = this;
 	if (!self.loaded) {
 	    new self.hook.comms();
 	    new self.control.events();
 	}
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.control.events=function() {
         const self = this;
@@ -7075,8 +7075,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.
 	    settings.sex = sexes[randSex];
 	    generateName();
 	});
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.display.box=$("<div id=\"culture\" class=\"item\"> <span> <img title=\"Randomly Generate Culture, Sex and Name.\" src=\"/img/dice.png\" class=\"randomizeCulture dice\"> Culture of <input name=\"name\" placeholder=\"Name This Fighter\"> </span> <ul class=\"gladiatorData\"> <li> <span>Culture</span> <select class=\"stat\" name=\"culture\"> <option>roman</option> <option>gallic</option> <option>germanic</option> <option>syrian</option> <option>numidian</option> <option>thracian</option> <option>greek</option> <option>iberian</option> <option>judean</option> <option>scythian</option> </select> </li> <li> <span>Sex</span> <select class=\"stat\" name=\"sex\"> <option>male</option> <option>female</option> </select> </li> <li> <span> Name <img title=\"Randomly Generate a name based on The Fighter's Culture and Sex.\" src=\"/img/dice.png\" class=\"randomizeName dice\"> </span> <input class=\"stat\" name=\"name\"> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.display.style="div < button[name=\"cultureNext\"] { display: block; } #culture input[name=\"name\"] { width: 450px; } button[name=\"cultureNext\"] { display: block; float:right; } ";
@@ -7138,8 +7138,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.
 	});
 	
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills = function () {
         const self = this;
 	
@@ -7150,12 +7150,12 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills =
 	    //self.state.regenerateSkills();
 	}
 	
-    };
-    
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.state = {};
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.loaded = false;
+      };
+      
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.state = {};
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.loaded = false;
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.control.events=function() {
         const self = this;
@@ -7219,8 +7219,8 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.p
 	    max: 16,
 	    animate: 'slow'
 	});
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.control.events.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype;
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.display.box=$("<div id=\"skills\" class=\"item\"> <span> Skills For <input name=\"name\" value=\"Name Your Gladiator\"> </span> <div> <span>Skill Points:</span> <span name=\"skillPoints\">10</span> </div> <ul class=\"gladiatorData\"> <li> <span>tactics</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"tactics\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\">n</span> <span class=\"description\">Abyssmal</span> </li> <li> <span>dodge</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"dodge\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>parry</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"parry\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>shield</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"shield\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>bash</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"bash\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>charge</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"charge\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>spear</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"spear\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>light Blade</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"lightBlade\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>heavy Blade</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"heavyBlade\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>bludgeoning</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"bludgeoning\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>axe</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"axe\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>riposte</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"riposte\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>close Combat</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"closeCombat\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>feint</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"feint\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>dirty Trick</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"dirtyTrick\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> <li> <span>appraise</span> <div class=\"slider-container\"> <span class=\"min\">0</span> <div class=\"slider\" name=\"appraise\"> <div class=\"ui-slider-handle custom-handle\"> </div> </div> <span class=\"max\">16</span> </div> <span class=\"proficiency\"></span> <span class=\"description\"></span> </li> </ul> </div>");
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.display.style="#skills div < button[name=\"skillsNext\"] { display: block; } #skills button[name=\"skillsPrevious\"] { display: block; float: left; } #skills .slider { width: 200px; margin: 11.75px 40px; } #skills input[name=\"name\"] { width: 57%; } #skills button[name=\"skillsNext\"] { display: block; float: right; color: rgba(255,255,255,0.72); } #skills .proficiency { text-align: center; } #skills .slider-container { color: rgba(170, 130, 25, 0.5); background: rgba(0, 0, 0, 0.32); border: 1px solid rgba(0,0,0,0.72); padding-left: 5px; padding-right: 5px; display: flex; flex-direction: row; width: 350px; } #skills .min { text-align: right; } #skills .max { text-align: left; } #skills .max, #skills .min { flex-grow: 0; padding-top: 8px; } #skills ul.gladiatorData>li>span:nth-child(1) { flex-grow: 3; }";
@@ -7603,13 +7603,13 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.p
 	
 	socket.emit("gladiator-skills-ready");
 	
-    };
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype;
+      };
+      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype;
 
-    window.modules.navigation.prototype.modules.settings.prototype.parent = window.modules.navigation.prototype;
-    window.modules.navigation.prototype.modules.settings.prototype.state = {};
-    window.modules.navigation.prototype.modules.settings.prototype.share = __SHARE__;
-    window.modules.navigation.prototype.modules.settings.prototype.loaded = false;
+      window.modules.navigation.prototype.modules.settings.prototype.parent = window.modules.navigation.prototype;
+      window.modules.navigation.prototype.modules.settings.prototype.state = {};
+      window.modules.navigation.prototype.modules.settings.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.settings.prototype.loaded = false;
     window.modules.navigation.prototype.modules.settings.prototype.control={};
 window.modules.navigation.prototype.modules.settings.prototype.control.dialog=function() {
         const self = this;
@@ -7646,8 +7646,8 @@ window.modules.navigation.prototype.modules.settings.prototype.control.dialog=fu
 	        $('.ui-widget-overlay').one('click', () => $(this).dialog('close'));
 	    }
 	});
-    };
-    window.modules.navigation.prototype.modules.settings.prototype.control.dialog.prototype = window.modules.navigation.prototype.modules.settings.prototype;
+      };
+      window.modules.navigation.prototype.modules.settings.prototype.control.dialog.prototype = window.modules.navigation.prototype.modules.settings.prototype;
 window.modules.navigation.prototype.modules.settings.prototype.control.sliders=function() {
         const self = this;
 	const settings = self.state.settings;
@@ -7715,8 +7715,8 @@ window.modules.navigation.prototype.modules.settings.prototype.control.sliders=f
 	        animate: 'fast'
 	    });
 	});
-    };
-    window.modules.navigation.prototype.modules.settings.prototype.control.sliders.prototype = window.modules.navigation.prototype.modules.settings.prototype;
+      };
+      window.modules.navigation.prototype.modules.settings.prototype.control.sliders.prototype = window.modules.navigation.prototype.modules.settings.prototype;
 window.modules.navigation.prototype.modules.settings.prototype.control.sounds=function() {
         const self = this;
 	
@@ -7754,8 +7754,8 @@ window.modules.navigation.prototype.modules.settings.prototype.control.sounds=fu
 	    let sound = self.share.sounds["dice" + r];
 	    sound.play();
 	});
-    };
-    window.modules.navigation.prototype.modules.settings.prototype.control.sounds.prototype = window.modules.navigation.prototype.modules.settings.prototype;
+      };
+      window.modules.navigation.prototype.modules.settings.prototype.control.sounds.prototype = window.modules.navigation.prototype.modules.settings.prototype;
 window.modules.navigation.prototype.modules.settings.prototype.display={};
 window.modules.navigation.prototype.modules.settings.prototype.display.style=".user-settings-btn { width: 64px; height: 64px; padding: 0 0; margin: 0 0; display: block; position: absolute; right: 0px; top: 0px; background: rgba(255,255,255,0.5); border-radius: 64px; border: 1px outset rgb(255,255,255,0.5); cursor: pointer; } .user-settings-btn:hover { border: 1px outset rgb(255,255,255,1); } .user-settings-btn:active { border: 1px inset rgb(255,255,255,1); } #user-settings-dialog { width:420px; display: none; background: rgb(0,0,0,0.72); } #user-settings-dialog .note { font-size: 12px; color: #848484; font-family: arial; text-shadow: 0px 0px 0px rgba(255,255,255,0.72); } #user-settings-dialog [name=master-sound] { width: 60px; margin: 11.75px 40px; } #user-settings-dialog [name=master-volume], #user-settings-dialog [name=music-volume], #user-settings-dialog [name=fx-volume] { width: 360px; margin: 11.75px 40px; } #user-settings-dialog .slider .custom-handle { width: 3em; height: 1.6em; top: 50%; margin-top: -.8em; margin-left: -30px; text-align: center; line-height: 1.6em; } ul.userData { list-style: none; background-color: rgba(164, 148, 105, 0.36); margin: 50px 0; padding: 10px; border: 0.5px outset rgba(170, 130, 25, 0.32); border-radius: 3px; } ul.userData>li { display: flex; flex-direction: row; box-shadow: 2px 2px 5px rgba(0,0,0, 0.32); padding: 5px; margin: 5px; background: rgba(0, 0, 0, 0.32); } ul.userData>li>span { padding-top: 6px; flex: 2; }";
 window.modules.navigation.prototype.modules.settings.prototype.display.view=$("<div id=\"user-settings-dialog\" title=\"Settings\"> <h2>Sound Settings</h2> <ul class=\"userData\"> <li> <span>Master Sound</span> <div class=\"slider\" name=\"master-sound\"> <div class=\"ui-slider-handle custom-handle\"> Off </div> </div> </li> <li> <span>Master Volume</span> <div class=\"slider\" name=\"master-volume\"> </div> </li> <li> <span>Music Volume</span> <div class=\"slider\" name=\"music-volume\"> </div> </li> <li> <span>Sound FX Volume</span> <div class=\"slider\" name=\"fx-volume\"> </div> </li> </ul> </div>");
@@ -7852,8 +7852,8 @@ window.modules.navigation.prototype.modules.settings.prototype.hook.comms=functi
 	});
 	
 	socket.emit("sound-settings-ready");
-    };
-    window.modules.navigation.prototype.modules.settings.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.settings.prototype;
+      };
+      window.modules.navigation.prototype.modules.settings.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.settings.prototype;
 window.modules.navigation.prototype.modules.settings.prototype.hook.settingState=function() {
         const self = this;
 	const settings = self.state.settings;
@@ -7926,13 +7926,13 @@ window.modules.navigation.prototype.modules.settings.prototype.hook.settingState
 	    }
 	});
 	
-    };
-    window.modules.navigation.prototype.modules.settings.prototype.hook.settingState.prototype = window.modules.navigation.prototype.modules.settings.prototype;
+      };
+      window.modules.navigation.prototype.modules.settings.prototype.hook.settingState.prototype = window.modules.navigation.prototype.modules.settings.prototype;
 
-    window.modules.utility.prototype.parent = window;
-    window.modules.utility.prototype.state = {};
-    window.modules.utility.prototype.share = __SHARE__;
-    window.modules.utility.prototype.loaded = false;
+      window.modules.utility.prototype.parent = window;
+      window.modules.utility.prototype.state = {};
+      window.modules.utility.prototype.share = __SHARE__;
+      window.modules.utility.prototype.loaded = false;
     window.modules.utility.prototype.functions={};
 window.modules.utility.prototype.functions.isServerUpdatable=function() {
         this.share.utility.isServerUpdatable = function isServerUpdatable(result) {
@@ -7953,8 +7953,8 @@ window.modules.utility.prototype.functions.isServerUpdatable=function() {
 	
 	    return false;
 	}
-    };
-    window.modules.utility.prototype.functions.isServerUpdatable.prototype = window.modules.utility.prototype;
+      };
+      window.modules.utility.prototype.functions.isServerUpdatable.prototype = window.modules.utility.prototype;
 window.modules.utility.prototype.manipulators={};
 window.modules.utility.prototype.manipulators.waject=function() {
         waject.extend('bindInput', function (
@@ -7981,5 +7981,5 @@ window.modules.utility.prototype.manipulators.waject=function() {
 	    outHandler(element, this.target[prop]);
 	});
 	
-    };
-    window.modules.utility.prototype.manipulators.waject.prototype = window.modules.utility.prototype;
+      };
+      window.modules.utility.prototype.manipulators.waject.prototype = window.modules.utility.prototype;

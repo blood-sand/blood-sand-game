@@ -1,3 +1,5 @@
+/* CSS Start */
+/* Main */
 @font-face {
     font-family: 'weiss_initialenregular';
     src: url('/font/weissinitialen-webfont.woff2') format('woff2'),
@@ -15,7 +17,7 @@
 }
 
 * {
-    text-shadow: 0px 0px 3px rgb(0,0,0);
+    text-shadow: 0px 0px 3px rgb(0, 0, 0);
     font-family: "weiss_initialenregular", sans-serif;
 }
 
@@ -24,7 +26,8 @@ html {
     color: rgb(255, 255, 255);
 }
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -60,31 +63,35 @@ ul.gladiatorData {
     background-repeat: no-repeat;
     background-position: center;
     list-style: none;
-    background-color:rgba(164, 148, 105, 0.36);
+    background-color: rgba(164, 148, 105, 0.36);
     margin: 10px 0 0 0;
     padding: 10px;
     border: 0.5px outset rgba(170, 130, 25, 0.32);
     border-radius: 3px;
 }
+
 ul.gladiatorData>li {
     display: flex;
     flex-direction: row;
-    box-shadow: 2px 2px 5px rgba(0,0,0, 0.32);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.32);
     padding: 5px;
     margin: 5px;
     background: rgba(0, 0, 0, 0.32);
 }
+
 ul.gladiatorData>li>span {
-    padding-top:6px;
-    flex:2;
+    padding-top: 6px;
+    flex: 2;
 }
+
 ul.gladiatorData>li>.bmiMod {
-    text-align:right;
+    text-align: right;
     font-style: italic;
     padding: 5px;
     color: rgb(170, 130, 25);
 
 }
+
 #game .item {
     position: relative;
     width: 720px;
@@ -94,7 +101,10 @@ ul.gladiatorData>li>.bmiMod {
     padding: 25px;
 }
 
-input,select,textarea,button {
+input,
+select,
+textarea,
+button {
     background: rgba(0, 0, 0, 0.32);
     color: rgb(170, 130, 25);
     padding: 5px;
@@ -152,17 +162,25 @@ select {
     text-align: center;
     line-height: 1.6em;
     border-radius: 1.6em;
-    box-shadow: -4px 5px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: -4px 5px 5px 0px rgba(0, 0, 0, 0.75);
     background: radial-gradient(ellipse at center, rgb(90, 77, 42) 36%, rgba(0, 0, 0, 0.72) 100%);
 }
 
 form>label {
-    flex:1;
+    flex: 1;
     flex-shrink: 1;
 }
+
 button {
     cursor: pointer;
 }
-html,select,input,textarea,button {
+
+html,
+select,
+input,
+textarea,
+button {
     font-size: 18px;
 }
+
+/* CSS End */

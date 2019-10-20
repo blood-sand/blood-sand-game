@@ -1,11 +1,11 @@
+// Mouse state
 const self = this;
 
 self.share.mouseIsDown = false;
 
 $(document).on('mousedown', () => {
-    self.share.mouseIsDown = true;
+  self.share.mouseIsDown = true;
 });
-
 $(document).on('mouseup', () => {
-    self.share.mouseIsDown = false;
+  self.share.mouseIsDown = false;
 });

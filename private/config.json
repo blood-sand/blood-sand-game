@@ -1,15 +1,15 @@
 {
-    "defaults": {
-        "app": "",
-        "index": "index.html"
-    },
-    "redirects": [
-        ["utils", "/libraries/utils.js"]
-    ],
-    "extensions": {
-        "dir": "extensions"
-    },
-    "socket": {
-        "dir": "channels"
-    }
+  "defaults": {
+    "app": "",
+    "index": "index.html"
+  },
+  "redirects": [
+    ["utils", "/libraries/utils.js"]
+  ],
+  "extensions": {
+    "dir": "extensions"
+  },
+  "socket": {
+    "dir": "channels"
+  }
 }

@@ -17,7 +17,7 @@
 
 [Emet](@lucacattide)
 
-<info@lucacattide.it> (https://lucacattide.it)
+<l.cattide@email.it> (https://lucacattide.dev)
 
 ### Design / Writing
 
@@ -33,11 +33,13 @@ Kory
 
 Jarrod Arroyo (GojiraGuy)
 
+Watermelon Burst
+
 ### Development / Consulting
 
 [Emet](@lucacattide)
 
-<info@lucacattide.it> (https://lucacattide.it)
+<l.cattide@email.it> (https://lucacattide.dev)
 
 [Kacproc](@kacproc)
 
@@ -46,6 +48,10 @@ Em3rgency
 <tadas.juscius@gmail.com>
 
 ### Development
+
+[Emet](@lucacattide)
+
+<l.cattide@email.it> (https://lucacattide.dev)
 
 [Spn](@s-p-n)
 

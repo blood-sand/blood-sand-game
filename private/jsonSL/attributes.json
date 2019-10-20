@@ -1,10 +1,10 @@
 {
-    "strength": "rand(1,6)+rand(1,6)+rand(1,6)",
-    "dexterity": "rand(1,6)+rand(1,6)+rand(1,6)",
-    "perception": "rand(1,6)+rand(1,6)+rand(1,6)",
-    "endurance": "rand(1,6)+rand(1,6)+rand(1,6)",
-    "intelligence": "rand(1,6)+rand(1,6)+rand(1,6)",
-    "willpower": "rand(1,6)+rand(1,6)+rand(1,6)",
-    "vitality": "rand(1,6)+rand(1,6)+rand(1,6)",
-    "abilitySum": "strength+dexterity+perception+endurance+intelligence+willpower+vitality"
+  "strength": "rand(1,6)+rand(1,6)+rand(1,6)",
+  "dexterity": "rand(1,6)+rand(1,6)+rand(1,6)",
+  "perception": "rand(1,6)+rand(1,6)+rand(1,6)",
+  "endurance": "rand(1,6)+rand(1,6)+rand(1,6)",
+  "intelligence": "rand(1,6)+rand(1,6)+rand(1,6)",
+  "willpower": "rand(1,6)+rand(1,6)+rand(1,6)",
+  "vitality": "rand(1,6)+rand(1,6)+rand(1,6)",
+  "abilitySum": "strength+dexterity+perception+endurance+intelligence+willpower+vitality"
 }

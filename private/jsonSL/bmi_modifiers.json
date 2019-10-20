@@ -3,132 +3,132 @@
     "bmi": 16
   },
   "bmi": "input.bmi",
-  
+
   "strength if bmi is 14": "- 3",
   "endurance if bmi is 14": "- 2",
   "vitality if bmi is 14": "- 3",
-  "dodge if bmi is 14": "6", 
-  
+  "dodge if bmi is 14": "6",
+
   "dexterity if bmi is 15": "1",
   "strength if bmi is 15": "- 3",
   "endurance if bmi is 15": "- 1",
   "vitality if bmi is 15": "- 2",
   "dodge if bmi is 15": "5",
-  
+
   "dexterity if bmi is 16": "1",
   "strength if bmi is 16": "- 2",
   "endurance if bmi is 16": "- 1",
   "vitality if bmi is 16": "- 1",
   "dodge if bmi is 16": "4",
- 
+
   "dexterity if bmi is 17": "1",
   "strength if bmi is 17": "- 1",
   "endurance if bmi is 17": "- 1",
   "dodge if bmi is 17": "3",
- 
+
   "dexterity if bmi is 18": "1",
   "strength if bmi is 18": "- 1",
   "dodge if bmi is 18": "2",
-  
+
   "dexterity if bmi is 19": "1",
   "dodge if bmi is 19": "1",
-  
+
   "endurance if bmi is 20": "1",
   "endurance if bmi is 21": "1",
   "endurance if bmi is 22": "1",
   "endurance if bmi is 23": "1",
   "endurance if bmi is 24": "1",
   "endurance if bmi is 25": "1",
-  
+
   "dexterity if bmi is 26": "- 1",
   "strength if bmi is 26": "1",
   "endurance if bmi is 26": "1",
   "dodge if bmi is 26": "- 1",
-  
+
   "dexterity if bmi is 27": "- 1",
   "strength if bmi is 27": "1",
   "vitality if bmi is 27": "1",
   "dodge if bmi is 27": "- 2",
-  
+
   "dexterity if bmi is 28": "- 1",
   "strength if bmi is 28": "1",
   "vitality if bmi is 28": "1",
   "willpower if bmi is 28": "- 1",
   "dodge if bmi is 28": "- 3",
- 
+
   "dexterity if bmi is 29": "- 1",
   "strength if bmi is 29": "1",
   "endurance if bmi is 29": "- 1",
   "vitality if bmi is 29": "1",
   "willpower if bmi is 29": "- 1",
   "dodge if bmi is 29": "- 4",
-  
+
   "dexterity if bmi is 30": "- 2",
   "strength if bmi is 30": "1",
   "endurance if bmi is 30": "- 1",
   "vitality if bmi is 30": "1",
   "willpower if bmi is 30": "- 1",
   "dodge if bmi is 30": "- 5",
-  
+
   "dexterity if bmi is 31": "- 2",
   "strength if bmi is 31": "1",
   "endurance if bmi is 31": "- 1",
   "willpower if bmi is 31": "- 1",
   "dodge if bmi is 31": "- 6",
-  
+
   "dexterity if bmi is 32": "- 2",
   "endurance if bmi is 32": "- 1",
   "willpower if bmi is 32": "- 1",
   "dodge if bmi is 32": "- 7",
-  
+
   "dexterity if bmi is 33": "- 2",
   "endurance if bmi is 33": "- 1",
   "perception if bmi is 33": "- 1",
   "willpower if bmi is 33": "- 1",
   "dodge if bmi is 33": "- 8",
-  
+
   "dexterity if bmi is 34": "- 2",
   "endurance if bmi is 34": "- 1",
   "perception if bmi is 34": "- 1",
   "vitality if bmi is 34": "- 1",
   "willpower if bmi is 34": "- 1",
   "dodge if bmi is 34": "- 9",
-  
+
   "dexterity if bmi is 35": "- 3",
   "endurance if bmi is 35": "- 2",
   "perception if bmi is 35": "- 1",
   "vitality if bmi is 35": "- 1",
   "willpower if bmi is 35": "- 1",
   "dodge if bmi is 35": "- 10",
-  
+
   "dexterity if bmi is 36": "- 3",
   "endurance if bmi is 36": "- 2",
   "perception if bmi is 36": "- 2",
   "vitality if bmi is 36": "- 1",
   "willpower if bmi is 36": "- 2",
   "dodge if bmi is 36": "- 11",
-  
+
   "dexterity if bmi is 37": "- 4",
   "endurance if bmi is 37": "- 3",
   "perception if bmi is 37": "- 2",
   "vitality if bmi is 37": "- 1",
   "willpower if bmi is 37": "- 2",
   "dodge if bmi is 37": "- 12",
-  
+
   "dexterity if bmi is 38": "- 4",
   "endurance if bmi is 38": "- 3",
   "perception if bmi is 38": "- 3",
   "vitality if bmi is 38": "- 2",
   "willpower if bmi is 38": "- 2",
   "dodge if bmi is 38": "- 13",
-  
+
   "dexterity if bmi is 39": "- 5",
   "endurance if bmi is 39": "- 3",
   "perception if bmi is 39": "- 3",
   "vitality if bmi is 39": "- 3",
   "willpower if bmi is 39": "- 2",
   "dodge if bmi is 39": "- 14",
-  
+
   "dexterity if bmi is 40": "- 6",
   "endurance if bmi is 40": "- 3",
   "perception if bmi is 40": "- 3",
@@ -140,7 +140,7 @@
   "endurance if bmi > 40": "- 3 + (40 - bmi)",
   "perception if bmi > 40": "- 3",
   "vitality if bmi > 40": "- 4 + (40 - bmi)",
-  "willpower if bmi > 40": "- 2",  
+  "willpower if bmi > 40": "- 2",
   "dodge if bmi > 40": "- (bmi - 25)"
-  
+
 }

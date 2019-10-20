@@ -1,17 +1,18 @@
-$selectric-main-color:      rgba(0,0,0,0.32) !default;                                              // Color used in border
-$selectric-secondary-color: rgb(170,130,25) !default;                                              // Color used in button
-$selectric-text-color:      rgb(170,130,25) !default;                                              // Color used in label
-$selectric-bg-color:        rgba(0,0,0,0.32) !default;                                           // Background color
-$selectric-btn-bg-color:    rgba(0,0,0,0.72) !default;                                           // Button background color
-$selectric-highlight-color: rgb(170,130,25) !default;
-$selectric-highlight-text:  rgb(255,255,255) !default;
-$selectric-height:          40px !default;                                              // Outer height
-$selectric-width:           160px !default;
-$selectric-spacing:         10px !default;                                              // Label left padding
-$selectric-border-width:    1px !default;                                               // Outer border width
-$selectric-border-radius:   0px !default;                                               // Border radius
-$selectric-inner-height:    $selectric-height - ($selectric-border-width * 2) !default; // Inner height
-$selectric-font-size:       18px !default;                                              // Font size
+// SASS Start
+$selectric-main-color: rgba(0, 0, 0, 0.32) !default; // Color used in border
+$selectric-secondary-color: rgb(170, 130, 25) !default; // Color used in button
+$selectric-text-color: rgb(170, 130, 25) !default; // Color used in label
+$selectric-bg-color: rgba(0, 0, 0, 0.32) !default; // Background color
+$selectric-btn-bg-color: rgba(0, 0, 0, 0.72) !default; // Button background color
+$selectric-highlight-color: rgb(170, 130, 25) !default;
+$selectric-highlight-text: rgb(255, 255, 255) !default;
+$selectric-height: 40px !default; // Outer height
+$selectric-width: 160px !default;
+$selectric-spacing: 10px !default; // Label left padding
+$selectric-border-width: 1px !default; // Outer border width
+$selectric-border-radius: 0px !default; // Border radius
+$selectric-inner-height: $selectric-height - ($selectric-border-width * 2) !default; // Inner height
+$selectric-font-size: 18px !default; // Font size
 
 .selectric-wrapper {
   position: relative;
@@ -55,7 +56,9 @@ $selectric-font-size:       18px !default;                                      
     color: $selectric-secondary-color;
     text-align: center;
     font: 0/0 a;
-    *font: 20px/#{$selectric-inner-height} Lucida Sans Unicode, Arial Unicode MS, Arial;
+    *font: 20px/#{$selectric-inner-height} Lucida Sans Unicode,
+    Arial Unicode MS,
+    Arial;
 
     &:after {
       content: " ";
@@ -184,7 +187,8 @@ $selectric-font-size:       18px !default;                                      
     bottom: 100%;
   }
 
-  ul, li {
+  ul,
+  li {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -245,3 +249,5 @@ $selectric-font-size:       18px !default;                                      
     }
   }
 }
+
+// SASS End

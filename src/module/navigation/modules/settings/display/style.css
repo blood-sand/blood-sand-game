@@ -1,76 +1,84 @@
+/* CSS Start */
+/* Display */
 .user-settings-btn {
-    width: 64px;
-    height: 64px;
-    padding: 0 0;
-    margin: 0 0;
-    display: block;
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    background: rgba(255,255,255,0.5);
-    border-radius: 64px;
-    border: 1px outset rgb(255,255,255,0.5);
-    cursor: pointer;
+  width: 64px;
+  height: 64px;
+  padding: 0 0;
+  margin: 0 0;
+  display: block;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 64px;
+  border: 1px outset rgb(255, 255, 255, 0.5);
+  cursor: pointer;
 }
 
 .user-settings-btn:hover {
-    border: 1px outset rgb(255,255,255,1);
+  border: 1px outset rgb(255, 255, 255, 1);
 }
 
 .user-settings-btn:active {
-    border: 1px inset rgb(255,255,255,1);
+  border: 1px inset rgb(255, 255, 255, 1);
 }
 
 #user-settings-dialog {
-    width:420px;
-    display: none;
-    background: rgb(0,0,0,0.72);
+  width: 420px;
+  display: none;
+  background: rgb(0, 0, 0, 0.72);
 }
+
 #user-settings-dialog .note {
-    font-size: 12px;
-    color: #848484;
-    font-family: arial;
-    text-shadow: 0px 0px 0px rgba(255,255,255,0.72);
+  font-size: 12px;
+  color: #848484;
+  font-family: arial;
+  text-shadow: 0px 0px 0px rgba(255, 255, 255, 0.72);
 }
+
 #user-settings-dialog [name=master-sound] {
-    width: 60px;
-    margin: 11.75px 40px;
+  width: 60px;
+  margin: 11.75px 40px;
 }
+
 #user-settings-dialog [name=master-volume],
 #user-settings-dialog [name=music-volume],
 #user-settings-dialog [name=fx-volume] {
-    width: 360px;
-    margin: 11.75px 40px;
+  width: 360px;
+  margin: 11.75px 40px;
 }
+
 #user-settings-dialog .slider .custom-handle {
-    width: 3em;
-    height: 1.6em;
-    top: 50%;
-    margin-top: -.8em;
-    margin-left: -30px;
-    text-align: center;
-    line-height: 1.6em;
+  width: 3em;
+  height: 1.6em;
+  top: 50%;
+  margin-top: -.8em;
+  margin-left: -30px;
+  text-align: center;
+  line-height: 1.6em;
 }
 
 ul.userData {
-    list-style: none;
-    background-color: rgba(164, 148, 105, 0.36);
-    margin: 50px 0;
-    padding: 10px;
-    border: 0.5px outset rgba(170, 130, 25, 0.32);
-    border-radius: 3px;
+  list-style: none;
+  background-color: rgba(164, 148, 105, 0.36);
+  margin: 50px 0;
+  padding: 10px;
+  border: 0.5px outset rgba(170, 130, 25, 0.32);
+  border-radius: 3px;
 }
 
-ul.userData>li {
-    display: flex;
-    flex-direction: row;
-    box-shadow: 2px 2px 5px rgba(0,0,0, 0.32);
-    padding: 5px;
-    margin: 5px;
-    background: rgba(0, 0, 0, 0.32);
+ul.userData > li {
+  display: flex;
+  flex-direction: row;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.32);
+  padding: 5px;
+  margin: 5px;
+  background: rgba(0, 0, 0, 0.32);
 }
 
-ul.userData>li>span {
-    padding-top: 6px;
-    flex: 2;
+ul.userData > li > span {
+  padding-top: 6px;
+  flex: 2;
 }
+
+/* CSS End */

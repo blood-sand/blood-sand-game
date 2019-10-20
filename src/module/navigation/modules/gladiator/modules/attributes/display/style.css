@@ -1,30 +1,34 @@
-#attributes div < button[name="attributesNext"] {
-    display: block;
+/* CSS Start */
+/* Attributes */
+#attributes div > button[name="attributesNext"] {
+  display: block;
 }
 
 #attributes button[name="attributesPrevious"] {
-    display: block;
-    float: left;
+  display: block;
+  float: left;
 }
 
-#attributes ul>li>.label {
-    flex: 7;
+#attributes ul > li > .label {
+  flex: 7;
 }
 
-#attributes ul>li>.final {
-    flex: 2;
+#attributes ul > li > .final {
+  flex: 2;
 }
 
 #attributes .slider {
-    width: 480px;
-    margin: 11.75px 40px;
+  width: 480px;
+  margin: 11.75px 40px;
 }
 
 #attributes input[name="name"] {
-    width: 57%;
+  width: 57%;
 }
 
 #attributes button[name="attributesNext"] {
-    display: block;
-    float: right;
+  display: block;
+  float: right;
 }
+
+/* CSS End */

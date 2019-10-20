@@ -18,7 +18,7 @@
   "skillpointsspent": "input.skillpointsspent",
   "skillvalue": "input.skillvalue",
   "tactics": "0.1*(input.intelligence+input.rank/10*20)/2*input.tacticspoints",
-  
+
   "dodgemod": "0.1+(0.9*(input.dexterity+input.perception)/30)+0.15*tactics/15",
   "parrymod": "0.1+(0.9*(input.strength+input.dexterity+input.perception+input.intelligence)/60)+0.15*tactics/15",
   "shieldmod": "0.1+(0.9*(input.strength+input.endurance)/30)+0.15*tactics/15",
@@ -34,7 +34,7 @@
   "feintmod": "0.2+(0.65*(input.dexterity+input.intelligence)/30)+0.35*tactics/15",
   "dirtytricksmod": "0.2+1*(input.dexterity+input.perception+2*input.intelligence)/60",
   "appraisemod": "0.2+0.7*(input.perception+input.intelligence)/30+0.3*tactics/15",
-  
+
   "skilltype if skill is 0": "0",
   "skilltype if skill is 1": "0",
   "skilltype if skill is 2": "1",
@@ -56,50 +56,50 @@
   "skillmax if skilltype is 2": "8",
 
   "skillvalue if skilltype is 0": {
-    "value if parent.skillpointsspent is 0": 0 ,
-    "value if parent.skillpointsspent is 1": 9 ,
-    "value if parent.skillpointsspent is 2": 17.5 ,
-    "value if parent.skillpointsspent is 3": 25.5 ,
-    "value if parent.skillpointsspent is 4": 33 ,
-    "value if parent.skillpointsspent is 5": 40 ,
-    "value if parent.skillpointsspent is 6": 46.5 ,
-    "value if parent.skillpointsspent is 7": 52.5 ,
-    "value if parent.skillpointsspent is 8": 58 ,
-    "value if parent.skillpointsspent is 9": 63 ,
-    "value if parent.skillpointsspent is 10": 67.5 ,
-    "value if parent.skillpointsspent is 11": 71.5 ,
-    "value if parent.skillpointsspent is 12": 75 ,
-    "value if parent.skillpointsspent is 13": 78 ,
-    "value if parent.skillpointsspent is 14": 80.5 ,
-    "value if parent.skillpointsspent is 15": 82.5 ,
-    "value if parent.skillpointsspent is 16": 84 
+    "value if parent.skillpointsspent is 0": 0,
+    "value if parent.skillpointsspent is 1": 9,
+    "value if parent.skillpointsspent is 2": 17.5,
+    "value if parent.skillpointsspent is 3": 25.5,
+    "value if parent.skillpointsspent is 4": 33,
+    "value if parent.skillpointsspent is 5": 40,
+    "value if parent.skillpointsspent is 6": 46.5,
+    "value if parent.skillpointsspent is 7": 52.5,
+    "value if parent.skillpointsspent is 8": 58,
+    "value if parent.skillpointsspent is 9": 63,
+    "value if parent.skillpointsspent is 10": 67.5,
+    "value if parent.skillpointsspent is 11": 71.5,
+    "value if parent.skillpointsspent is 12": 75,
+    "value if parent.skillpointsspent is 13": 78,
+    "value if parent.skillpointsspent is 14": 80.5,
+    "value if parent.skillpointsspent is 15": 82.5,
+    "value if parent.skillpointsspent is 16": 84
   },
   "skillvalue if skilltype is 1": {
-    "value if parent.skillpointsspent is 0": 0 ,
-    "value if parent.skillpointsspent is 1": 12.01 ,
-    "value if parent.skillpointsspent is 2": 23.11 ,
-    "value if parent.skillpointsspent is 3": 33.3 ,
-    "value if parent.skillpointsspent is 4": 42.58 ,
-    "value if parent.skillpointsspent is 5": 50.95 ,
-    "value if parent.skillpointsspent is 6": 58.41 ,
-    "value if parent.skillpointsspent is 7": 64.96 ,
-    "value if parent.skillpointsspent is 8": 70.6 ,
-    "value if parent.skillpointsspent is 9": 75.33 ,
-    "value if parent.skillpointsspent is 10": 79.15 ,
-    "value if parent.skillpointsspent is 11": 82.06 ,
-    "value if parent.skillpointsspent is 12": 84.06 
+    "value if parent.skillpointsspent is 0": 0,
+    "value if parent.skillpointsspent is 1": 12.01,
+    "value if parent.skillpointsspent is 2": 23.11,
+    "value if parent.skillpointsspent is 3": 33.3,
+    "value if parent.skillpointsspent is 4": 42.58,
+    "value if parent.skillpointsspent is 5": 50.95,
+    "value if parent.skillpointsspent is 6": 58.41,
+    "value if parent.skillpointsspent is 7": 64.96,
+    "value if parent.skillpointsspent is 8": 70.6,
+    "value if parent.skillpointsspent is 9": 75.33,
+    "value if parent.skillpointsspent is 10": 79.15,
+    "value if parent.skillpointsspent is 11": 82.06,
+    "value if parent.skillpointsspent is 12": 84.06
   },
   "skillvalue if skilltype is 2": {
-    "value if parent.skillpointsspent is 0": 0 ,
-    "value if parent.skillpointsspent is 1": 18.05 ,
-    "value if parent.skillpointsspent is 2": 33.95 ,
-    "value if parent.skillpointsspent is 3": 47.7 ,
-    "value if parent.skillpointsspent is 4": 59.3 ,
-    "value if parent.skillpointsspent is 5": 68.75 ,
-    "value if parent.skillpointsspent is 6": 76.05 ,
-    "value if parent.skillpointsspent is 7": 81.2 ,
-    "value if parent.skillpointsspent is 8": 84.2 
-  }  ,
+    "value if parent.skillpointsspent is 0": 0,
+    "value if parent.skillpointsspent is 1": 18.05,
+    "value if parent.skillpointsspent is 2": 33.95,
+    "value if parent.skillpointsspent is 3": 47.7,
+    "value if parent.skillpointsspent is 4": 59.3,
+    "value if parent.skillpointsspent is 5": 68.75,
+    "value if parent.skillpointsspent is 6": 76.05,
+    "value if parent.skillpointsspent is 7": 81.2,
+    "value if parent.skillpointsspent is 8": 84.2
+  },
 
   "skillfinal if skill is 0": "dodgemod*skillvalue",
   "skillfinal if skill is 1": "parrymod*skillvalue",
@@ -116,6 +116,6 @@
   "skillfinal if skill is 12": "feintmod*skillvalue",
   "skillfinal if skill is 13": "dirtytricksmod*skillvalue",
   "skillfinal if skill is 14": "appraisemod*skillvalue"
-  
- 
+
+
 }

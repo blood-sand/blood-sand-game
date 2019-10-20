@@ -1,10 +1,10 @@
 {
-    "name": "Lorica Segmentata",
-    "coverage": {
-        "torso": {
-            //        coverage, durability total, durability remaining
-            "chest": [1.0, 80, 80],
-            "abdoment": [1.0, 55]
-        }
+  "name": "Lorica Segmentata",
+  "coverage": {
+    "torso": {
+      // coverage, durability total, durability remaining
+      "chest": [1.0, 80, 80],
+      "abdoment": [1.0, 55]
     }
+  }
 }
