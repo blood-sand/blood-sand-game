@@ -1,7 +1,6 @@
 // Main
-const self = this;
 
-if (!self.loaded) {
-  new self.control.events();
-  new self.control.mouseState();
+constructor() {
+  new this.control.events();
+  new this.control.mouseState();
 }

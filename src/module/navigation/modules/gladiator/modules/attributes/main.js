@@ -1,7 +1,5 @@
 // Main
-const self = this;
-
-if (!self.loaded) {
-  new self.hook.comms();
-  new self.control.events();
+constructor() {
+  new this.hook.comms();
+  new this.control.events();
 }

@@ -1,12 +1,10 @@
 // Main
-const self = this;
+constructor () {
+  $('head').append('<style>' + this.display.style + '</style>');
+  $('#game').append(this.display.view);
 
-if (!self.loaded) {
-  $('head').append('<style>' + self.display.style + '</style>');
-  $('#game').append(self.display.view);
-
-  new self.control.events();
-  self.modules.fetch('settings');
-  self.modules.fetch('gladiator');
-  self.modules.fetch('listGladiators');
+  new this.control.events();
+  this.modules.fetch('settings');
+  this.modules.fetch('gladiator');
+  this.modules.fetch('listGladiators');
 }

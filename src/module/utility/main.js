@@ -1,9 +1,7 @@
 // Main
-const self = this;
+constructor() {
+  this.share.utility = {};
 
-if (!self.loaded) {
-  self.share.utility = {};
-
-  new self.manipulators.waject;
-  new self.functions.isServerUpdatable;
+  new this.manipulators.waject;
+  new this.functions.isServerUpdatable;
 }

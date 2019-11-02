@@ -1,14 +1,12 @@
 // Main
-const self = this;
+constructor() {
+  $('head').append('<style>' + this.display.style + '</style>');
+  $('#game').append(this.display.view);
 
-if (!self.loaded) {
-  $('head').append('<style>' + self.display.style + '</style>');
-  $('#game').append(self.display.view);
+  this.state.dialog = $('#user-settings-dialog');
 
-  self.state.dialog = $('#user-settings-dialog');
-
-  new self.hook.comms();
-  new self.control.sliders();
-  new self.control.dialog();
-  new self.control.sounds();
+  new this.hook.comms();
+  new this.control.sliders();
+  new this.control.dialog();
+  new this.control.sounds();
 }

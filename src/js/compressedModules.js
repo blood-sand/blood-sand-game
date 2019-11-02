@@ -1,22 +1,32 @@
 const __SHARE__ = {};
 window.modules = {
       share: __SHARE__,
+      __CACHE__: {},
       fetch: function (name) {
-        let m = new this[name];
-        this[name].prototype.loaded = true;
-        return m;
+        if (!(name in this.__CACHE__)) {
+          let m = new this[name];
+          this.__CACHE__[name] = m;
+          return m;
+        } else {
+          if ('onFetch' in this.__CACHE__[name]) {
+            this.__CACHE__[name].onFetch();
+          }
+          return this.__CACHE__[name];
+        }
       }
     };
-window.modules.eventLoop = function () {
-        // Main
-	const self = this;
+window.modules.eventLoop = (function () {
+        class eventLoop {
+          // Main
 	
-	if (!self.loaded) {
-	  new self.control.events();
-	  new self.control.mouseState();
+	constructor() {
+	  new this.control.events();
+	  new this.control.mouseState();
 	}
 	
-      };
+        }
+        return eventLoop;
+      }());
       
       window.modules.eventLoop.prototype.parent = window;
       window.modules.eventLoop.prototype.state = {};
@@ -107,59 +117,78 @@ window.modules.eventLoop.prototype.control.mouseState=function() {
     };
     window.modules.eventLoop.prototype.control.mouseState.prototype = window.modules.eventLoop.prototype;
 
-    window.modules.navigation = function () {
-        // Main
-	const self = this;
+    window.modules.navigation = (function () {
+        class navigation {
+          // Main
+	constructor () {
+	  $('head').append('<style>' + this.display.style + '</style>');
+	  $('#game').append(this.display.view);
 	
-	if (!self.loaded) {
-	  $('head').append('<style>' + self.display.style + '</style>');
-	  $('#game').append(self.display.view);
-	
-	  new self.control.events();
-	  self.modules.fetch('settings');
-	  self.modules.fetch('gladiator');
-	  self.modules.fetch('listGladiators');
+	  new this.control.events();
+	  this.modules.fetch('settings');
+	  this.modules.fetch('gladiator');
+	  this.modules.fetch('listGladiators');
 	}
 	
-      };
+        }
+        return navigation;
+      }());
       window.modules.navigation.prototype.modules = {
       share: __SHARE__,
+      __CACHE__: {},
       fetch: function (name) {
-        let m = new this[name];
-        this[name].prototype.loaded = true;
-        return m;
+        if (!(name in this.__CACHE__)) {
+          let m = new this[name];
+          this.__CACHE__[name] = m;
+          return m;
+        } else {
+          if ('onFetch' in this.__CACHE__[name]) {
+            this.__CACHE__[name].onFetch();
+          }
+          return this.__CACHE__[name];
+        }
       }
     };
-window.modules.navigation.prototype.modules.gladiator = function () {
-        // Main
-	const self = this;
+window.modules.navigation.prototype.modules.gladiator = (function () {
+        class gladiator {
+          // Main
+	constructor() {
+	  $('head').append('<style>' + this.display.style + '</style>');
+	  $('#game').append(this.display.view);
 	
-	if (!self.loaded) {
-	  $('head').append('<style>' + self.display.style + '</style>');
-	  $('#game').append(self.display.view);
-	
-	  new self.control.events();
+	  new this.control.events();
 	}
 	
-      };
+        }
+        return gladiator;
+      }());
       window.modules.navigation.prototype.modules.gladiator.prototype.modules = {
       share: __SHARE__,
+      __CACHE__: {},
       fetch: function (name) {
-        let m = new this[name];
-        this[name].prototype.loaded = true;
-        return m;
+        if (!(name in this.__CACHE__)) {
+          let m = new this[name];
+          this.__CACHE__[name] = m;
+          return m;
+        } else {
+          if ('onFetch' in this.__CACHE__[name]) {
+            this.__CACHE__[name].onFetch();
+          }
+          return this.__CACHE__[name];
+        }
       }
     };
-window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes = function () {
-        // Main
-	const self = this;
-	
-	if (!self.loaded) {
-	  new self.hook.comms();
-	  new self.control.events();
+window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes = (function () {
+        class attributes {
+          // Main
+	constructor() {
+	  new this.hook.comms();
+	  new this.control.events();
 	}
 	
-      };
+        }
+        return attributes;
+      }());
       
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.state = {};
@@ -520,16 +549,17 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
     };
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype;
 
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics = function () {
-        // Main
-	const self = this;
-	
-	if (!self.loaded) {
-	  new self.hook.comms();
-	  new self.control.events();
+    window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics = (function () {
+        class biometrics {
+          // Main
+	constructor() {
+	  new this.hook.comms();
+	  new this.control.events();
 	}
 	
-      };
+        }
+        return biometrics;
+      }());
       
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.state = {};
@@ -642,8 +672,10 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
     };
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype;
 
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats = function () {
-        // Main
+    window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats = (function () {
+        class combatStats {
+          // Main
+	/*
 	const self = this;
 	
 	if (!self.loaded) {
@@ -652,8 +684,10 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
 	} else {
 	  //socket.emit("gladiator-combatStats-generate");
 	}
-	
-      };
+	*/
+        }
+        return combatStats;
+      }());
       
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.state = {};
@@ -705,16 +739,17 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatSt
     };
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype;
 
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture = function () {
-        // Main
-	const self = this;
-	
-	if (!self.loaded) {
-	  new self.hook.comms();
-	  new self.control.events();
+    window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture = (function () {
+        class culture {
+          // Main
+	constructor() {
+	  new this.hook.comms();
+	  new this.control.events();
 	}
 	
-      };
+        }
+        return culture;
+      }());
       
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.state = {};
@@ -886,8 +921,10 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.
     };
     window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype;
 
-    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills = function () {
-        // Main
+    window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills = (function () {
+        class skills {
+          // Main
+	/*
 	const self = this;
 	
 	if (!self.loaded) {
@@ -896,8 +933,10 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.
 	} else {
 	  //self.state.regenerateSkills();
 	}
-	
-      };
+	*/
+        }
+        return skills;
+      }());
       
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.state = {};
@@ -1551,13 +1590,14 @@ window.modules.navigation.prototype.modules.gladiator.prototype.display={};
 window.modules.navigation.prototype.modules.gladiator.prototype.display.style="/* CSS Start */ /* Display */ #gladiator.ui-tabs { font-size: 15.3px; } /* CSS End */ ";
 window.modules.navigation.prototype.modules.gladiator.prototype.display.view=$("<!--Gladiator Start--> <div id=\"gladiator\"> <ul> <li title=\"Tell Me About This Prospect.\"><a href=\"#culture\"> <i class=\"fas fa-flag\"></i> Culture </a></li> <li title=\"Here's What We Know About This Fighter.\"><a href=\"#biometrics\"> <i class=\"fas fa-diagnoses\"></i> Biometrics </a></li> <li title=\"Tell Me This Gladiator's Strengths.\"><a href=\"#attributes\"> <i class=\"fas fa-star-half-alt\"></i> Attributes </a></li> <li title=\"Spend Points; Get Good.\"><a href=\"#skills\"> <i class=\"fas fa-chess\"></i> Skills </a></li> <li title=\"We Hope You'll be Pleased With This Gladiator's Competitive Analysis.\"> <a href=\"#combatStats\"> <i class=\"fas fa-fist-raised\"></i> Combat Stats </a></li> <li title=\"(Not Yet Implemented) &nbsp; &nbsp; &nbsp; &nbsp; Get Ready.\"><a href=\"#saveGladiator\"> <i class=\"fas fa-save\"></i> Save </a></li> </ul> <div id=\"saveGladiator\" class=\"item\" title=\"Nuu! ... R.I.P. Save\"> CAN HAZ SAVE!?!? </div> </div> <!--Gladiator End--> ");
 
-    window.modules.navigation.prototype.modules.listGladiators = function () {
-        // Main
-	const self = this;
+    window.modules.navigation.prototype.modules.listGladiators = (function () {
+        class listGladiators {
+          // Main
 	
-	if (!self.loaded) {}
 	
-      };
+        }
+        return listGladiators;
+      }());
       
       window.modules.navigation.prototype.modules.listGladiators.prototype.parent = window.modules.navigation.prototype;
       window.modules.navigation.prototype.modules.listGladiators.prototype.state = {};
@@ -1571,23 +1611,24 @@ window.modules.navigation.prototype.modules.listGladiators.prototype.hook.comms=
     };
     window.modules.navigation.prototype.modules.listGladiators.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.listGladiators.prototype;
 
-    window.modules.navigation.prototype.modules.settings = function () {
-        // Main
-	const self = this;
+    window.modules.navigation.prototype.modules.settings = (function () {
+        class settings {
+          // Main
+	constructor() {
+	  $('head').append('<style>' + this.display.style + '</style>');
+	  $('#game').append(this.display.view);
 	
-	if (!self.loaded) {
-	  $('head').append('<style>' + self.display.style + '</style>');
-	  $('#game').append(self.display.view);
+	  this.state.dialog = $('#user-settings-dialog');
 	
-	  self.state.dialog = $('#user-settings-dialog');
-	
-	  new self.hook.comms();
-	  new self.control.sliders();
-	  new self.control.dialog();
-	  new self.control.sounds();
+	  new this.hook.comms();
+	  new this.control.sliders();
+	  new this.control.dialog();
+	  new this.control.sounds();
 	}
 	
-      };
+        }
+        return settings;
+      }());
       
       window.modules.navigation.prototype.modules.settings.prototype.parent = window.modules.navigation.prototype;
       window.modules.navigation.prototype.modules.settings.prototype.state = {};
@@ -2154,18 +2195,19 @@ window.modules.navigation.prototype.display={};
 window.modules.navigation.prototype.display.style="/* CSS Start */ /* Display */ #navigation { width: 100%; background: rgba(0, 0, 0, 0.72); display: flex; flex-direction: column; flex-flow: row; justify-content: space-between; } #navigation ul.nav-left > li { border-right: 1px solid rgba(255, 255, 255, 0.32); } #navigation ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: row; } #navigation ul > li { padding: 10px; margin: 0; cursor: pointer; } #navigation ul > li:hover, #navigation ul > li.selected { color: rgb(170, 130, 25); background: rgb(0, 0, 0); } /* CSS End */ ";
 window.modules.navigation.prototype.display.view=$("<!--Navigation Start--> <div id=\"navigation\"> <ul class=\"nav-left\"> <li title=\"Create Your Next Legend.\" href=\"gladiator-culture\"> Create Gladiator </li> <li title=\"(Not Yet Implemented) &nbsp; &nbsp; &nbsp; &nbsp; An Overview of Your Saved Fighters.\"> My Gladiators </li> </ul> <ul class=\"nav-right\"> <li title=\"(Not Yet Implemented) &nbsp; &nbsp; &nbsp; &nbsp; Your Blood &amp; Sand Account.\" href=\"&account=true\"> <i class=\"fas fa-user\"></i> </li> <li title=\"Adjust Sound Settings.\" class=\"sound\" href=\"&soundSettings=true\"> <i class=\"fas fa-volume-mute\"></i> </li> </ul> </div> <!--Navigation End--> ");
 
-    window.modules.utility = function () {
-        // Main
-	const self = this;
+    window.modules.utility = (function () {
+        class utility {
+          // Main
+	constructor() {
+	  this.share.utility = {};
 	
-	if (!self.loaded) {
-	  self.share.utility = {};
-	
-	  new self.manipulators.waject;
-	  new self.functions.isServerUpdatable;
+	  new this.manipulators.waject;
+	  new this.functions.isServerUpdatable;
 	}
 	
-      };
+        }
+        return utility;
+      }());
       
       window.modules.utility.prototype.parent = window;
       window.modules.utility.prototype.state = {};

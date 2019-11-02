@@ -53,7 +53,7 @@ function recurWatch(p) {
       console.log(`${filename} changed:: RELOADING: ${NAME}`);
 
       delete require.cache[require.resolve('./compressor.js')];
-      delete require.cache[require.resolve('./moduleCompressor.js')];
+      delete require.cache[require.resolve('hookmod')];
       delete require.cache[require.resolve('./scriptCompressor.js')];
 
       require('./compressor.js');
