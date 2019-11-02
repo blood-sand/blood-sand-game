@@ -10,12 +10,17 @@ let scripts = [
   'jquery-ui.min.js',
   'jquery.selectric.js',
   'jquery-ui-touch-punch.min.js',
-  'waject2.js',
+  'waject.js',
   'json-sl.js',
   'compressedModules.js',
   'main.js'
 ];
 let code = {};
+
+// Get Waject dependency
+fs.copyFileSync(
+  'node_modules/waject/waject.js',
+  path.join(dir, 'waject.js'));
 
 scripts.forEach(filename => {
   code[filename] = fs.readFileSync(path.join(dir, filename), 'utf8');

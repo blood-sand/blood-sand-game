@@ -33,7 +33,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.0",
     "express-socket.io-session": "^1.3.5",
-    "hookmod": "0.0.2",
+    "hookmod": "0.0.3",
     "json-sl": "^2.0.2",
     "mongoose": "^5.7.7",
     "node-sass": "^4.13.0",
@@ -41,6 +41,7 @@
     "socket.io": "^2.3.0",
     "socket.io-cookie-parser": "^1.0.0",
     "tree-kill": "^1.2.1",
-    "uglify-es": "^3.3.9"
+    "uglify-es": "^3.3.9",
+    "waject": "^2.0.0"
   }
 }

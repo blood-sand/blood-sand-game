@@ -12,6 +12,7 @@ package-lock.json
 # Vendors
 node_modules/
 hookmod/
+waject/
 # Cache
 .sass-cache
 # Build

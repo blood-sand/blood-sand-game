@@ -1,18 +1,21 @@
-const __SHARE__ = {};
-window.modules = {
+
+    (function () {
+      const __SHARE__ = {};
+      const __CACHE__ = new WeakMap();
+      window.modules = {
       share: __SHARE__,
-      __CACHE__: {},
       fetch: function (name) {
-        if (!(name in this.__CACHE__)) {
-          let m = new this[name];
-          this.__CACHE__[name] = m;
-          return m;
-        } else {
-          if ('onFetch' in this.__CACHE__[name]) {
-            this.__CACHE__[name].onFetch();
-          }
-          return this.__CACHE__[name];
+        if (!__CACHE__.has(window)) {
+          __CACHE__.set(window, {});
         }
+        let cache =  __CACHE__.get(window);
+        if (!(name in cache)) {
+          cache[name] = new this[name];
+        }
+        if ('onFetch' in cache[name]) {
+          cache[name].onFetch();
+        }
+        return cache[name];
       }
     };
 window.modules.eventLoop = (function () {
@@ -31,7 +34,6 @@ window.modules.eventLoop = (function () {
       window.modules.eventLoop.prototype.parent = window;
       window.modules.eventLoop.prototype.state = {};
       window.modules.eventLoop.prototype.share = __SHARE__;
-      window.modules.eventLoop.prototype.loaded = false;
       window.modules.eventLoop.prototype.control={};
 window.modules.eventLoop.prototype.control.events=function() {
       // Events
@@ -135,18 +137,18 @@ window.modules.eventLoop.prototype.control.mouseState=function() {
       }());
       window.modules.navigation.prototype.modules = {
       share: __SHARE__,
-      __CACHE__: {},
       fetch: function (name) {
-        if (!(name in this.__CACHE__)) {
-          let m = new this[name];
-          this.__CACHE__[name] = m;
-          return m;
-        } else {
-          if ('onFetch' in this.__CACHE__[name]) {
-            this.__CACHE__[name].onFetch();
-          }
-          return this.__CACHE__[name];
+        if (!__CACHE__.has(window.modules.navigation.prototype)) {
+          __CACHE__.set(window.modules.navigation.prototype, {});
         }
+        let cache =  __CACHE__.get(window.modules.navigation.prototype);
+        if (!(name in cache)) {
+          cache[name] = new this[name];
+        }
+        if ('onFetch' in cache[name]) {
+          cache[name].onFetch();
+        }
+        return cache[name];
       }
     };
 window.modules.navigation.prototype.modules.gladiator = (function () {
@@ -164,18 +166,18 @@ window.modules.navigation.prototype.modules.gladiator = (function () {
       }());
       window.modules.navigation.prototype.modules.gladiator.prototype.modules = {
       share: __SHARE__,
-      __CACHE__: {},
       fetch: function (name) {
-        if (!(name in this.__CACHE__)) {
-          let m = new this[name];
-          this.__CACHE__[name] = m;
-          return m;
-        } else {
-          if ('onFetch' in this.__CACHE__[name]) {
-            this.__CACHE__[name].onFetch();
-          }
-          return this.__CACHE__[name];
+        if (!__CACHE__.has(window.modules.navigation.prototype.modules.gladiator.prototype)) {
+          __CACHE__.set(window.modules.navigation.prototype.modules.gladiator.prototype, {});
         }
+        let cache =  __CACHE__.get(window.modules.navigation.prototype.modules.gladiator.prototype);
+        if (!(name in cache)) {
+          cache[name] = new this[name];
+        }
+        if ('onFetch' in cache[name]) {
+          cache[name].onFetch();
+        }
+        return cache[name];
       }
     };
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes = (function () {
@@ -193,7 +195,6 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.state = {};
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.share = __SHARE__;
-      window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.loaded = false;
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.attributes.prototype.control.events=function() {
       // Events
@@ -564,7 +565,6 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.attribut
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.state = {};
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.share = __SHARE__;
-      window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.loaded = false;
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometrics.prototype.control.events=function() {
       // Events
@@ -692,7 +692,6 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.biometri
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.state = {};
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.share = __SHARE__;
-      window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.loaded = false;
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatStats.prototype.control.events=function() {
       // Events
@@ -754,7 +753,6 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.combatSt
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.state = {};
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.share = __SHARE__;
-      window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.loaded = false;
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.prototype.control.events=function() {
       // Culture
@@ -941,7 +939,6 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.culture.
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.parent = window.modules.navigation.prototype.modules.gladiator.prototype;
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.state = {};
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.share = __SHARE__;
-      window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.loaded = false;
       window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.prototype.control.events=function() {
       // Events
@@ -1464,7 +1461,6 @@ window.modules.navigation.prototype.modules.gladiator.prototype.modules.skills.p
       window.modules.navigation.prototype.modules.gladiator.prototype.parent = window.modules.navigation.prototype;
       window.modules.navigation.prototype.modules.gladiator.prototype.state = {};
       window.modules.navigation.prototype.modules.gladiator.prototype.share = __SHARE__;
-      window.modules.navigation.prototype.modules.gladiator.prototype.loaded = false;
       window.modules.navigation.prototype.modules.gladiator.prototype.control={};
 window.modules.navigation.prototype.modules.gladiator.prototype.control.events=function() {
       // Evnets
@@ -1602,7 +1598,6 @@ window.modules.navigation.prototype.modules.gladiator.prototype.display.view=$("
       window.modules.navigation.prototype.modules.listGladiators.prototype.parent = window.modules.navigation.prototype;
       window.modules.navigation.prototype.modules.listGladiators.prototype.state = {};
       window.modules.navigation.prototype.modules.listGladiators.prototype.share = __SHARE__;
-      window.modules.navigation.prototype.modules.listGladiators.prototype.loaded = false;
       window.modules.navigation.prototype.modules.listGladiators.prototype.display={};
 window.modules.navigation.prototype.modules.listGladiators.prototype.display.view=$("");
 window.modules.navigation.prototype.modules.listGladiators.prototype.hook={};
@@ -1633,7 +1628,6 @@ window.modules.navigation.prototype.modules.listGladiators.prototype.hook.comms=
       window.modules.navigation.prototype.modules.settings.prototype.parent = window.modules.navigation.prototype;
       window.modules.navigation.prototype.modules.settings.prototype.state = {};
       window.modules.navigation.prototype.modules.settings.prototype.share = __SHARE__;
-      window.modules.navigation.prototype.modules.settings.prototype.loaded = false;
       window.modules.navigation.prototype.modules.settings.prototype.control={};
 window.modules.navigation.prototype.modules.settings.prototype.control.dialog=function() {
       // Dialog
@@ -1975,7 +1969,6 @@ window.modules.navigation.prototype.modules.settings.prototype.hook.settingState
       window.modules.navigation.prototype.parent = window;
       window.modules.navigation.prototype.state = {};
       window.modules.navigation.prototype.share = __SHARE__;
-      window.modules.navigation.prototype.loaded = false;
       window.modules.navigation.prototype.control={};
 window.modules.navigation.prototype.control.events=function() {
       // Events
@@ -2212,7 +2205,6 @@ window.modules.navigation.prototype.display.view=$("<!--Navigation Start--> <div
       window.modules.utility.prototype.parent = window;
       window.modules.utility.prototype.state = {};
       window.modules.utility.prototype.share = __SHARE__;
-      window.modules.utility.prototype.loaded = false;
       window.modules.utility.prototype.functions={};
 window.modules.utility.prototype.functions.isServerUpdatable=function() {
       // Server update checking
@@ -2271,3 +2263,4 @@ window.modules.utility.prototype.manipulators.waject=function() {
     window.modules.utility.prototype.manipulators.waject.prototype = window.modules.utility.prototype;
 
     
+    }());
