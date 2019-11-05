@@ -3,7 +3,7 @@ constructor() {
   $('head').append('<style>' + this.display.style + '</style>');
   $('#game').append(this.display.view);
 
-  this.state.dialog = $('#user-settings-dialog');
+  this.state.dialog = $('#sound-settings-dialog');
 
   new this.hook.comms();
   new this.control.sliders();

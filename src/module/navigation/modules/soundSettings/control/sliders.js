@@ -1,9 +1,10 @@
 // Sliders
 const self = this;
 const settings = self.state.settings;
+const dialog = self.state.dialog;
 
-self.state.dialog.on('dialogcreate', () => {
-  $('#user-settings-dialog .slider[name=master-sound]').slider({
+dialog.on('dialogcreate', () => {
+  dialog.find('.slider[name=master-sound]').slider({
     value: 0,
     min: 0,
     max: 1,
@@ -13,11 +14,12 @@ self.state.dialog.on('dialogcreate', () => {
         $(this).slider('value', result.value).children('.custom-handle').text(result.value ? 'On' : 'Off'));
     },
     slide(event, ui) {
+      console.log("slide masterSound", ui.value)
       settings.masterSound = ui.value;
     },
     animate: 'fast'
   });
-  $('#user-settings-dialog .slider[name=master-volume]').slider({
+  dialog.find('.slider[name=master-volume]').slider({
     value: 80,
     min: 0,
     max: 100,
@@ -31,7 +33,7 @@ self.state.dialog.on('dialogcreate', () => {
     },
     animate: 'fast'
   });
-  $('#user-settings-dialog .slider[name=music-volume]').slider({
+  dialog.find('.slider[name=music-volume]').slider({
     value: 80,
     min: 0,
     max: 100,
@@ -45,7 +47,7 @@ self.state.dialog.on('dialogcreate', () => {
     },
     animate: 'fast'
   });
-  $('#user-settings-dialog .slider[name=fx-volume]').slider({
+  dialog.find('.slider[name=fx-volume]').slider({
     value: 80,
     min: 0,
     max: 100,

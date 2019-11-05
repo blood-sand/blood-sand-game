@@ -1,0 +1,98 @@
+/* CSS Start */
+/* Display */
+
+#account-settings-dialog {
+  width: 420px;
+  display: none;
+  background: rgb(0, 0, 0, 0.72);
+}
+
+#account-settings-dialog .note {
+  font-size: 12px;
+  color: #848484;
+  font-family: arial;
+  text-shadow: 0px 0px 0px rgba(255, 255, 255, 0.72);
+}
+
+#account-settings-dialog .reveal-pw {
+  cursor: pointer;
+  color: rgba(255,255,255,0.72);
+  font-size: 30px;
+  width: 42px;
+}
+
+#account-settings-dialog .reveal-pw:hover {
+  color: rgba(255,255,255,1);
+}
+
+#account-settings-dialog input {
+  font-family: arial;
+  width:400px;
+}
+
+#account-settings-dialog .edit:disabled {
+  opacity:0.5;
+  cursor:default;
+}
+
+#account-settings-dialog .edit:disabled:after {
+    content: "Preparing...";
+}
+
+#account-settings-dialog .edit:after {
+    content: "Edit";
+}
+
+#account-settings-dialog .save:disabled {
+  opacity:0.5;
+  cursor:default;
+}
+
+#account-settings-dialog .save:disabled:after {
+    content: "Saving...";
+}
+
+#account-settings-dialog .save:after {
+    content: "Save";
+}
+
+#account-settings-dialog input:invalid {
+  outline: 1px dotted red;
+}
+
+#account-settings-dialog ul.userData {
+  list-style: none;
+  background-color: rgba(164, 148, 105, 0.36);
+  margin: 50px 0;
+  padding: 10px;
+  border: 0.5px outset rgba(170, 130, 25, 0.32);
+  border-radius: 3px;
+}
+
+#account-settings-dialog ul.userData > li {
+  display: flex;
+  flex-direction: row;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.32);
+  padding: 5px;
+  margin: 5px;
+  background: rgba(0, 0, 0, 0.32);
+}
+
+#account-settings-dialog ul.userData > li > span {
+  padding-top: 6px;
+  flex: 2;
+}
+
+#account-settings-dialog ul.userData > li > div {
+  width: 410px;
+  height: 32px;
+}
+
+#account-settings-dialog ul.userData > li > div > input {
+    display: block;
+    position: absolute;
+    top: auto;
+}
+#account-settings-dialog ul.userData > li > div > input[name=shownPassword] {
+    display: none;
+/* CSS End */

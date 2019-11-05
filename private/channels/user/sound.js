@@ -12,37 +12,37 @@ module.exports = function(m, local) {
   let session = local.session;
   let socket = local.socket;
 
-  if (typeof session.user === 'object') {
-    for (let label in session.user) {
+  if (typeof session.sound === 'object') {
+    for (let label in session.sound) {
       if (!(label in settingValues)) {
-        console.log('bad sess!');
+        console.log('bad sess! (sound)');
 
-        session.user = undefined;
+        session.sound = undefined;
 
         break;
       }
     }
-    if (session.user !== undefined) {
+    if (session.sound !== undefined) {
       for (let label in settingValues) {
-        if (!(label in session.user)) {
-          console.log('bad sess(2)!');
+        if (!(label in session.sound)) {
+          console.log('bad sess(2)! (sound)');
 
-          session.user = undefined;
+          session.sound = undefined;
 
           break;
         }
-        if (!settingValues[label].test(session.user[label])) {
-          console.log('bad sess format!');
+        if (!settingValues[label].test(session.sound[label])) {
+          console.log('bad sess format! (sound)');
 
-          session.user = undefined;
+          session.sound = undefined;
 
           break;
         }
       }
     }
   }
-  if (session.user === undefined) {
-    session.user = {
+  if (session.sound === undefined) {
+    session.sound = {
       masterSound: null,
       masterVolume: 75,
       musicVolume: 75,
@@ -50,17 +50,17 @@ module.exports = function(m, local) {
     }
   }
 
-  //console.log('sound settings:', session.user);
+  //console.log('sound settings:', session.sound);
 
-  socket.emit('sound-settings', session.user)
+  socket.emit('sound-settings', session.sound)
   socket.on('sound-settings', settings => {
     for (let label in settings) {
       if (label in settingValues && settingValues[label].test(settings[label])) {
-        session.user[label] = settings[label];
+        session.sound[label] = settings[label];
       }
     }
 
-    //console.log('new sound settings:', session.user);
+    //console.log('new sound settings:', session.sound);
   });
 }
 // Module End

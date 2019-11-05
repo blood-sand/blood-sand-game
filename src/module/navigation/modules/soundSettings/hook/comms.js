@@ -56,15 +56,12 @@ let sounds = self.share.sounds = {
  * @date 2019-10-20
  * @param {*} target
  */
-function sendUpdate(target) {
-  target.serverSettings = {
-    masterSound: target.masterSound,
-    masterVolume: target.masterVolume,
-    musicVolume: target.musicVolume,
-    fxVolume: target.fxVolume
-  };
-
-  socket.emit('sound-settings', target.serverSettings);
+function sendUpdate(result) {
+  Object.assign(result.target.serverSettings, result.target);
+  //result.target.serverSettings = result.target;
+  delete result.target.serverSettings.serverSettings;
+  result.target.serverSettings[result.key] = result.value;
+  socket.emit('sound-settings', result.target.serverSettings);
 
   pendingMessage = false;
 }
@@ -80,15 +77,26 @@ settings.on('set', result => {
     return;
   }
   if (!self.share.utility.isServerUpdatable(result)) {
+    console.log("server not updatable", result)
     return;
   }
-
+  console.log("server updating:", result.target);
   pendingMessage = true;
 
   if (self.share.mouseIsDown) {
-    $(document).one('mouseup', () => sendUpdate(result.target));
+    console.log("Waiting for mouseup..")
+    $(document).one('mouseup', () => {
+      // The value is stale because this event is
+      // created when the user begins sliding,
+      // and is triggered once the user is done
+      // sliding. `result.target` should have
+      // up-to-date data, so we'll use that.
+      result.value = result.target[result.key];
+      sendUpdate(result)
+    });
   } else {
-    sendUpdate(result.target);
+    console.log("Updating now..")
+    sendUpdate(result);
   }
 });
 socket.on('sound-settings', serverSettings => {

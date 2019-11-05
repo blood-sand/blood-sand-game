@@ -18,8 +18,6 @@ module.exports = function(m) {
   var channels = [];
 
   for (index in dir) {
-    console.log(m.root, 'private/', m.config.socket.dir, dir[index]);
-
     let candidate = path.join(m.root, 'private/', m.config.socket.dir, dir[index]);
 
     if (m.fs.lstatSync(candidate).isDirectory()) {
@@ -31,10 +29,8 @@ module.exports = function(m) {
 
   m.sockets = io.sockets;
   m.sockets.on('connection', function(socket) {
-    //console.log('cookies:', socket.request.cookies);
-    //console.log(socket.handshake.session);
-
     let session = socket.handshake.session;
+    console.log("socket.io sess:", session);
     let local = {
       socket,
       session,
@@ -42,7 +38,7 @@ module.exports = function(m) {
     };
 
     socket.on('disconnect', function() {
-      console.log('Session disconnected:');
+      //console.log('Session disconnected');
     });
 
     for (var i in channels) {

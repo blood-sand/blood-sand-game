@@ -22,9 +22,9 @@ self.state.dialog.dialog({
   create() {
     self.share.eventLoop.when(() => (
       self.share.query.soundSettings === true &&
-      !$('#user-settings-dialog').dialog('isOpen')
+      !self.state.dialog.dialog('isOpen')
     ), () => {
-      $('#user-settings-dialog').dialog('open');
+      self.state.dialog.dialog('open');
     });
   },
   open() {

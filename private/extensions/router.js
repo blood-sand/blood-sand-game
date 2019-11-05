@@ -8,19 +8,46 @@ module.exports = function(m) {
   const path = require('path');
   const expressSession = require('express-session');
   const MongoStore = require('connect-mongo')(expressSession);
+  const store = new MongoStore({
+    secret: 'blood-sand',
+    mongooseConnection: m.mongoose.connection
+  });
   const session = expressSession({
     secret: 'blood-sand',
-    resave: true,
+    resave: false,
     saveUninitialized: true,
-    store: new MongoStore({
-      mongooseConnection: m.mongoose.connection
-    })
+    store
   });
+  store.on('create', function (...args) {
+    console.log("mongo store :: create");
+    console.log(args);
+  });
+  store.on('touch', function (...args) {
+    console.log("mongo store :: touch");
+    //console.log(args);
+  });
+  store.on('update', function (id) {
+    console.log("mongo store :: update");
+    
+  });
+  /*
+  store.on('set', function (...args) {
+    console.log("mongo store :: set");
+    console.log(args);
+  });
+  */
+  store.on('destroy', function (...args) {
+    console.log("mongo store :: destroy");
+    console.log(args);
+  });
+
   const root = path.dirname(process.mainModule.filename);
 
   app.use(session);
-
+  m.sessionStore = store;
   m.expressSession = session;
+
+  console.log("express sess:", m.expressSession);
 
   app.get('/', function(req, res) {
     res.redirect('/' + m.config.defaults.index);

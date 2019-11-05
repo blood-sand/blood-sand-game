@@ -127,7 +127,8 @@ window.modules.eventLoop.prototype.control.mouseState=function() {
 	  $('#game').append(this.display.view);
 	
 	  new this.control.events();
-	  this.modules.fetch('settings');
+	  this.modules.fetch('accountSettings');
+	  this.modules.fetch('soundSettings');
 	  this.modules.fetch('gladiator');
 	  this.modules.fetch('listGladiators');
 	}
@@ -151,7 +152,251 @@ window.modules.eventLoop.prototype.control.mouseState=function() {
         return cache[name];
       }
     };
-window.modules.navigation.prototype.modules.gladiator = (function () {
+window.modules.navigation.prototype.modules.accountSettings = (function () {
+        class accountSettings {
+          
+	constructor () {
+	  $('head').append('<style>' + this.display.style + '</style>');
+	  $('#game').append(this.display.view);
+	
+	  this.state.dialog = $('#account-settings-dialog');
+	
+	  new this.hook.comms;
+	  new this.control.dialog;
+	  new this.control.login;
+	  new this.control.edit;
+	}
+        }
+        return accountSettings;
+      }());
+      
+      window.modules.navigation.prototype.modules.accountSettings.prototype.parent = window.modules.navigation.prototype;
+      window.modules.navigation.prototype.modules.accountSettings.prototype.state = {};
+      window.modules.navigation.prototype.modules.accountSettings.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.accountSettings.prototype.control={};
+window.modules.navigation.prototype.modules.accountSettings.prototype.control.dialog=function() {
+      // Dialog
+	const self = this;
+	const dialog = self.state.dialog;
+	
+	dialog.dialog({
+	  autoOpen: false,
+	  modal: true,
+	  width: 720,
+	  show: {
+	    effect: 'puff',
+	    duration: 250
+	  },
+	  hide: {
+	    effect: 'puff',
+	    duration: 250
+	  },
+	  beforeClose() {
+	    delete self.share.query.accountSettings;
+	  },
+	  close() {
+	    self.share.sounds.bow.play();
+	  },
+	  create() {
+	    self.share.eventLoop.when(() => (
+	      self.share.query.accountSettings === true &&
+	      !self.state.dialog.dialog('isOpen')
+	    ), () => {
+	      self.state.dialog.dialog('open');
+	    });
+	  },
+	  open() {
+	    self.share.query.accountSettings = true;
+	
+	    self.share.sounds.switch.play();
+	
+	    $('.ui-widget-overlay').one('click', () => $(this).dialog('close'));
+	  }
+	});
+	
+	self.state.credentials.on("set", "email", result => {
+	  console.log("Email change");
+	  if (result.value.length === 0) {
+	    dialog.html(self.display.login);
+	    return;
+	  }
+	  dialog.html(self.display.list);
+	  dialog.find('.email').text(result.value);
+	});
+	
+	dialog.on('submit', 'form', function (e) {
+	  e.preventDefault();
+	});
+    };
+    window.modules.navigation.prototype.modules.accountSettings.prototype.control.dialog.prototype = window.modules.navigation.prototype.modules.accountSettings.prototype;
+window.modules.navigation.prototype.modules.accountSettings.prototype.control.edit=function() {
+      const self = this;
+	const dialog = self.state.dialog;
+	
+	dialog.on('submit', 'form[action=edit]', function (e) {
+	  console.log("Edit...");
+	  dialog.html(self.display.modify);
+	  dialog.find('[name=email]').val(self.state.credentials.email);
+	});
+    };
+    window.modules.navigation.prototype.modules.accountSettings.prototype.control.edit.prototype = window.modules.navigation.prototype.modules.accountSettings.prototype;
+window.modules.navigation.prototype.modules.accountSettings.prototype.control.login=function() {
+      
+	const self = this;
+	let dialog = this.state.dialog;
+	
+	dialog.on('change keyup', 'input', function (e) {
+	
+	  this.setCustomValidity("");
+	  if(!this.checkValidity()) {
+	    console.log("not valid")
+	    dialog.find('button').click();
+	    return;
+	  }
+	  let name = $(this).attr('name');
+	  let lower = /[a-z]/;
+	  let upper = /[A-Z]/;
+	  let number = /[0-9]/;
+	  let special = /[^a-z0-9]/i;
+	  if (name === "password" || name === "shownPassword") {
+	    if (!$(this).is(':required')) {
+	      console.log("not required");
+	      this.setCustomValidity("");
+	      return;
+	    }
+	    console.log("required");
+	    if (!lower.test($(this).val())) {
+	      console.log("no lower-case in pw");
+	      this.setCustomValidity("Please include a lower-case letter.");
+	      dialog.find('button').click();
+	      return;
+	    }
+	    if (!upper.test($(this).val())) {
+	      console.log("no upper-case in pw");
+	      this.setCustomValidity("Please include an upper-case letter.");
+	      dialog.find('button').click();
+	      return;
+	    }
+	    if (!number.test($(this).val())) {
+	      console.log("no number in pw");
+	      this.setCustomValidity("Please include a number.");
+	      dialog.find('button').click();
+	      return;
+	    }
+	    if (!special.test($(this).val())) {
+	      console.log("no special char in pw");
+	      this.setCustomValidity("Please include a special character.");
+	      dialog.find('button').click();
+	      return;
+	    }
+	    this.setCustomValidity("");
+	  }
+	});
+	
+	dialog.on('submit', 'form[action=login]', function (e) {
+	  e.preventDefault()
+	  let result = $(this).serializeObject();
+	  delete result.shownPassword;
+	  console.log(result);
+	
+	  $(this).find('.save').prop('disabled', true);
+	  self.state.login(result);
+	});
+	
+	dialog.on('focus', 'input', function (e) {
+	    $(this).removeClass('invalid');
+	});
+	
+	dialog.on('click', '.reveal-pw', function (e) {
+	  $(this).toggleClass('fa-eye').toggleClass('fa-eye-slash');
+	  let pw = $(this).siblings('div:has(input)').children('input[name=password]');
+	  let shownPw = $(this).siblings('div:has(input)').children('input[name=shownPassword]');
+	  pw.toggle('slide', {
+	    direction: 'up',
+	    duration: 300,
+	    easing: 'easeInQuad'
+	  });
+	  shownPw.toggle('slide', {
+	    direction: 'down',
+	    duration: 300,
+	    easing: 'easeInQuad'
+	  });
+	  if ($(this).hasClass('fa-eye')) {
+	    pw.prop('required', false);
+	    shownPw.prop('required', true);
+	  } else {
+	    pw.prop('required', true);
+	    shownPw.prop('required', false);
+	  }
+	  pw[0].setCustomValidity('');
+	  shownPw[0].setCustomValidity('');
+	
+	  pw.trigger('change');
+	  shownPw.trigger('change');
+	});
+	
+	dialog.on('dialogbeforeclose', function (e) {
+	  let revealer = $(this).find('.reveal-pw');
+	  if (revealer.hasClass('fa-eye')) {
+	    revealer.trigger('click');
+	  }
+	});
+	
+	dialog.on('change', 'input[name=password]', function (e) {
+	  $(this).siblings('input[name=shownPassword]').val($(this).val());
+	});
+	dialog.on('change', 'input[name=shownPassword]', function (e) {
+	  $(this).siblings('input[name=password]').val($(this).val());
+	});
+	
+    };
+    window.modules.navigation.prototype.modules.accountSettings.prototype.control.login.prototype = window.modules.navigation.prototype.modules.accountSettings.prototype;
+window.modules.navigation.prototype.modules.accountSettings.prototype.display={};
+window.modules.navigation.prototype.modules.accountSettings.prototype.display.list=$("<div> <p> View/edit your account data. </p> <form action=\"edit\"> <ul class=\"userData\"> <li> <span>Recovery Email</span> <span class=\"email\"></span> </li> <li> <button class=\"edit\"></button> </li> </ul> </form> </div> ");
+window.modules.navigation.prototype.modules.accountSettings.prototype.display.login=$("<div> <p> Fill out the form below to save/restore data. </p> <form action=\"login\"> <ul class=\"userData\"> <li> <span>Recovery Email</span> <input type=\"email\" name=\"email\" required> </li> <li> <span>Password</span> <i class=\"reveal-pw fas fa-eye-slash\"></i> <div> <input type=\"password\" name=\"password\" minlength=8 maxlength=32 required> <input type=\"text\" name=\"shownPassword\" minlength=8 maxlength=32> </div> </li> <li> <button class=\"save\"></button> </li> </ul> </form> </div> ");
+window.modules.navigation.prototype.modules.accountSettings.prototype.display.modify=$("<div> <p> Change your recovery email. </p> <form action=\"login\"> <ul class=\"userData\"> <li> <span>Recovery Email</span> <input type=\"email\" name=\"email\" required> </li> <li> <span>Verify Password</span> <i class=\"reveal-pw fas fa-eye-slash\"></i> <div> <input type=\"password\" name=\"password\" minlength=8 maxlength=32 required> <input type=\"text\" name=\"shownPassword\" minlength=8 maxlength=32> </div> </li> <li> <button class=\"save\"></button> </li> </ul> </form> </div> ");
+window.modules.navigation.prototype.modules.accountSettings.prototype.display.style="/* CSS Start */ /* Display */ #account-settings-dialog { width: 420px; display: none; background: rgb(0, 0, 0, 0.72); } #account-settings-dialog .note { font-size: 12px; color: #848484; font-family: arial; text-shadow: 0px 0px 0px rgba(255, 255, 255, 0.72); } #account-settings-dialog .reveal-pw { cursor: pointer; color: rgba(255,255,255,0.72); font-size: 30px; width: 42px; } #account-settings-dialog .reveal-pw:hover { color: rgba(255,255,255,1); } #account-settings-dialog input { font-family: arial; width:400px; } #account-settings-dialog .edit:disabled { opacity:0.5; cursor:default; } #account-settings-dialog .edit:disabled:after { content: \"Preparing...\"; } #account-settings-dialog .edit:after { content: \"Edit\"; } #account-settings-dialog .save:disabled { opacity:0.5; cursor:default; } #account-settings-dialog .save:disabled:after { content: \"Saving...\"; } #account-settings-dialog .save:after { content: \"Save\"; } #account-settings-dialog input:invalid { outline: 1px dotted red; } #account-settings-dialog ul.userData { list-style: none; background-color: rgba(164, 148, 105, 0.36); margin: 50px 0; padding: 10px; border: 0.5px outset rgba(170, 130, 25, 0.32); border-radius: 3px; } #account-settings-dialog ul.userData > li { display: flex; flex-direction: row; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.32); padding: 5px; margin: 5px; background: rgba(0, 0, 0, 0.32); } #account-settings-dialog ul.userData > li > span { padding-top: 6px; flex: 2; } #account-settings-dialog ul.userData > li > div { width: 410px; height: 32px; } #account-settings-dialog ul.userData > li > div > input { display: block; position: absolute; top: auto; } #account-settings-dialog ul.userData > li > div > input[name=shownPassword] { display: none; /* CSS End */ ";
+window.modules.navigation.prototype.modules.accountSettings.prototype.display.view=$("<!--accountSettings Start--> <div id=\"account-settings-dialog\" title=\"Account Settings\"> </div>");
+window.modules.navigation.prototype.modules.accountSettings.prototype.hook={};
+window.modules.navigation.prototype.modules.accountSettings.prototype.hook.comms=function() {
+      const self = this;
+	
+	self.state.credentials = waject({
+	  email: '',
+	  password: ''
+	});
+	
+	self.state.login = function (credentials) {
+	  socket.emit('account-login', credentials);
+	}
+	
+	self.state.modify = function (credentials) {
+	  socket.emit('account-modify', credentials);
+	}
+	
+	socket.on('account-credentials', credentials => {
+	  if (credentials === null) {
+	    console.log('No credentials.')
+	  } else {
+	    console.log('credentials:', credentials);
+	    self.state.credentials['*'] = credentials;
+	  }
+	
+	});
+	
+	socket.on('account-credentials-error', error => {
+	  console.log('Account credentials error:', error);
+	  if (error === 'incorrect') {
+	    self.state.dialog.find('[name=password]')[0].setCustomValidity("Incorrect Password");
+	    self.state.dialog.find('.save').prop('disabled', false).trigger('click');
+	  }
+	});
+	
+	socket.emit('account-settings-ready');
+    };
+    window.modules.navigation.prototype.modules.accountSettings.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.accountSettings.prototype;
+
+    window.modules.navigation.prototype.modules.gladiator = (function () {
         class gladiator {
           // Main
 	constructor() {
@@ -1606,14 +1851,14 @@ window.modules.navigation.prototype.modules.listGladiators.prototype.hook.comms=
     };
     window.modules.navigation.prototype.modules.listGladiators.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.listGladiators.prototype;
 
-    window.modules.navigation.prototype.modules.settings = (function () {
-        class settings {
+    window.modules.navigation.prototype.modules.soundSettings = (function () {
+        class soundSettings {
           // Main
 	constructor() {
 	  $('head').append('<style>' + this.display.style + '</style>');
 	  $('#game').append(this.display.view);
 	
-	  this.state.dialog = $('#user-settings-dialog');
+	  this.state.dialog = $('#sound-settings-dialog');
 	
 	  new this.hook.comms();
 	  new this.control.sliders();
@@ -1622,14 +1867,14 @@ window.modules.navigation.prototype.modules.listGladiators.prototype.hook.comms=
 	}
 	
         }
-        return settings;
+        return soundSettings;
       }());
       
-      window.modules.navigation.prototype.modules.settings.prototype.parent = window.modules.navigation.prototype;
-      window.modules.navigation.prototype.modules.settings.prototype.state = {};
-      window.modules.navigation.prototype.modules.settings.prototype.share = __SHARE__;
-      window.modules.navigation.prototype.modules.settings.prototype.control={};
-window.modules.navigation.prototype.modules.settings.prototype.control.dialog=function() {
+      window.modules.navigation.prototype.modules.soundSettings.prototype.parent = window.modules.navigation.prototype;
+      window.modules.navigation.prototype.modules.soundSettings.prototype.state = {};
+      window.modules.navigation.prototype.modules.soundSettings.prototype.share = __SHARE__;
+      window.modules.navigation.prototype.modules.soundSettings.prototype.control={};
+window.modules.navigation.prototype.modules.soundSettings.prototype.control.dialog=function() {
       // Dialog
 	const self = this;
 	
@@ -1654,9 +1899,9 @@ window.modules.navigation.prototype.modules.settings.prototype.control.dialog=fu
 	  create() {
 	    self.share.eventLoop.when(() => (
 	      self.share.query.soundSettings === true &&
-	      !$('#user-settings-dialog').dialog('isOpen')
+	      !self.state.dialog.dialog('isOpen')
 	    ), () => {
-	      $('#user-settings-dialog').dialog('open');
+	      self.state.dialog.dialog('open');
 	    });
 	  },
 	  open() {
@@ -1669,14 +1914,15 @@ window.modules.navigation.prototype.modules.settings.prototype.control.dialog=fu
 	});
 	
     };
-    window.modules.navigation.prototype.modules.settings.prototype.control.dialog.prototype = window.modules.navigation.prototype.modules.settings.prototype;
-window.modules.navigation.prototype.modules.settings.prototype.control.sliders=function() {
+    window.modules.navigation.prototype.modules.soundSettings.prototype.control.dialog.prototype = window.modules.navigation.prototype.modules.soundSettings.prototype;
+window.modules.navigation.prototype.modules.soundSettings.prototype.control.sliders=function() {
       // Sliders
 	const self = this;
 	const settings = self.state.settings;
+	const dialog = self.state.dialog;
 	
-	self.state.dialog.on('dialogcreate', () => {
-	  $('#user-settings-dialog .slider[name=master-sound]').slider({
+	dialog.on('dialogcreate', () => {
+	  dialog.find('.slider[name=master-sound]').slider({
 	    value: 0,
 	    min: 0,
 	    max: 1,
@@ -1686,11 +1932,12 @@ window.modules.navigation.prototype.modules.settings.prototype.control.sliders=f
 	        $(this).slider('value', result.value).children('.custom-handle').text(result.value ? 'On' : 'Off'));
 	    },
 	    slide(event, ui) {
+	      console.log("slide masterSound", ui.value)
 	      settings.masterSound = ui.value;
 	    },
 	    animate: 'fast'
 	  });
-	  $('#user-settings-dialog .slider[name=master-volume]').slider({
+	  dialog.find('.slider[name=master-volume]').slider({
 	    value: 80,
 	    min: 0,
 	    max: 100,
@@ -1704,7 +1951,7 @@ window.modules.navigation.prototype.modules.settings.prototype.control.sliders=f
 	    },
 	    animate: 'fast'
 	  });
-	  $('#user-settings-dialog .slider[name=music-volume]').slider({
+	  dialog.find('.slider[name=music-volume]').slider({
 	    value: 80,
 	    min: 0,
 	    max: 100,
@@ -1718,7 +1965,7 @@ window.modules.navigation.prototype.modules.settings.prototype.control.sliders=f
 	    },
 	    animate: 'fast'
 	  });
-	  $('#user-settings-dialog .slider[name=fx-volume]').slider({
+	  dialog.find('.slider[name=fx-volume]').slider({
 	    value: 80,
 	    min: 0,
 	    max: 100,
@@ -1735,8 +1982,8 @@ window.modules.navigation.prototype.modules.settings.prototype.control.sliders=f
 	});
 	
     };
-    window.modules.navigation.prototype.modules.settings.prototype.control.sliders.prototype = window.modules.navigation.prototype.modules.settings.prototype;
-window.modules.navigation.prototype.modules.settings.prototype.control.sounds=function() {
+    window.modules.navigation.prototype.modules.soundSettings.prototype.control.sliders.prototype = window.modules.navigation.prototype.modules.soundSettings.prototype;
+window.modules.navigation.prototype.modules.soundSettings.prototype.control.sounds=function() {
       // Sounds
 	const self = this;
 	
@@ -1780,12 +2027,12 @@ window.modules.navigation.prototype.modules.settings.prototype.control.sounds=fu
 	});
 	
     };
-    window.modules.navigation.prototype.modules.settings.prototype.control.sounds.prototype = window.modules.navigation.prototype.modules.settings.prototype;
-window.modules.navigation.prototype.modules.settings.prototype.display={};
-window.modules.navigation.prototype.modules.settings.prototype.display.style="/* CSS Start */ /* Display */ .user-settings-btn { width: 64px; height: 64px; padding: 0 0; margin: 0 0; display: block; position: absolute; right: 0px; top: 0px; background: rgba(255, 255, 255, 0.5); border-radius: 64px; border: 1px outset rgb(255, 255, 255, 0.5); cursor: pointer; } .user-settings-btn:hover { border: 1px outset rgb(255, 255, 255, 1); } .user-settings-btn:active { border: 1px inset rgb(255, 255, 255, 1); } #user-settings-dialog { width: 420px; display: none; background: rgb(0, 0, 0, 0.72); } #user-settings-dialog .note { font-size: 12px; color: #848484; font-family: arial; text-shadow: 0px 0px 0px rgba(255, 255, 255, 0.72); } #user-settings-dialog [name=master-sound] { width: 60px; margin: 11.75px 40px; } #user-settings-dialog [name=master-volume], #user-settings-dialog [name=music-volume], #user-settings-dialog [name=fx-volume] { width: 360px; margin: 11.75px 40px; } #user-settings-dialog .slider .custom-handle { width: 3em; height: 1.6em; top: 50%; margin-top: -.8em; margin-left: -30px; text-align: center; line-height: 1.6em; } ul.userData { list-style: none; background-color: rgba(164, 148, 105, 0.36); margin: 50px 0; padding: 10px; border: 0.5px outset rgba(170, 130, 25, 0.32); border-radius: 3px; } ul.userData > li { display: flex; flex-direction: row; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.32); padding: 5px; margin: 5px; background: rgba(0, 0, 0, 0.32); } ul.userData > li > span { padding-top: 6px; flex: 2; } /* CSS End */ ";
-window.modules.navigation.prototype.modules.settings.prototype.display.view=$("<!--Settings Start--> <div id=\"user-settings-dialog\" title=\"Settings\"> <h2>Sound Settings</h2> <ul class=\"userData\"> <li> <span>Master Sound</span> <div class=\"slider\" name=\"master-sound\"> <div class=\"ui-slider-handle custom-handle\"> Off </div> </div> </li> <li> <span>Master Volume</span> <div class=\"slider\" name=\"master-volume\"> </div> </li> <li> <span>Music Volume</span> <div class=\"slider\" name=\"music-volume\"> </div> </li> <li> <span>Sound FX Volume</span> <div class=\"slider\" name=\"fx-volume\"> </div> </li> </ul> </div> <!--Settings End--> ");
-window.modules.navigation.prototype.modules.settings.prototype.hook={};
-window.modules.navigation.prototype.modules.settings.prototype.hook.comms=function() {
+    window.modules.navigation.prototype.modules.soundSettings.prototype.control.sounds.prototype = window.modules.navigation.prototype.modules.soundSettings.prototype;
+window.modules.navigation.prototype.modules.soundSettings.prototype.display={};
+window.modules.navigation.prototype.modules.soundSettings.prototype.display.style="/* CSS Start */ /* Display */ #sound-settings-dialog { width: 420px; display: none; background: rgb(0, 0, 0, 0.72); } #sound-settings-dialog .note { font-size: 12px; color: #848484; font-family: arial; text-shadow: 0px 0px 0px rgba(255, 255, 255, 0.72); } #sound-settings-dialog [name=master-sound] { width: 60px; margin: 11.75px 40px; } #sound-settings-dialog [name=master-volume], #sound-settings-dialog [name=music-volume], #sound-settings-dialog [name=fx-volume] { width: 360px; margin: 11.75px 40px; } #sound-settings-dialog .slider .custom-handle { width: 3em; height: 1.6em; top: 50%; margin-top: -.8em; margin-left: -30px; text-align: center; line-height: 1.6em; } #sound-settings-dialog ul.userData { list-style: none; background-color: rgba(164, 148, 105, 0.36); margin: 50px 0; padding: 10px; border: 0.5px outset rgba(170, 130, 25, 0.32); border-radius: 3px; } #sound-settings-dialog ul.userData > li { display: flex; flex-direction: row; box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.32); padding: 5px; margin: 5px; background: rgba(0, 0, 0, 0.32); } #sound-settings-dialog ul.userData > li > span { padding-top: 6px; flex: 2; } /* CSS End */ ";
+window.modules.navigation.prototype.modules.soundSettings.prototype.display.view=$("<!--soundSettings Start--> <div id=\"sound-settings-dialog\" title=\"Settings\"> <h2>Sound Settings</h2> <ul class=\"userData\"> <li> <span>Master Sound</span> <div class=\"slider\" name=\"master-sound\"> <div class=\"ui-slider-handle custom-handle\"> Off </div> </div> </li> <li> <span>Master Volume</span> <div class=\"slider\" name=\"master-volume\"> </div> </li> <li> <span>Music Volume</span> <div class=\"slider\" name=\"music-volume\"> </div> </li> <li> <span>Sound FX Volume</span> <div class=\"slider\" name=\"fx-volume\"> </div> </li> </ul> </div> <!--soundSettings End--> ");
+window.modules.navigation.prototype.modules.soundSettings.prototype.hook={};
+window.modules.navigation.prototype.modules.soundSettings.prototype.hook.comms=function() {
       // Common
 	const self = this;
 	const state = self.state;
@@ -1844,15 +2091,12 @@ window.modules.navigation.prototype.modules.settings.prototype.hook.comms=functi
 	 * @date 2019-10-20
 	 * @param {*} target
 	 */
-	function sendUpdate(target) {
-	  target.serverSettings = {
-	    masterSound: target.masterSound,
-	    masterVolume: target.masterVolume,
-	    musicVolume: target.musicVolume,
-	    fxVolume: target.fxVolume
-	  };
-	
-	  socket.emit('sound-settings', target.serverSettings);
+	function sendUpdate(result) {
+	  Object.assign(result.target.serverSettings, result.target);
+	  //result.target.serverSettings = result.target;
+	  delete result.target.serverSettings.serverSettings;
+	  result.target.serverSettings[result.key] = result.value;
+	  socket.emit('sound-settings', result.target.serverSettings);
 	
 	  pendingMessage = false;
 	}
@@ -1868,15 +2112,26 @@ window.modules.navigation.prototype.modules.settings.prototype.hook.comms=functi
 	    return;
 	  }
 	  if (!self.share.utility.isServerUpdatable(result)) {
+	    console.log("server not updatable", result)
 	    return;
 	  }
-	
+	  console.log("server updating:", result.target);
 	  pendingMessage = true;
 	
 	  if (self.share.mouseIsDown) {
-	    $(document).one('mouseup', () => sendUpdate(result.target));
+	    console.log("Waiting for mouseup..")
+	    $(document).one('mouseup', () => {
+	      // The value is stale because this event is
+	      // created when the user begins sliding,
+	      // and is triggered once the user is done
+	      // sliding. `result.target` should have
+	      // up-to-date data, so we'll use that.
+	      result.value = result.target[result.key];
+	      sendUpdate(result)
+	    });
 	  } else {
-	    sendUpdate(result.target);
+	    console.log("Updating now..")
+	    sendUpdate(result);
 	  }
 	});
 	socket.on('sound-settings', serverSettings => {
@@ -1887,8 +2142,8 @@ window.modules.navigation.prototype.modules.settings.prototype.hook.comms=functi
 	socket.emit("sound-settings-ready");
 	
     };
-    window.modules.navigation.prototype.modules.settings.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.settings.prototype;
-window.modules.navigation.prototype.modules.settings.prototype.hook.settingState=function() {
+    window.modules.navigation.prototype.modules.soundSettings.prototype.hook.comms.prototype = window.modules.navigation.prototype.modules.soundSettings.prototype;
+window.modules.navigation.prototype.modules.soundSettings.prototype.hook.settingState=function() {
       // State
 	const self = this;
 	const settings = self.state.settings;
@@ -1963,7 +2218,7 @@ window.modules.navigation.prototype.modules.settings.prototype.hook.settingState
 	});
 	
     };
-    window.modules.navigation.prototype.modules.settings.prototype.hook.settingState.prototype = window.modules.navigation.prototype.modules.settings.prototype;
+    window.modules.navigation.prototype.modules.soundSettings.prototype.hook.settingState.prototype = window.modules.navigation.prototype.modules.soundSettings.prototype;
 
     
       window.modules.navigation.prototype.parent = window;
@@ -2186,7 +2441,7 @@ window.modules.navigation.prototype.control.events=function() {
     window.modules.navigation.prototype.control.events.prototype = window.modules.navigation.prototype;
 window.modules.navigation.prototype.display={};
 window.modules.navigation.prototype.display.style="/* CSS Start */ /* Display */ #navigation { width: 100%; background: rgba(0, 0, 0, 0.72); display: flex; flex-direction: column; flex-flow: row; justify-content: space-between; } #navigation ul.nav-left > li { border-right: 1px solid rgba(255, 255, 255, 0.32); } #navigation ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: row; } #navigation ul > li { padding: 10px; margin: 0; cursor: pointer; } #navigation ul > li:hover, #navigation ul > li.selected { color: rgb(170, 130, 25); background: rgb(0, 0, 0); } /* CSS End */ ";
-window.modules.navigation.prototype.display.view=$("<!--Navigation Start--> <div id=\"navigation\"> <ul class=\"nav-left\"> <li title=\"Create Your Next Legend.\" href=\"gladiator-culture\"> Create Gladiator </li> <li title=\"(Not Yet Implemented) &nbsp; &nbsp; &nbsp; &nbsp; An Overview of Your Saved Fighters.\"> My Gladiators </li> </ul> <ul class=\"nav-right\"> <li title=\"(Not Yet Implemented) &nbsp; &nbsp; &nbsp; &nbsp; Your Blood &amp; Sand Account.\" href=\"&account=true\"> <i class=\"fas fa-user\"></i> </li> <li title=\"Adjust Sound Settings.\" class=\"sound\" href=\"&soundSettings=true\"> <i class=\"fas fa-volume-mute\"></i> </li> </ul> </div> <!--Navigation End--> ");
+window.modules.navigation.prototype.display.view=$("<!--Navigation Start--> <div id=\"navigation\"> <ul class=\"nav-left\"> <li title=\"Create Your Next Legend.\" href=\"gladiator-culture\"> Create Gladiator </li> <li title=\"(Not Yet Implemented) &nbsp; &nbsp; &nbsp; &nbsp; An Overview of Your Saved Fighters.\"> My Gladiators </li> </ul> <ul class=\"nav-right\"> <li title=\"Blood &amp; Sand Account.\" href=\"&accountSettings=true\"> <i class=\"fas fa-user\"></i> </li> <li title=\"Adjust Sound Settings.\" class=\"sound\" href=\"&soundSettings=true\"> <i class=\"fas fa-volume-mute\"></i> </li> </ul> </div> <!--Navigation End--> ");
 
     window.modules.utility = (function () {
         class utility {
